@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+
+.login {
+    background: url(../img/Food.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    margin: auto;
+    z-index: 2;
+    height:100%;
+    position: relative;
+}
