@@ -15,9 +15,19 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$balanced:                        #67BF68 !default;
+
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+
+.bg {
+	background: url(../img/Food.jpg);
+   	background-size: 100%;
+   	background-position: bottom;
+   	background-repeat: no-repeat;
+  }
