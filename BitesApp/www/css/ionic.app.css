@@ -7697,4 +7697,12 @@ a.button {
   background: url(../img/Food.jpg);
   background-size: 100%;
   background-position: bottom;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  background-color: white; }
+
+.bg2 {
+  background: url(../img/Food2.jpg);
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: white; }

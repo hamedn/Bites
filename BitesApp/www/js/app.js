@@ -32,10 +32,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $stateProvider
 
 
-//----------------------LOGIN STATE
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login-screen.html'
+//----------------------PREAPP
+
+  // setup an abstract state for the preapp
+    .state('preapp', {
+    url: '/preapp',
+    abstract: true,
+    templateUrl: 'templates/preapp/preapp.html'
+  })
+
+
+
+  .state('preapp.splashscreen', {
+    url: '/splashscreen',
+    templateUrl: 'templates/preapp/splash-screen.html'
+  })
+
+ .state('preapp.loginscreen', {
+    url: '/loginscreen',
+    templateUrl: 'templates/preapp/login-screen.html'
   })
 
 
@@ -89,6 +104,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/preapp/splashscreen');
 
 });
