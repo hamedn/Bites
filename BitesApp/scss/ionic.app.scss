@@ -16,7 +16,8 @@ $dark:                            #444 !default;
 */
 
 $balanced:                        #67BF68 !default;
-
+$royal:                           #886aea !default;
+$font-size-base:16px !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -40,3 +41,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
    	background-repeat: no-repeat;
    	background-color: white;
   }
+
+
+
