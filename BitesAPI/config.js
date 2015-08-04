@@ -9,7 +9,7 @@ var config = {
   name: 'landme',
   root: path.normalize(__dirname),
   mongo:  {
-    uri: 'mongodb://composer:composed@ds031581.mongolab.com:31581/heroku_4sbvgqg8'
+//    uri: 'mongodb://composer:composed@ds031581.mongolab.com:31581/heroku_4sbvgqg8'
   },
   server: {
     port: {

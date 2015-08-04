@@ -4,7 +4,7 @@ module.exports = {
 
 	mongo: {
 		development: {
-			connectionString: 'mongodb://hamed:Launch123@104.131.40.245:27017/landme'
+			connectionString: 'mongodb://BitesServer:Launch123@ds029803.mongolab.com:29803/heroku_98rtcrbj'
 		},
 		production: {
 			connectionString: 'your_connect;'
