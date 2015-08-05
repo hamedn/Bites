@@ -50,12 +50,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
  .state('preapp.loginscreen', {
     url: '/loginscreen',
-    views: {
-      'login-screen': {
-        templateUrl: 'templates/preapp/login-screen.html',
-        controller: 'LoginCtrl'
-      }
-    }
+    templateUrl: 'templates/preapp/login-screen.html',
+    controller: 'LoginCtrl'
+      
+    
   })
 
 

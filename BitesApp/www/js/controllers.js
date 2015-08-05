@@ -5,7 +5,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('LoginCtrl', function($scope) {
-  alert("hello world")
+  $scope.loginFacebook = function() {
+    alert("try to log in with FB");
+  }
+
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
