@@ -8,7 +8,8 @@ var userSchema = new Schema({
 	email: String,
 	authId: String,
 	name: String,
-	created: Date
+	created: Date,
+	facebook: {}
 });
 
 var User = mongoose.model('User', userSchema);

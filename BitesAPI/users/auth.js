@@ -21,11 +21,15 @@ passport.deserializeUser(function(id, done){
 module.exports = function(app, options) {
 //fallback redirect pages
 	if (!options.successRedirect) {
-		options.successRedirect = '/account';
+		options.successRedirect = config.facebook[env].successURL;
 	}
 	if (!options.failureRedirect) {
-		options.failureRedirect = '/account';
+		options.failureRedirect = config.facebook[env].failURL;
 	}
+
+	app.get(options.successRedirect, function(req, res) {
+  		res.send('Auth successful!');
+	})
 
 	return {
 		init: function() {
@@ -57,8 +61,10 @@ module.exports = function(app, options) {
 						authId: authId,
 						name: profile.displayName,
 						email: profile.emails[0].value,
-						created: Date.now()
+						created: Date.now(),
+						facebook: profile._json
 					});
+					user.facebook.accessToken = accessToken;
 					user.save(function(err) {
 						if (err) return done(err,null);
 						done(null,user);
@@ -93,7 +99,7 @@ module.exports = function(app, options) {
 				app.get('/auth/facebook/callback',
 						passport.authenticate('facebook', { failureRedirect: options.failureRedirect , scope: [ 'email' ] }),
 						function(req, res) {
-							res.redirect(303, req.query.redirect || options.successRedirect);
+							res.redirect(303, options.successRedirect);
 					});
 
 

@@ -16,7 +16,9 @@ module.exports = {
 			development: {
 				appId: '1596595767272078',
 				appSecret: '57a67c051886e350c539c4cc3913ea3c',
-				callBackURL: 'http://localhost:3000/auth/facebook/callback'
+				callBackURL: 'http://localhost:3000/auth/facebook/callback',
+				successURL: '/success',
+				failURL: '/fail'
 			}
 		}
 	}
