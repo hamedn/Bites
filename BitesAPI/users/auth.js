@@ -19,17 +19,7 @@ passport.deserializeUser(function(id, done){
 });
 
 module.exports = function(app, options) {
-//fallback redirect pages
-	if (!options.successRedirect) {
-		options.successRedirect = config.facebook[env].successURL;
-	}
-	if (!options.failureRedirect) {
-		options.failureRedirect = config.facebook[env].failURL;
-	}
 
-	app.get(options.successRedirect, function(req, res) {
-  		res.send('Auth successful!');
-	})
 
 	return {
 		init: function() {
@@ -38,6 +28,18 @@ module.exports = function(app, options) {
 			 try {
 			var env = app.get('env');
 			var config = options.providers;
+
+
+			if (!options.successRedirect) {
+				options.successRedirect = config.facebook[env].successURL;
+			}
+			if (!options.failureRedirect) {
+				options.failureRedirect = config.facebook[env].failURL;
+			}
+
+			app.get(config.facebook[env].successURL, function(req, res) {
+		  		res.send('Auth successful!');
+			})
 
 			app.use(require('cookie-parser')(credentials.cookieSecret));
 			app.use(require('express-session')({secret:credentials.cookieSecret, store:options.sessionStor }));
@@ -72,6 +74,9 @@ module.exports = function(app, options) {
 
 				});
 
+
+				options.successRedirect = config.facebook[env].successURL + "?oauth_token=" + accessToken;
+				console.log(accessToken);
 
 			}));
 		}

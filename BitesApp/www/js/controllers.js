@@ -4,9 +4,33 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', function($scope, $window, $location) {
+  
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        window.open = cordova.InAppBrowser.open;
+    }
+
+
+
   $scope.loginFacebook = function() {
-    alert("try to log in with FB");
+
+
+
+    url = 'http://localhost:3000' + '/auth/facebook';
+        loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+
+        loginWindow.addEventListener('loadstart', function (event) {
+          hasToken = event.url.indexOf('?oauth_token=');
+          if(hasToken > -1) {
+            token = event.url.match("oauth_token=(.*)")[1];
+            loginWindow.close();
+            //Auth.updateUserAndToken(token);
+            $location.path('/');
+            alert(token);
+          }
+        })
+
   }
 
 })
