@@ -56,7 +56,7 @@ module.exports = function(app, options) {
 			    },
 			    function(req, email, password, done) {
 
-			    	console.log("tried to make user");
+			    		console.log("tried to make user");
 
 			        process.nextTick(function() {
 
@@ -136,7 +136,7 @@ module.exports = function(app, options) {
 
 
 
-			app.post('/signup', function(req,res,next) {
+			/*app.post('/signup', function(req,res,next) {
 				passport.authenticate('local-signup', function(err,user,info) {
 					if (err) 
 						return next(err)
@@ -146,8 +146,11 @@ module.exports = function(app, options) {
 						res.json({message:"user successfully created"})
 				})(req,res,next);
 			})
-			
+			*/
 
+			app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
+				res.send("Got it")
+			});
 
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {
