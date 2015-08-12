@@ -1,14 +1,15 @@
 var User = require('./user.model.js'),
 	passport = require('passport'),
-	credentials = require('../credentials.js');
-	FacebookStrategy = require('passport-facebook').Strategy;
+	credentials = require('../credentials.js'),
+	FacebookStrategy = require('passport-facebook').Strategy,
+	LocalStrategy = require('passport-local').Strategy;
 
 var express = require('express');
 var router = express.Router();
 
 
 passport.serializeUser(function(user, done) {
-	done(null,user._id);
+	done(null,user.id);
 });
 
 passport.deserializeUser(function(id, done){
@@ -46,6 +47,50 @@ module.exports = function(app, options) {
 			app.use(passport.initialize());
 			app.use(passport.session());
 
+
+
+			passport.use('local-signup', new LocalStrategy({
+       			    usernameField : 'email',
+        			passwordField : 'password',
+        			passReqToCallback : true 
+			    },
+			    function(req, email, password, done) {
+
+			    	console.log("tried to make user");
+
+			        process.nextTick(function() {
+
+
+
+			        User.findOne({ 'email' :  email }, function(err, user) {
+			            if (err) {
+			                return done(err);
+			            }
+			            
+			            if (user) {
+			                return done(null, false, {message: "Sorry, that email is already taken."});
+			            } 
+
+			            else {
+
+			                var newUser  = new User();
+
+			                newUser.email    = email;
+			                newUser.password = newUser.generateHash(password);
+			                newUser.save(function(err) {
+			                    if (err)
+			                        throw err;
+			                    return done(null, newUser);
+			                });
+			            }});    
+
+			        });
+
+   			 }));
+
+
+
+
 			passport.use(new FacebookStrategy({
 				clientID: config.facebook[env].appId,
 				clientSecret: config.facebook[env].appSecret,
@@ -66,7 +111,7 @@ module.exports = function(app, options) {
 						created: Date.now(),
 						facebook: profile._json
 					});
-					user.facebook.accessToken = accessToken;
+					user.accessToken = accessToken;
 					user.save(function(err) {
 						if (err) return done(err,null);
 						done(null,user);
@@ -88,6 +133,20 @@ module.exports = function(app, options) {
 			var config = options.providers;
 
 			console.log('try to register routes');
+
+
+
+			app.post('/signup', function(req,res,next) {
+				passport.authenticate('local-signup', function(err,user,info) {
+					if (err) 
+						return next(err)
+					if (!user)
+						return res.json({message:"no user"})
+					else
+						res.json({message:"user successfully created"})
+				})(req,res,next);
+			})
+			
 
 
 			app.get('/auth/facebook',
