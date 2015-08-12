@@ -56,7 +56,7 @@ module.exports = function(app, options) {
 			    },
 			    function(req, email, password, done) {
 
-			    		console.log("tried to make user");
+			 console.log("tried to make user");
 
 			        process.nextTick(function() {
 
@@ -148,9 +148,11 @@ module.exports = function(app, options) {
 			})
 			*/
 
-			app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-				res.send("Got it")
-			});
+			app.post('/signup', passport.authenticate('local-signup', {
+		        successRedirect : '/profile', // redirect to the secure profile section
+		        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		        failureFlash : true // allow flash messages
+		    }));
 
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {
@@ -161,6 +163,7 @@ module.exports = function(app, options) {
 				});
 
 		
+
 
 
 				app.get('/auth/facebook/callback',
