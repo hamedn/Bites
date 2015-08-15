@@ -49,7 +49,7 @@ module.exports = function(app, options) {
 			app.use(passport.session());
 			app.use(flash());
 
-
+			
 			passport.use('local-signup', new LocalStrategy({
        			    usernameField : 'email',
         			passwordField : 'password',
@@ -57,10 +57,10 @@ module.exports = function(app, options) {
 			    },
 			    function(req, email, password, done) {
 
-			 console.log("tried to make user");
+			    	process.nextTick(function() {
 
-			        process.nextTick(function() {
 
+					 console.log("tried to make user");
 
 
 			        User.findOne({ 'email' :  email }, function(err, user) {
@@ -85,14 +85,15 @@ module.exports = function(app, options) {
 			                });
 			            }});    
 
-			        });
+			    });
+
 
    			 }));
 
 
 
 
-			passport.use(new FacebookStrategy({
+			passport.use('facebook', new FacebookStrategy({
 				clientID: config.facebook[env].appId,
 				clientSecret: config.facebook[env].appSecret,
 				callbackURL: config.facebook[env].callBackURL,
@@ -137,21 +138,23 @@ module.exports = function(app, options) {
 
 
 
-			/*app.post('/signup', function(req,res,next) {
+			app.post('/signup', function(req,res,next) {
 				passport.authenticate('local-signup', function(err,user,info) {
 					if (err) 
 						return next(err)
 					if (!user)
-						return res.json({message:"no user"})
+						return res.json(info);
 					else
 						res.json({message:"user successfully created"})
 				})(req,res,next);
 			})
-			*/
+			
 
+			
 			app.get('/signup', function (req, res) {
-			  res.send("sss"+req.flash('message'));
+			  res.send("error"+req.flash('message'));
 			})
+
 
 
 			app.post('/signup', passport.authenticate('local-signup', {

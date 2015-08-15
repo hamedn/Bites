@@ -26,6 +26,17 @@ module.exports = function(app) {
 
 
 
+  // Request Middleware
+  // app.use(favicon(Config.get('/root') + '/public/img/favicon.ico'));
+  //app.use(logger('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+  app.use(cookieParser());
+  app.use(compress());
+  app.use(methodOverride());
+
 
 //mongoose code
 
@@ -90,17 +101,6 @@ app.use(function(req, res, next){
 
 
 
-
-  // Request Middleware
-  // app.use(favicon(Config.get('/root') + '/public/img/favicon.ico'));
-  //app.use(logger('dev'));
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-  app.use(cookieParser());
-  app.use(compress());
-  app.use(methodOverride());
 
 
 
