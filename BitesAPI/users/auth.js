@@ -7,6 +7,7 @@ var User = require('./user.model.js'),
 var express = require('express');
 var router = express.Router();
 
+var flash    = require('connect-flash');
 
 passport.serializeUser(function(user, done) {
 	done(null,user.id);
@@ -46,7 +47,7 @@ module.exports = function(app, options) {
 			app.use(require('express-session')({secret:credentials.cookieSecret, store:options.sessionStor }));
 			app.use(passport.initialize());
 			app.use(passport.session());
-
+			app.use(flash());
 
 
 			passport.use('local-signup', new LocalStrategy({
@@ -148,10 +149,15 @@ module.exports = function(app, options) {
 			})
 			*/
 
+			app.get('/signup', function (req, res) {
+			  res.send("sss"+req.flash('message'));
+			})
+
+
 			app.post('/signup', passport.authenticate('local-signup', {
 		        successRedirect : '/profile', // redirect to the secure profile section
-		        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-		        failureFlash : true // allow flash messages
+		        failureRedirect : '/signup',
+		         failureFlash : true // redirect back to the signup page if there is an error
 		    }));
 
 			app.get('/auth/facebook',
