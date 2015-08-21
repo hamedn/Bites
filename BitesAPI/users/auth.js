@@ -49,6 +49,36 @@ module.exports = function(app, options) {
 			app.use(passport.session());
 			app.use(flash());
 
+
+			passport.use('local-login', new LocalStrategy({
+		        // by default, local strategy uses username and password, we will override with email
+		        usernameField : 'email',
+		        passwordField : 'password',
+		        passReqToCallback : true // allows us to pass back the entire request to the callback
+		    },
+		    function(req, email, password, done) { // callback with email and password from our form
+
+		        // find a user whose email is the same as the forms email
+		        // we are checking to see if the user trying to login already exists
+		        User.findOne({ 'email' :  email }, function(err, user) {
+		            // if there are any errors, return the error before anything else
+		            if (err)
+		                return done(err);
+
+		            // if no user is found, return the message
+		            if (!user)
+		                return done(null, false, {message: "No user found"}); // req.flash is the way to set flashdata using connect-flash
+
+		            // if the user is found but the password is wrong
+		            if (!user.validPassword(password))
+		                return done(null, false, {message: "Sorry, that password is wrong."}); // create the loginMessage and save it to session as flashdata
+
+		            // all is well, return successful user
+		            return done(null, user);
+		        });
+
+		    }));
+
 			
 			passport.use('local-signup', new LocalStrategy({
        			    usernameField : 'email',
@@ -78,6 +108,7 @@ module.exports = function(app, options) {
 
 			                newUser.email    = email;
 			                newUser.password = newUser.generateHash(password);
+			               	newUser.accessToken = newUser.generateHash(password);
 			                newUser.save(function(err) {
 			                    if (err)
 			                        throw err;
@@ -145,23 +176,21 @@ module.exports = function(app, options) {
 					if (!user)
 						return res.json(info);
 					else
-						res.json({message:"user successfully created"})
+						res.json({message:"User Successfully Created", accessToken:user.accessToken})
 				})(req,res,next);
 			})
 			
 
-			
-			app.get('/signup', function (req, res) {
-			  res.send("error"+req.flash('message'));
+			app.post('/login', function(req,res,next) {
+				passport.authenticate('local-login', function(err,user,info) {
+					if (err) 
+						return next(err)
+					if (!user)
+						return res.json(info);
+					else
+						res.json({message:"login successful",accessToken:user.accessToken})
+				})(req,res,next);
 			})
-
-
-
-			app.post('/signup', passport.authenticate('local-signup', {
-		        successRedirect : '/profile', // redirect to the secure profile section
-		        failureRedirect : '/signup',
-		         failureFlash : true // redirect back to the signup page if there is an error
-		    }));
 
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {

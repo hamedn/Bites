@@ -12,20 +12,20 @@
       <div class="item item-text-wrap">
       
          <label class="item item-input">
-              <input type="text" placeholder="Email">
+              <input type="text" placeholder="Email" ng-model="data.email">
           </label>
           <label class="item item-input">
-              <input type="password" placeholder="Password">
+              <input type="password" placeholder="Password" ng-model="data.password">
           </label>
 
 
-        <button class="button button-block button-balanced" style="border-radius:4px;">
+        <button class="button button-block button-balanced" ng-click="loginLocal()" style="border-radius:4px;">
           Sign In
         </button>
 
 
         <div class="button-bar">
-  <a class="button button-outline button-balanced">Register</a>
+  <a class="button button-outline button-balanced" ng-click="registerLocal()">Register</a>
   <a class="button button-outline button-balanced">Recover</a>
 </div>
 

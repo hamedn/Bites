@@ -4,20 +4,90 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $window, $location) {
-  
+.controller('LoginCtrl', function($scope, $window, $location, $http, APIServer) {
+   $scope.data = {};
+
+
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
         window.open = cordova.InAppBrowser.open;
     }
 
 
+  $scope.registerLocal = function () {
+
+
+
+    $http({
+        method: 'POST',
+        url: APIServer.url() + '/signup',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+
+        data:  {
+          email: $scope.data.email,
+          password: $scope.data.password
+        }
+    }).then (function (response) {
+        console.log(response.data);
+
+        if (response.data.accessToken) {
+          alert("Login Successful!!!!") 
+        }
+        else {
+          alert(response.data.message);
+        }
+
+
+
+    })
+
+
+  }
+
+  $scope.loginLocal = function () {
+
+    $http({
+        method: 'POST',
+        url: APIServer.url() + '/login',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+
+        data:  {
+          email: $scope.data.email,
+          password: $scope.data.password
+        }
+    }).then (function (response) {
+        console.log(response.data);
+
+         if (response.data.accessToken) {
+          alert("Login Successful!!!!") 
+        }
+        else {
+          alert(response.data.message);
+        }
+
+
+    })
+  }
 
   $scope.loginFacebook = function() {
 
 
 
-    url = 'http://localhost:3000' + '/auth/facebook';
+    url = APIServer.url() + '/auth/facebook';
         loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
 
         loginWindow.addEventListener('loadstart', function (event) {
@@ -25,9 +95,10 @@ angular.module('starter.controllers', [])
           if(hasToken > -1) {
             token = event.url.match("oauth_token=(.*)")[1];
             loginWindow.close();
-            //Auth.updateUserAndToken(token);
             $location.path('/');
             alert(token);
+
+            //Logged in, change screen and pass token in
           }
         })
 

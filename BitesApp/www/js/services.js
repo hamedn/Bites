@@ -1,5 +1,15 @@
 angular.module('starter.services', [])
 
+.factory('APIServer', function() {
+  return {
+    url: function() {
+      return "http://localhost:3000";
+    }
+  };
+})
+
+
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
