@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $window, $location, $http, APIServer) {
+.controller('LoginCtrl', function($scope, $window, $location, $http, APIServer, $state) {
    $scope.data = {};
 
 
@@ -38,7 +38,8 @@ angular.module('starter.controllers', [])
         console.log(response.data);
 
         if (response.data.accessToken) {
-          alert("Login Successful!!!!") 
+          alert("Login Successful!!!!");
+          $state.go("preapp.dashboard"); 
         }
         else {
           alert(response.data.message);
@@ -73,7 +74,8 @@ angular.module('starter.controllers', [])
         console.log(response.data);
 
          if (response.data.accessToken) {
-          alert("Login Successful!!!!") 
+          alert("Login Successful!!!!");
+          $state.go("preapp.dashboard");
         }
         else {
           alert(response.data.message);

@@ -20,7 +20,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-  });
+
+  })
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -34,11 +36,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 //----------------------PREAPP
 
-  // setup an abstract state for the preapp
-    .state('preapp', {
-    url: '/preapp',
-    abstract: true,
-    templateUrl: 'templates/preapp/preapp.html'
+  // setup an abstract state for the preapp     
+  .state('preapp', {url: '/preapp', abstract: true, templateUrl: 'templates/preapp/preapp.html'
   })
 
 
@@ -55,7 +54,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       
     
   })
-
+  
+  .state('preapp.dashboard', {
+    url: '/dashboard',
+    templateUrl: 'templates/preapp/dashboard-screen.html',
+    controller: "DashCtrl"
+  })
 
 
   // setup an abstract state for the tabs directive
