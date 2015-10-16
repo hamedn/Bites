@@ -4,10 +4,26 @@
 
 var express = require('express');
 var router = express.Router();
-var Program = require('mongoose').model('Meal');
+var Meal = require('mongoose').model('Meal');
 
 
 router.post('/', function(req, res, next) {
+
+
+	var mealTitle = req.body.title;
+	var mealPrice = req.body.price;
+
+
+	var meal = new Meal();
+	meal.title = mealTitle;
+	meal.price = mealPrice;
+
+	meal.save(function(err) {
+	    if (err)
+	        throw err;
+	    return done(null, meal);
+	});
+
 
 });
 
