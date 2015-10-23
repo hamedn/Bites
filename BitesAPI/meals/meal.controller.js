@@ -32,6 +32,17 @@ router.post('/', function(req, res, next) {
 	meal.title = mealTitle;
 	meal.price = mealPrice;
 	meal.charId = mealCharId;
+	meal.description = mealDesc;
+	meal.deadline = mealDeadline;
+	meal.pickup = mealPickup;
+	meal.maxOrder = mealMaxOrder;
+	meal.location = mealLocation;
+	meal.ingredients = mealIngredients;
+	meal.chefName = mealName;
+	meal.picture = mealPicture;
+	meal.charId = mealCharId;
+
+
 	/*
 	meal.deadline = mealDeadline;
 	meal.pickup = mealPickup;
@@ -45,8 +56,7 @@ router.post('/', function(req, res, next) {
 	    if (err)
 	        throw err;
 	    else {
-	    	res.json({message:"login successful",accessToken:user.accessToken})
-				})(req,res,next);
+	    	res.json({message:"meal post successful"});
 	    	done(null, meal);
 	    }
 	});
@@ -54,15 +64,22 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.get('/', function(req, res, next) {
+router.get('/:charId', function(req, res, next) {
 
-	var charId = req.body.mealCharId;
 
-	Meal.findOne({charId: charId}, function(err, meal) {
+	var charId = req.params.charId;
+	console.log(req.params.charId);
+
+	Meal.findOne({'charId': charId}, function(err, meal) {
 		if (err)
 			throw err;
-		return meal;
+		res.json(meal);
 	});
+
+
+
+
+
 });
 
 router.delete('/:programId', function(req, res, next) {
