@@ -65,8 +65,6 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:charId', function(req, res, next) {
-
-
 	var charId = req.params.charId;
 	console.log(req.params.charId);
 
@@ -75,11 +73,15 @@ router.get('/:charId', function(req, res, next) {
 			throw err;
 		res.json(meal);
 	});
+});
 
+router.get('/getAll', function(req, res, next) {
 
-
-
-
+	Meal.find({}, function(err, meals) {
+		if (err)
+			throw err;
+		res.json(meals);
+	});
 });
 
 router.delete('/:programId', function(req, res, next) {
