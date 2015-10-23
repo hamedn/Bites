@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-
+	console.log("Blaaa");
 });
 
 router.delete('/:programId', function(req, res, next) {
