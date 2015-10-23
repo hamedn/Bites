@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var mealSchema = new Schema({
 	title: String,
 	description: String,
@@ -9,9 +8,12 @@ var mealSchema = new Schema({
 	pickup: Date,
 	price: Number,
 	maxOrder: Number,
+	numOrder: Number,
 	mealLocation: String,
 	ingredients: String,
-	name: String 
+	name: String,
+	picture: String, 
+	charId: String
 });
 
 

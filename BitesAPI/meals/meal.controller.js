@@ -6,29 +6,63 @@ var express = require('express');
 var router = express.Router();
 var Meal = require('mongoose').model('Meal');
 
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+};
 
 router.post('/', function(req, res, next) {
 
 
 	var mealTitle = req.body.title;
 	var mealPrice = req.body.price;
-
-
+	var mealDesc = req.body.description;
+	var mealDeadline = req.body.orderDeadline;
+	var mealPickup = req.body.pickup;
+	var mealMaxOrder = req.body.maxOrder;
+	var mealNumOrder = req.body.numOrder;
+	var mealLocation = req.body.mealLocation;
+	var mealIngredients = req.body.ingredients;
+	var mealName = req.body.name;
+	var mealPicture = req.body.picture;
+	var mealCharId = randomString(64, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'); 
+	
 	var meal = new Meal();
 	meal.title = mealTitle;
 	meal.price = mealPrice;
+	meal.charId = mealCharId;
+	/*
+	meal.deadline = mealDeadline;
+	meal.pickup = mealPickup;
+	meal.maxOrder = mealMaxOrder;
+	meal.location = mealLocation;
+	meal.ingredients = mealIngredients;
+	meal.name = mealName;
+	*/
 
 	meal.save(function(err) {
 	    if (err)
 	        throw err;
-	    return done(null, meal);
+	    else {
+	    	res.json({message:"login successful",accessToken:user.accessToken})
+				})(req,res,next);
+	    	done(null, meal);
+	    }
 	});
 
 
 });
 
 router.get('/', function(req, res, next) {
-	console.log("Blaaa");
+
+	var charId = req.body.mealCharId;
+
+	Meal.findOne({charId: charId}, function(err, meal) {
+		if (err)
+			throw err;
+		return meal;
+	});
 });
 
 router.delete('/:programId', function(req, res, next) {
