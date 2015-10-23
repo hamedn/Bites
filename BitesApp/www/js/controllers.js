@@ -1,7 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope,$rootScope, Meals) {
+  $scope.doRefresh = function() {
 
+
+    $scope.meals = Meals.getMeals();
+
+
+    $scope.$broadcast('scroll.refreshComplete');
+  }
+
+  $scope.doRefresh();
 })
 
 .controller('LoginCtrl', function($scope, $window, $location, $http, APIServer, $state, localStorage) {
@@ -12,6 +21,7 @@ angular.module('starter.controllers', [])
     function onDeviceReady() {
         window.open = cordova.InAppBrowser.open;
     }
+
 
 
   $scope.registerLocal = function () {

@@ -1,5 +1,18 @@
 angular.module('starter.services', [])
 
+
+.factory('Meals', function() {
+  return {
+    getMeals: function() {
+      meal1 = {name:"Pasta"};
+      meal2 = {name:"Pizza"};
+
+      return {meal1,meal2};
+    }
+  };
+})
+
+
 .factory('APIServer', function() {
   return {
     url: function() {
