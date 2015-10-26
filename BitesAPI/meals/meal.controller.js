@@ -64,7 +64,9 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.get('/:charId', function(req, res, next) {
+
+
+router.get('/individual/:charId', function(req, res, next) {
 	var charId = req.params.charId;
 	console.log(req.params.charId);
 
@@ -75,12 +77,19 @@ router.get('/:charId', function(req, res, next) {
 	});
 });
 
-router.get('/getAll', function(req, res, next) {
+router.get('/getAll/', function(req, res, next) {
+
+
 
 	Meal.find({}, function(err, meals) {
-		if (err)
-			throw err;
-		res.json(meals);
+		var foodMap = {};
+
+		meals.forEach(function(meal) {
+			foodMap[meal._id] = meal;
+			console.log(meal);
+		})
+		
+		res.send(foodMap);
 	});
 });
 
