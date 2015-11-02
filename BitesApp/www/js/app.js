@@ -61,6 +61,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     controller: "DashCtrl"
   })
 
+  .state('preapp.newmeal', {
+    url: '/newmeal',
+    templateUrl: 'templates/preapp/newmeal-screen.html',
+    controller: "MealFormCtrl"
+  })
 
   // setup an abstract state for the tabs directive
     .state('tab', {

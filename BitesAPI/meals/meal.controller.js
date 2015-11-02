@@ -12,7 +12,7 @@ function randomString(length, chars) {
     return result;
 };
 
-router.post('/', function(req, res, next) {
+router.post('/new', function(req, res, next) {
 
 
 	var mealTitle = req.body.title;
@@ -78,8 +78,6 @@ router.get('/individual/:charId', function(req, res, next) {
 });
 
 router.get('/getAll/', function(req, res, next) {
-
-
 
 	Meal.find({}, function(err, meals) {
 		var foodMap = {};
