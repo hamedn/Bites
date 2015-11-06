@@ -1,0 +1,29 @@
+<ion-view dash-screen view-title="Bites"  class="bg2">
+    <ion-header-bar class="bar-stable">
+    	<div class="buttons">
+    		<button class="button button-icon ion-navicon">
+    		</button>
+    	</div>
+
+    	<h1 class="title">Bites</h1>
+
+    	<div class="buttons">
+    		<button class="button button-icon ion-android-add" ng-click="goMeal()"></button>
+    	</div>
+
+    </ion-header-bar>
+
+<ion-content scroll="true">
+
+<ion-refresher on-refresh="doRefresh()" ></ion-refresher>
+    
+	<div ng-repeat="meal in meals">
+	    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+	    	
+	   
+	    </div>
+
+	  </div>
+  </ion-content>
+
+</ion-view>
