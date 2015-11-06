@@ -12,7 +12,7 @@ function randomString(length, chars) {
     return result;
 };
 
-router.post('/new', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
 
 	var mealTitle = req.body.title;

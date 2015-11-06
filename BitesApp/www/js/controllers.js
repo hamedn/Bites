@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
 
     $http({
       method: 'POST',
-      url: APIServer.url() + '/new',
+      url: APIServer.url() + '/meals',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
       
