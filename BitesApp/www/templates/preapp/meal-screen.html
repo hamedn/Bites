@@ -1,7 +1,7 @@
 <ion-view dash-screen view-title="Bites"  class="bg2">
     <ion-header-bar class="bar-stable">
     	<div class="buttons">
-    		<button class="button button-icon ion-navicon">
+    		<button class="button button-icon ion-ios-arrow-back">
     		</button>
     	</div>
 
@@ -14,7 +14,7 @@
     </ion-header-bar>
 
 <ion-content scroll="true">
-    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-top: 10%;">
         <div class="item item-avatar">
             <img src="img/avatar.jpg">
             <h2>{{meal.name}}</h2>
@@ -30,19 +30,19 @@
         </div>
 
             
-            <div class="item item-image">
-                <img src="img/foodcard.jpg">
-            </div>
+        <div class="item item-image" style="margin-top: -2%;">
+            <img src="img/foodcard.jpg">
+        </div>
             
-            <div class="item item-divider">
-                <div class="buttons">
-                    <button class="button button-icon ion-person" style= "float: left; display: inline-block;"> 30 orders</button>
+        <div class="item item-divider">
+            <p> {{meal.description}} </p>
+            <div class="row">
+                <div class="buttons" style="margin: 0 auto;">
+                    <button class="button button-balanced" >Order Now</button>
                 </div>
+            </div>
+        </div>  
 
-                <div class="buttons">
-                    <button class="button button-balanced" style= "float: right; display: inline-block;">Order Now</button>
-                </div>
-            </div>   
     </div>
 </ion-content>
 
