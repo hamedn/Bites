@@ -7,7 +7,7 @@ angular.module('starter.services', [])
       meal1 = {name:"Pasta"};
       meal2 = {name:"Pizza"};
 
-      return {meal1,meal2};
+      return {"hdskja":meal1,"djskd":meal2};
     }
   };
 })
