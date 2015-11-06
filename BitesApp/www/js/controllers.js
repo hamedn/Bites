@@ -44,6 +44,26 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('MealCtrl', function($scope, $window, $location, $http, APIServer, $state) {
+  $scope.tabs = [{
+    title: 'About',
+    url: 'about.html'
+  }, {
+    title: 'Ingredients',
+    url: 'ingredients.html'
+  }];
+
+  $scope.currentTab = 'about.html';
+
+  $scope.onClickTab = function(tab) {
+    $scope.currentTab = tab.url;
+  }
+
+  $scope.isActiveTab = function(tabUrl) {
+    return tabUrl == $scope.currentTab;
+  }
+})
+
 .controller('DashCtrl', function($scope,$rootScope, $state, Meals) {
   $scope.doRefresh = function() {
 
