@@ -74,14 +74,20 @@ angular.module('starter.controllers', [])
   }
 })
 
+
+
 .controller('DashCtrl', function($scope,$rootScope, $state, Meals) {
   $scope.doRefresh = function() {
 
+    req = Meals.getMeals();
 
-    $scope.meals = Meals.getMeals();
+    req.then(function(result) {  // this is only run after $http completes
+       $scope.meals = result.data;
+       console.log(result.data);
+        $scope.$broadcast('scroll.refreshComplete');
+    });
 
-
-    $scope.$broadcast('scroll.refreshComplete');
+   
   }
 
   $scope.doRefresh();
