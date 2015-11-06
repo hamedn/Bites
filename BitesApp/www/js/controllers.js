@@ -47,10 +47,12 @@ angular.module('starter.controllers', [])
 .controller('MealCtrl', function($scope, $window, $location, $http, APIServer, $state) {
   $scope.tabs = [{
     title: 'About',
-    url: 'about.html'
+    url: 'about.html',
+    style: 'left'
   }, {
     title: 'Ingredients',
-    url: 'ingredients.html'
+    url: 'ingredients.html',
+    style: 'right'
   }];
 
   $scope.currentTab = 'about.html';

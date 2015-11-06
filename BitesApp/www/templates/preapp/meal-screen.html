@@ -1,4 +1,4 @@
-<ion-view dash-screen view-title="Bites"  class="bg2">
+<ion-view dash-screen view-title="Bites" class="bg2">
     <ion-header-bar class="bar-stable">
     	<div class="buttons">
     		<button class="button button-icon ion-ios-arrow-back">
@@ -46,30 +46,40 @@
     </div>
 
     <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
-        <div id="tabs" ng-controller='MealCtrl'>
-            <ul>
-                <li ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)">
-                    <div >
+        <div class="item item-divider">
+            <div id="tabs">
+                <div ng-repeat="tab in tabs" ng-class="tab.style" ng-click="onClickTab(tab)">
+                    <div>
                         {{tab.title}}
                     </div>
-                </li>
-            </ul>
-            <div id="mainView">
-                <div ng-include="currentTab"></div>
+                </div>
+
             </div>
         </div>
-        <script type="text/ng-template" id="about.html">
-            <div id="about">
-                <p>Order Deadline</p>
-            </div>
-        </script>
 
-        <script type="text/ng-template" id="ingredients.html">
-            <div id="ingredients">
-                <p>Hello</p>
-            </div>
-        </script>
-    </div>
+        <div class="item item-text-wrap">
+            <div ng-include="currentTab"></div>
+
+            <script type="text/ng-template" id="about.html">
+                <div id="about">
+                    <p style="font-size: 1.2em; display: inline-block; float: left" class="button-icon ion-android-alarm-clock"> Order Deadline: </p>
+                        <p style="font-size: 1.2em; display: inline-block; float: right"> 00:29:16 </p>
+
+                        <li><p style="font-size: 1.2em;" class="button-icon ion-clock"> Pickup Time: </p>
+                        <p style="font-size: 1.2em; display: inline-block; float: right">6:30 pm </p>
+
+                        <li><p style="font-size: 1.2em;" class="button-icon ion-fork"> Max Order: </p>
+                        <p style="font-size: 1.2em; display: inline-block; float: right"> 5 </p>
+                </div>
+            </script>
+
+            <script type="text/ng-template" id="ingredients.html">
+                <div id="ingredients">
+                    <p>Foods</p>
+                </div>
+            </script>
+        </div>
+
 </ion-content>
 
 </ion-view>

@@ -7706,3 +7706,13 @@ a.button {
   background-position: bottom;
   background-repeat: no-repeat;
   background-color: white; }
+
+.left {
+  color: #000;
+  display: inline-block;
+  float: left; }
+
+.right {
+  color: #000;
+  display: inline-block;
+  float: right; }

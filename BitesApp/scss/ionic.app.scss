@@ -42,5 +42,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
    	background-color: white;
   }
 
+.left {
+    color: #000;
+    display: inline-block; 
+    float: left;
+}
 
-
+.right {
+    color: #000;
+    display: inline-block; 
+    float: right;
+}
