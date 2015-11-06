@@ -45,6 +45,7 @@ module.exports = function(app, options) {
 
 			app.use(require('cookie-parser')(credentials.cookieSecret));
 			app.use(require('express-session')({secret:credentials.cookieSecret, store:options.sessionStor }));
+			console.log("session used")
 			app.use(passport.initialize());
 			app.use(passport.session());
 			app.use(flash());

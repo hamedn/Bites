@@ -101,12 +101,6 @@ auth.registerRoutes();
 catch (err) {console.log(err)};
 
 app.use(function(req, res, next){
-  res.locals.loggedIn = true;
-  if(!req.session.passport.user)
-    res.locals.loggedIn = false;
-  else
-    res.locals.loggedIn = true;
-
   next();
 });
 

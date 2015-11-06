@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
 	        throw err;
 	    else {
 	    	res.json({message:"meal post successful"});
-	    	done(null, meal);
+	    	//done(null, meal);
 	    }
 	});
 
