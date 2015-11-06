@@ -64,6 +64,14 @@ angular.module('starter.controllers', [])
   $scope.isActiveTab = function(tabUrl) {
     return tabUrl == $scope.currentTab;
   }
+
+  $scope.goDash = function() {
+    $state.go("preapp.dashboard");
+  }
+
+  $scope.goMeal = function() {
+    $state.go("preapp.newmeal");    
+  }
 })
 
 .controller('DashCtrl', function($scope,$rootScope, $state, Meals) {
