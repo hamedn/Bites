@@ -1,13 +1,19 @@
 angular.module('starter.services', [])
 
 
-.factory('Meals', function() {
+.factory('Meals', function($http) {
   return {
     getMeals: function() {
-      meal1 = {name:"Pasta"};
-      meal2 = {name:"Pizza"};
 
-      return {"hdskja":meal1,"djskd":meal2};
+      $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
+          console.log('Success', resp);
+          return resp;
+        }, function(err) {
+          console.error('ERR', err);
+          // err.status will contain the status code
+        })
+
+
     }
   };
 })

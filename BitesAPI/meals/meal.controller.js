@@ -80,14 +80,8 @@ router.get('/individual/:charId', function(req, res, next) {
 router.get('/getAll/', function(req, res, next) {
 
 	Meal.find({}, function(err, meals) {
-		var foodMap = {};
-
-		meals.forEach(function(meal) {
-			foodMap[meal._id] = meal;
-			console.log(meal);
-		})
 		
-		res.send(foodMap);
+		res.json(meals);
 	});
 });
 
