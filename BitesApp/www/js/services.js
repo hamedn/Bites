@@ -5,15 +5,12 @@ angular.module('starter.services', [])
   return {
     getMeals: function() {
 
-      $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
-          console.log('Success', resp);
+      return $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
+          console.log(resp.data);
           return resp;
-        }, function(err) {
-          console.error('ERR', err);
-          // err.status will contain the status code
-        })
+        });
 
-
+      
     }
   };
 })
