@@ -61,6 +61,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       
     
   })
+  .state('preapp.chefscreen', {
+    url: '/chefscreen',
+    templateUrl: 'templates/preapp/chefsignup-screen.html',
+    controller: 'LoginCtrl'
+      
+    
+  })
+
+
   
   .state('preapp.dashboard', {
     url: '/dashboard',

@@ -125,7 +125,7 @@ angular.module('starter.controllers', [])
         },
 
         data:  {
-          name: $scope.data.realname
+          name: $scope.data.realname,
           email: $scope.data.email,
           password: $scope.data.password
         }
