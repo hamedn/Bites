@@ -44,35 +44,7 @@ angular.module('starter.controllers', [])
 
 })
 
-//.controller('MealCtrl', function($scope, $window, $location, $http, APIServer, $state) {
-
-
-
-
-.controller('DashCtrl', function($scope,$rootScope, $state, Meals) {
-  $scope.doRefresh = function() {
-
-    req = Meals.getMeals();
-
-    req.then(function(result) {  // this is only run after $http completes
-       $scope.meals = result.data;
-       console.log(result.data);
-        $scope.$broadcast('scroll.refreshComplete');
-    });
-
-   
-  }
-
-  $scope.doRefresh();
-
-  $scope.goMeal = function() {
-    $state.go("preapp.newmeal");    
-  }
-
-  $scope.toMeal = function(id) {
-    $state.go("preapp.meal", {id: id})
-  }
-
+.controller('MealCtrl', function($scope, $window, $location, $http, APIServer, $state) {
   $scope.tabs = [{
     title: 'About',
     url: 'about.html',
@@ -97,11 +69,31 @@ angular.module('starter.controllers', [])
     $state.go("preapp.dashboard");
   }
 
-  $scope.findMeal = function(id) {
-    for (var i = 0; i < $scope.meals; i++) {
-      if ($scope.meal._id == id)
-        $scope.meal = $scope.meal._id;
-    }
+  $scope.goMeal = function() {
+    $state.go("preapp.newmeal");    
+  }
+})
+
+
+
+.controller('DashCtrl', function($scope,$rootScope, $state, Meals) {
+  $scope.doRefresh = function() {
+
+    req = Meals.getMeals();
+
+    req.then(function(result) {  // this is only run after $http completes
+       $scope.meals = result.data;
+       console.log(result.data);
+        $scope.$broadcast('scroll.refreshComplete');
+    });
+
+   
+  }
+
+  $scope.doRefresh();
+
+  $scope.goMeal = function() {
+    $state.go("preapp.newmeal");    
   }
 })
 

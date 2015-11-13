@@ -77,7 +77,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('preapp.meal', {
     url: '/meal/{id}',
     templateUrl: 'templates/preapp/meal-screen.html',
-    controller: "DashCtrl"
+    controller: "MealCtrl"
   })
 
   // setup an abstract state for the tabs directive
