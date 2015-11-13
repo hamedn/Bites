@@ -98,9 +98,11 @@ angular.module('starter.controllers', [])
   }
 
   $scope.findMeal = function() {
-    for (meal in meals) {
-      if (meal._id == $stateParams.id)
-        $scope.meal = $scope.meal._id;
+    for (meal in Object) {
+      if (meal._id == $stateParams.id) {
+        $scope.meal = meal._id;
+        console.log("Going Through the Loop!");
+      }
     }
   }
 })
