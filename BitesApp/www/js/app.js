@@ -54,6 +54,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       
     
   })
+  .state('preapp.registerscreen', {
+    url: '/registerscreen',
+    templateUrl: 'templates/preapp/register-screen.html',
+    controller: 'LoginCtrl'
+      
+    
+  })
   
   .state('preapp.dashboard', {
     url: '/dashboard',

@@ -109,6 +109,9 @@ angular.module('starter.controllers', [])
 
 
   $scope.registerLocal = function () {
+    if ($scope.data.password == $scope.data.confirm) {
+
+
     $http({
         method: 'POST',
         url: APIServer.url() + '/signup',
@@ -122,6 +125,7 @@ angular.module('starter.controllers', [])
         },
 
         data:  {
+          name: $scope.data.realname
           email: $scope.data.email,
           password: $scope.data.password
         }
@@ -143,6 +147,13 @@ angular.module('starter.controllers', [])
 
 
   }
+  else {
+    alert("Passwords don't match!")
+  }
+}
+
+
+
 
   $scope.loginLocal = function () {
 
