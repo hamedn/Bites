@@ -10,7 +10,8 @@ var userSchema = new Schema({
 	authId: String,
 	name: String,
 	created: Date,
-	accessToken: String
+	accessToken: String,
+	isChef: Boolean
 });
 
 

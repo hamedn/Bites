@@ -1,4 +1,4 @@
-<ion-view login-screen view-title="Log In Screen" hide-nav-bar="true" class="bg2">
+<ion-view login-screen view-title="Register Screen" hide-nav-bar="true" class="bg2">
 
   <ion-content scroll="false">
     
@@ -17,16 +17,17 @@
           <label class="item item-input">
               <input type="password" placeholder="Password" ng-model="data.password">
           </label>
-
+          <label class="item item-input">
+              <input type="password" placeholder="Confirm Password" ng-model="data.password">
+          </label>
 
         <button class="button button-block button-balanced" ng-click="loginLocal()" style="border-radius:4px;">
-          Sign In
+          Sign Up
         </button>
 
 
         <div class="button-bar">
-  <a class="button button-outline button-balanced" ng-click="registerLocal()">Register</a>
-
+  <a class="button button-outline button-balanced" ng-click="registerLocal()">Log In</a>
 </div>
 
 
