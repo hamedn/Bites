@@ -92,7 +92,7 @@ module.exports = function(app, options) {
 
 
 					 console.log("tried to make user");
-
+					// console.log(req);
 
 			        User.findOne({ 'email' :  email }, function(err, user) {
 			            if (err) {
@@ -106,7 +106,8 @@ module.exports = function(app, options) {
 			            else {
 
 			                var newUser  = new User();
-
+			                newUser.name = req.body.name;
+			                console.log(req.body.name);
 			                newUser.email    = email;
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password);
