@@ -99,9 +99,15 @@ angular.module('starter.controllers', [])
 
   $scope.findMeal = function() {
     for (meal in Object) {
+      console.log("Going through the Loop!");
+      
+      if (p.hasOwnProperty(key)) {
+        alert(key + " -> " + p[key]);
+      }
+
       if (meal._id == $stateParams.id) {
         $scope.meal = meal._id;
-        console.log("Going Through the Loop!");
+        console.log("FOudn it");
       }
     }
   }
