@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('preapp.meal', {
-    url: '/meal',
+    url: '/meal/{id}',
     templateUrl: 'templates/preapp/meal-screen.html',
     controller: "MealCtrl"
   })
