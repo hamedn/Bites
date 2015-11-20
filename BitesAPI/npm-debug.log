@@ -1,0 +1,39 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   './manifest' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.2
+4 verbose install initial load of /Users/Eshan/Documents/Bites/BitesAPI/package.json
+5 verbose installManyTop reading scoped package data from /Users/Eshan/Documents/Bites/BitesAPI/node_modules/confidence/package.json
+6 verbose installManyTop reading scoped package data from /Users/Eshan/Documents/Bites/BitesAPI/node_modules/express/package.json
+7 verbose installManyTop reading scoped package data from /Users/Eshan/Documents/Bites/BitesAPI/node_modules/glob/package.json
+8 info package.json confidence@1.4.2 No license field.
+9 verbose readDependencies loading dependencies from /Users/Eshan/Documents/Bites/BitesAPI/package.json
+10 silly cache add args [ './manifest', null ]
+11 verbose cache add spec ./manifest
+12 silly cache add parsed spec Result {
+12 silly cache add   raw: './manifest',
+12 silly cache add   scope: null,
+12 silly cache add   name: null,
+12 silly cache add   rawSpec: './manifest',
+12 silly cache add   spec: '/Users/Eshan/Documents/Bites/BitesAPI/manifest',
+12 silly cache add   type: 'local' }
+13 error addLocal Could not install /Users/Eshan/Documents/Bites/BitesAPI/manifest
+14 verbose stack Error: ENOENT: no such file or directory, open '/Users/Eshan/Documents/Bites/BitesAPI/manifest'
+14 verbose stack     at Error (native)
+15 verbose cwd /Users/Eshan/Documents/Bites/BitesAPI
+16 error Darwin 14.1.0
+17 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "--save" "./manifest"
+18 error node v4.2.2
+19 error npm  v2.14.7
+20 error path /Users/Eshan/Documents/Bites/BitesAPI/manifest
+21 error code ENOENT
+22 error errno -2
+23 error syscall open
+24 error enoent ENOENT: no such file or directory, open '/Users/Eshan/Documents/Bites/BitesAPI/manifest'
+24 error enoent This is most likely not a problem with npm itself
+24 error enoent and is related to npm not being able to find a file.
+25 verbose exit [ -2, true ]

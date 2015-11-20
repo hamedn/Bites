@@ -49,14 +49,20 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('DashCtrl', function($scope,$rootScope, $state, $stateParams, Meals) {
+.controller('DashCtrl', function($scope,$rootScope, $state, $stateParams, Meals, currentMeal) {
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.meal = currentMeal.meal;
+  })
+
   $scope.doRefresh = function() {
 
     req = Meals.getMeals();
 
     req.then(function(result) {  // this is only run after $http completes
        $scope.meals = result.data;
-       console.log(result.data);
+       //console.log(result.data);
+       //currentMeal.meals = result.data;
+       //console.log(currentMeal.meals);
         $scope.$broadcast('scroll.refreshComplete');
     });
 
@@ -69,8 +75,12 @@ angular.module('starter.controllers', [])
     $state.go("preapp.newmeal");    
   }
 
-  $scope.toMeal = function(id) {
-    $state.go("preapp.meal", {id: id})
+
+
+  $scope.toMeal = function(mealCurrent) {
+    currentMeal.meal = mealCurrent;
+    console.log(currentMeal.meal)
+    $state.go("preapp.meal",{meal:mealCurrent})
   }
 
   $scope.tabs = [{
@@ -98,6 +108,10 @@ angular.module('starter.controllers', [])
   }
 
   $scope.findMeal = function() {
+        console.log(currentMeal.meal)
+
+    console.log("TRYING TO FIND MEAL")
+
     for (meal in Object) {
       console.log("Going through the Loop!");
       

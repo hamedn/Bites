@@ -1,12 +1,15 @@
 angular.module('starter.services', [])
 
+.factory("currentMeal",function(){
+        return {};
+})
+
 
 .factory('Meals', function($http) {
   return {
     getMeals: function() {
 
       return $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
-          console.log(resp.data);
           return resp;
         });
 
