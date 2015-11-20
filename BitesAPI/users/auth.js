@@ -111,6 +111,7 @@ module.exports = function(app, options) {
 			                newUser.email    = email;
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password);
+			               	newUser.chef = req.body.isChef;
 			                newUser.save(function(err) {
 			                    if (err)
 			                        throw err;

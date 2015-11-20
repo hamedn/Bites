@@ -140,8 +140,11 @@ angular.module('starter.controllers', [])
 
 
   $scope.registerLocal = function () {
-    if ($scope.data.password == $scope.data.confirm) {
+    console.log($scope.data.agreedToTerms);
 
+    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true) {
+      console.log($scope.data.chef);
+      
 
     $http({
         method: 'POST',
@@ -158,7 +161,8 @@ angular.module('starter.controllers', [])
         data:  {
           name: $scope.data.realname,
           email: $scope.data.email,
-          password: $scope.data.password
+          password: $scope.data.password,
+          isChef: $scope.data.chef
         }
     }).then (function (response) {
         console.log(response.data);
@@ -172,11 +176,13 @@ angular.module('starter.controllers', [])
           alert(response.data.message);
         }
 
-
-
     })
 
 
+  }
+
+  else if ($scope.data.agreedToTerms == false || typeof $scope.data.agreedToTerms == "undefined") {
+    alert("Must Agree to Terms of Service");
   }
   else {
     alert("Passwords don't match!")
