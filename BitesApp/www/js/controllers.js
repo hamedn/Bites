@@ -28,6 +28,7 @@ angular.module('starter.controllers', [])
         orderDeadline: $scope.data.orderDeadline,
         pickup: $scope.data.pickup,
         price: $scope.data.price,
+        mealDate: $scope.data.mealDate,
         maxOrder: $scope.data.maxOrder,
         numOrder: $scope.data.numOrder,
         mealLocation: $scope.data.mealLocation,

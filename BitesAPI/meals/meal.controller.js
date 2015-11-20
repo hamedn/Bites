@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
 	var mealTitle = req.body.title;
 	var mealPrice = req.body.price;
 	var mealDesc = req.body.description;
+	var mealDate = req.body.mealDate;
 	var mealDeadline = req.body.orderDeadline;
 	var mealPickup = req.body.pickup;
 	var mealMaxOrder = req.body.maxOrder;
@@ -31,6 +32,7 @@ router.post('/', function(req, res, next) {
 	var meal = new Meal();
 	meal.title = mealTitle;
 	meal.price = mealPrice;
+	meal.mealDate = mealDate;
 	meal.charId = mealCharId;
 	meal.description = mealDesc;
 	meal.deadline = mealDeadline;
