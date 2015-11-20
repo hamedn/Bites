@@ -1,6 +1,6 @@
 <ion-view view-title="New Meal Screen" hide-nav-bar="true" class="bg2">
 
-  <ion-content scroll="false">
+  <ion-content>
     
     <div class = "splashtext" align="center" style="margin-top:10%;">
 
@@ -17,10 +17,17 @@
             <input type="text" placeholder="Price" ng-model="data.price">
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Order Deadline" ng-model="data.orderDeadline">
+            <span class="input-label">Meal Date: </span>
+            <input type="date" ng-model="data.date">
         </label>
         <label class="item item-input">
-            <input type="text" placeholder="Pickup Time" ng-model="data.pickup">
+            <span class="input-label">Order Deadline:</span>
+            <input type="time" placeholder="Order Deadline" ng-model="data.orderDeadline">
+        </label>
+
+        <label class="item item-input">
+            <span class="input-label">Pickup Time: </span>
+            <input type="time" ng-model="data.pickup">
         </label>
         <label class="item item-input">
             <input type="text" placeholder="Max Order" ng-model="data.maxOrder">
