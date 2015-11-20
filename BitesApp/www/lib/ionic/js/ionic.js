@@ -2,7 +2,7 @@
  * Copyright 2014 Drifty Co.
  * http://drifty.com/
  *
- * Ionic, v1.0.1
+ * Ionic, v1.1.1
  * A powerful HTML5 mobile app framework.
  * http://ionicframework.com/
  *
@@ -18,7 +18,7 @@
 // build processes may have already created an ionic obj
 window.ionic = window.ionic || {};
 window.ionic.views = {};
-window.ionic.version = '1.0.1';
+window.ionic.version = '1.1.1';
 
 (function (ionic) {
 
@@ -1778,8 +1778,8 @@ window.ionic.version = '1.0.1';
 
       } else if (!this.preventedFirstMove && ev.srcEvent.type == 'touchmove') {
         // Prevent gestures that are not intended for this event handler from firing subsequent times
-        if (inst.options.prevent_default_directions.length === 0
-            || inst.options.prevent_default_directions.indexOf(ev.direction) != -1) {
+        if (inst.options.prevent_default_directions.length > 0
+            && inst.options.prevent_default_directions.indexOf(ev.direction) != -1) {
           ev.srcEvent.preventDefault();
         }
         this.preventedFirstMove = true;
@@ -2320,7 +2320,12 @@ window.ionic.version = '1.0.1';
       }
     },
 
-    // Check if the platform is the one detected by cordova
+    /**
+     * @ngdoc method
+     * @name ionic.Platform#is
+     * @param {string} Platform name.
+     * @returns {boolean} Whether the platform name provided is detected.
+     */
     is: function(type) {
       type = type.toLowerCase();
       // check if it has an array of platforms

@@ -80,8 +80,19 @@ router.get('/individual/:charId', function(req, res, next) {
 router.get('/getAll/', function(req, res, next) {
 
 	Meal.find({}, function(err, meals) {
-		
-		res.json(meals);
+		console.log("in getAll");
+		//console.log(meals);
+
+		var array = eval(meals);
+		console.log(array[0].title);
+
+		array.sort(function(a,b) {
+			return b.price - a.price;
+		});
+
+		console.log(array);
+
+		res.json(array);
 	});
 });
 
