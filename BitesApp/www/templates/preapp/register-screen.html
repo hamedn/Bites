@@ -28,8 +28,11 @@
           <ion-checkbox ng-model="data.chef">Do you want to be a Chef?</ion-checkbox>
           <div style=" width: 100%;" ng-show="data.chef">
             <iframe  src="http://www.w3schools.com"></iframe>
-            <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Services</ion-checkbox>
           </div>
+          <div style="width: 100%;" ng-hide="data.chef">
+            <iframe src="http://www.w3schools.com/js/"></iframe>
+          </div>
+          <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Services</ion-checkbox>
 
 
         <button class="button button-block button-balanced" ng-click="registerLocal()" style="border-radius:4px;">

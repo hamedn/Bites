@@ -140,10 +140,12 @@ angular.module('starter.controllers', [])
 
 
   $scope.registerLocal = function () {
-    console.log($scope.data.agreedToTerms);
 
     if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true) {
-      console.log($scope.data.chef);
+      if (typeof $scope.data.chef == "undefined")
+        $scope.data.chef = false;
+      
+      console.log("isChef: " + $scope.data.chef);
       
 
     $http({

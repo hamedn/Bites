@@ -107,11 +107,12 @@ module.exports = function(app, options) {
 
 			                var newUser  = new User();
 			                newUser.name = req.body.name;
+			                newUser.isChef = req.body.isChef;
 			                console.log(req.body.name);
-			                newUser.email    = email;
+			                newUser.email = email;
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password);
-			               	newUser.chef = req.body.isChef;
+			               	
 			                newUser.save(function(err) {
 			                    if (err)
 			                        throw err;
