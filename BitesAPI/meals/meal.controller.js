@@ -87,10 +87,12 @@ router.get('/getAll/', function(req, res, next) {
 		console.log(array[0].title);
 
 		array.sort(function(a,b) {
-			return b.price - a.price;
+			return new Date(b.pickup) - new Date (a.pickup);
 		});
 
-		console.log(array);
+		for (var i = 0; i < array.length; i++) {
+			console.log(array[i].pickup);
+		};
 
 		res.json(array);
 	});
