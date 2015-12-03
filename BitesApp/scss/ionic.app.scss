@@ -53,3 +53,24 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     display: inline-block; 
     float: right;
 }
+
+.rate {
+  display: table;
+  margin: 0 auto;
+}
+
+.rate-button {
+  display: table;
+  margin: 0 auto;
+}
+
+ul.rating li { 
+  display: inline; 
+  border: 0px; 
+  background: none; 
+  padding: 5px 10px; 
+} 
+
+ul.rating li i { 
+  font-size: 30px; 
+}

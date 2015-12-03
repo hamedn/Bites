@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic.rating'])
 
 // Work on the Following, Need to get the Post Requests
 // Up and running
@@ -126,6 +126,10 @@ angular.module('starter.controllers', [])
       }
     }
   }
+
+  // Setting the rating variables
+  $scope.rate = 3;
+  $scope.max = 5;
 })
 
 .controller('LoginCtrl', function($scope, $window, $location, $http, APIServer, $state, localStorage) {
