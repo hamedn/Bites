@@ -46,12 +46,28 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     color: #000;
     display: inline-block; 
     float: left;
+    margin-left: 5px;
+}
+
+.left-active {
+  border-bottom: thick solid #33cd5f;
+  display: inline-block; 
+  float: left;
+  margin-left: 5px;
+}
+
+.right-active {
+  border-bottom: thick solid #33cd5f;
+  display: inline-block; 
+  float: right;
+  margin-right: 5px;
 }
 
 .right {
     color: #000;
     display: inline-block; 
     float: right;
+    margin-right: 5px;
 }
 
 .rate {

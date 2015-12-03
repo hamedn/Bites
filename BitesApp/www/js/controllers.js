@@ -87,7 +87,7 @@ angular.module('starter.controllers', ['ionic.rating'])
   $scope.tabs = [{
     title: 'About',
     url: 'about.html',
-    style: 'left'
+    style: 'left-active'
   }, {
     title: 'Ingredients',
     url: 'ingredients.html',
@@ -98,6 +98,15 @@ angular.module('starter.controllers', ['ionic.rating'])
 
   $scope.onClickTab = function(tab) {
     $scope.currentTab = tab.url;
+    if (tab.url == 'about.html') {
+      tab.style = 'left-active';
+      $scope.tabs[1].style = 'right';
+    }
+
+    if (tab.url == 'ingredients.html') {
+      tab.style = 'right-active';
+      $scope.tabs[0].style = 'left';
+    }
   }
 
   $scope.isActiveTab = function(tabUrl) {
