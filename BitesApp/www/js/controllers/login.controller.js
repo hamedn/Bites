@@ -131,4 +131,63 @@ angular.module('login.controllers', ['ionic.rating'])
 
   }
 
+  $scope.registerFacebook = function() {
+
+
+
+    url = APIServer.url() + '/auth/facebook';
+        loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+
+        loginWindow.addEventListener('loadstart', function (event) {
+          hasToken = event.url.indexOf('?oauth_token=');
+          if(hasToken > -1) {
+            token = event.url.match("oauth_token=(.*)")[1];
+            loginWindow.close();
+            $location.path('/');
+            localStorage.set("userToken", token);
+            $state.go("preapp.registerfacebook");
+
+            //Logged in, change screen and pass token in
+          }
+        })
+
+  }
+
+  $scope.facebookFinish = function() {
+
+$http({
+        method: 'POST',
+        url: APIServer.url() + '/users/changechef',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+
+        data:  {
+          accessToken: localStorage.get("userToken"),
+          isChef: $scope.data.chef
+        }
+    }).then (function (response) {
+
+      if (response.data == "success") {
+          $state.go("preapp.dashboard");
+      }
+      else {
+        alert("error connecting to server");
+      }
+
+
+
+    })
+
+
+}
+
+
+
+
 })

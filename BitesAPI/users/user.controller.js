@@ -35,6 +35,29 @@ router.get('/byToken', function(req, res, next) {
 
 });
 
+router.post('/changechef', function(req, res, next) {
+
+	User.findOne({'accessToken': req.body.accessToken}, function(err, user) {
+		if (err) {
+			res.send("fail");
+			throw err;
+		}
+
+		user.isChef = req.body.isChef
+
+		user.save(function(err) {
+			if (err) res.send("fail");
+
+			res.send("success");
+			console.log("changed chef " + req.body.accessToken + " status to " + req.body.isChef)
+		})
+
+		
+	});
+
+});
+
+
 module.exports = function(app) {
   app.use('/users', router);
 };

@@ -61,6 +61,14 @@ angular.module('starter', ['ionic', 'login.controllers','dashboard.controllers',
       
     
   })
+   .state('preapp.registerfacebook', {
+    url: '/registerfacebook',
+    templateUrl: 'templates/preapp/register-facebook.html',
+    controller: 'LoginCtrl'
+      
+    
+  })
+
   .state('preapp.chefscreen', {
     url: '/chefscreen',
     templateUrl: 'templates/preapp/chefsignup-screen.html',
