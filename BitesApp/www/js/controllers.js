@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic.rating'])
 
 // Work on the Following, Need to get the Post Requests
 // Up and running
@@ -99,7 +99,7 @@ angular.module('starter.controllers', [])
   $scope.tabs = [{
     title: 'About',
     url: 'about.html',
-    style: 'left'
+    style: 'left-active'
   }, {
     title: 'Ingredients',
     url: 'ingredients.html',
@@ -110,6 +110,15 @@ angular.module('starter.controllers', [])
 
   $scope.onClickTab = function(tab) {
     $scope.currentTab = tab.url;
+    if (tab.url == 'about.html') {
+      tab.style = 'left-active';
+      $scope.tabs[1].style = 'right';
+    }
+
+    if (tab.url == 'ingredients.html') {
+      tab.style = 'right-active';
+      $scope.tabs[0].style = 'left';
+    }
   }
 
   $scope.isActiveTab = function(tabUrl) {
@@ -138,6 +147,10 @@ angular.module('starter.controllers', [])
       }
     }
   }
+
+  // Setting the rating variables
+  $scope.rate = 3;
+  $scope.max = 5;
 })
 
 .controller('LoginCtrl', function($scope, $window, $location, $http, APIServer, $state, localStorage) {
