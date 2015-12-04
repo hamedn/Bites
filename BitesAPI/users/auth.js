@@ -137,6 +137,8 @@ module.exports = function(app, options) {
 			function (accessToken, refreshToken, profile, done) {
 				var authId = 'facebook' + profile.id;
 
+
+
 				User.findOne({authId: authId}, function(err, user) {
 					if (err) return done(err,null);
 					if (user) return done(null, user);
@@ -157,6 +159,9 @@ module.exports = function(app, options) {
 				});
 
 
+				/*
+				POTENTIAL BUG WITH ASYNC.
+				*/
 				options.successRedirect = config.facebook[env].successURL + "?oauth_token=" + accessToken;
 				console.log(accessToken);
 
@@ -180,7 +185,7 @@ module.exports = function(app, options) {
 					if (!user)
 						return res.json(info);
 					else
-						res.json({message:"User Successfully Created", accessToken:user.accessToken})
+						res.json({message:"User Successfully Created", accessToken:user.accessToken,oid:user._id})
 				})(req,res,next);
 			})
 			
@@ -192,7 +197,7 @@ module.exports = function(app, options) {
 					if (!user)
 						return res.json(info);
 					else
-						res.json({message:"login successful",accessToken:user.accessToken})
+						res.json({message:"login successful",accessToken:user.accessToken,oid:user._id})
 				})(req,res,next);
 			})
 

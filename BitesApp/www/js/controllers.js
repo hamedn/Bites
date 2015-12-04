@@ -50,9 +50,20 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('DashCtrl', function($scope,$rootScope, $state, $stateParams, Meals, currentMeal) {
+.controller('DashCtrl', function($scope,$rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
+
+
+    var acc = localStorage.get("userToken");
+    console.log(acc);
+
+    $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
+      localStorage.set("oid",resp.data._id)
+       console.log(localStorage.get("oid"));
+
+    });
+
   })
 
   $scope.doRefresh = function() {
@@ -67,6 +78,7 @@ angular.module('starter.controllers', [])
         $scope.$broadcast('scroll.refreshComplete');
     });
 
+    console.log(localStorage.get("userToken",0));
    
   }
 
@@ -172,7 +184,9 @@ angular.module('starter.controllers', [])
         if (response.data.accessToken) {
           alert("Login Successful!!!!");
           localStorage.set("userToken", response.data.accessToken);
+          console.log(response.data);
           $state.go("preapp.dashboard"); 
+
         }
         else {
           alert(response.data.message);
@@ -241,7 +255,8 @@ angular.module('starter.controllers', [])
             token = event.url.match("oauth_token=(.*)")[1];
             loginWindow.close();
             $location.path('/');
-            alert(token);
+            localStorage.set("userToken", token);
+            $state.go("preapp.dashboard");
 
             //Logged in, change screen and pass token in
           }
