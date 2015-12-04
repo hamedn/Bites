@@ -21,11 +21,11 @@
             <p>By Robbie Netzorg</p>
 
             <!-- Might want to change this styling in the future -->
-            <h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">$5</h2>
+            <h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
                 
             <div class="buttons">
-                <button class="button button-icon button-small ion-location" style= "float: right; display: inline-block;"> Lerner</button>
-                <button class="button button-icon button-small ion-clock" style= "float: right; display: inline-block;"> 6:30pm </button>
+                <button class="button button-icon ion-location" style= "float: right; display: inline-block;"> Lerner </button>
+                <button class="button button-icon ion-clock" style= "float: right; display: inline-block;"> {{meal.pickup}} </button>
             </div>
         </div>
 
@@ -81,7 +81,7 @@
 
                     <div class="row">
                         <p style="font-size: 1.2em;" class="button-icon ion-clock"> Pickup Time: </p>
-                        <p style="font-size: 1.2em; display: inline-block; float: right">6:30 pm </p>
+                        <p style="font-size: 1.2em; display: inline-block; float: right">{{meal.pickup}}</p>
                     </div>
 
                     <div class="row">

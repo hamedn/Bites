@@ -12,7 +12,9 @@ var mealSchema = new Schema({
 	mealLocation: String,
 	ingredients: String,
 	name: String,
-	picture: String, 
+	picture: String,
+	oid: String,
+	rating: Number,
 	charId: String
 });
 

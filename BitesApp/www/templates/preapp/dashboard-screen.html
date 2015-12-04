@@ -27,21 +27,21 @@
 	    		<p>By Robbie Netzorg</p>
 
 	    		<!-- Might want to change this styling in the future -->
-	    		<h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">$5</h2>
+	    		<h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
 	    		
 	    		<div class="buttons">
-	    			<button class="button button-icon button-small ion-location" style= "float: right; display: inline-block;"> Lerner</button>
-	    			<button class="button button-icon button-small ion-clock" style= "float: right; display: inline-block;"> 6:30pm </button>
+	    			<button class="button button-icon  ion-location" style= "float: right; display: inline-block;"> Lerner</button>
+	    			<button class="button button-icon  ion-clock" style= "float: right; display: inline-block;"> {{meal.pickup}} </button>
 	    		</div>
 	   		</div>
 
-	    	<div class="item item-image">
+	    	<div class="item item-image" style="margin-top: -15px;">
 	      		<img src="img/foodcard.jpg">
 	    	</div>
 	    	
 	    	<div class="item item-divider">
 	    		<div class="buttons">
-	    			<button class="button button-icon ion-person" style= "float: left; display: inline-block;"> 30 orders</button>
+	    			<button class="button button-icon ion-person" style= "float: left; display: inline-block;"> {{meal.maxOrder}} Orders</button>
 	    		</div>
 
 	    		<div class="buttons">

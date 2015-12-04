@@ -43,6 +43,7 @@ router.post('/', function(req, res, next) {
 	meal.chefName = mealName;
 	meal.picture = mealPicture;
 	meal.charId = mealCharId;
+	meal.rating = -5;
 
 
 	/*
@@ -66,7 +67,23 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.post('/rating/:mealId/:rating', function(req, res, next) {
+	var indivRate = req.body.rating;
+	var mealId = req.params.mealId;
 
+	var meal = Meal.findOne({'mealId': mealId}, function(err, meal) {
+		if (err)
+			throw err;
+		res.json(meal);
+	});
+
+	if (meal.rating == -5) {
+		meal.rating = indivRate;
+	} else {
+		meal.rating = (meal.rating + indivRate) / 2;
+	}
+
+});
 
 router.get('/individual/:charId', function(req, res, next) {
 	var charId = req.params.charId;
