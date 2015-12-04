@@ -106,6 +106,34 @@ angular.module('dashboard.controllers', ['ionic.rating'])
     }
   }
 
+  $scope.submitRating = function() {
+    console.log($scope.rate);
+    console.log($scope.meal._id);
+
+    $http({
+      method: 'POST',
+      url: APIServer.url() + '/meals/rating',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+      
+      // I have no idea if this is necessary
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      },
+      
+
+      data: {
+        rating: $scope.rate,
+        mealId: $scope.meal._id
+      }
+
+    }).then(function (response) {
+        alert("Rating Submitted");
+    })
+  }
   // Setting the rating variables
   $scope.rate = 3;
   $scope.max = 5;

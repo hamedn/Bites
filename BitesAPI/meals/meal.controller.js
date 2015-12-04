@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var Meal = require('mongoose').model('Meal');
+var mongo = require('mongodb');
 
 function randomString(length, chars) {
     var result = '';
@@ -67,14 +68,13 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.post('/rating/:mealId/:rating', function(req, res, next) {
+router.post('/rating', function(req, res, next) {
 	var indivRate = req.body.rating;
-	var mealId = req.params.mealId;
+	var o_id = new mongo.ObjectID(req.body.oid);
 
-	var meal = Meal.findOne({'mealId': mealId}, function(err, meal) {
+	var meal = Meal.findOne({'_id': o_id}, function(err, meal) {
 		if (err)
 			throw err;
-		res.json(meal);
 	});
 
 	if (meal.rating == -5) {
@@ -83,6 +83,14 @@ router.post('/rating/:mealId/:rating', function(req, res, next) {
 		meal.rating = (meal.rating + indivRate) / 2;
 	}
 
+	meal.save(function(err) {
+	    if (err)
+	        throw err;
+	    else {
+	    	res.json({message:"rating post successful"});
+	    	//done(null, meal);
+	    }
+	});
 });
 
 router.get('/individual/:charId', function(req, res, next) {
