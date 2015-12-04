@@ -45,6 +45,8 @@ router.post('/', function(req, res, next) {
 	meal.picture = mealPicture;
 	meal.charId = mealCharId;
 	meal.rating = -5;
+	meal.ratingCount = 0;
+	meal.ratingArr = [];
 
 
 	/*
@@ -69,27 +71,37 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/rating', function(req, res, next) {
-	var indivRate = req.body.rating;
+	var indivRate = parseInt(req.body.rating);
+
 	var o_id = new mongo.ObjectID(req.body.oid);
 
-	var meal = Meal.findOne({'_id': o_id}, function(err, meal) {
+	Meal.findOne({'_id': o_id}, function(err, meal) {
 		if (err)
 			throw err;
-	});
 
-	if (meal.rating == -5) {
-		meal.rating = indivRate;
-	} else {
-		meal.rating = (meal.rating + indivRate) / 2;
-	}
+		if (meal.ratingCount == 0) {
+			meal.rating = indivRate;
+			meal.ratingArr.push(indivRate);
+			meal.ratingCount++;
+		} else {
+			meal.ratingCount++;
+			meal.ratingArr.push(indivRate);
+			var sum = 0;
+			for (var i = 0; i<meal.ratingArr.length; i++) {
+				sum += meal.ratingArr[i];
+			}
 
-	meal.save(function(err) {
-	    if (err)
-	        throw err;
-	    else {
-	    	res.json({message:"rating post successful"});
-	    	//done(null, meal);
-	    }
+			meal.rating = sum / meal.ratingCount;
+		}
+
+		meal.save(function(err) {
+	    	if (err)
+	        	throw err;
+	    	else {
+	    		res.json({message:"rating post successful"});
+	    		//done(null, meal);
+	    	}
+		});
 	});
 });
 
