@@ -123,7 +123,7 @@ angular.module('dashboard.controllers', ['ionic.rating'])
 
       data: {
         rating: $scope.rate,
-        mealId: $scope.meal._id
+        oid: $scope.meal._id
       }
 
     }).then(function (response) {
@@ -131,6 +131,6 @@ angular.module('dashboard.controllers', ['ionic.rating'])
     })
   }
   // Setting the rating variables
-  $scope.rate = 3;
+  $scope.rate = 1; 
   $scope.max = 5;
 })
