@@ -6,6 +6,13 @@ angular.module('mealform.controllers', ['ionic.rating'])
 
   $scope.newMeal = function() {
 
+
+    var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
+               $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
+    
+    var orderDeadlineFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
+               $scope.data.orderDeadline.getHours(), $scope.data.orderDeadline.getMinutes(), $scope.data.orderDeadline.getSeconds());
+
     $http({
       method: 'POST',
       url: APIServer.url() + '/meals',
@@ -24,8 +31,8 @@ angular.module('mealform.controllers', ['ionic.rating'])
       data: {
         title: $scope.data.title,
         description: $scope.data.description,
-        orderDeadline: $scope.data.orderDeadline,
-        pickup: $scope.data.pickup,
+        orderDeadline: orderDeadlineFixed,
+        pickup: pickupFixed,
         price: $scope.data.price,
         mealDate: $scope.data.mealDate,
         maxOrder: $scope.data.maxOrder,
