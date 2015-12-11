@@ -7760,3 +7760,13 @@ ul.rating li i {
 .ionic_ratings {
   font-size: 40px;
   margin: 5px 0 0 0; }
+
+.profile-rating {
+  font-size: 20px; }
+
+.profile-avatar {
+  border-radius: 100%;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  display: block; }

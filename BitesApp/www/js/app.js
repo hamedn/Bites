@@ -21,7 +21,18 @@ angular.module('starter', ['ionic', 'login.controllers','dashboard.controllers',
       StatusBar.styleLightContent();
     }
 
-  })
+    // To make this work for dev push notifications
+    // run 'ionic config set dev_push true' in termial
+    /*
+    var push = new Ionic.Push({
+      "debug": true
+    });
+
+    push.register(function(token) {
+      console.log("Device token:", token.token);
+    });
+    */
+  });
 
 })
 
@@ -94,6 +105,12 @@ angular.module('starter', ['ionic', 'login.controllers','dashboard.controllers',
   .state('preapp.meal', {
     url: '/meal/{id}',
     templateUrl: 'templates/preapp/meal-screen.html',
+    controller: "DashCtrl"
+  })
+
+  .state('preapp.chef', {
+    url: '/chef/{id}',
+    templateUrl: 'templates/preapp/chef-screen.html',
     controller: "DashCtrl"
   })
 

@@ -47,7 +47,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $state.go("preapp.newmeal");    
   }
 
-
+  // Placeholder goChef function
+  $scope.goChef = function() {
+    $scope.userActive = '';
+    $state.go("preapp.chef");
+  }
 
   $scope.toMeal = function(mealCurrent) {
     currentMeal.meal = mealCurrent;
