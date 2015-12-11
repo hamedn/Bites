@@ -1,4 +1,4 @@
-angular.module('mealform.controllers', ['ionic.rating'])
+angular.module('mealform.controllers', ['ionic-ratings'])
 
 
 .controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer, $state) {

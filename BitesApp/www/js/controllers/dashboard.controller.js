@@ -1,4 +1,4 @@
-angular.module('dashboard.controllers', ['ionic.rating'])
+angular.module('dashboard.controllers', ['ionic-ratings'])
 
 // Work on the Following, Need to get the Post Requests
 // Up and runnin
@@ -122,7 +122,7 @@ angular.module('dashboard.controllers', ['ionic.rating'])
       
 
       data: {
-        rating: $scope.rate,
+        rating: $scope.ratingsObject.rating,
         oid: $scope.meal._id
       }
 
@@ -131,6 +131,20 @@ angular.module('dashboard.controllers', ['ionic.rating'])
     })
   }
   // Setting the rating variables
-  $scope.rate = 1; 
-  $scope.max = 5;
+  $scope.ratingsObject = {
+    iconOn : 'ion-ios-star',
+    iconOff : 'ion-ios-star-outline',
+    iconOnColor: 'rgb(200, 200, 100)',
+    iconOffColor: 'rgb(200, 100, 100)',
+    rating: 3,
+    minRating: 1,
+    callback: function(rating) {
+      $scope.ratingsCallback(rating);
+    }
+  };
+
+  $scope.ratingsCallback = function(rating) {
+    console.log('Selected rating is : ', rating);
+    $scope.ratingsObject.rating = rating;
+  };
 })

@@ -1,4 +1,4 @@
-angular.module('login.controllers', ['ionic.rating'])
+angular.module('login.controllers', ['ionic-ratings'])
 
 // Work on the Following, Need to get the Post Requests
 // Up and runnin
