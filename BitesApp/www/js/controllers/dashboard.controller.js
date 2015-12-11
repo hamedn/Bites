@@ -12,6 +12,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
 
+    var pickupUgly = $scope.meal.deadline
+    var pickupPretty = "Sunday"
+    console.log("uuu" + pickupUgly);
+    
+    $scope.meal.pickupPretty = pickupPretty;
 
     var acc = localStorage.get("userToken");
 
