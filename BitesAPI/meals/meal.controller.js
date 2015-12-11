@@ -33,7 +33,6 @@ router.post('/', function(req, res, next) {
 	var meal = new Meal();
 	meal.title = mealTitle;
 	meal.price = mealPrice;
-	meal.mealDate = mealDate;
 	meal.charId = mealCharId;
 	meal.description = mealDesc;
 	meal.deadline = mealDeadline;
@@ -62,7 +61,7 @@ router.post('/', function(req, res, next) {
 	    if (err)
 	        throw err;
 	    else {
-	    	res.json({message:"meal post successful"});
+	    	res.json({message:"meal post successful",data:req.body});
 	    	//done(null, meal);
 	    }
 	});

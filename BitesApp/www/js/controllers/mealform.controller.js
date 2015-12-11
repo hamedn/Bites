@@ -13,6 +13,9 @@ angular.module('mealform.controllers', ['ionic.rating'])
     var orderDeadlineFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
                $scope.data.orderDeadline.getHours(), $scope.data.orderDeadline.getMinutes(), $scope.data.orderDeadline.getSeconds());
 
+
+
+
     $http({
       method: 'POST',
       url: APIServer.url() + '/meals',
@@ -34,7 +37,6 @@ angular.module('mealform.controllers', ['ionic.rating'])
         orderDeadline: orderDeadlineFixed,
         pickup: pickupFixed,
         price: $scope.data.price,
-        mealDate: $scope.data.mealDate,
         maxOrder: $scope.data.maxOrder,
         numOrder: $scope.data.numOrder,
         mealLocation: $scope.data.mealLocation,
@@ -43,6 +45,7 @@ angular.module('mealform.controllers', ['ionic.rating'])
       }
     }).then(function (response) {
         alert("Meal Prepared");
+        console.log(response);
         $state.go("preapp.dashboard");
 
     })

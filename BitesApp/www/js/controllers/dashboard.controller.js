@@ -14,11 +14,9 @@ angular.module('dashboard.controllers', ['ionic.rating'])
 
 
     var acc = localStorage.get("userToken");
-    console.log(acc);
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
       localStorage.set("oid",resp.data._id)
-       console.log(localStorage.get("oid"));
 
     });
 
@@ -30,13 +28,16 @@ angular.module('dashboard.controllers', ['ionic.rating'])
 
     req.then(function(result) {  // this is only run after $http completes
        $scope.meals = result.data;
+
+       console.log($scope.meals[0]);
+
+       console.log({ssd:new Date()});
        //console.log(result.data);
        //currentMeal.meals = result.data;
        //console.log(currentMeal.meals);
         $scope.$broadcast('scroll.refreshComplete');
     });
 
-    console.log(localStorage.get("userToken",0));
    
   }
 
@@ -88,12 +89,8 @@ angular.module('dashboard.controllers', ['ionic.rating'])
   }
 
   $scope.findMeal = function() {
-        console.log(currentMeal.meal)
-
-    console.log("TRYING TO FIND MEAL")
 
     for (meal in Object) {
-      console.log("Going through the Loop!");
       
       if (p.hasOwnProperty(key)) {
         alert(key + " -> " + p[key]);
@@ -101,7 +98,6 @@ angular.module('dashboard.controllers', ['ionic.rating'])
 
       if (meal._id == $stateParams.id) {
         $scope.meal = meal._id;
-        console.log("FOudn it");
       }
     }
   }

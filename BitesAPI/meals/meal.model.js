@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var mealSchema = new Schema({
 	title: String,
 	description: String,
-	orderDeadline: Date,
+	deadline: Date,
 	pickup: Date,
 	price: Number,
 	maxOrder: Number,
