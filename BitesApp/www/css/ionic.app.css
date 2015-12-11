@@ -7756,3 +7756,8 @@ ul.rating li {
 
 ul.rating li i {
   font-size: 30px; }
+
+.ionic_ratings {
+  font-size: 40px;
+  margin: 5px 0 0 0;
+}
