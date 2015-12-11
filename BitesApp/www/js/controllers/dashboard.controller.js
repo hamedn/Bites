@@ -11,13 +11,18 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 .controller('DashCtrl',  function($scope,$rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
+    $scope.meal.pickup = new Date();
 
+
+
+
+/*
     var pickupUgly = $scope.meal.deadline
     var pickupPretty = "Sunday"
     console.log("uuu" + pickupUgly);
     
     $scope.meal.pickupPretty = pickupPretty;
-
+*/
     var acc = localStorage.get("userToken");
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
