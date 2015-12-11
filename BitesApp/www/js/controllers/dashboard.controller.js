@@ -54,7 +54,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   // Placeholder goChef function
   $scope.goChef = function() {
-    $scope.userActive = '';
     $state.go("preapp.chef");
   }
 
