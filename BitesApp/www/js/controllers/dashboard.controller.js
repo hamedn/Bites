@@ -11,7 +11,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 .controller('DashCtrl',  function($scope,$rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
-    $scope.meal.pickup = new Date();
 
 
 
