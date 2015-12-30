@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'angularMoment', 'login.controllers','dashboard.controllers','mealform.controllers', 'starter.services'])
+angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login.controllers','dashboard.controllers','mealform.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, localStorage) {
   $ionicPlatform.ready(function() {
@@ -22,8 +22,7 @@ angular.module('starter', ['ionic', 'angularMoment', 'login.controllers','dashbo
     }
 
     // To make this work for dev push notifications
-    // run 'ionic config set dev_push true' in termial
-    /*
+    // run 'ionic config set dev_push true' in terminal
     var push = new Ionic.Push({
       "debug": true
     });
@@ -31,7 +30,6 @@ angular.module('starter', ['ionic', 'angularMoment', 'login.controllers','dashbo
     push.register(function(token) {
       console.log("Device token:", token.token);
     });
-    */
   });
 
 })
@@ -88,7 +86,11 @@ angular.module('starter', ['ionic', 'angularMoment', 'login.controllers','dashbo
     
   })
 
-
+  .state('preapp.settings', {
+    url: '/settings',
+    templateUrl: 'templates/preapp/settings-screen.html',
+    controller: 'DashCtrl'
+  })
   
   .state('preapp.dashboard', {
     url: '/dashboard',

@@ -1,6 +1,6 @@
 {
   "name": "Bites",
-  "app_id": "",
+  "app_id": "b24a5ed6",
   "gulpStartupTasks": [
     "sass",
     "watch"

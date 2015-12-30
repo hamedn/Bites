@@ -8,7 +8,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope,$rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
 
@@ -59,6 +59,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   // Placeholder goChef function
   $scope.goChef = function() {
     $state.go("preapp.chef");
+  }
+
+  // Settings goSettings function
+  $scope.goSettings = function() {
+    $state.go("preapp.settings")
   }
 
   $scope.toMeal = function(mealCurrent) {
@@ -112,6 +117,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
         $scope.meal = meal._id;
       }
     }
+  }
+
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
   }
 
   $scope.submitRating = function() {
