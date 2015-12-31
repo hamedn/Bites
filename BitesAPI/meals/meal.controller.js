@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
 	meal.deadline = mealDeadline;
 	meal.pickup = mealPickup;
 	meal.maxOrder = mealMaxOrder;
-	meal.location = mealLocation;
+	meal.mealLocation = mealLocation;
 	meal.ingredients = mealIngredients;
 	meal.chefName = mealName;
 	meal.picture = mealPicture;
