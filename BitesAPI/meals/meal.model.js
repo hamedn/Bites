@@ -17,7 +17,8 @@ var mealSchema = new Schema({
 	rating: Number,
 	ratingArr: Array,
 	ratingCount: Number,
-	charId: String
+	charId: String,
+	userOID: String
 });
 
 

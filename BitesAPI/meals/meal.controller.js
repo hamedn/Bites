@@ -46,7 +46,7 @@ router.post('/', function(req, res, next) {
 	meal.rating = -5;
 	meal.ratingCount = 0;
 	meal.ratingArr = [];
-
+	meal.userOID = req.body.userOID;
 
 	/*
 	meal.deadline = mealDeadline;

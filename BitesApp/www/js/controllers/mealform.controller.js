@@ -1,7 +1,7 @@
 angular.module('mealform.controllers', ['ionic-ratings'])
 
 
-.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer, $state) {
+.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, $state) {
   $scope.data = {};
 
   $scope.newMeal = function() {
@@ -41,7 +41,9 @@ angular.module('mealform.controllers', ['ionic-ratings'])
         numOrder: $scope.data.numOrder,
         mealLocation: $scope.data.mealLocation,
         ingredients: $scope.data.ingredients,
-        name: $scope.data.name
+        name: $scope.data.name,
+        userOID: localStorage.get("oid")
+
       }
     }).then(function (response) {
         alert("Meal Prepared");
