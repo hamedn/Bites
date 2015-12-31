@@ -24,7 +24,14 @@ angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login
     // To make this work for dev push notifications
     // run 'ionic config set dev_push true' in terminal
     var push = new Ionic.Push({
-      "debug": true
+      "debug": true,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        console.log(notification, payload);
+      },
+      "onRegister": function(data) {
+        console.log(data.token);
+      }
     });
 
     push.register(function(token) {
