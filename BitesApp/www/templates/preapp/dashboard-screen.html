@@ -3,7 +3,7 @@
 <ion-side-menus enable-menu-with-back-views="true">
 
 <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
+    <ion-header-bar class="bar-balanced">
       <h1 class="title">Your Bites</h1>
     </ion-header-bar>
     <ion-content scroll="false" class="has-header">
@@ -18,7 +18,7 @@
 </ion-side-menu>
 
 <ion-side-menu-content>
-    <ion-header-bar class="bar-stable">
+    <ion-header-bar class="bar-balanced">
     	<div class="buttons">
     		<button class="button button-icon ion-navicon" ng-click="toggleLeft()">
     		</button>
@@ -47,10 +47,10 @@
 	    		<!-- Might want to change this styling in the future -->
 	    		<h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
 	    		
-	    		<div class="buttons">
-	    			<button class="button button-icon  ion-location" style= "float: right; display: inline-block;"> {{meal.mealLocation}}</button>
+	    		<div class="buttons" style= "float: right;">
+	    			<button class="button button-icon  ion-location" > {{meal.mealLocation}}</button>
 
-	    			<button class="button button-icon  ion-clock" style= "float: right; display: inline-block;"> {{meal.pickup | amCalendar}}</button>
+	    			<button class="button button-icon  ion-clock"> {{meal.pickup | amCalendar}}</button>
 
 	    			
 	    		</div>
