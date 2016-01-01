@@ -128,6 +128,66 @@ app.use(function(req, res, next){
     require(controller)(app);
   });
 
+
+/*
+
+UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
+
+
+*/
+
+  var User = require('mongoose').model('User');
+  var Meal = require('mongoose').model('Meal');
+  var ratingAggregator = function() { 
+
+       User.find({}, function(err, users) {
+
+          users.forEach(function(user) {
+            
+
+                finalScore = 5;
+                //Now that you've found the user, loop through all meals and average out the scores
+                mealList = user.mealArray;
+                if (mealList.length == 0) {res.json({"rating":5})}
+                else {
+                  Meal.find({
+                      '_id': { $in: mealList}
+                  }, function(err, docs){
+                       finalScore = 0;
+                       for ( i = 0; i < docs.length; i++) {
+                        finalScore += docs[i].rating;
+                       }
+
+
+                       user.rating = finalScore/(docs.length);
+
+                       user.save(function(err) {
+                      if (err)
+                        throw err;
+                      else {
+                        console.log({"rating":(finalScore/(docs.length))})
+
+                      }
+                    })
+
+                  })
+                }
+
+
+
+          });
+
+        });
+
+
+
+      console.log("Running hourly score update"); 
+
+    }
+
+
+  setInterval(ratingAggregator, 1000 * 60 * 60);
+  ratingAggregator();
   //require(Config.get('/root') + '/app/app.controller')(app);
 
 

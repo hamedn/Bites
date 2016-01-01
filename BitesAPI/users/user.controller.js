@@ -4,6 +4,7 @@
 
 var express = require('express');
 var router = express.Router();
+var Meal = require('mongoose').model('Meal');
 var User = require('mongoose').model('User');
 var mongo = require('mongodb');
 
@@ -21,6 +22,47 @@ router.get('/individual/:oid', function(req, res, next) {
 	});
 
 });
+
+router.get('/updateRating/:oid', function(req, res, next) {
+	var o_id = new mongo.ObjectID(req.params.oid);
+
+	User.findOne({'_id': o_id}, function(err, user) {
+		if (err)
+			throw err;
+
+		finalScore = 5;
+		//Now that you've found the user, loop through all meals and average out the scores
+		mealList = user.mealArray;
+		if (mealList.length == 0) {res.json({"rating":5})}
+		else {
+			Meal.find({
+			    '_id': { $in: mealList}
+			}, function(err, docs){
+			     finalScore = 0;
+			     for ( i = 0; i < docs.length; i++) {
+			     	finalScore += docs[i].rating;
+			     }
+
+
+			     user.rating = finalScore/(docs.length);
+
+			     user.save(function(err) {
+					if (err)
+						throw err;
+					else {
+						res.json({"rating":(finalScore/(docs.length))})
+
+					}
+				})
+
+			})
+		}
+	});
+
+
+
+});
+
 
 router.get('/byToken', function(req, res, next) {
 

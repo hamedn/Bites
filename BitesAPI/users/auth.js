@@ -109,7 +109,9 @@ module.exports = function(app, options) {
 			                newUser.name = req.body.name;
 			                newUser.isChef = req.body.isChef;
 			                console.log(req.body.name);
+			                newUser.mealArray = [];
 			                newUser.email = email;
+			                newUser.rating = 5;
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password);
 			               	
@@ -150,6 +152,8 @@ module.exports = function(app, options) {
 						created: Date.now(),
 						facebook: profile._json
 					});
+					user.mealArray = [];
+					user.rating = 5;
 					user.accessToken = accessToken;
 					user.save(function(err) {
 						if (err) return done(err,null);

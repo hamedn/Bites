@@ -11,7 +11,9 @@ var userSchema = new Schema({
 	name: String,
 	created: Date,
 	accessToken: String,
-	isChef: Boolean
+	isChef: Boolean,
+	mealArray: Array,
+	rating: Number
 });
 
 

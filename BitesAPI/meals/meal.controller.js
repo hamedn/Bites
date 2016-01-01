@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var Meal = require('mongoose').model('Meal');
+var User = require('mongoose').model('User');
 var mongo = require('mongodb');
 
 function randomString(length, chars) {
@@ -58,12 +59,32 @@ router.post('/', function(req, res, next) {
 	meal.name = mealName;
 	*/
 
+
+
+
 	meal.save(function(err) {
 	    if (err)
 	        throw err;
 	    else {
-	    	res.json({message:"meal post successful",data:req.body});
-	    	//done(null, meal);
+	    	var o_id = new mongo.ObjectID(req.body.userOID);
+
+			User.findOne({'_id': o_id}, function(err, user) {
+				if (err)
+					throw err;
+				console.log(user);
+				user.mealArray.push(meal._id)
+
+				user.save(function(err) {
+					if (err)
+						throw err;
+					else {
+						res.json({message:"meal post successful",data:req.body});
+					}
+				})
+
+			});
+
+
 	    }
 	});
 
@@ -123,7 +144,6 @@ router.get('/getAll/', function(req, res, next) {
 		//console.log(meals);
 
 		var array = eval(meals);
-		console.log(array[0].title);
 
 		array.sort(function(a,b) {
 			return new Date(b.pickup) - new Date (a.pickup);
