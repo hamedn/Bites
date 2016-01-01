@@ -42,7 +42,8 @@ angular.module('mealform.controllers', ['ionic-ratings'])
         mealLocation: $scope.data.mealLocation,
         ingredients: $scope.data.ingredients,
         name: $scope.data.name,
-        userOID: localStorage.get("oid")
+        userOID: localStorage.get("oid"),
+        userName: localStorage.get("name")
 
       }
     }).then(function (response) {
