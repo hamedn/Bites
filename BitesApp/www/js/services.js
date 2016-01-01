@@ -4,6 +4,10 @@ angular.module('starter.services', [])
         return {};
 })
 
+.factory("currentProfile",function(){
+        return {};
+})
+
 
 .factory('Meals', function($http) {
   return {

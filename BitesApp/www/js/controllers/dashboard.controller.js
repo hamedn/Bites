@@ -8,11 +8,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, currentProfile,currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
-
-
+    $scope.chef = currentProfile.data;
+    console.log($scope.chef);
 
 
 /*
@@ -40,9 +40,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     req.then(function(result) {  // this is only run after $http completes
        $scope.meals = result.data;
 
-       console.log($scope.meals[0]);
 
-       console.log({ssd:new Date()});
        //console.log(result.data);
        //currentMeal.meals = result.data;
        //console.log(currentMeal.meals);
@@ -59,8 +57,17 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
   // Placeholder goChef function
-  $scope.goChef = function() {
-    $state.go("preapp.chef");
+  $scope.goChef = function(oid) {
+    currentProfile.oid = oid;
+
+    $http.get(APIServer.url() + '/users/individual/' + oid).then(function(resp) {
+      
+      currentProfile.data = resp.data;
+
+      $state.go("preapp.chef");
+    });
+
+
   }
 
   // Settings goSettings function
@@ -71,7 +78,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   $scope.toMeal = function(mealCurrent) {
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal)
-    $state.go("preapp.meal",{meal:mealCurrent})
+    $state.go("preapp.meal")
   }
 
   $scope.tabs = [{
