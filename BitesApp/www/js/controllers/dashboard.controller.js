@@ -27,6 +27,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
       localStorage.set("oid",resp.data._id);
       localStorage.set("name",resp.data.name);
+      localStorage.set("isChef",resp.data.isChef);
 
     });
 

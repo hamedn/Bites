@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login.controllers','dashboard.controllers','mealform.controllers', 'starter.services'])
+angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, localStorage) {
   $ionicPlatform.ready(function() {
@@ -96,7 +96,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login
   .state('preapp.settings', {
     url: '/settings',
     templateUrl: 'templates/preapp/settings-screen.html',
-    controller: 'DashCtrl'
+    controller: "SettingsCtrl"
   })
   
   .state('preapp.dashboard', {
