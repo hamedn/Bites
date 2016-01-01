@@ -58,6 +58,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   // Placeholder goChef function
   $scope.goChef = function(oid) {
+    if (oid == 'null') oid = localStorage.get("oid");
+
     currentProfile.oid = oid;
 
     $http.get(APIServer.url() + '/users/individual/' + oid).then(function(resp) {

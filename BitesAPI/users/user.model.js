@@ -13,7 +13,8 @@ var userSchema = new Schema({
 	accessToken: String,
 	isChef: Boolean,
 	mealArray: Array,
-	rating: Number
+	rating: Number,
+	profilePicture: String
 });
 
 

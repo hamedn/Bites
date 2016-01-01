@@ -51,6 +51,7 @@ angular.module('login.controllers', ['ionic-ratings'])
         if (response.data.accessToken) {
           alert("Login Successful!!!!");
           localStorage.set("userToken", response.data.accessToken);
+          localStorage.set("loggedIn",true);
           console.log(response.data);
           $state.go("preapp.dashboard"); 
 
@@ -99,6 +100,7 @@ angular.module('login.controllers', ['ionic-ratings'])
          if (response.data.accessToken) {
           alert("Login Successful!!!!");
           localStorage.set("userToken", response.data.accessToken);
+          localStorage.set("loggedIn",true);
           $state.go("preapp.dashboard");
         }
         else {
@@ -123,6 +125,7 @@ angular.module('login.controllers', ['ionic-ratings'])
             loginWindow.close();
             $location.path('/');
             localStorage.set("userToken", token);
+             localStorage.set("loggedIn",true);
             $state.go("preapp.dashboard");
 
             //Logged in, change screen and pass token in
@@ -145,6 +148,7 @@ angular.module('login.controllers', ['ionic-ratings'])
             loginWindow.close();
             $location.path('/');
             localStorage.set("userToken", token);
+            localStorage.set("loggedIn",true);
             $state.go("preapp.registerfacebook");
 
             //Logged in, change screen and pass token in
@@ -174,6 +178,7 @@ $http({
     }).then (function (response) {
 
       if (response.data == "success") {
+        
           $state.go("preapp.dashboard");
       }
       else {

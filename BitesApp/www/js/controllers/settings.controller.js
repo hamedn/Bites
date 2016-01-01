@@ -14,4 +14,10 @@ angular.module('settings.controllers', ['ionic-ratings'])
   $scope.goDash = function() {
     $state.go("preapp.dashboard");
   }
+
+  $scope.logOut = function () {
+    localStorage.set("loggedIn","false");
+    $state.go("preapp.splashscreen");
+  }
+
 })

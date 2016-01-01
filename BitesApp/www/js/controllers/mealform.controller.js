@@ -3,7 +3,9 @@ angular.module('mealform.controllers', ['ionic-ratings'])
 
 .controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, $state) {
   $scope.data = {};
-
+ $scope.goDash = function() {
+    $state.go("preapp.dashboard");
+  }
   $scope.newMeal = function() {
 
 

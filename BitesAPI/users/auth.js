@@ -134,7 +134,7 @@ module.exports = function(app, options) {
 				clientID: config.facebook[env].appId,
 				clientSecret: config.facebook[env].appSecret,
 				callbackURL: config.facebook[env].callBackURL,
-				profileFields: ['id', 'emails'],
+				profileFields: ['id', 'emails','picture.type(large)'],
 			},
 			function (accessToken, refreshToken, profile, done) {
 				var authId = 'facebook' + profile.id;
@@ -150,7 +150,8 @@ module.exports = function(app, options) {
 						name: profile.displayName,
 						email: profile.emails[0].value,
 						created: Date.now(),
-						facebook: profile._json
+						facebook: profile._json,
+						profilePicture: profile.photos[0].value
 					});
 					user.mealArray = [];
 					user.rating = 5;
@@ -207,7 +208,7 @@ module.exports = function(app, options) {
 
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {
-					callbackURL: config.facebook[env].callBackURL, scope: [ 'email' ]
+					callbackURL: config.facebook[env].callBackURL, scope: [ 'email' , 'public_profile' ]
 				}),
 				function (req,res) {
 
@@ -218,7 +219,7 @@ module.exports = function(app, options) {
 
 
 				app.get('/auth/facebook/callback',
-						passport.authenticate('facebook', { failureRedirect: options.failureRedirect , scope: [ 'email' ] }),
+						passport.authenticate('facebook', { failureRedirect: options.failureRedirect , scope: [ 'email','public_profile' ] }),
 						function(req, res) {
 							res.redirect(303, options.successRedirect);
 					});

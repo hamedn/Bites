@@ -148,7 +148,7 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
                 finalScore = 5;
                 //Now that you've found the user, loop through all meals and average out the scores
                 mealList = user.mealArray;
-                if (mealList.length == 0) {res.json({"rating":5})}
+                if (mealList.length == 0) {console.log({"rating":5})}
                 else {
                   Meal.find({
                       '_id': { $in: mealList}
