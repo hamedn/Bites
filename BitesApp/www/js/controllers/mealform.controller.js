@@ -1,11 +1,23 @@
 angular.module('mealform.controllers', ['ionic-ratings'])
 
 
-.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, $state) {
+.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state) {
   $scope.data = {};
- $scope.goDash = function() {
+  
+  $scope.goDash = function() {
     $state.go("preapp.dashboard");
   }
+
+  // Get the Photo
+  $scope.getPhoto = function() {
+    Camera.getPicture().then(function(imageURI) {
+      console.log(imageURI);
+      return imageURI;
+    }, function(err) {
+      console.err(err);
+    });
+  };
+
   $scope.newMeal = function() {
 
 

@@ -8,7 +8,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -133,6 +133,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   // Get the Photo
   $scope.getPhoto = function() {
     Camera.getPicture().then(function(imageURI) {
+      return imageURI
       console.log(imageURI);
     }, function(err) {
       console.err(err);
