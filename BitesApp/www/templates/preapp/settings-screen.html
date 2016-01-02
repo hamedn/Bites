@@ -14,10 +14,22 @@
     </ion-header-bar>
 
 <ion-content scroll="true">
-    <div class="item" ng-click="">
-        {{chef}}
-    </div>  
-   
+    
+
+<div class ="list">
+
+<ion-toggle ng-model="isChef.checked" ng-change="toggleChef()">
+    Chef Account
+</ion-toggle>
+
+
+</div>
+
+
+
+
+
+</ul>
 
     <button class="button button-full button-assertive" ng-click="logOut()" style="margin-top:4%;">
       Log Out
