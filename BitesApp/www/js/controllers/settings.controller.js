@@ -37,11 +37,6 @@ var confirmPopup = $ionicPopup.confirm({
        confirmPopup.then(function(res) {
          if(res) {
                     
-
-           //MAKE HIM A CHEF
-
-
-
           $http({
                   method: 'POST',
                   url: APIServer.url() + '/users/changechef',
@@ -89,15 +84,6 @@ var confirmPopup = $ionicPopup.confirm({
        });
        confirmPopup.then(function(res) {
          if(res) {
-                    
-
-           //MAKE HIM A CHEF
-
-
-
-
-
-
 
           $http({
                   method: 'POST',
@@ -128,19 +114,6 @@ var confirmPopup = $ionicPopup.confirm({
 
 
               })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
          } 
        });
