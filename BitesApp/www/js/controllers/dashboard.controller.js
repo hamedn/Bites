@@ -8,10 +8,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, currentProfile,currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
+    $scope.hStars = hStars.data;
+    $scope.uhStars = uhStars.data;
+    $scope.halfStars = halfStar.data;
+
     console.log($scope.chef);
 
 
@@ -50,6 +54,38 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
    
   }
 
+
+  $scope.calculateRatingStars = function(rating) {
+    hStars.data = [];
+    uhStars.data = [];
+    halfStar.data = [];
+
+    console.log("Stars to put: " + rating);
+    for (var i = 0; i < Math.round(rating); i++) {
+      hStars.data.push(i);
+    }
+
+    var decimal = rating - Math.round(rating);
+    console.log(decimal);
+
+    if (decimal > .25 || decimal < .75) {
+      halfStar.data.push(1);
+    }
+
+    if (hStars.data.length < 5) {
+      var x = 5 - hStars.data.length;
+      console.log("Stars to put: " + x);
+    }
+
+    for (var i = 0; i < x; i++) {
+      uhStars.data.push(i)
+    }
+
+    if (halfStar.data.length != 0) {
+      hStars.data.splice(0, 1);
+    }
+  }
+
   $scope.doRefresh();
 
   $scope.goMeal = function() {
@@ -66,7 +102,15 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       
       currentProfile.data = resp.data;
 
+      $scope.calculateRatingStars(currentProfile.data.rating);
+
       $state.go("preapp.chef");
+
+      console.log("Stars: " + hStars);
+      for (var i = 0; i < hStars.length; i++) {
+        console.log(hStars[i]);
+      }
+      console.log("No Stars: " + uhStars);
     });
 
 

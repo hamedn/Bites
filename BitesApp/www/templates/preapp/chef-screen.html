@@ -14,9 +14,12 @@
     <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
         <div class="item">
             <img src="img/avatar.jpg" class="profile-avatar">
-            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">{{chef.name}}</h2>
-            <ionic-ratings class='profile-rating' ratingsobj='ratingsObject'></ionic-ratings>
-
+            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">{{chef.name}} {{chef.rating}}</h2>
+            <div class="profile-rating">
+                <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
+                <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
+                <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
+            </div>
         </div>
 
 

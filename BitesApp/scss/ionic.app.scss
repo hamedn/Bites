@@ -97,7 +97,29 @@ ul.rating li i {
 }
 
 .profile-rating {
-  font-size: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.stars {
+  margin: 0 auto;
+  display: inline-block;
+  color: rgb(200, 100, 100);
+  padding: 0;
+}
+
+.hstars {
+  color: rgb(200, 200, 100);
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0;
+}
+
+.halfstars {
+  color: rgb(200, 200, 100);
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0;
 }
 
 .profile-avatar {

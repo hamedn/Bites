@@ -8,6 +8,19 @@ angular.module('starter.services', [])
         return {};
 })
 
+.factory("hStars", function() {
+  return {};
+
+})
+
+.factory("uhStars", function() {
+  return {};
+})
+
+.factory("halfStar", function() {
+  return {};
+})
+
 
 .factory('Meals', function($http) {
   return {
