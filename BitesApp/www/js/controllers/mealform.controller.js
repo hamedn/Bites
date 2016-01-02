@@ -14,7 +14,7 @@ angular.module('mealform.controllers', ['ionic-ratings'])
       console.log(imageURI);
       return imageURI;
     }, function(err) {
-      console.err(err);
+      console.log(err);
     });
   };
 
