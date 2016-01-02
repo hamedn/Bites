@@ -3,5 +3,3 @@
 node_modules/
 platforms/
 plugins/
-credentials.js
-config.js
