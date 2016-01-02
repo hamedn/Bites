@@ -97,26 +97,30 @@ ul.rating li i {
 }
 
 .profile-rating {
-  font-size: 25px;
+  font-size: 0px;
   text-align: center;
+  margin-top: -1%;
 }
 
 .stars {
+  font-size: 30px;
   margin: 0 auto;
   display: inline-block;
-  color: rgb(200, 100, 100);
+  color: $balanced;
   padding: 0;
 }
 
 .hstars {
-  color: rgb(200, 200, 100);
+  font-size: 30px;
+  color: $balanced;
   margin: 0 auto;
   display: inline-block;
   padding: 0;
 }
 
 .halfstars {
-  color: rgb(200, 200, 100);
+  font-size: 30px;
+  color: $balanced;
   margin: 0 auto;
   display: inline-block;
   padding: 0;

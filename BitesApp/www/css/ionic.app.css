@@ -7762,23 +7762,27 @@ ul.rating li i {
   margin: 5px 0 0 0; }
 
 .profile-rating {
-  font-size: 25px;
-  text-align: center; }
+  font-size: 0px;
+  text-align: center;
+  margin-top: -1%; }
 
 .stars {
+  font-size: 30px;
   margin: 0 auto;
   display: inline-block;
-  color: #c86464;
+  color: #67BF68;
   padding: 0; }
 
 .hstars {
-  color: #c8c864;
+  font-size: 30px;
+  color: #67BF68;
   margin: 0 auto;
   display: inline-block;
   padding: 0; }
 
 .halfstars {
-  color: #c8c864;
+  font-size: 30px;
+  color: #67BF68;
   margin: 0 auto;
   display: inline-block;
   padding: 0; }

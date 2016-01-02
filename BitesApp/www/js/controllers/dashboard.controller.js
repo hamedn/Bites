@@ -60,15 +60,15 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     uhStars.data = [];
     halfStar.data = [];
 
+    var decimal = rating - Math.round(rating);
+    console.log("Var Decimal: " + decimal);
+
     console.log("Stars to put: " + rating);
     for (var i = 0; i < Math.round(rating); i++) {
       hStars.data.push(i);
     }
 
-    var decimal = rating - Math.round(rating);
-    console.log(decimal);
-
-    if (decimal > .25 || decimal < .75) {
+    if (decimal > .25 && decimal < .75) {
       halfStar.data.push(1);
     }
 
@@ -81,9 +81,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       uhStars.data.push(i)
     }
 
-    if (halfStar.data.length != 0) {
-      hStars.data.splice(0, 1);
+    if (halfStar.data.length == 1) {
+      uhStars.data.splice(0, 1);
     }
+
+    console.log(hStars.data.length);
+    console.log(halfStar.data.length);
   }
 
   $scope.doRefresh();
