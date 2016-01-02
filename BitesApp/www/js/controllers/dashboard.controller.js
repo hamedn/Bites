@@ -130,6 +130,15 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $state.go("preapp.meal")
   }
 
+  // Get the Photo
+  $scope.getPhoto = function() {
+    Camera.getPicture().then(function(imageURI) {
+      console.log(imageURI);
+    }, function(err) {
+      console.err(err);
+    });
+  };
+
   $scope.tabs = [{
     title: 'About',
     url: 'about.html',
