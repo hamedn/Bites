@@ -1,9 +1,9 @@
 {
-  "name": "landme",
-  "version": "0.0.1",
+  "name": "bitesapi",
+  "version": "0.12.2",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node server"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
