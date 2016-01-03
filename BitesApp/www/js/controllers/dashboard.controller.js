@@ -1,3 +1,4 @@
+
 angular.module('dashboard.controllers', ['ionic-ratings'])
 
 // Work on the Following, Need to get the Post Requests
@@ -183,6 +184,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $state.go("preapp.meal")
   }
 
+
   // Get the Photo
   $scope.getPhoto = function() {
     Camera.getPicture().then(function(imageURI) {
@@ -267,6 +269,15 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
+
+  function handleOpenURL(url) {
+
+    console.log(url);
+    var body = document.getElementsByTagName("body")[0];
+    var mainController = angular.element(body).scope();
+    mainController.reportAppLaunched("http://www.bitesapp.com");
+
+
   }
 
   $scope.submitRating = function() {
