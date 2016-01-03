@@ -1,7 +1,7 @@
 angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
-.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop) {
+.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
   $scope.data = {};
   
   $scope.goDash = function() {
