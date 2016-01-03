@@ -17,8 +17,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $scope.halfStars = halfStar.data;
     $scope.currentChefMeals = currentChefMeals.data;
     $scope.pastChefMeals = pastChefMeals.data;
+    $scope.yourAccount = currentChefMeals.yourAccount;
     
     console.log($scope.chef);
+    console.log($scope.yourAccount);
     
     $scope.doRefresh();
 
@@ -40,6 +42,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     });
 
   })
+
+  
 
   $scope.doRefresh = function() {
 
@@ -84,6 +88,26 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     //}
   }
 
+  $scope.deleteMeal = function(oid) {
+    $http({
+      method: 'POST',
+      url: APIServer.url() + '/meals/delete/' + oid,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+      
+      // I have no idea if this is necessary
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      }
+    }).then(function (response) {
+        alert("Meal Deleted");
+        $state.go($state.current, {}, {reload: true});
+    })
+  }
+
   $scope.calculateRatingStars = function(rating) {
     hStars.data = [];
     uhStars.data = [];
@@ -125,8 +149,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   // Placeholder goChef function
   $scope.goChef = function(oid) {
-    
-    if (oid == 'null') oid = localStorage.get("oid");
+    currentChefMeals.yourAccount = false;
+    if (oid == 'null') {
+      oid = localStorage.get("oid");
+      currentChefMeals.yourAccount = true;
+    }
+
 
     currentProfile.oid = oid;
 
@@ -138,8 +166,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       $scope.getChefMeals();
 
       $state.go("preapp.chef");
-
-      console.log("Chef's meals: " + currentChefMeals.data);
 
     });
 

@@ -38,7 +38,7 @@
 
         <script type="text/ng-template" id="current.html">
         <div id="current" ng-repeat="meal in currentChefMeals">
-            <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+            <div ng-show="afield=true"class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
                 <div class="item item-avatar">
                     <img src="img/avatar.jpg">
                     <h2>{{meal.title}}</h2>
@@ -61,7 +61,10 @@
             <div class="item item-divider">
                 <p> {{meal.description}} </p>
                 <div class="row">
-                    <div class="buttons" style="margin: 0 auto;">
+                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                        <button class="button button-assertive" ng-click="deleteMeal(meal._id); getChefMeals();">Delete</button>
+                    </div>
+                    <div ng-hide="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced">Order Now</button>
                     </div>
                 </div>

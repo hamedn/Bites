@@ -126,6 +126,19 @@ router.post('/rating', function(req, res, next) {
 	});
 });
 
+router.post('/delete/:oid', function(req, res, next) {
+	var o_id = new mongo.ObjectID(req.params.oid);
+
+	Meal.remove({'_id': o_id}, function(err, meal) {
+		if (err) {
+			throw err;
+		} else {
+			res.json({message:"meal successfully deleted"});
+		}
+
+	});
+});
+
 router.get('/search/:oid', function(req, res, next) {
 
 	var o_id = new mongo.ObjectID(req.params.oid);
