@@ -126,6 +126,19 @@ router.post('/rating', function(req, res, next) {
 	});
 });
 
+router.get('/search/:oid', function(req, res, next) {
+
+	var o_id = new mongo.ObjectID(req.params.oid);
+	console.log(req.body);
+
+	Meal.findOne({'_id': o_id}, function(err, meal) {
+		if (err)
+			throw err;
+		console.log(meal);
+		res.json(meal);
+	});
+});
+
 router.get('/individual/:charId', function(req, res, next) {
 	var charId = req.params.charId;
 	console.log(req.params.charId);

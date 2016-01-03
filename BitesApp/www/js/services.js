@@ -21,6 +21,9 @@ angular.module('starter.services', [])
   return {};
 })
 
+.factory("currentChefMeals", function() {
+  return {};
+})
 
 .factory('Meals', function($http) {
   return {

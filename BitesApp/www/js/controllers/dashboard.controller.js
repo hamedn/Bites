@@ -8,13 +8,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
     $scope.hStars = hStars.data;
     $scope.uhStars = uhStars.data;
     $scope.halfStars = halfStar.data;
+    $scope.currentChefMeals = currentChefMeals.data;
 
     console.log($scope.chef);
 
@@ -54,11 +55,25 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
    
   }
 
+  $scope.getChefMeals = function() {
+    //if (currentProfile.data.mealArray.length != 0) {
+      console.log(currentProfile.data.mealArray[0]);
+      for (var i = 0; i < currentProfile.data.mealArray.length; i++) {
+        $http.get(APIServer.url() + '/meals/search/' + currentProfile.data.mealArray[i]).then(function(resp) {
+          console.log(currentProfile.data.mealArray[i]);
+          currentChefMeals.data.push(resp.data);
+        })
+      }
+    //} else {
+    //  return 0
+    //}
+  }
 
   $scope.calculateRatingStars = function(rating) {
     hStars.data = [];
     uhStars.data = [];
     halfStar.data = [];
+    currentChefMeals.data = [];
 
     var decimal = rating - Math.round(rating);
     console.log("Var Decimal: " + decimal);
@@ -106,9 +121,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       currentProfile.data = resp.data;
 
       $scope.calculateRatingStars(currentProfile.data.rating);
+      $scope.getChefMeals();
 
       $state.go("preapp.chef");
 
+      console.log("Chef's meals: " + currentChefMeals.data[0]);
       console.log("Stars: " + hStars);
       for (var i = 0; i < hStars.length; i++) {
         console.log(hStars[i]);
