@@ -172,11 +172,17 @@ router.get('/getAll/', function(req, res, next) {
 		var array = eval(meals);
 
 		array.sort(function(a,b) {
-			return new Date(b.pickup) - new Date (a.pickup);
+			if (a.orderDeadline < b.orderDeadline) {
+				return -1
+			} else if (a.orderDeadline > b.orderDeadline){
+				return 1;
+			} else {
+				return 0;
+			};
 		});
 
 		for (var i = 0; i < array.length; i++) {
-			console.log(array[i].pickup);
+			console.log(array[i].orderDeadline);
 		};
 
 		res.json(array);
