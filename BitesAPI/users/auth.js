@@ -227,14 +227,6 @@ module.exports = function(app, options) {
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
 				var stripeToken = "number=4258284520513848&cvc=738&exp_month=4&exp_year=17";
-				/*var stripeToken = stripe.card.createToken({
-				  number: "4258284520513848",
-				  cvc: "738",
-				  exp_month: "4",
-				  exp_year: "17"
-				}, function(status, response) {
-					console.log("Stipre response handler response " + response);
-				}); */
 
 				stripe.tokens.create({
 				  card: {
