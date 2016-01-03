@@ -16,9 +16,14 @@ router.get('/individual/:oid', function(req, res, next) {
 	User.findOne({'_id': o_id}, function(err, user) {
 		if (err)
 			throw err;
-		user.accessToken = "nice try."
-		user.password = "nice try."
-		res.json(user);
+		if (user != null) {
+			user.accessToken = "nice try."
+			user.password = "nice try."
+			res.json(user);
+		}
+		else {
+			console.log("USER IS NULL!!!!");
+		}
 	});
 
 });
