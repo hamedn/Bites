@@ -8,7 +8,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -16,8 +16,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $scope.uhStars = uhStars.data;
     $scope.halfStars = halfStar.data;
     $scope.currentChefMeals = currentChefMeals.data;
-
+    $scope.pastChefMeals = pastChefMeals.data;
+    
     console.log($scope.chef);
+    
 
 
 /*
@@ -56,12 +58,24 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
   $scope.getChefMeals = function() {
+    currentChefMeals.data = [];
+    pastChefMeals.data = [];
     //if (currentProfile.data.mealArray.length != 0) {
-      console.log(currentProfile.data.mealArray[0]);
+      var now = new Date();
+      console.log("First Meal: " + currentProfile.data.mealArray[0]);
       for (var i = 0; i < currentProfile.data.mealArray.length; i++) {
         $http.get(APIServer.url() + '/meals/search/' + currentProfile.data.mealArray[i]).then(function(resp) {
-          console.log(currentProfile.data.mealArray[i]);
-          currentChefMeals.data.push(resp.data);
+          var fixedDate = new Date(resp.data.pickup);
+
+          var timeDif = fixedDate - now;
+
+          if (timeDif > 0 ) {
+            currentChefMeals.data.push(resp.data);
+          } else {
+            resp.data.rating = (Math.round(resp.data.rating * 2) / 2).toFixed(1);
+            pastChefMeals.data.push(resp.data);
+
+          }
         })
       }
     //} else {
@@ -73,12 +87,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     hStars.data = [];
     uhStars.data = [];
     halfStar.data = [];
-    currentChefMeals.data = [];
+    
 
     var decimal = rating - Math.round(rating);
     console.log("Var Decimal: " + decimal);
 
-    console.log("Stars to put: " + rating);
+    //console.log("Stars to put: " + rating);
     for (var i = 0; i < Math.round(rating); i++) {
       hStars.data.push(i);
     }
@@ -89,7 +103,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
     if (hStars.data.length < 5) {
       var x = 5 - hStars.data.length;
-      console.log("Stars to put: " + x);
+      //console.log("Stars to put: " + x);
     }
 
     for (var i = 0; i < x; i++) {
@@ -100,8 +114,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       uhStars.data.splice(0, 1);
     }
 
-    console.log(hStars.data.length);
-    console.log(halfStar.data.length);
   }
 
   $scope.doRefresh();
@@ -112,6 +124,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   // Placeholder goChef function
   $scope.goChef = function(oid) {
+    
     if (oid == 'null') oid = localStorage.get("oid");
 
     currentProfile.oid = oid;
@@ -125,12 +138,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
       $state.go("preapp.chef");
 
-      console.log("Chef's meals: " + currentChefMeals.data[0]);
-      console.log("Stars: " + hStars);
-      for (var i = 0; i < hStars.length; i++) {
-        console.log(hStars[i]);
-      }
-      console.log("No Stars: " + uhStars);
+      console.log("Chef's meals: " + currentChefMeals.data);
+
     });
 
 

@@ -71,24 +71,13 @@
         </script>
 
         <script type="text/ng-template" id="past.html">
-            <div id="past">
+            <div id="past" ng-repeat="meal in pastChefMeals">
                 <div class="list card" style="padding: 10px; margin-left:5%; margin-right:5%; border-radius:5px;">
-                    <div style="float: left; margin-top: 5px;"> Pizza: </div>
+                    <div style="float: left; margin-top: 5px;"> {{meal.title}}: </div>
                     <div style="float: right;">
-                        <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
-                        <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
-                        <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
+                        <div class="hstars ion-ios-star">{{meal.rating}}/5</div>
                     </div>
-                    <div style="float: right; margin: 5px 5px 0 0;"> 3/5 Orders</div>
-                </div>
-                <div class="list card" style="padding: 10px; margin-left:5%; margin-right:5%; border-radius:5px;">
-                    <div style="float: left; margin-top: 5px;"> Hummus: </div>
-                    <div style="float: right;">
-                        <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
-                        <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
-                        <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
-                    </div>
-                    <div style="float: right; margin: 5px 5px 0 0;"> 10/15 Orders</div>
+                    <div style="float: right; margin: 5px 5px 0 0;"> 3/{{meal.maxOrder}} Orders</div>
                 </div>
             </div>
         </script>
