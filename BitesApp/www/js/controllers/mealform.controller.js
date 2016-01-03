@@ -1,7 +1,7 @@
-angular.module('mealform.controllers', ['ionic-ratings'])
+angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
-.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state) {
+.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop) {
   $scope.data = {};
   
   $scope.goDash = function() {
@@ -9,26 +9,76 @@ angular.module('mealform.controllers', ['ionic-ratings'])
   }
 
 
+//  $scope.photo = "http://cdn3.vox-cdn.com/uploads/chorus_asset/file/917470/iphone-6-travel-photo-review-mann-header.0.jpg"
+
 
   $scope.fromCamera = function () {
     $scope.takePicture(navigator.camera.PictureSourceType.CAMERA);
   }
 
   $scope.fromLibrary = function () {
+
     $scope.takePicture(navigator.camera.PictureSourceType.PHOTOLIBRARY);
 
   }
 
+  $scope.processImage = function (imgURL) {
+
+    console.log(imgURL);
+
+    var img = new Image();
+      img.onload = function() {
+
+        console.log(this);
+        console.log("processed image" + this.height/this.width);
+        if (this.height/this.width > 1) {
+
+          $jrCrop.crop({
+              url: imgURL,
+              width: 400,
+              height: 400
+          }).then(function(canvas) {
+              // success!
+
+              var image = canvas.toDataURL();
+
+              $scope.photo = image;
+              $scope.$apply();
+
+
+          }, function() {
+              alert("Image height cannot exceed image width");
+              // User canceled or couldn't load image.
+          });
+
+        }
+        else {
+          console.log("set scope to photo");
+          $scope.photo = imgURL;
+          $scope.$apply();
+
+         console.log($scope.photo);
+        }
+
+      }
+      img.src = imgURL;
+  }
+
+
   $scope.takePicture = function (source) {
+
     var options =   {
       quality: 50,
       destinationType: navigator.camera.DestinationType.FILE_URI,
       sourceType: source,
-      encodingType: 0
+      encodingType: 0,
+      correctOrientation:true
       };
 
     Camera.getPicture(options).then(function(res) {
-      console.log(res);
+      
+      $scope.processImage(res);
+
       return res;
     }, function(err) {
       console.log(err);

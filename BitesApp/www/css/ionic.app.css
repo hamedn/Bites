@@ -9183,3 +9183,7 @@ ul.rating li i {
 
 .chefDash {
   color: #387ef5; }
+
+.foodphoto {
+  max-width: 100%;
+  max-height: 100%; }
