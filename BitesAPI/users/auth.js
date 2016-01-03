@@ -3,6 +3,8 @@ var User = require('./user.model.js'),
 	credentials = require('../credentials.js'),
 	FacebookStrategy = require('passport-facebook').Strategy,
 	LocalStrategy = require('passport-local').Strategy;
+	StripeStrategy = require('passport-stripe').Strategy;
+
 
 var express = require('express');
 var router = express.Router();
@@ -44,6 +46,7 @@ module.exports = function(app, options) {
 			})
 
 			app.use(require('cookie-parser')(credentials.cookieSecret));
+			
 			app.use(require('express-session')({secret:credentials.cookieSecret, store:options.sessionStor }));
 			console.log("session used")
 			app.use(passport.initialize());
@@ -128,8 +131,6 @@ module.exports = function(app, options) {
    			 }));
 
 
-
-
 			passport.use('facebook', new FacebookStrategy({
 				clientID: config.facebook[env].appId,
 				clientSecret: config.facebook[env].appSecret,
@@ -179,6 +180,26 @@ module.exports = function(app, options) {
 				console.log(accessToken);
 
 			}));
+
+
+
+
+
+			//stripe connect authentication
+			passport.use('stripe', new StripeStrategy({
+        		clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
+        		clientSecret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
+        		callbackURL: "http://localhost:3000/auth/stripe/callback"
+      		},
+      		function(accessToken, refreshToken, stripe_properties, done) {
+      			console.log(accessToken + " " + stripe_properties);
+        		User.findOrCreate({ stripeId: stripe_properties.stripe_user_id }, function (err, user) {
+        			console.log(user);
+          			return done(err, user);
+        		});
+      			}
+    		));
+
 		}
 		catch (err) {console.log(err)};
 
@@ -188,8 +209,6 @@ module.exports = function(app, options) {
 			var config = options.providers;
 
 			console.log('try to register routes');
-
-
 
 			app.post('/signup', function(req,res,next) {
 				passport.authenticate('local-signup', function(err,user,info) {
@@ -202,6 +221,42 @@ module.exports = function(app, options) {
 				})(req,res,next);
 			})
 			
+			app.post('/saveStripeCardDetails', function(req, res) {
+				console.log("reached /saveStripeCardDetails " + req.body.cardNumber + " and res is " + res);
+
+				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
+				var customerID = "";
+				var stripeToken = "number=4258284520513848&cvc=738&exp_month=4&exp_year=17";
+				/*var stripeToken = stripe.card.createToken({
+				  number: "4258284520513848",
+				  cvc: "738",
+				  exp_month: "4",
+				  exp_year: "17"
+				}, function(status, response) {
+					console.log("Stipre response handler response " + response);
+				}); */
+
+				stripe.tokens.create({
+				  card: {
+				    "number": '4242424242424242',
+				    "exp_month": 12,
+				    "exp_year": 2017,
+				    "cvc": '123'
+				  }
+				}, function(err, token) {
+				  	// asynchronously called
+				  	console.log("successfully created token " + token.id);
+				  	stripe.customers.create({
+					  description: 'Customer for test@example.com',
+					  source: token.id // obtained with Stripe.js
+					}, function(err, customer) {
+					  // asynchronously called
+					  console.log("successfully created customer " + customer.id);
+					  customerID = customer.id;
+					});
+				});
+				return customer.id;
+			});
 
 			app.post('/login', function(req,res,next) {
 				passport.authenticate('local-login', function(err,user,info) {
@@ -214,6 +269,8 @@ module.exports = function(app, options) {
 				})(req,res,next);
 			})
 
+			
+
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {
 					callbackURL: config.facebook[env].callBackURL, scope: [ 'email' , 'public_profile' ]
@@ -222,18 +279,28 @@ module.exports = function(app, options) {
 
 				});
 
-		
-
-
-
+	
 				app.get('/auth/facebook/callback',
 						passport.authenticate('facebook', { failureRedirect: options.failureRedirect , scope: [ 'email','public_profile' ] }),
 						function(req, res) {
 							res.redirect(303, options.successRedirect);
 					});
 
+			//stripe authentication
+			app.get('/auth/stripe', passport.authenticate('stripe'));
 
+			/*	app.get('/auth/stripe/callback',
+	      			passport.authenticate('stripe', { failureRedirect: '/' }),
+	      			function(req, res) {
+	        			// Successful authentication, redirect home.
+	        			console.log("successfully reached callback");
+	        			res.redirect('/');
+	      			});
+			*/
 
+			app.get('/auth/stripe/callback', function() {
+				console.log("reached callback");
+			})
 
 		}
 	}
