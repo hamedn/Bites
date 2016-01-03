@@ -8,15 +8,43 @@ angular.module('mealform.controllers', ['ionic-ratings'])
     $state.go("preapp.dashboard");
   }
 
-  // Get the Photo
-  $scope.getPhoto = function() {
-    Camera.getPicture().then(function(imageURI) {
-      console.log(imageURI);
-      return imageURI;
+
+
+  $scope.fromCamera = function () {
+    var options =   {
+      quality: 50,
+      destinationType: navigator.camera.DestinationType.FILE_URI,
+      sourceType: navigator.camera.PictureSourceType.CAMERA,
+      encodingType: 0
+      };
+
+
+    Camera.getPicture(options).then(function(res) {
+      console.log(res);
+      return res;
     }, function(err) {
       console.log(err);
     });
-  };
+  }
+
+  $scope.fromLibrary = function () {
+    var options =   {
+      quality: 50,
+      destinationType: navigator.camera.DestinationType.FILE_URI,
+      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: 0
+      };
+
+    Camera.getPicture(options).then(function(res) {
+      console.log(res);
+      return res;
+    }, function(err) {
+      console.log(err);
+    });
+
+
+  }
+
 
   $scope.newMeal = function() {
 
