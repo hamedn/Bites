@@ -20,6 +20,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     
     console.log($scope.chef);
     
+    $scope.doRefresh();
 
 
 /*

@@ -35,7 +35,7 @@ angular.module('starter.services', [])
 
     
     getMeals: function() {
-      return $http.get('https://mighty-shore-9561.herokuapp.com/meals/getAll').then(function(resp) {
+      return $http.get('https://bitesapp.herokuapp.com/meals/getAll').then(function(resp) {
           return resp;
         });
     }
@@ -72,7 +72,7 @@ getMeals:function() {
 .factory('APIServer', function() {
   return {
     url: function() {
-      return "https://mighty-shore-9561.herokuapp.com";
+      return "https://bitesapp.herokuapp.com";
     //  return "http://localhost:3000";
     }
   };

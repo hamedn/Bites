@@ -53,13 +53,19 @@
            <input type="text" placeholder="Please list all the Ingredients" ng-model="data.ingredients">
         </label>
 
-        <label class="item item-input">
-        <span style="padding: 5px 0 5px 0;">Image From: </span>
-            <button class="button button-icon ion-camera" ng-click="fromCamera()"> Camera </button>
-            <button class="button button-icon ion-image" ng-click="fromLibrary()"> Library </button>
+        <div class="item item-input">
+        Photo:
+          <div id="left">
+            <button class="button button-icon ion-camera" ng-click="fromCamera()"> Camera</button>
+            </div>
+            <div id ="right">
+            <button class="button button-icon ion-image" ng-click="fromLibrary()"> Library</button>
+</div>
 
+<br style="clear:both;"/>
+        </div>
+           
           
-        </label>
 
         <button class="button button-block button-balanced" ng-click="newMeal()" style="border-radius:4px;">
           Add Meal

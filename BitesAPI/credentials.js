@@ -23,7 +23,7 @@ module.exports = {
 			production: {
 				appId: '1596595767272078',
 				appSecret: '57a67c051886e350c539c4cc3913ea3c',
-				callBackURL: 'http://mighty-shore-9561.herokuapp.com/auth/facebook/callback',
+				callBackURL: 'http://bitesapp.herokuapp.com/auth/facebook/callback',
 				successURL: '/success',
 				failURL: '/fail'
 			}

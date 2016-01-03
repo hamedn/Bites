@@ -11,27 +11,19 @@ angular.module('mealform.controllers', ['ionic-ratings'])
 
 
   $scope.fromCamera = function () {
-    var options =   {
-      quality: 50,
-      destinationType: navigator.camera.DestinationType.FILE_URI,
-      sourceType: navigator.camera.PictureSourceType.CAMERA,
-      encodingType: 0
-      };
-
-
-    Camera.getPicture(options).then(function(res) {
-      console.log(res);
-      return res;
-    }, function(err) {
-      console.log(err);
-    });
+    $scope.takePicture(navigator.camera.PictureSourceType.CAMERA);
   }
 
   $scope.fromLibrary = function () {
+    $scope.takePicture(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+
+  }
+
+  $scope.takePicture = function (source) {
     var options =   {
       quality: 50,
       destinationType: navigator.camera.DestinationType.FILE_URI,
-      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: source,
       encodingType: 0
       };
 
@@ -41,8 +33,6 @@ angular.module('mealform.controllers', ['ionic-ratings'])
     }, function(err) {
       console.log(err);
     });
-
-
   }
 
 
