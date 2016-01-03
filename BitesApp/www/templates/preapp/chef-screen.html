@@ -20,18 +20,79 @@
                 <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
                 <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
             </div>
+
+            <div class="item">
+                <div id="chefTabs">
+                    <div ng-repeat="tab in chefTabs" ng-class="tab.style" ng-click="onClickChefTab(tab)">
+                        <div>
+                            <h2 style="padding: 1px;font-size: 1.2em;">{{tab.title}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <div class="item item-divider">
-
-        <!--
-            <p> {{chef.description}} </p>
--->
-
-        </div>  
-
     </div>
+    
+    <div>
+        <div ng-include="currentChefTab"></div>
+
+        <script type="text/ng-template" id="current.html">
+            <div id="current" class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+                <div class="item item-avatar">
+                    <img src="img/avatar.jpg">
+                    <h2>{{meal.title}}</h2>
+                    <p>By {{meal.userName}}</p>
+
+                <!-- Might want to change this styling in the future -->
+                <h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
+                    
+                <div class="buttons" style="float: right;">
+                    <button class="button button-icon ion-location" > {{meal.mealLocation}} </button>
+                    <button class="button button-icon ion-clock" > {{meal.pickup | amCalendar}} </button>
+                </div>
+            </div>
+
+            
+            <div class="item item-image" style="margin-top: -15px;">
+                <img src="img/foodcard.jpg">
+            </div>
+            
+            <div class="item item-divider">
+                <p> {{meal.description}} </p>
+                <div class="row">
+                    <div class="buttons" style="margin: 0 auto;">
+                        <button class="button button-balanced">Order Now</button>
+                    </div>
+                </div>
+                </div>  
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="past.html">
+            <div id="past">
+                <div class="list card" style="padding: 10px; margin-left:5%; margin-right:5%; border-radius:5px;">
+                    <div style="float: left; margin-top: 5px;"> Pizza: </div>
+                    <div style="float: right;">
+                        <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
+                        <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
+                        <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
+                    </div>
+                    <div style="float: right; margin: 5px 5px 0 0;"> 3/5 Orders</div>
+                </div>
+                <div class="list card" style="padding: 10px; margin-left:5%; margin-right:5%; border-radius:5px;">
+                    <div style="float: left; margin-top: 5px;"> Hummus: </div>
+                    <div style="float: right;">
+                        <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
+                        <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
+                        <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
+                    </div>
+                    <div style="float: right; margin: 5px 5px 0 0;"> 10/15 Orders</div>
+                </div>
+            </div>
+        </script>
+    </div> 
+
+    
 
 </ion-content>
 

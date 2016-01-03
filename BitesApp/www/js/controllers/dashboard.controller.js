@@ -150,7 +150,32 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     style: 'right'
   }];
 
+  $scope.chefTabs = [{
+    title: 'Currently Cooking',
+    url: 'current.html',
+    style: 'left-active'
+  }, {
+    title: 'Past Meals',
+    url: 'past.html',
+    style: 'right'
+  }];
+
   $scope.currentTab = 'about.html';
+
+  $scope.currentChefTab = 'current.html';
+
+  $scope.onClickChefTab = function(tab) {
+    $scope.currentChefTab = tab.url;
+    if (tab.url == 'current.html') {
+      tab.style = 'left-active';
+      $scope.chefTabs[1].style = 'right';
+    }
+
+    if (tab.url == 'past.html') {
+      tab.style = 'right-active';
+      $scope.chefTabs[0].style = 'left';
+    }
+  }
 
   $scope.onClickTab = function(tab) {
     $scope.currentTab = tab.url;
