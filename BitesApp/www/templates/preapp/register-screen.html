@@ -1,5 +1,5 @@
 <ion-view login-screen view-title="Register Screen" hide-nav-bar="true" class="bg2">
-
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <ion-content>
     
     <div class = "splashtext" align="center" style="margin-top:10%;">
@@ -25,7 +25,21 @@
               <input type="password" placeholder="Confirm Password" ng-model="data.confirm">
           </label>
 
-          <ion-checkbox ng-model="data.chef">Do you want to be a Chef?</ion-checkbox>
+            <label class="item item-input">
+                <input type="text" placholder="Credit Card Number" ng-model="data.cardNumber" data-stripe="number"/>
+            </label>
+            <label class="item item-input">
+                <input type="text" data-stripe="cvc" ng-model="data.CVC" placholder="cvc"/>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="data.exp_month" data-stripe="exp-month"/>
+            </label> 
+            <label class="item item-input">
+                <input type="text" ng-model="data.exp_year" data-stripe="exp-year"/>
+            </label> 
+          
+
+          <ion-checkbox ng-model="data.chef" >Do you want to be a Chef?</ion-checkbox>
           <div style=" width: 100%;" ng-show="data.chef">
             <iframe  src="http://www.w3schools.com"></iframe>
           </div>
@@ -35,14 +49,18 @@
           <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Services</ion-checkbox>
 
 
+        <button class="button button-block button-balanced" ng-click="linkStripeAccount()" ng-show="data.chef" style="border-radius:4px;">
+          Connect Chef Account with Stripe
+        </button>
+
         <button class="button button-block button-balanced" ng-click="registerLocal()" style="border-radius:4px;">
           Sign Up
         </button>
 
 
         <div class="button-bar">
-  <a class="button button-outline button-balanced" ui-sref="preapp.loginscreen">Log In</a>
-</div>
+          <a class="button button-outline button-balanced" ui-sref="preapp.loginscreen">Log In</a>
+        </div>
 
 
       </div>
@@ -51,12 +69,10 @@
 
 
     <div style="padding-left:5%; padding-right:5%;">
-    <button class="button button-block button-positive" ng-click="registerFacebook()">
-  Sign Up with Facebook
-</button>
+      <button class="button button-block button-positive" ng-click="registerFacebook()">
+        Sign Up with Facebook
+      </button>
     </div>
-
-
 
   </ion-content>
 
