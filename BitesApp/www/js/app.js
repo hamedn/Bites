@@ -118,9 +118,14 @@ angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login
     controller: "DashCtrl"
   })
 
+
   .state('preapp.chef', {
     url: '/chef/{id}',
     templateUrl: 'templates/preapp/chef-screen.html',
+
+  .state('preapp.order', {
+    url: '/order',
+    templateUrl: 'templates/preapp/order-screen.html',
     controller: "DashCtrl"
   })
 
