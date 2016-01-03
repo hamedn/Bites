@@ -71,12 +71,19 @@ router.get('/updateRating/:oid', function(req, res, next) {
 
 router.get('/byToken', function(req, res, next) {
 
+	console.log("TRIED TO GET USER BY TOKEN:" + req.headers.accesstoken);
+
 	User.findOne({'accessToken': req.headers.accesstoken}, function(err, user) {
 		if (err)
 			throw err;
+		if (user != null) {
 		user.accessToken = "nice try."
 		user.password = "nice try."
 		res.json(user);
+		}
+		else {
+			console.log("USER IS NULL, user.controller:85");
+		}
 	});
 
 
