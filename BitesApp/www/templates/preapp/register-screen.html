@@ -25,18 +25,18 @@
               <input type="password" placeholder="Confirm Password" ng-model="data.confirm">
           </label>
 
-            <label class="item item-input">
-                <input type="text" placholder="Credit Card Number" ng-model="data.cardNumber" data-stripe="number"/>
-            </label>
-            <label class="item item-input">
-                <input type="text" data-stripe="cvc" ng-model="data.CVC" placholder="cvc"/>
-            </label>
-            <label class="item item-input">
-                <input type="text" ng-model="data.exp_month" data-stripe="exp-month"/>
-            </label> 
-            <label class="item item-input">
-                <input type="text" ng-model="data.exp_year" data-stripe="exp-year"/>
-            </label> 
+          <label class="item item-input">
+              <input type="text" placholder="Credit Card Number" ng-model="data.cardNumber"/>
+          </label>
+          <label class="item item-input">
+              <input type="text" data-stripe="cvc" ng-model="data.CVC" placholder="cvc"/>
+          </label>
+          <label class="item item-input">
+              <input type="text" ng-model="data.exp_month" data-stripe="exp-month"/>
+          </label> 
+          <label class="item item-input">
+              <input type="text" ng-model="data.exp_year" data-stripe="exp-year"/>
+          </label> 
           
 
           <ion-checkbox ng-model="data.chef" >Do you want to be a Chef?</ion-checkbox>
