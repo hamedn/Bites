@@ -121,7 +121,8 @@ angular.module('starter', ['ionic','ionic.service.core', 'angularMoment', 'login
 
   .state('preapp.chef', {
     url: '/chef/{id}',
-    templateUrl: 'templates/preapp/chef-screen.html',
+    templateUrl: 'templates/preapp/chef-screen.html'
+  })
 
   .state('preapp.order', {
     url: '/order',

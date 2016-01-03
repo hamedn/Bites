@@ -170,7 +170,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
     });
 
-
   }
 
   // Settings goSettings function
@@ -269,6 +268,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
+  }
 
   function handleOpenURL(url) {
 
