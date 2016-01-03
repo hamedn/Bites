@@ -143,7 +143,15 @@ module.exports = function(app, options) {
 
 				User.findOne({authId: authId}, function(err, user) {
 					if (err) return done(err,null);
-					if (user) return done(null, user);
+					if (user) {
+						user.accessToken = accessToken
+						user.save(function(err) {
+							if (err) return done(err,null);
+							return done(null, user);
+						})
+
+						
+					}
 
 					user = new User({
 						authId: authId,
