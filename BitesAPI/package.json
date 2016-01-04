@@ -47,7 +47,8 @@
     "passport-stripe": "^0.2.1",
     "serve-favicon": "^2.3.0",
     "session-mongoose": "^0.5.2",
-    "shortid": "^2.2.4"
+    "shortid": "^2.2.4",
+    "stripe": "^4.1.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
