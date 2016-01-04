@@ -31,7 +31,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
         console.log(this);
         console.log("processed image" + this.height/this.width);
-        if (this.height/this.width > 1) {
+        //i have currently disabled crop because of image upload problems!
+        if (false/*this.height/this.width > 1*/) {
 
           $jrCrop.crop({
               url: imgURL,

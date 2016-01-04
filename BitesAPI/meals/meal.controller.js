@@ -212,30 +212,29 @@ router.post('/uploadPicture', function(req, res, next) {
 var multipartMiddleware = multipart();
 router.post('/uploadPicture', multipartMiddleware, function(req, resp) {
 
-var file = req.files.file;
-	var path = file.path;
-	var destFileName = shortId.generate()+'.'+mime.extension(file.type);
+		var file = req.files.file;
+			var path = file.path;
+			var destFileName = shortId.generate()+'.'+mime.extension(file.type);
 
-console.log(destFileName);
-console.log(file);
-
-
-
-mv(path, "./public/" + destFileName, function(err) {
-    // handle the error
-    if (err)
-    	throw err;
-
-    console.log("moved filed");
-    resp.send("Successfully posted meal");
-});
+		console.log(destFileName);
+		console.log(file);
 
 
+
+		mv(path, "./public/" + destFileName, function(err) {
+		    // handle the error
+		    if (err)
+		    	throw err;
+
+		    console.log("moved filed");
+		    resp.send("Successfully posted meal");
+		});
 
 
  // console.log(req.body, req.files);
   // don't forget to delete all req.files when done 
 });
+
 
 
 
