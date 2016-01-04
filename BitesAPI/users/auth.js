@@ -2,7 +2,7 @@ var User = require('./user.model.js'),
 	passport = require('passport'),
 	credentials = require('../credentials.js'),
 	FacebookStrategy = require('passport-facebook').Strategy,
-	LocalStrategy = require('passport-local').Strategy;
+	LocalStrategy = require('passport-local').Strategy,
 	StripeStrategy = require('passport-stripe').Strategy;
 
 
@@ -148,11 +148,10 @@ module.exports = function(app, options) {
 						user.accessToken = accessToken
 						user.save(function(err) {
 							if (err) return done(err,null);
-							return done(null, user);
+							return done(null,user);
 						})
-
-						
 					}
+					else {
 
 					user = new User({
 						authId: authId,
@@ -169,6 +168,7 @@ module.exports = function(app, options) {
 						if (err) return done(err,null);
 						done(null,user);
 					})
+				}
 
 				});
 
@@ -278,6 +278,7 @@ module.exports = function(app, options) {
 							res.redirect(303, options.successRedirect);
 					});
 
+
 			//stripe authentication
 			app.get('/auth/stripe', passport.authenticate('stripe'));
 
@@ -289,6 +290,7 @@ module.exports = function(app, options) {
 	        			res.redirect('/');
 	      			});
 			*/
+
 
 			app.get('/auth/stripe/callback', function() {
 				console.log("reached callback");
