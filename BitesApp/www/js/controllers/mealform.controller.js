@@ -32,8 +32,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         console.log(this);
         console.log("processed image" + this.height/this.width);
         //i have currently disabled crop because of image upload problems!
-        if (false/*this.height/this.width > 1*/) {
+        if (this.height/this.width > 1) {
 
+        alert("Could not use image. Image height cannot exceed image width. Please take photos in landscape mode");
+
+/*
           $jrCrop.crop({
               url: imgURL,
               width: 400,
@@ -50,7 +53,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
           }, function() {
               alert("Image height cannot exceed image width");
               // User canceled or couldn't load image.
-          });
+          });*/
 
         }
         else {
