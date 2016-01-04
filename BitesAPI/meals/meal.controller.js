@@ -11,6 +11,8 @@ var multipart = require('connect-multiparty');
 var shortId = require('shortid');
 var mime = require('mime');
 var fs = require("fs");
+var mv = require('mv');
+
 
 
 function randomString(length, chars) {
@@ -217,14 +219,17 @@ var file = req.files.file;
 console.log(destFileName);
 console.log(file);
 
-var source = fs.createReadStream(path);
-var dest = fs.createWriteStream('/public/' + destFileName);
 
-source.pipe(dest);
-source.on('end', function() { /* copied */ });
-source.on('error', function(err) { /* error */ });
 
-console.log(source);
+mv(path, "./public/" + destFileName, function(err) {
+    // handle the error
+    console.log("moved filed");
+    if (err)
+    	throw err;
+});
+
+
+
 
  // console.log(req.body, req.files);
   // don't forget to delete all req.files when done 
