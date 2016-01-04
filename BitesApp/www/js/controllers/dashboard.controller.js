@@ -44,7 +44,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   })
 
-  
+  $scope.formatMealLocation = function(mealLocation) {
+    if (mealLocation.length > 11) {
+      return mealLocation.substring(0, 11) + "...";
+    } else {
+      return mealLocation;
+    }
+  }
 
   $scope.doRefresh = function() {
 

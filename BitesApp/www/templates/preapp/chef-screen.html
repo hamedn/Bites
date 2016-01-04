@@ -25,7 +25,7 @@
                 <div id="chefTabs">
                     <div ng-repeat="tab in chefTabs" ng-class="tab.style" ng-click="onClickChefTab(tab)">
                         <div>
-                            <h2 style="padding: 1px;font-size: 1.1em;">{{tab.title}}</h2>
+                            <h2 style="padding: 1px;font-size: 1em;margin-bottom: -2px;">{{tab.title}}</h2>
                         </div>
                     </div>
                 </div>
@@ -75,10 +75,10 @@
 
         <script type="text/ng-template" id="past.html">
             <div id="past" ng-repeat="meal in pastChefMeals">
-                <div class="list card" style="padding: 10px; margin-left:5%; margin-right:5%; border-radius:5px;">
+                <div class="list card" style="padding: 10px; margin: 0px 5% 1.5% 5%; border-radius:5px;">
                     <div style="float: left; margin-top: 5px;"> {{meal.title}}: </div>
                     <div style="float: right;">
-                        <div class="hstars ion-ios-star">{{meal.rating}}/5</div>
+                        <div class="hstars ion-ios-star" style="font-size: 25px; margin-top: 2px;">{{meal.rating}}/5</div>
                     </div>
                     <div style="float: right; margin: 5px 5px 0 0;"> 3/{{meal.maxOrder}} Orders</div>
                 </div>

@@ -15,37 +15,38 @@ angular.module('login.controllers', ['ionic-ratings'])
         window.open = cordova.InAppBrowser.open;
     }
 
-  $scope.registerLocal = function () {
+  $scope.registerStripe = function () {
+    console.log($scope.data.cardNumber);
+    $http({
+          method: 'POST',
+          url: APIServer.url() + '/saveStripeCardDetails',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true) {
-      if (typeof $scope.data.chef == "undefined")
-        $scope.data.chef = false;
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
 
-      console.log($scope.data.cardNumber);
-      $http({
-            method: 'POST',
-            url: APIServer.url() + '/saveStripeCardDetails',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-
-            transformRequest: function(obj) {
-              var str = [];
-              for(var p in obj)
-              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-              return str.join("&");
-            },
-
-           data:  {
+          data:  {
             cardNumber: $scope.data.cardNumber,
             cvc: $scope.data.CVC,
             exp_month: $scope.data.exp_month,
             exp_year: $scope.data.exp_year
           }
             
-        }).then (function (response) {
-          console.log(response);
-        });
-      
-      /*
+          }).then (function (response) {
+            console.log(response);
+            $state.go("preapp.dashboard");
+          });
+  }
+
+  $scope.registerLocal = function () {
+
+    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true) {
+      if (typeof $scope.data.chef == "undefined")
+        $scope.data.chef = false;      
       $http({
           method: 'POST',
           url: APIServer.url() + '/signup',
@@ -64,7 +65,8 @@ angular.module('login.controllers', ['ionic-ratings'])
             password: $scope.data.password,
             isChef: $scope.data.chef,
             chefStripeToken: localStorage.get("stripeAccessToken"),
-            customerStripeId: $scope.data.customerID
+            // COMMENTED OUT FOR CURRENT USE
+            //customerStripeId: $scope.data.customerID
           }
       }).then (function (response) {
 
@@ -74,7 +76,7 @@ angular.module('login.controllers', ['ionic-ratings'])
             alert("Login Successful!!!!");
             localStorage.set("userToken", response.data.accessToken);
             console.log(response.data);
-            $state.go("preapp.dashboard"); 
+            $state.go("preapp.stripeScreen"); 
 
           }
           else {
@@ -83,7 +85,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
       })
 
-      */
+    
   }
 
   else if ($scope.data.agreedToTerms == false || typeof $scope.data.agreedToTerms == "undefined") {
@@ -189,6 +191,10 @@ angular.module('login.controllers', ['ionic-ratings'])
           }
         })
 
+  }
+
+  $scope.goDash = function() {
+    $state.go("preapp.dashboard");
   }
 
   $scope.facebookFinish = function() {

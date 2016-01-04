@@ -24,34 +24,12 @@
           <label class="item item-input">
               <input type="password" placeholder="Confirm Password" ng-model="data.confirm">
           </label>
-
-          <label class="item item-input">
-              <input type="text" placholder="Credit Card Number" ng-model="data.cardNumber"/>
-          </label>
-          <label class="item item-input">
-              <input type="text" data-stripe="cvc" ng-model="data.CVC" placholder="cvc"/>
-          </label>
-          <label class="item item-input">
-              <input type="text" ng-model="data.exp_month" data-stripe="exp-month"/>
-          </label> 
-          <label class="item item-input">
-              <input type="text" ng-model="data.exp_year" data-stripe="exp-year"/>
-          </label> 
           
-
           <ion-checkbox ng-model="data.chef" >Do you want to be a Chef?</ion-checkbox>
-          <div style=" width: 100%;" ng-show="data.chef">
-            <iframe  src="http://www.w3schools.com"></iframe>
+          <div style="width: 100%; padding: 15px;">
+            <a href="http://www.bitesapp.com">Link to Terms of Service</a>
           </div>
-          <div style="width: 100%;" ng-hide="data.chef">
-            <iframe src="http://www.w3schools.com/js/"></iframe>
-          </div>
-          <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Services</ion-checkbox>
-
-
-        <button class="button button-block button-balanced" ng-click="linkStripeAccount()" ng-show="data.chef" style="border-radius:4px;">
-          Connect Chef Account with Stripe
-        </button>
+          <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Service</ion-checkbox>
 
         <button class="button button-block button-balanced" ng-click="registerLocal()" style="border-radius:4px;">
           Sign Up

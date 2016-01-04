@@ -90,8 +90,12 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'angularMom
     url: '/chefscreen',
     templateUrl: 'templates/preapp/chefsignup-screen.html',
     controller: 'LoginCtrl'
-      
-    
+  })
+
+  .state('preapp.stripeScreen', {
+    url: '/chefscreen',
+    templateUrl: 'templates/preapp/stripe-screen.html',
+    controller: 'LoginCtrl'
   })
 
   .state('preapp.settings', {

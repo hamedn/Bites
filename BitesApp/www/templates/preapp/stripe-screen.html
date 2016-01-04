@@ -1,0 +1,48 @@
+<ion-view login-screen view-title="Stripe Screen" hide-nav-bar="true" class="bg2">
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <ion-content>
+    
+    <div class = "splashtext" align="center" style="margin-top:10%;">
+
+		<img ng-src="img/LogoNoText.jpg" style="width:20%;" align="middle">
+
+    </div>
+
+    <div class="card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+      <div class="item item-text-wrap">
+          <label class="item item-input">
+              <input type="text" placholder="Credit Card Number" ng-model="data.cardNumber"/>
+          </label>
+          <label class="item item-input">
+              <input type="text" data-stripe="cvc" ng-model="data.CVC" placholder="cvc"/>
+          </label>
+          <label class="item item-input">
+              <input type="text" ng-model="data.exp_month" data-stripe="exp-month"/>
+          </label> 
+          <label class="item item-input">
+              <input type="text" ng-model="data.exp_year" data-stripe="exp-year"/>
+          </label> 
+
+
+        <button class="button button-block button-balanced" ng-click="linkStripeAccount()" style="border-radius:4px;">
+          Connect Chef Account with Stripe
+        </button>
+
+        <button class="button button-block button-balanced" ng-click="registerStripe()"style="border-radius:4px;">
+          Enter in Stripe Info
+        </button>
+        
+        <button class="button button-block button-balanced" ng-click="goDash()"style="border-radius:4px;">
+          Enter Bites
+        </button>
+
+        <div class="button-bar">
+          <a class="button button-outline button-balanced" ui-sref="preapp.loginscreen">Log In</a>
+        </div>
+
+
+      </div>
+    </div>
+  </ion-content>
+
+</ion-view>
