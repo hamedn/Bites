@@ -280,6 +280,50 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   }
 
+  $scope.pushNotification = function() {
+    $http({
+      method: 'POST',
+      url: "https://push.ionic.io/api/v1/push",
+      headers: {"Content-Type": "application/json", "X-Ionic-Application-Id": "b24a5ed6"},
+
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      },
+
+      data: {
+        tokens: [],
+        notification: {
+          alert: "Hello World!",
+          ios:{
+            badge:1,
+            sound:"ping.aiff",
+            expiry: 1423238641,
+            priority: 10,
+            contentAvailable: 1,
+            payload:{
+              key1:"value",
+              key2:"value"
+            }
+          },
+          android:{
+            collapseKey:"foo",
+            delayWhileIdle:true,
+            timeToLive:300,
+            payload:{
+              key1:"value",
+              key2:"value"
+            }
+          }
+        }    
+      }
+    }).then(function (response) {
+      console.log("Push Success");
+    })
+  }
+
   $scope.submitRating = function() {
     console.log($scope.rate);
     console.log($scope.meal._id);
