@@ -10,7 +10,7 @@ var mongo = require('mongodb');
 var multipart = require('connect-multiparty');
 var shortId = require('shortid');
 var mime = require('mime');
-
+var fs = require("fs");
 
 
 function randomString(length, chars) {

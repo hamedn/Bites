@@ -20,6 +20,7 @@
     "esq": "0.0.12",
     "express": "^4.13.1",
     "express-session": "^1.12.1",
+    "fs": "0.0.2",
     "glob": "^5.0.14",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.3",
