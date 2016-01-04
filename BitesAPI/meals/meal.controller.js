@@ -223,9 +223,11 @@ console.log(file);
 
 mv(path, "./public/" + destFileName, function(err) {
     // handle the error
-    console.log("moved filed");
     if (err)
     	throw err;
+
+    console.log("moved filed");
+    resp.send("Successfully posted meal");
 });
 
 

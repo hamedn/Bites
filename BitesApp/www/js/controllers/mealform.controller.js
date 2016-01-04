@@ -1,7 +1,7 @@
 angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
-.controller('MealFormCtrl', function($scope, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
+.controller('MealFormCtrl', function($scope,$ionicLoading, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
   $scope.data = {};
   
   $scope.goDash = function() {
@@ -88,7 +88,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
-/*
+    $ionicLoading.show({
+      template: 'Posting meal data'
+    });
+
+
     var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
                $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
     
@@ -129,21 +133,38 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
       }
     }).then(function (response) {
-        alert("Meal Prepared");
-        console.log(response);
-        $state.go("preapp.dashboard");
+        $ionicLoading.hide();
+     console.log(response);
 
-    })
 
-*/
-     $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture", $scope.photo, {}).then(function(result) {
-            console.log("SUCCESS: " + JSON.stringify(result.response));
+        if ($scope.photo.length > 1) {
+          $ionicLoading.show({
+            template: 'Uploading photo'
+          });
+        }
+
+        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture", $scope.photo, {}).then(function(result) {
+          alert("Meal successfully posted");
+          $ionicLoading.hide();
+           $state.go("preapp.dashboard");
+
+
+
         }, function(err) {
+          $ionicLoading.hide();
+          alert("Server error");
             console.log("ERROR: " + JSON.stringify(err));
         }, function (progress) {
             // constant progress updates
         });
 
+
+
+
+    })
+
+
+     
 
   }
 
