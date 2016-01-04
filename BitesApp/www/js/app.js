@@ -121,7 +121,8 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'angularMom
 
   .state('preapp.chef', {
     url: '/chef/{id}',
-    templateUrl: 'templates/preapp/chef-screen.html'
+    templateUrl: 'templates/preapp/chef-screen.html',
+    controller: "DashCtrl"
   })
 
   .state('preapp.order', {
