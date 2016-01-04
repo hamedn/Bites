@@ -88,7 +88,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
-
+/*
     var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
                $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
     
@@ -134,6 +134,17 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         $state.go("preapp.dashboard");
 
     })
+
+*/
+     $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture", $scope.photo, {}).then(function(result) {
+            console.log("SUCCESS: " + JSON.stringify(result.response));
+        }, function(err) {
+            console.log("ERROR: " + JSON.stringify(err));
+        }, function (progress) {
+            // constant progress updates
+        });
+
+
   }
 
 

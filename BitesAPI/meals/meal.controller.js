@@ -7,6 +7,11 @@ var router = express.Router();
 var Meal = require('mongoose').model('Meal');
 var User = require('mongoose').model('User');
 var mongo = require('mongodb');
+var multipart = require('connect-multiparty');
+var shortId = require('shortid');
+var mime = require('mime');
+
+
 
 function randomString(length, chars) {
     var result = '';
@@ -192,6 +197,30 @@ router.get('/getAll/', function(req, res, next) {
 router.delete('/:programId', function(req, res, next) {
 
 });
+
+/*
+
+router.post('/uploadPicture', function(req, res, next) {
+	console.log("BLAH");
+	res.send("BLAH");
+});
+*/
+
+
+var multipartMiddleware = multipart();
+router.post('/uploadPicture', multipartMiddleware, function(req, resp) {
+
+var file = req.files.file;
+	var path = file.path;
+	var destFileName = shortId.generate()+'.'+mime.extension(file.type);
+
+console.log(destFileName);
+console.log(file);
+ // console.log(req.body, req.files);
+  // don't forget to delete all req.files when done 
+});
+
+
 
 module.exports = function(app) {
   app.use('/meals', router);
