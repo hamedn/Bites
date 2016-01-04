@@ -54,6 +54,7 @@ app.use(function (req, res, next) {
   app.use(cookieParser());
   app.use(compress());
   app.use(methodOverride());
+  app.use(express.static('public'));
 
 
 //mongoose code

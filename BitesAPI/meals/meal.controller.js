@@ -216,6 +216,16 @@ var file = req.files.file;
 
 console.log(destFileName);
 console.log(file);
+
+var source = fs.createReadStream(path);
+var dest = fs.createWriteStream('/public/' + destFileName);
+
+source.pipe(dest);
+source.on('end', function() { /* copied */ });
+source.on('error', function(err) { /* error */ });
+
+console.log(source);
+
  // console.log(req.body, req.files);
   // don't forget to delete all req.files when done 
 });
