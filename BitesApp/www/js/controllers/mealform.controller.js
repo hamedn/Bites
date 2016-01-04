@@ -138,16 +138,18 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
       }
     }).then(function (response) {
         $ionicLoading.hide();
-     console.log(response);
+        console.log(response.data.id);
+        
 
-
-        if ($scope.photo.length > 1) {
+        if ($scope.photo != null && $scope.photo.length > 1) {
           $ionicLoading.show({
             template: 'Uploading photo'
           });
         }
 
-        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture", $scope.photo, {}).then(function(result) {
+
+
+        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
           alert("Meal successfully posted");
           $ionicLoading.hide();
            $state.go("preapp.dashboard");

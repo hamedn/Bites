@@ -19,7 +19,8 @@ var mealSchema = new Schema({
 	ratingCount: Number,
 	charId: String,
 	userOID: String,
-	userName: String
+	userName: String,
+	photo:String
 });
 
 

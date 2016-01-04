@@ -85,7 +85,7 @@ router.post('/', function(req, res, next) {
 					if (err)
 						throw err;
 					else {
-						res.json({message:"meal post successful",data:req.body});
+						res.json({message:"meal post successful",id:meal._id,data:req.body});
 					}
 				})
 
@@ -210,7 +210,10 @@ router.post('/uploadPicture', function(req, res, next) {
 
 
 var multipartMiddleware = multipart();
-router.post('/uploadPicture', multipartMiddleware, function(req, resp) {
+router.post('/uploadPicture/:oid', multipartMiddleware, function(req, resp) {
+
+
+console.log("THIS IS DA ID" + req.params.oid)
 
 		var file = req.files.file;
 			var path = file.path;
@@ -226,10 +229,34 @@ router.post('/uploadPicture', multipartMiddleware, function(req, resp) {
 		    if (err)
 		    	throw err;
 
-		    console.log("moved filed");
-		    resp.send("Successfully posted meals");
+
+
+		    var o_id = new mongo.ObjectID(req.params.oid);
+
+			Meal.findOne({'_id': o_id}, function(err, meal) {
+				if (err)
+					throw err;
+
+				meal.photo = destFileName;
+				meal.save(function(err) {
+					if (err)
+						throw err;
+					else {
+						
+						console.log("moved filed");
+		   			    resp.send("Successfully posted meals");
+
+					}
+				})
+
+			});
+
+		    
 		});
 
+
+
+	
 
  // console.log(req.body, req.files);
   // don't forget to delete all req.files when done 
