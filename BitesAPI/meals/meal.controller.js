@@ -227,7 +227,7 @@ router.post('/uploadPicture', multipartMiddleware, function(req, resp) {
 		    	throw err;
 
 		    console.log("moved filed");
-		    resp.send("Successfully posted meal");
+		    resp.send("Successfully posted meals");
 		});
 
 
