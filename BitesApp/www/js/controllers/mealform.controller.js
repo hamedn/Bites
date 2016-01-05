@@ -164,6 +164,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
             // constant progress updates
         });
         }
+        else {
+          alert("Meal successfully posted");
+          $ionicLoading.hide();
+           $state.go("preapp.dashboard");
+        }
       }
       else {
         alert("Server error. Could not load meal id.");
