@@ -135,7 +135,7 @@ module.exports = function(app, options) {
 				clientID: config.facebook[env].appId,
 				clientSecret: config.facebook[env].appSecret,
 				callbackURL: config.facebook[env].callBackURL,
-				profileFields: ['id', 'emails','picture.type(large)','name'],
+				profileFields: ['id', 'emails','picture.type(large)','name','displayName'],
 			},
 			function (accessToken, refreshToken, profile, done) {
 				var authId = 'facebook' + profile.id;
