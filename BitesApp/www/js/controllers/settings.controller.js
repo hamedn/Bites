@@ -1,8 +1,9 @@
 angular.module('settings.controllers', ['ionic-ratings'])
 
 .controller("SettingsCtrl", function($scope, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
-  
-//$scope.isChef = {checked:true};
+
+
+$scope.isChef = {checked:true};
 $scope.data = {};
 
 
@@ -13,17 +14,22 @@ $scope.data = {};
     console.log("userToken retrieved in settings page " + acc);
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
-      //localStorage.set("oid",resp.data._id);
-      //localStorage.set("name",resp.data.name);
-      //localStorage.set("isChef",resp.data.isChef);
-
+      
       console.log("isChef loaded in settigns page " + resp.data.isChef);
       console.log("userName in settings page " + resp.data.name);
       $scope.isChef = {checked: resp.data.isChef};
 
+      if (!resp.data.customerStripeToken) {
+          //don't show "current card on file"
+          //instead show, "enter in card details"
+          savedCard = false;
+      } else {
+          //show "current card on file"
+      }
+
     });
 
-
+    
     chef = localStorage.get("isChef");
     console.log(chef);
 
@@ -31,6 +37,7 @@ $scope.data = {};
 
 
     $scope.isChef = {checked:isChef};
+    
 
 
   });

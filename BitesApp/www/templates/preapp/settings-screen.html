@@ -23,21 +23,13 @@
     </ion-toggle>
 
     <!-- Stripe Credit Card Settings -->
-    <label class="item item-input">
+    <label class="item item-input" ng-show="savedCard">
       <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/>
     </label>
 
-    <!--
-    <label class="item item-input">
-      <input type="text" placeholder="CVC" ng-model="data.CVC"/>
+    <label class="item item-input" ng-show="!savedCard">
+        <p>No current card on file.</p>
     </label>
-    <label class="item item-input">
-      <input type="text" placeholder="Expiration month MM" ng-model="data.exp_month"/>
-    </label> 
-    <label class="item item-input">
-      <input type="text" placeholder="Expiration year YY" ng-model="data.exp_year" data-stripe="exp-year"/>
-    </label>
-    -->
 
 </div>
 
@@ -48,8 +40,14 @@
 </div>
 
 <div>
-    <button class="button button-full button-balanced" ng-click="changeCreditCardInfo()">
+    <button class="button button-full button-balanced" ng-show="savedCard" ng-click="changeCreditCardInfo()">
           Change Credit Card Information
+    </button>
+</div>
+
+<div>
+    <button class="button button-full button-balanced" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
+          Enter Credit Card Information
     </button>
 </div>
 
