@@ -1,6 +1,13 @@
 module.exports = {
 	cookieSecret: 'suchsecretmuchunkown',
 
+	location: {
+		development: "http://localhost:3000/",
+		production: "http://bitesapp.herokuapp.com/"
+	}
+
+	,
+
 
 	mongo: {
 		development: {
