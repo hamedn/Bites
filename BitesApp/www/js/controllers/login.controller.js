@@ -97,7 +97,7 @@ angular.module('login.controllers', ['ionic-ratings'])
             push.register(callback);
 
             console.log(response.data);
-            $state.go("preapp.stripeScreen"); 
+            //$state.go("preapp.stripeScreen"); 
 
           }
           else {

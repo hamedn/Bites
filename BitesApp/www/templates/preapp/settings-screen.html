@@ -18,15 +18,32 @@
 
 <div class ="list">
 
-<ion-toggle ng-model="isChef.checked" ng-change="toggleChef()">
-    Chef Account
-</ion-toggle>
+    <ion-toggle ng-model="isChef.checked" ng-change="toggleChef()">
+        Chef Account
+    </ion-toggle>
 
+    <!-- Stripe Credit Card Settings -->
+    <label class="item item-input">
+      <input type="text" placeholder="Credit Card Number" ng-model="data.cardNumber"/>
+    </label>
+    <label class="item item-input">
+      <input type="text" placeholder="CVC" ng-model="data.CVC"/>
+    </label>
+    <label class="item item-input">
+      <input type="text" placeholder="Expiration month MM" ng-model="data.exp_month"/>
+    </label> 
+    <label class="item item-input">
+      <input type="text" placeholder="Expiration year YY" ng-model="data.exp_year" data-stripe="exp-year"/>
+    </label>
+    
 
 </div>
 
-
-
+<div>
+    <button ng-show="isChef.checked" class="button button-full button-balanced" ng-click="linkStripeAccount()" style="width:100%; margin-left:0%; margin-right:0%;">
+          Connect Chef Account with Stripe
+    </button>
+</div>
 
 
 </ul>

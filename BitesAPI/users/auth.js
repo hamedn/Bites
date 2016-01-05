@@ -191,16 +191,16 @@ module.exports = function(app, options) {
         		clientSecret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
         		callbackURL: "http://localhost:3000/auth/stripe/callback"
       		},
-      		function(accessToken, refreshToken, stripe_properties, done) {
-      			console.log(accessToken + " " + stripe_properties);
-        		User.findOrCreate({ stripeId: stripe_properties.stripe_user_id }, function (err, user) {
-        			console.log(user);
-          			return done(err, user);
-        		});
-      			}
-    		));
+	      		function(accessToken, refreshToken, stripe_properties, done) {
+	      			console.log(accessToken + " " + stripe_properties);
+	        		User.findOrCreate({ stripeId: stripe_properties.stripe_user_id }, function (err, user) {
+	        			console.log(user);
+	          			return done(err, user);
+	        		});
+	      			}
+	    		));
 
-		}
+			}
 		catch (err) {console.log(err)};
 
 		},
