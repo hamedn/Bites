@@ -161,6 +161,15 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
 
 
                        user.rating = finalScore/(docs.length);
+                       meal.profilePicture = user.profilePicture;
+
+                       meal.save(function(err) {
+                      if (err)
+                        throw err;
+                      else {
+                        
+
+                      }
 
                        user.save(function(err) {
                       if (err)
