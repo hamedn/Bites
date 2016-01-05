@@ -67,6 +67,8 @@ router.post('/', function(req, res, next) {
 	*/
 
 
+var o_id = new mongo.ObjectID(req.body.userOID);
+
 	User.findOne({'_id': o_id}, function(err, user) {
 				if (err)
 					throw err;
