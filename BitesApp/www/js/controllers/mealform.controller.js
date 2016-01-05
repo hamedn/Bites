@@ -89,6 +89,23 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
     });
   }
 
+  $scope.resetForm = function (){
+    $scope.photo = null;
+    $scope.data.mealDate = null;
+    $scope.data.pickup = null;
+    $scope.data.orderDeadline = null;
+     $scope.data.title = null;
+      $scope.data.description = null;
+      $scope.data.price = null;
+
+       $scope.data.maxOrder = null;
+       $scope.data.numOrder = null;
+       $scope.data.mealLocation = null;
+        $scope.data.ingredients = null;
+       $scope.data.name = null;
+
+  }
+
 
   $scope.newMeal = function() {
 
@@ -151,6 +168,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
         $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
           alert("Meal successfully posted");
+          $scope.resetForm();
           $ionicLoading.hide();
            $state.go("preapp.dashboard");
 
@@ -167,7 +185,10 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         else {
           alert("Meal successfully posted");
           $ionicLoading.hide();
+                     $scope.resetForm();
+
            $state.go("preapp.dashboard");
+
         }
       }
       else {
