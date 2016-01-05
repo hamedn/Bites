@@ -14,7 +14,8 @@ var userSchema = new Schema({
 	isChef: Boolean,
 	mealArray: Array,
 	rating: Number,
-	profilePicture: String
+	profilePicture: String,
+	facebook: Object
 });
 
 

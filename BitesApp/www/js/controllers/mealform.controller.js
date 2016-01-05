@@ -149,7 +149,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
 
-        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.id, $scope.photo, {}).then(function(result) {
+        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
           alert("Meal successfully posted");
           $ionicLoading.hide();
            $state.go("preapp.dashboard");
