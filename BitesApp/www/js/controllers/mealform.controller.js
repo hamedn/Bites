@@ -140,12 +140,12 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         $ionicLoading.hide();
         console.log(response);
         
-
+        if (response.data.id) {
         if ($scope.photo != null && $scope.photo.length > 1) {
           $ionicLoading.show({
             template: 'Uploading photo'
           });
-        }
+        
 
 
 
@@ -163,7 +163,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         }, function (progress) {
             // constant progress updates
         });
-
+        }
+      }
+      else {
+        alert("Server error. Could not load meal id.");
+      }
 
 
 
