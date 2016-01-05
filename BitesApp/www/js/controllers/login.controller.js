@@ -86,7 +86,15 @@ angular.module('login.controllers', ['ionic-ratings'])
               // user.id = 'your-custom-user-id';
             }
             //persist the user
-            user.save();
+            var push = new Ionic.Push();
+
+            var callback = function(pushToken) {
+              console.log("Registered Token: ", pushToken.token);
+              user.addPushToken(pushToken);
+              localStorage.set("token", pushToken);
+              user.save();
+            }
+            push.register(callback);
 
             console.log(response.data);
             $state.go("preapp.stripeScreen"); 

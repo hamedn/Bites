@@ -294,8 +294,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.pushNotification = function() {
       var notification = {
-        "user_ids": ["568b6c579fee5b1100ad1aca"],
-        //"tokens": ["token"],
+        //"user_ids": ["568b81139fee5b1100ad1acb"],
+        "tokens": [localStorage.get("token").token],
         "notification": {
           "alert": "Hello World!",
           "ios":{
