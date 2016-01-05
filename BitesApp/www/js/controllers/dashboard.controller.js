@@ -293,46 +293,57 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
   $scope.pushNotification = function() {
-    $http({
-      method: 'POST',
-      url: "https://push.ionic.io/api/v1/push",
-      headers: {"Content-Type": "application/json", "X-Ionic-Application-Id": "b24a5ed6"},
-
-      transformRequest: function(obj) {
-        var str = [];
-        for(var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-        return str.join("&");
-      },
-
-      data: {
-        tokens: [],
-        notification: {
-          alert: "Hello World!",
-          ios:{
-            badge:1,
-            sound:"ping.aiff",
-            expiry: 1423238641,
-            priority: 10,
-            contentAvailable: 1,
-            payload:{
-              key1:"value",
-              key2:"value"
+      var notification = {
+        "user_ids": ["568b6c579fee5b1100ad1aca"],
+        //"tokens": ["token"],
+        "notification": {
+          "alert": "Hello World!",
+          "ios":{
+            "badge":1,
+            "sound":"ping.aiff",
+            "expiry": 1423238641,
+            "priority": 10,
+            "contentAvailable": 1,
+            "payload":{
+              "key1":"value",
+              "key2":"value"
             }
           },
-          android:{
-            collapseKey:"foo",
-            delayWhileIdle:true,
-            timeToLive:300,
-            payload:{
-              key1:"value",
-              key2:"value"
+          "android":{
+            "collapseKey":"foo",
+            "delayWhileIdle":true,
+            "timeToLive":300,
+            "payload":{
+              "key1":"value",
+              "key2":"value"
             }
           }
         }    
+      };
+
+    var dataString = JSON.stringify(notification);
+
+    // Here's our App's PRIVATE API KEY, must be encoded for Authroization
+    var encodedAPIKey = btoa("0855bb2ee64bd357b02fe4be9dab13849a0ef847389961be");
+
+    var config = {
+      headers: {
+        "Content-Type": "application/json", 
+        "X-Ionic-Application-Id": "b24a5ed6", 
+        'Authorization' : 'basic ' + encodedAPIKey
       }
-    }).then(function (response) {
+    }
+
+    $http.post("https://push.ionic.io/api/v1/push", dataString, config)
+    .success(function(data, status, headers, config) {
+      console.log(data);
+      console.log(status);
+      console.log(headers);
+      console.log(config);
       console.log("Push Success");
+    })
+    .error(function (data, status, header, config) {
+      console.log(data);
     })
   }
 

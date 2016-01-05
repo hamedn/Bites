@@ -76,6 +76,18 @@ angular.module('login.controllers', ['ionic-ratings'])
             alert("Login Successful!!!!");
             localStorage.set("loggedIn",true);
             localStorage.set("userToken", response.data.accessToken);
+            // kick off the platform web client
+            Ionic.io();
+            // this will give you a fresh user or the previously saved 'current user'
+            var user = Ionic.User.current();
+            // if the user doesn't have an id, you'll need to give it one.
+            if (!user.id) {
+              user.id = response.data.oid;
+              // user.id = 'your-custom-user-id';
+            }
+            //persist the user
+            user.save();
+
             console.log(response.data);
             $state.go("preapp.stripeScreen"); 
 
