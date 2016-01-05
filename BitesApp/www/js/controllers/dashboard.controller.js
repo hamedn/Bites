@@ -20,9 +20,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $scope.pastChefMeals = pastChefMeals.data;
     $scope.yourAccount = currentChefMeals.yourAccount;
     
-    console.log($scope.chef);
-    console.log($scope.yourAccount);
-    
     $scope.doRefresh();
 
 
@@ -57,13 +54,23 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     req = Meals.getMeals();
 
     req.then(function(result) {  // this is only run after $http completes
-       $scope.meals = result.data;
+      var meals = result.data;
+      for (i = 0; i < meals.length; i++) {
+        var individualMeal = meals[i];
+        if (individualMeal.photo) {
+          individualMeal.photo = APIServer.url() +"/"+individualMeal.photo;
+        }
+        else {
+          individualMeal.photo = "img/foodcard.jpg";
+        }
+      }
 
-
+       $scope.meals = meals;
        //console.log(result.data);
        //currentMeal.meals = result.data;
        //console.log(currentMeal.meals);
         $scope.$broadcast('scroll.refreshComplete');
+        console.log($scope.meals);
     });
 
    
