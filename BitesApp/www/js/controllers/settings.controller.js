@@ -15,7 +15,7 @@ $scope.data = {};
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
       
-      console.log("isChef loaded in settigns page " + resp.data.isChef);
+      console.log("isChef loaded in settings page " + resp.data.isChef);
       console.log("userName in settings page " + resp.data.name);
       $scope.isChef = {checked: resp.data.isChef};
 
