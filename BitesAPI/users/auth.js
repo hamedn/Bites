@@ -115,7 +115,7 @@ module.exports = function(app, options) {
 			                newUser.mealArray = [];
 			                newUser.email = email;
 			                newUser.rating = 5;
-			                newUser.profile = options.location[env] + "defaultprofile.gif"
+			                newUser.profile = credentials.location[env] + "defaultprofile.gif"
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password);
 			               	
