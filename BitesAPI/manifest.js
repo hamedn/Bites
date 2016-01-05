@@ -170,6 +170,7 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
                         
 
                       }
+                    }
 
                        user.save(function(err) {
                       if (err)
