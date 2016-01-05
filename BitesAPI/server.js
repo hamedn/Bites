@@ -4,6 +4,15 @@ var glob = require('glob');
 var app = express();
 
 
+var mkdirp = require('mkdirp');
+
+mkdirp('./public/uploads/', function(err) { 
+if (err)
+	throw err;
+    // path was created unless there was error
+
+});
+
 
 require('./manifest')(app);
 
