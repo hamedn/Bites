@@ -34,7 +34,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         //i have currently disabled crop because of image upload problems!
         if (this.height/this.width > 1) {
 
-        alert("Could not use image. Image height cannot exceed image width. Please take photos in landscape mode");
+        alert("Could not use image. Image height cannot exceed image width. Please take photos in landscape mode (hold phone horizontally).");
 
 /*
           $jrCrop.crop({
@@ -138,7 +138,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
       }
     }).then(function (response) {
         $ionicLoading.hide();
-        console.log(response.data.id);
+        console.log(response);
         
 
         if ($scope.photo != null && $scope.photo.length > 1) {
@@ -149,7 +149,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
 
-        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
+        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.id, $scope.photo, {}).then(function(result) {
           alert("Meal successfully posted");
           $ionicLoading.hide();
            $state.go("preapp.dashboard");

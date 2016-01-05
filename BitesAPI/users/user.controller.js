@@ -82,6 +82,7 @@ router.get('/byToken', function(req, res, next) {
 		res.json(user);
 		}
 		else {
+			res.send("failed to find user");
 			console.log("USER IS NULL, user.controller:85");
 		}
 	});

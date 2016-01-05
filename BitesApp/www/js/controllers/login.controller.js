@@ -74,6 +74,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
           if (response.data.accessToken) {
             alert("Login Successful!!!!");
+            localStorage.set("loggedIn",true);
             localStorage.set("userToken", response.data.accessToken);
             console.log(response.data);
             $state.go("preapp.stripeScreen"); 
