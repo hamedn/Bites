@@ -157,11 +157,8 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
                        finalScore = 0;
                        for ( i = 0; i < docs.length; i++) {
                         finalScore += docs[i].rating;
-                       }
-
-
-                       user.rating = finalScore/(docs.length);
-                       meal.profilePicture = user.profilePicture;
+                        var meal = docs[i];
+                        meal.profilePicture = user.profilePicture;
 
                        meal.save(function(err) {
                       if (err)
@@ -170,7 +167,14 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
                         
 
                       }
-                    }
+                    });
+
+
+                       }
+
+
+                       user.rating = finalScore/(docs.length);
+
 
                        user.save(function(err) {
                       if (err)
