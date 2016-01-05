@@ -1,5 +1,16 @@
 <ion-view login-screen view-title="Stripe Screen" hide-nav-bar="true" class="bg2">
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+  <ion-header-bar align-title="center" class="bar-balanced">
+      <div class="buttons">
+        <button class="button button-icon ion-ios-arrow-back" ng-click="cancelChangeCreditCardInfo()">
+        </button>
+      </div>
+
+      <h1 class="title">Credit Card Info</h1>
+
+  </ion-header-bar>
+
   <ion-content>
     
     <div class = "splashtext" align="center" style="margin-top:10%;">
@@ -14,7 +25,7 @@
               <input type="text" placeholder="Credit Card Number" ng-model="data.cardNumber"/>
           </label>
           <label class="item item-input">
-              <input type="text" data-stripe="CVC" ng-model="data.CVC" placeholder="cvc"/>
+              <input type="text" data-stripe="cvc" ng-model="data.CVC" placeholder="CVC"/>
           </label>
           <label class="item item-input">
               <input type="text" placeholder="Expiration Month MM" ng-model="data.exp_month" data-stripe="exp-month"/>

@@ -219,20 +219,20 @@ module.exports = function(app, options) {
 					else
 						res.json({message:"User Successfully Created", accessToken:user.accessToken,oid:user._id})
 				})(req,res,next);
-			})
+			});
 			
 			app.post('/saveStripeCardDetails', function(req, res) {
-				console.log("reached /saveStripeCardDetails " + req.body.cardNumber + " and res is " + res);
+				console.log("reached /saveStripeCardDetails. card number is " + req.body.cardNumber);
 
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
-				var stripeToken = "number=4258284520513848&cvc=738&exp_month=4&exp_year=17";
+				//var stripeToken = "number=4258284520513848&cvc=738&exp_month=4&exp_year=17";
 
 				stripe.tokens.create({
 				  card: {
 				    "number": '4242424242424242',
-				    "exp_month": 12,
-				    "exp_year": 2017,
+				    "exp_month": '12',
+				    "exp_year": '2017',
 				    "cvc": '123'
 				  }
 				}, function(err, token) {
@@ -259,7 +259,7 @@ module.exports = function(app, options) {
 					else
 						res.json({message:"login successful",accessToken:user.accessToken,oid:user._id})
 				})(req,res,next);
-			})
+			});
 
 			
 
@@ -269,7 +269,7 @@ module.exports = function(app, options) {
 				}),
 				function (req,res) {
 
-				});
+			});
 
 	
 				app.get('/auth/facebook/callback',

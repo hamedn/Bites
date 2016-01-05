@@ -1,6 +1,6 @@
 angular.module('settings.controllers', ['ionic-ratings'])
 
-.controller("SettingsCtrl", function($scope, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
+.controller("SettingsCtrl", function($scope, $window, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
 
 
 $scope.isChef = {checked:true};
@@ -247,7 +247,7 @@ $scope.data = {};
   } 
 
   $scope.changeCreditCardInfo = function() {
-    $state.go("preapp.stripeScreen");
+    $state.go("preapp.stripescreen");
   }
 
   $scope.cancelChangeCreditCardInfo = function() {
