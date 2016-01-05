@@ -2,11 +2,28 @@ angular.module('settings.controllers', ['ionic-ratings'])
 
 .controller("SettingsCtrl", function($scope, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
   
-$scope.isChef = {checked:true};
+//$scope.isChef = {checked:true};
 $scope.data = {};
 
 
   $scope.$on('$ionicView.enter', function(e) {
+
+    //need to load data here
+    var acc = localStorage.get("userToken");
+    console.log("userToken retrieved in settings page " + acc);
+
+    $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
+      //localStorage.set("oid",resp.data._id);
+      //localStorage.set("name",resp.data.name);
+      //localStorage.set("isChef",resp.data.isChef);
+
+      console.log("isChef loaded in settigns page " + resp.data.isChef);
+      console.log("userName in settings page " + resp.data.name);
+      $scope.isChef = {checked: resp.data.isChef};
+
+    });
+
+
     chef = localStorage.get("isChef");
     console.log(chef);
 
@@ -31,7 +48,7 @@ $scope.data = {};
 
 
 
-var confirmPopup = $ionicPopup.confirm({
+      var confirmPopup = $ionicPopup.confirm({
          title: 'Are you sure?',
          template: 'Are you sure you want to remove your chef status'
        });
@@ -221,5 +238,13 @@ var confirmPopup = $ionicPopup.confirm({
       })
 
   } 
+
+  $scope.changeCreditCardInfo = function() {
+    $state.go("preapp.stripeScreen");
+  }
+
+  $scope.cancelChangeCreditCardInfo = function() {
+    $state.go("preapp.settings");
+  }
 
 })
