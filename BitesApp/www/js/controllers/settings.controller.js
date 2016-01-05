@@ -172,4 +172,54 @@ var confirmPopup = $ionicPopup.confirm({
           });
   }
 
+  $scope.linkStripeAccount = function() {
+
+      url = APIServer.url() + "/auth/stripe";
+      
+      loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+
+      loginWindow.addEventListener('loadstart', function (event) {
+
+        console.log(event.url);
+
+        hasToken = event.url.indexOf('&code=');
+        console.log("hasToken index " + hasToken);
+        if(hasToken > -1) {
+          console.log("found code");
+          code = event.url.match("code=(.*)")[1];
+          console.log(code);
+          
+          //post code to retrieve all stripe details
+          $http({
+            method: 'POST',
+            url: 'https://connect.stripe.com/oauth/token',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+
+            data:  {
+              client_secret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
+              clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
+              code: code,
+              grant_type: "authorization_code"
+            }
+          }).then( function (body) {
+              /*NO ERROR CHECKING BUILT IN YET */
+              console.log("successfully posted code to stripe");
+              var accessToken = angular.fromJson(body).data.access_token;
+              console.log(accessToken);
+              localStorage.set("stripeAccessToken", accessToken);
+              loginWindow.close();
+            })
+        
+        } 
+      })
+
+  } 
+
 })
