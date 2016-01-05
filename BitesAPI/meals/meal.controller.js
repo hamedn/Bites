@@ -217,7 +217,7 @@ console.log("THIS IS DA ID" + req.params.oid)
 
 		var file = req.files.file;
 			var path = file.path;
-			var destFileName = shortId.generate()+'.'+mime.extension(file.type);
+			var destFileName = "uploads/" + shortId.generate()+'.'+mime.extension(file.type);
 
 		console.log(destFileName);
 		console.log(file);
