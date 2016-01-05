@@ -70,7 +70,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
        //currentMeal.meals = result.data;
        //console.log(currentMeal.meals);
         $scope.$broadcast('scroll.refreshComplete');
-        console.log($scope.meals);
     });
 
    
