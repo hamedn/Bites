@@ -293,11 +293,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
   $scope.pushNotification = function() {
+      console.log(localStorage.get("token"));
       var notification = {
         //"user_ids": ["568b81139fee5b1100ad1acb"],
-        "tokens": [localStorage.get("token").token],
+        "tokens": [localStorage.get("token")],
         "notification": {
           "alert": "Hello World!",
+          "scheduled": new Date() + 10000,
           "ios":{
             "badge":1,
             "sound":"ping.aiff",
