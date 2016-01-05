@@ -3,6 +3,7 @@ angular.module('settings.controllers', ['ionic-ratings'])
 .controller("SettingsCtrl", function($scope, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
   
 $scope.isChef = {checked:true};
+$scope.data = {};
 
 
   $scope.$on('$ionicView.enter', function(e) {
@@ -142,6 +143,33 @@ var confirmPopup = $ionicPopup.confirm({
      });
 
    
+  }
+
+  $scope.saveCreditCard = function () {
+    console.log($scope.data.cardNumber);
+    $http({
+          method: 'POST',
+          url: APIServer.url() + '/saveStripeCardDetails',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+
+          data:  {
+            cardNumber: $scope.data.cardNumber,
+            cvc: $scope.data.CVC,
+            exp_month: $scope.data.exp_month,
+            exp_year: $scope.data.exp_year
+          }
+            
+          }).then (function (response) {
+            console.log(response);
+            $state.go("preapp.dashboard");
+          });
   }
 
 })
