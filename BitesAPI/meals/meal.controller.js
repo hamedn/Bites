@@ -67,15 +67,7 @@ router.post('/', function(req, res, next) {
 	*/
 
 
-
-
-	meal.save(function(err) {
-	    if (err)
-	        throw err;
-	    else {
-	    	var o_id = new mongo.ObjectID(req.body.userOID);
-
-			User.findOne({'_id': o_id}, function(err, user) {
+	User.findOne({'_id': o_id}, function(err, user) {
 				if (err)
 					throw err;
 				console.log(user);
@@ -85,16 +77,35 @@ router.post('/', function(req, res, next) {
 					if (err)
 						throw err;
 					else {
-						res.json({message:"meal post successful",id:meal._id,data:req.body});
+
+						meal.profilePicture = user.profilePicture
+
+
+
+							meal.save(function(err) {
+						    if (err)
+						        throw err;
+						    else {
+								res.json({message:"meal post successful",id:meal._id,data:req.body});
+										
+						    }
+						});
+
+
+
 					}
 				})
 
 			});
 
 
-	    }
-	});
 
+
+
+
+
+
+	
 
 });
 
