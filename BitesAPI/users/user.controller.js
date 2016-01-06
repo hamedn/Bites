@@ -114,7 +114,7 @@ router.post('/changechef', function(req, res, next) {
 
 
 router.post('/changepicture', function(req, res, next) {
-console.log(req);
+console.log(req.body);
 res.send("OK");
 
 });

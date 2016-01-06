@@ -74,7 +74,30 @@ $scope.data = {};
 
   $scope.saveImage = function () {
 
-    $scope.takePicture(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+      var file = $scope.self.profilePicture;
+
+
+
+
+      // It is!
+      // Let's build a FormData object
+      var fd = new FormData();
+      fd.append("image", file); // Append the file
+      // Create the XHR (Cross-Domain XHR FTW!!!)
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", APIServer.url() + "/users/changepicture"); // Boooom!
+      
+      xhr.onload = function() {
+         // Big win!
+         // The URL of the image is:
+         console.log("sent?");
+      }
+
+      // And now, we send the formdata
+      xhr.send(fd);
+
+
+
 
   }
 
