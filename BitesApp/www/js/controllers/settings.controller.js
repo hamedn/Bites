@@ -1,6 +1,6 @@
 angular.module('settings.controllers', ['ionic-ratings'])
 
-.controller("SettingsCtrl", function($scope, $window,$ionicLoading.hide();, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
+.controller("SettingsCtrl", function($scope, $window,$ionicLoading, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
 $scope.isChef = {checked:true};
