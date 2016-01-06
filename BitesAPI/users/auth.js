@@ -210,7 +210,7 @@ module.exports = function(app, options) {
 			var config = options.providers;
 
 			console.log('try to register routes');
-
+			
 			app.post('/signup', function(req,res,next) {
 				passport.authenticate('local-signup', function(err,user,info) {
 					if (err) 
@@ -222,7 +222,8 @@ module.exports = function(app, options) {
 				})(req,res,next);
 			});
 			
-			app.post('/saveStripeCardDetails', function(req, res) {
+			app.post('/saveCreditCard', function(req,res,next) {
+				
 				console.log("reached /saveStripeCardDetails. card number is " + req.body.cardNumber);
 
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
@@ -246,9 +247,17 @@ module.exports = function(app, options) {
 					  // asynchronously called
 					  console.log("successfully created customer " + customer.id);
 					  customerID = customer.id;
+
+					  return customerID;
 					});
 				});
-				return customer.id;
+				//return customerID;
+				
+			
+			});
+				
+			app.get('/saveCreditCard', function() {
+				console.log("Here you go");
 			});
 
 			app.post('/login', function(req,res,next) {

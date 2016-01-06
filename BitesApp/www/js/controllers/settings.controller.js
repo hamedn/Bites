@@ -257,11 +257,13 @@ $scope.data = {};
    
   }
 
+
   $scope.saveCreditCard = function () {
     console.log($scope.data.cardNumber);
+
     $http({
           method: 'POST',
-          url: APIServer.url() + '/saveStripeCardDetails',
+          url: APIServer.url() + '/saveCreditCard',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
           transformRequest: function(obj) {
@@ -280,9 +282,10 @@ $scope.data = {};
             
           }).then (function (response) {
             console.log(response);
-            $state.go("preapp.dashboard");
+            $state.go("preapp.settings");
           });
   }
+  
 
   $scope.linkStripeAccount = function() {
 

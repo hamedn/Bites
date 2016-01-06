@@ -73,7 +73,7 @@ getMeals:function() {
   return {
     url: function() {
       return "https://bitesapp.herokuapp.com";
-   //   return "http://localhost:3000";
+      //return "http://localhost:3000";
     }
   };
 })
