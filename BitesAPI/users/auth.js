@@ -333,7 +333,7 @@ module.exports = function(app, options) {
 				    // check for `err`
 				    // do something with `charge`
 				  });
-			}
+			});
 
 			app.post('/login', function(req,res,next) {
 				passport.authenticate('local-login', function(err,user,info) {
