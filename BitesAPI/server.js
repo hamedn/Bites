@@ -10,7 +10,7 @@ mkdirp('./public/uploads/', function(err) {
 if (err)
 	throw err;
     // path was created unless there was error
-
+    console.log("made uploads directory");
 });
 
 
