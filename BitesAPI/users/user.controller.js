@@ -120,15 +120,62 @@ router.post('/saveCreditCard', function(req, res, next) {
 });
 */
 
-var multipart = require('connect-multiparty');
 
 
-var multipartMiddleware = multipart();
 
-router.post('/changepicture', function(req, res, next) {
-console.log(req.body);
-console.log(req)
-res.send("OK");
+
+
+
+
+
+
+
+
+
+module.exports = function(app) {
+
+
+	var env = app.get("env")
+	var cred = require("../credentials.js");
+
+router.post('/changepicture/:oid', function(req, res, next) {
+
+	var id = req.params.oid
+
+var base64 = req.body.image;
+
+var base64Data = base64.replace(/^data:image\/png;base64,/, "");
+
+var filename = "public/uploads/" + id + ".png";
+
+require("fs").writeFile(filename, base64Data, 'base64', function(err) {
+  
+	var o_id = new mongo.ObjectID(id);
+
+			User.findOne({'_id': o_id}, function(err, user) {
+				if (err)
+					throw err;
+
+				user.profilePicture = cred.location[env] + "uploads/" + id + ".png" ;
+				user.save(function(err) {
+					if (err)
+						throw err;
+					else {
+						
+						console.log("moved filed picture: " + user.profilePicture);
+		   			    res.send("Successfully updated propic");
+
+					}
+				})
+
+			});
+
+
+
+
+
+
+});
 
 });
 
@@ -137,6 +184,5 @@ res.send("OK");
 
 
 
-module.exports = function(app) {
   app.use('/users', router);
 };
