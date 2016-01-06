@@ -5,7 +5,7 @@ var User = require('./user.model.js'),
 	LocalStrategy = require('passport-local').Strategy,
 	StripeStrategy = require('passport-stripe').Strategy;
 
-
+var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 var express = require('express');
 var router = express.Router();
 
@@ -226,7 +226,7 @@ module.exports = function(app, options) {
 				
 				console.log("reached /saveCreditCard. data is " + req.body.cardNumber + req.body.cvc + req.body.exp_month + req.body.exp_year);
 
-				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
+				//var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
 				var lastFour = req.body.cardNumber.slice(-4);
 
@@ -314,9 +314,26 @@ module.exports = function(app, options) {
 		        }); 
 			});
 
-			app.post('/makeTransaction', function(req,res,next) {
-				
-			});
+			app.post('/makeTransaction', function(req, res) {
+				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
+
+				var payment = req.body.transAmount;
+				var source = req.body.customerToken;
+				var receiver = req.body.chefToken;
+
+				var fee = 0.03 * payment;
+
+				stripe.charges.create({
+				  amount: payment,
+				  currency: 'usd',
+				  source: {source},
+				  application_fee: fee
+				}, {stripe_account: receiver},
+				  function(err, charge) {
+				    // check for `err`
+				    // do something with `charge`
+				  });
+			}
 
 			app.post('/login', function(req,res,next) {
 				passport.authenticate('local-login', function(err,user,info) {
