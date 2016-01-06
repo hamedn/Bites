@@ -4,15 +4,12 @@ module.exports = {
 	location: {
 		development: "http://localhost:3000/",
 		production: "http://bitesapp.herokuapp.com/"
-	}
-
-	,
+	},
 
 	stripecallback: {
 		development: "http://localhost:3000/auth/stripe/callback",
 		production: "http://bitesapp.herokuapp.com/auth/stripe/callback"
-	}
-
+	},
 
 	mongo: {
 		development: {
