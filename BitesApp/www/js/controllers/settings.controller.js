@@ -1,6 +1,6 @@
 angular.module('settings.controllers', ['ionic-ratings'])
 
-.controller("SettingsCtrl", function($scope, $window, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
+.controller("SettingsCtrl", function($scope, $window,$ionicLoading.hide();, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
 $scope.isChef = {checked:true};
@@ -74,13 +74,20 @@ $scope.data = {};
 
   $scope.saveImage = function () {
 
+
+    $ionicLoading.show({
+      template: 'Uploading photo'
+    });
+
+
+
       var file = $scope.self.profilePicture;
 
 
 
       $http({
                   method: 'POST',
-                  url: APIServer.url() + '/users/changepicture',
+                  url: APIServer.url() + '/users/changepicture/' + $scope.self._id,
                   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
                   transformRequest: function(obj) {
@@ -95,7 +102,8 @@ $scope.data = {};
                   }
               }).then (function (response) {
 
-                alert("sent'")
+                $ionicLoading.hide();
+                alert("Successfully changed profile picture");
 
 
 
