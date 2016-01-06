@@ -395,4 +395,9 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     console.log('Selected rating is : ', rating);
     $scope.ratingsObject.rating = rating;
   };
+
+  $scope.toOrder = function() {
+    console.log("in to order, price = " + $scope.meal.price);
+
+  }
 })

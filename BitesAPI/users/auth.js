@@ -301,7 +301,7 @@ module.exports = function(app, options) {
 		                user.chefStripeAccessToken = req.body.accessToken;
 		                user.chefStripeRefreshToken = req.body.refreshToken;
 		                user.chefStripeUserId = req.body.stripeUserId;
-		                
+
 		                user.save(function(err) {
 			                if (err){
 			                    console.log('Error')
@@ -312,6 +312,10 @@ module.exports = function(app, options) {
 		            } 
 
 		        }); 
+			});
+
+			app.post('/makeTransaction', function(req,res,next) {
+				
 			});
 
 			app.post('/login', function(req,res,next) {
