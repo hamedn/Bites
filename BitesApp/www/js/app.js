@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services','splash.controllers'])
+angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.service.push', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services','splash.controllers'])
 
 .run(function($ionicPlatform, localStorage) {
   $ionicPlatform.ready(function() {
@@ -23,7 +23,7 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'angularMom
 
     // To make this work for dev push notifications
     // run 'ionic config set dev_push true' in terminal
-    var push = new Ionic.Push({
+    $ionicPush.init({
       "debug": true,
       "onNotification": function(notification) {
         var payload = notification.payload;

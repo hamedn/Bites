@@ -7,7 +7,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
 
 
-.controller('LoginCtrl', function($scope, $window, $location, $http, APIServer, $state, localStorage) {
+.controller('LoginCtrl', function($scope, $window, $ionicPush, $location, $http, APIServer, $state, localStorage) {
    $scope.data = {};
 
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -86,7 +86,7 @@ angular.module('login.controllers', ['ionic-ratings'])
               // user.id = 'your-custom-user-id';
             }
             //persist the user
-            var push = new Ionic.Push();
+            //var push = new Ionic.Push();
 
             var callback = function(pushToken) {
               console.log("Registered Token: ", pushToken.token);
@@ -94,11 +94,11 @@ angular.module('login.controllers', ['ionic-ratings'])
               localStorage.set("token", pushToken);
               user.save();
             }
-            push.register(callback);
+            $ionicPush.register(callback);
 
             console.log(response.data);
             //$state.go("preapp.stripeScreen"); 
-
+            $state.go("preapp.dashboard");
           }
           else {
             alert(response.data.message);

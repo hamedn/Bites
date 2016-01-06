@@ -297,6 +297,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       var notification = {
         //"user_ids": ["568b81139fee5b1100ad1acb"],
         "tokens": [localStorage.get("token")],
+        "production": false,
         "notification": {
           "alert": "Hello World!",
           "scheduled": new Date() + 10000,
