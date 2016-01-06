@@ -190,7 +190,7 @@ module.exports = function(app, options) {
 			passport.use('stripe', new StripeStrategy({
         		clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
         		clientSecret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
-        		callbackURL: "http://localhost:3000/auth/stripe/callback"
+        		callbackURL: credentials.stripecallback[env]
       		},
 	      		function(accessToken, refreshToken, stripe_properties, done) {
 	      			console.log(accessToken + " " + stripe_properties);
