@@ -13,6 +13,7 @@ angular.module('splash.controllers', ['ionic-ratings'])
 	      template: 'Loading'
 	    });
 
+console.log('hello workd"')
 
     	var acc = localStorage.get("userToken");
 

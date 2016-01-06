@@ -3,6 +3,9 @@ angular.module('settings.controllers', ['ionic-ratings'])
 .controller("SettingsCtrl", function($scope, $window,$ionicLoading, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
+
+
+$scope.freezebuttons = false;
 $scope.isChef = {checked:true};
 $scope.data = {};
 
@@ -74,6 +77,7 @@ $scope.data = {};
 
   $scope.saveImage = function () {
 
+if ($scope.freezebuttons == false) {
 
     $ionicLoading.show({
       template: 'Uploading photo'
@@ -102,6 +106,7 @@ $scope.data = {};
                   }
               }).then (function (response) {
 
+
                 $ionicLoading.hide();
                 alert("Successfully changed profile picture");
 
@@ -109,7 +114,7 @@ $scope.data = {};
 
               })
 
-
+}
 
   }
 
@@ -119,6 +124,7 @@ $scope.data = {};
 
     console.log(imgURL);
 
+    $scope.freezebuttons = true;
      $jrCrop.crop({
               url: imgURL,
               width: 300,
@@ -126,11 +132,34 @@ $scope.data = {};
           }).then(function(canvas) {
               // success!
 
-              var image = canvas.toDataURL();
 
-              $scope.self.profilePicture = image;
-              $scope.$apply();
 
+              var oldCanvas = canvas.toDataURL("image/png");
+              
+               $scope.self.profilePicture = oldCanvas;
+               $scope.$apply();
+
+              var canvas = document.createElement('canvas');
+               var context = canvas.getContext('2d');
+
+
+                var img = new Image();
+                img.src = oldCanvas;
+                img.onload = function (){
+                    canvas.height = 300;
+                    canvas.width = 300;
+                    context.drawImage(img, 0, 0,300,300);
+
+                        $scope.self.profilePicture = canvas.toDataURL();
+                        $scope.$apply();
+                       
+                       setTimeout(function(){  $scope.freezebuttons = false; console.log("FIXED")}, 2000);
+
+
+
+                }
+
+          
 
           }, function() {
               alert("Image height cannot exceed image width");
@@ -251,6 +280,7 @@ $scope.data = {};
 
   $scope.logOut = function () {
 
+if ($scope.freezebuttons == false) {
     var confirmPopup = $ionicPopup.confirm({
        title: 'Confirm Logout',
        template: 'Are you sure you want to log out?'
@@ -261,6 +291,8 @@ $scope.data = {};
            $state.go("preapp.splashscreen");
        } 
      });
+
+   }
 
    
   }
