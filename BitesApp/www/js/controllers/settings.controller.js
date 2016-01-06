@@ -1,6 +1,6 @@
 angular.module('settings.controllers', ['ionic-ratings'])
 
-.controller("SettingsCtrl", function($scope, $window, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicPopup) {
+.controller("SettingsCtrl", function($scope, $window, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
 $scope.isChef = {checked:true};
@@ -18,7 +18,7 @@ $scope.data = {};
       console.log("isChef loaded in settings page " + resp.data.isChef);
       console.log("userName in settings page " + resp.data.name);
       $scope.isChef = {checked: resp.data.isChef};
-
+      $scope.self = resp.data;
       if (!resp.data.customerStripeToken) {
           //don't show "current card on file"
           //instead show, "enter in card details"
@@ -42,7 +42,68 @@ $scope.data = {};
 
   });
 
+  $scope.takePicture = function (source) {
 
+    var options =   {
+      quality: 50,
+      destinationType: navigator.camera.DestinationType.FILE_URI,
+      sourceType: source,
+      encodingType: 0,
+      correctOrientation:true
+      };
+
+    Camera.getPicture(options).then(function(res) {
+      
+      $scope.processImage(res);
+
+      return res;
+    }, function(err) {
+      console.log(err);
+    });
+  }
+
+  $scope.fromCamera = function () {
+    $scope.takePicture(navigator.camera.PictureSourceType.CAMERA);
+  }
+
+  $scope.fromLibrary = function () {
+
+    $scope.takePicture(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+
+  }
+
+  $scope.saveImage = function () {
+
+    $scope.takePicture(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+
+  }
+
+
+
+  $scope.processImage = function (imgURL) {
+
+    console.log(imgURL);
+
+     $jrCrop.crop({
+              url: imgURL,
+              width: 300,
+              height: 300
+          }).then(function(canvas) {
+              // success!
+
+              var image = canvas.toDataURL();
+
+              $scope.self.profilePicture = image;
+              $scope.$apply();
+
+
+          }, function() {
+              alert("Image height cannot exceed image width");
+              // User canceled or couldn't load image.
+          });
+
+
+}
 
   
 
