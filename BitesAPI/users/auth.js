@@ -224,11 +224,10 @@ module.exports = function(app, options) {
 			
 			app.post('/saveCreditCard', function(req,res,next) {
 				
-				console.log("reached /saveStripeCardDetails. card number is " + req.body.cardNumber);
+				console.log("reached /saveCreditCard. card number is " + req.body.cardNumber);
 
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
-				//var stripeToken = "number=4258284520513848&cvc=738&exp_month=4&exp_year=17";
 
 				stripe.tokens.create({
 				  card: {
@@ -254,10 +253,6 @@ module.exports = function(app, options) {
 				//return customerID;
 				
 			
-			});
-				
-			app.get('/saveCreditCard', function() {
-				console.log("Here you go");
 			});
 
 			app.post('/login', function(req,res,next) {
