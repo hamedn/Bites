@@ -253,6 +253,30 @@ module.exports = function(app, options) {
 					  console.log("successfully created customer " + customer.id);
 					  customerID = customer.id;
 
+
+					  console.log("userToken" + req.body.userToken);
+
+					  User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
+			            if (err) {
+			                return done(err);
+			            }
+			            
+			            if (user) {
+			            	console.log("user.email" + user.email);
+			                console.log("found user");
+			                user.stripeCustomerToken = customerID;
+			                user.save(function(err) {
+				                if (err){
+				                    console.log('Error')
+				                } else {
+				                    console.log('Sucess')
+				                }
+				            });
+			            } 
+
+			           	}); 
+
+
 					  return customerID;
 					});
 

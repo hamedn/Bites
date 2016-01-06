@@ -277,7 +277,8 @@ $scope.data = {};
             cardNumber: $scope.data.cardNumber,
             cvc: $scope.data.cvc,
             exp_month: $scope.data.exp_month,
-            exp_year: $scope.data.exp_year
+            exp_year: $scope.data.exp_year,
+            userToken: localStorage.get("userToken")
           }
             
           }).then (function (response) {

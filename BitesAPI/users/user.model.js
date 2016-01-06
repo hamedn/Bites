@@ -15,7 +15,8 @@ var userSchema = new Schema({
 	mealArray: Array,
 	rating: Number,
 	profilePicture: String,
-	facebook: Object
+	facebook: Object,
+	stripeCustomerToken: String
 });
 
 

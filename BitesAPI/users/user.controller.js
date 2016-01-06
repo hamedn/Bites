@@ -112,14 +112,6 @@ router.post('/changechef', function(req, res, next) {
 
 });
 
-/*
-router.post('/saveCreditCard', function(req, res, next) {
-
-	console.log('helloooooooo');
-
-});
-*/
-
 var multipart = require('connect-multiparty');
 
 
