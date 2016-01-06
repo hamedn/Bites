@@ -16,7 +16,11 @@ var userSchema = new Schema({
 	rating: Number,
 	profilePicture: String,
 	facebook: Object,
-	stripeCustomerToken: String
+	stripeCustomerToken: String,
+	creditCardLastFourDigits: String,
+	chefStripeAccessToken: String,
+	chefStripeRefreshToken: String,
+	chefStripeUserId: String
 });
 
 

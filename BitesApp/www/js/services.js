@@ -72,8 +72,8 @@ getMeals:function() {
 .factory('APIServer', function() {
   return {
     url: function() {
-      return "https://bitesapp.herokuapp.com";
-      //return "http://localhost:3000";
+      //return "https://bitesapp.herokuapp.com";
+      return "http://localhost:3000";
     }
   };
 })

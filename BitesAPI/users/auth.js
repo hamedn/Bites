@@ -228,15 +228,16 @@ module.exports = function(app, options) {
 
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
+				var lastFour = req.body.cardNumber.slice(-4);
 
 				//create a Stripe token with the given card information
 				stripe.tokens.create({
 				  card: {
 				  	//will eventually change this data to be the entered data, for now just use testing card info
-				    "number": '4242424242424242',
-				    "exp_month": '12',
-				    "exp_year": '2017',
-				    "cvc": '123'
+				    "number": req.body.cardNumber,
+				    "exp_month": req.body.cvc,
+				    "exp_year": req.body.exp_month,
+				    "cvc": req.body.exp_year
 				  }
 				}, function(err, token) {
 				  	//once token has been made use that token to create customer object so that card data will be saved for future transactions
@@ -265,6 +266,7 @@ module.exports = function(app, options) {
 			            	console.log("user.email" + user.email);
 			                console.log("found user");
 			                user.stripeCustomerToken = customerID;
+			                user.creditCardLastFourDigits = lastFour;
 			                user.save(function(err) {
 				                if (err){
 				                    console.log('Error')
@@ -285,6 +287,31 @@ module.exports = function(app, options) {
 				//return customerID;
 				
 			
+			});
+
+			app.post('/saveChefStripeDetails', function(req,res,next) {
+				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
+		            if (err) {
+		                return done(err);
+		            }
+		            
+		            if (user) {
+		            	console.log("user.email" + user.email);
+
+		                user.chefStripeAccessToken = req.body.accessToken;
+		                user.chefStripeRefreshToken = req.body.refreshToken;
+		                user.chefStripeUserId = req.body.stripeUserId;
+		                
+		                user.save(function(err) {
+			                if (err){
+			                    console.log('Error')
+			                } else {
+			                    console.log('Sucess')
+			                }
+			            });
+		            } 
+
+		        }); 
 			});
 
 			app.post('/login', function(req,res,next) {

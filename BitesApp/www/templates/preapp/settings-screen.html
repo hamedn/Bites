@@ -24,7 +24,8 @@
 
     <!-- Stripe Credit Card Settings -->
     <label class="item item-input" ng-show="savedCard">
-      <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/>
+      <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
+      <p style="font-size:18px;">Current Card On File:  &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; {{lastFour}}</p>
     </label>
 
     <label class="item item-input" ng-show="!savedCard">
@@ -34,7 +35,7 @@
 </div>
 
 <div>
-    <button ng-show="isChef.checked" class="button button-full button-balanced" ng-click="linkStripeAccount()" style="width:100%; margin-left:0%; margin-right:0%;">
+    <button ng-show="isChef.checked && !chefStripeConnected " class="button button-full button-balanced" ng-click="linkStripeAccount()" style="width:100%; margin-left:0%; margin-right:0%;">
           Connect Chef Account with Stripe
     </button>
 </div>

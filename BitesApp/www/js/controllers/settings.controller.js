@@ -1,4 +1,5 @@
-angular.module('settings.controllers', ['ionic-ratings'])
+angular.module('settings.controllers', ['ionic-ratings']) 
+
 
 .controller("SettingsCtrl", function($scope, $window,$ionicLoading, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
@@ -6,7 +7,10 @@ angular.module('settings.controllers', ['ionic-ratings'])
 
 
 $scope.freezebuttons = false;
+$scope.chefStripeConnected = false;
 $scope.isChef = {checked:true};
+$scope.savedCard = false;
+$scope.lastFour = "";
 $scope.data = {};
 
 
@@ -18,17 +22,24 @@ $scope.data = {};
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
       
-      console.log("isChef loaded in settings page " + resp.data.isChef);
-      console.log("userName in settings page " + resp.data.name);
       $scope.isChef = {checked: resp.data.isChef};
       $scope.self = resp.data;
-      if (!resp.data.customerStripeToken) {
+
+      if (!resp.data.stripeCustomerToken) {
           //don't show "current card on file"
           //instead show, "enter in card details"
-          savedCard = false;
+          console.log("customer token not found");
+          $scope.savedCard = false;
       } else {
           //show "current card on file"
+          console.log("customer token found");
+          $scope.savedCard = true;
+          $scope.lastFour = resp.data.creditCardLastFourDigits;
       }
+
+      if (resp.data.chefStripeAccessToken)
+          $scope.chefStripeConnected = true;
+      
 
     });
 
@@ -367,9 +378,33 @@ if ($scope.freezebuttons == false) {
           }).then( function (body) {
               /*NO ERROR CHECKING BUILT IN YET */
               console.log("successfully posted code to stripe");
-              var accessToken = angular.fromJson(body).data.access_token;
-              console.log(accessToken);
-              localStorage.set("stripeAccessToken", accessToken);
+
+              //Post this to auth.js to save data
+              $http({
+                method: 'POST',
+                url: APIServer.url() + '/saveChefStripeDetails',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+                transformRequest: function(obj) {
+                  var str = [];
+                  for(var p in obj)
+                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                  return str.join("&");
+                },
+
+                data:  {
+                  accessToken: angular.fromJson(body).data.access_token,
+                  refreshToken: angular.fromJson(body).data.refresh_token,
+                  stripeUserId: angular.fromJson(body).data.stripe_user_id,
+                  userToken: localStorage.get("userToken")
+                }
+                  
+                }).then (function (response) {
+                  console.log(response);
+                  $state.go("preapp.settings");
+                });
+
+              //localStorage.set("stripeAccessToken", accessToken);
               loginWindow.close();
             })
         
