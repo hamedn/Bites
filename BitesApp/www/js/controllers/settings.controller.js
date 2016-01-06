@@ -78,24 +78,28 @@ $scope.data = {};
 
 
 
+      $http({
+                  method: 'POST',
+                  url: APIServer.url() + '/users/changepicture',
+                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-      // It is!
-      // Let's build a FormData object
-      var fd = new FormData();
-      fd.append("image", file); // Append the file
-      // Create the XHR (Cross-Domain XHR FTW!!!)
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", APIServer.url() + "/users/changepicture"); // Boooom!
-      
-      xhr.onload = function() {
-         // Big win!
-         // The URL of the image is:
-         console.log("sent?");
-      }
+                  transformRequest: function(obj) {
+                      var str = [];
+                      for(var p in obj)
+                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                      return str.join("&");
+                  },
 
-      // And now, we send the formdata
-      xhr.send(fd);
+                  data:  {
+                    image:file
+                  }
+              }).then (function (response) {
 
+                alert("sent'")
+
+
+
+              })
 
 
 

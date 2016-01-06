@@ -118,10 +118,9 @@ var multipart = require('connect-multiparty');
 
 var multipartMiddleware = multipart();
 
-router.post('/changepicture',multipartMiddleware, function(req, res, next) {
+router.post('/changepicture', function(req, res, next) {
 console.log(req.body);
 console.log(req)
-console.log("FILE" + req.files);
 res.send("OK");
 
 });
