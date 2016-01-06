@@ -224,31 +224,39 @@ module.exports = function(app, options) {
 			
 			app.post('/saveCreditCard', function(req,res,next) {
 				
-				console.log("reached /saveCreditCard. card number is " + req.body.cardNumber);
+				console.log("reached /saveCreditCard. data is " + req.body.cardNumber + req.body.cvc + req.body.exp_month + req.body.exp_year);
 
 				var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 				var customerID = "";
 
+				//create a Stripe token with the given card information
 				stripe.tokens.create({
 				  card: {
+				  	//will eventually change this data to be the entered data, for now just use testing card info
 				    "number": '4242424242424242',
 				    "exp_month": '12',
 				    "exp_year": '2017',
 				    "cvc": '123'
 				  }
 				}, function(err, token) {
-				  	// asynchronously called
+				  	//once token has been made use that token to create customer object so that card data will be saved for future transactions
+				  	
 				  	console.log("successfully created token " + token.id);
+				  	
+				  	//create the Customer object
 				  	stripe.customers.create({
 					  description: 'Customer for test@example.com',
 					  source: token.id // obtained with Stripe.js
 					}, function(err, customer) {
-					  // asynchronously called
+					  
+					  //Customer has been created, save the Customer id to the user info in database
 					  console.log("successfully created customer " + customer.id);
 					  customerID = customer.id;
 
 					  return customerID;
 					});
+
+
 				});
 				//return customerID;
 				
