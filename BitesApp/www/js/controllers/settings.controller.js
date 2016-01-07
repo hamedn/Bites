@@ -30,8 +30,7 @@ $scope.data = {};
 
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
-
-          //instead show, "no card on file" and "enter in card details" button
+          //show, "no card on file" and "enter in card details" button
           $scope.savedCard = false;
       } else {
           //show "current card on file"
@@ -44,8 +43,11 @@ $scope.data = {};
           $scope.chefStripeConnected = true;
       
       //check if user has any past orders
-      if (!orders)
+      if (typeof $scope.orders.length == 'undefined') {
         $scope.noOrders = true;
+        console.log("no orders");
+      }
+        
 
     });
 

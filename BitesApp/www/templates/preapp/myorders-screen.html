@@ -11,7 +11,11 @@
     </ion-header-bar>
 
 <ion-content scroll="true">
-    
+  
+<div ng-show="noOrders">
+  <p>What's wrong with you? You havn't made any orders...</p>
+</div>
+
 <div ng-repeat="order in orders">
       <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
 
