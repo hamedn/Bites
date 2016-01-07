@@ -42,10 +42,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   })
 
   $scope.formatMealLocation = function(mealLocation) {
-    if (mealLocation.length > 11) {
-      return mealLocation.substring(0, 11) + "...";
-    } else {
-      return mealLocation;
+    if (mealLocation) {
+      if (mealLocation.length > 11) {
+        return mealLocation.substring(0, 11) + "...";
+      } else {
+        return mealLocation;
+      }
     }
   }
 
@@ -424,6 +426,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
             orderDate: $scope.meal.deadline,
             pickupDate: $scope.meal.pickup,
             price: $scope.meal.price,
+            chefName: $scope.meal.userName,
+            description: $scope.meal.description,
             userToken: localStorage.get("userToken")
           }
             

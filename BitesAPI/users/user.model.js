@@ -6,6 +6,8 @@ var orderSchema = new Schema({
 	orderName: String,
 	orderDate: Date,
 	pickupDate: Date,
+	chefName: String,
+	description: String,
 	price: String
 });
 

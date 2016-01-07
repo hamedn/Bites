@@ -26,7 +26,14 @@ $scope.data = {};
       //load data
       $scope.isChef = {checked: resp.data.isChef};
       $scope.self = resp.data;
-      $scope.orders = resp.data.orders;
+
+      //check if user has any past orders
+      if (resp.data.orders)
+        $scope.orders = resp.data.orders;
+      else 
+        $scope.noOrders = true;
+
+      console.log("getMonth" + orders.pickupDate.getMonth());
 
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
@@ -41,13 +48,6 @@ $scope.data = {};
       //check if chef is connected to stripe
       if (resp.data.chefStripeAccessToken)
           $scope.chefStripeConnected = true;
-      
-      //check if user has any past orders
-      if (typeof $scope.orders.length == 'undefined') {
-        $scope.noOrders = true;
-        console.log("no orders");
-      }
-        
 
     });
 

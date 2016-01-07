@@ -365,7 +365,7 @@ module.exports = function(app, options) {
 		            if (user) {
 		            	console.log("user.email" + user.email);
 
-		            	var newOrder = {orderName: req.body.orderName, orderDate: req.body.orderDate, pickupDate: req.body.pickupDate, price: req.body.price};
+		            	var newOrder = {orderName: req.body.orderName, orderDate: req.body.orderDate, pickupDate: req.body.pickupDate, price: req.body.price, chefName: req.body.chefName, description: req.body.description};
 
 		                user.orders.push(newOrder);
 
