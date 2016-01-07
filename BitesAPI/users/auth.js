@@ -324,6 +324,7 @@ module.exports = function(app, options) {
 			                if (err){
 			                    console.log('Error')
 			                } else {
+			                	res.json({message:"SUCCESS"})
 			                    console.log('Sucess')
 			                }
 			            });

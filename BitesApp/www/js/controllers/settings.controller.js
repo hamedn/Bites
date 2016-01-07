@@ -414,7 +414,7 @@ if ($scope.freezebuttons == false) {
                 }
                   
                 }).then (function (response) {
-                  alert("Succesfully connected with stripe");
+                  alert("Stripe successfully connected");
                   $state.go("preapp.settings",{},{reload:true});
 
                 });
