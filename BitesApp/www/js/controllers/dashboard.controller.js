@@ -48,6 +48,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       } else {
         return mealLocation;
       }
+    } else {
+      return "Loading...";
     }
   }
 
