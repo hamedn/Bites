@@ -336,7 +336,7 @@ module.exports = function(app, options) {
 			app.post('/makeTransaction', function(req, res) {
 				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
 
-				var payment = req.body.transAmount;
+				var payment = req.body.transAmount * 100;
 				var source = req.body.customerToken;
 				var receiver = req.body.chefToken;
 
@@ -352,6 +352,35 @@ module.exports = function(app, options) {
 				    // check for `err`
 				    // do something with `charge`
 				  });
+			});
+
+			app.post('/saveOrder', function(req, res) {
+				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
+
+				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
+		            if (err) {
+		                return done(err);
+		            }
+		            
+		            if (user) {
+		            	console.log("user.email" + user.email);
+
+		            	var newOrder = {orderName: req.body.orderName, orderDate: req.body.orderDate, pickupDate: req.body.pickupDate, price: req.body.price};
+
+		                user.orders.push(newOrder);
+
+		                user.save(function(err) {
+			                if (err){
+			                    return res.json({message:"Error " + err});
+			                } else {
+			                	return res.json({message:"SUCCESS"});
+			                    console.log('Sucess');
+			                }
+			            });
+		            } 
+
+		        }); 
+
 			});
 
 			app.post('/login', function(req,res,next) {

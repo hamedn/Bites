@@ -101,6 +101,12 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
     templateUrl: 'templates/preapp/settings-screen.html',
     controller: "SettingsCtrl"
   })
+
+  .state('preapp.myorders', {
+    url: '/settings',
+    templateUrl: 'templates/preapp/myorders-screen.html',
+    controller: "SettingsCtrl"
+  })
   
   .state('preapp.dashboard', {
     url: '/dashboard',

@@ -5,41 +5,47 @@ angular.module('settings.controllers', ['ionic-ratings'])
 
 
 
-
+//global variables
 $scope.freezebuttons = false;
 $scope.chefStripeConnected = false;
 $scope.isChef = {checked:true};
 $scope.savedCard = false;
+$scope.noOrders = false;
 $scope.lastFour = "";
+$scope.orders = {};
 $scope.data = {};
+
 
 
   $scope.$on('$ionicView.enter', function(e) {
 
-    //need to load data here
     var acc = localStorage.get("userToken");
-    console.log("userToken retrieved in settings page " + acc);
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
       
+      //load data
       $scope.isChef = {checked: resp.data.isChef};
       $scope.self = resp.data;
+      $scope.orders = resp.data.orders;
 
+      //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
-          //don't show "current card on file"
-          //instead show, "enter in card details"
-          console.log("customer token not found");
+
+          //instead show, "no card on file" and "enter in card details" button
           $scope.savedCard = false;
       } else {
           //show "current card on file"
-          console.log("customer token found");
           $scope.savedCard = true;
           $scope.lastFour = resp.data.creditCardLastFourDigits;
       }
 
+      //check if chef is connected to stripe
       if (resp.data.chefStripeAccessToken)
           $scope.chefStripeConnected = true;
       
+      //check if user has any past orders
+      if (!orders)
+        $scope.noOrders = true;
 
     });
 
@@ -313,7 +319,7 @@ if ($scope.freezebuttons == false) {
     console.log($scope.data.cardNumber);
 
 
- $ionicLoading.show({
+    $ionicLoading.show({
       template: 'Sending info to server'
     });
 

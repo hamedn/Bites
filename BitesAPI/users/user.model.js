@@ -2,6 +2,12 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
+var orderSchema = new Schema({
+	orderName: String,
+	orderDate: Date,
+	pickupDate: Date,
+	price: String
+});
 
 var userSchema = new Schema({
 	username: String,
@@ -20,7 +26,8 @@ var userSchema = new Schema({
 	creditCardLastFourDigits: String,
 	chefStripeAccessToken: String,
 	chefStripeRefreshToken: String,
-	chefStripeUserId: String
+	chefStripeUserId: String,
+	orders: [orderSchema]
 });
 
 

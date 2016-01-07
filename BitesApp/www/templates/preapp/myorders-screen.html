@@ -1,0 +1,26 @@
+<ion-view dash-screen view-title="Bites" class="bg2" >
+    <ion-header-bar align-title="center" class="bar-balanced">
+      <div class="buttons">
+        <button class="button button-icon ion-ios-arrow-back" ng-click="goDash()">
+        </button>
+      </div>
+
+      <h1 class="title">My Orders</h1>
+
+
+    </ion-header-bar>
+
+<ion-content scroll="true">
+    
+<div ng-repeat="order in orders">
+      <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+
+        <div class="item item-avatar">
+          <h2>{{order.orderName}}</h2>
+          <h2>{{order.price}}</h2>
+        </div>
+      </div>
+
+</ion-content>
+
+</ion-view>

@@ -189,6 +189,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $state.go("preapp.settings")
   }
 
+  $scope.goMyOrders = function() {
+    $state.go("preapp.myorders");
+  }
+  
   $scope.toMeal = function(mealCurrent) {
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal)
@@ -397,6 +401,44 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.toOrder = function() {
     console.log("in to order, price = " + $scope.meal.price);
+
+    //POST data to /makeTransaction
+    //......
+
+    //POST data to save for myorders
+    $http({
+          method: 'POST',
+          url: APIServer.url() + '/saveOrder',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+
+          data:  {
+            orderName: $scope.meal.title,
+            mealUsername: $scope.meal.userName,
+            orderDate: $scope.meal.deadline,
+            pickupDate: $scope.meal.pickup,
+            price: $scope.meal.price,
+            userToken: localStorage.get("userToken")
+          }
+            
+          }).then (function(response) {
+
+              $ionicLoading.hide();
+
+              if (response.data.message == "SUCCESS") {
+                console.log(response);
+                $state.go("preapp.dashboard");
+              } else {
+                  console.log(response.data);
+                  alert("Error: " + response.data.reason.message);
+                }
+          });
 
   }
 })
