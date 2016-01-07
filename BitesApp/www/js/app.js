@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.service.push', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services','splash.controllers'])
 
-.run(function($ionicPlatform, localStorage) {
+.run(function($ionicPlatform, $ionicPush, localStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -34,9 +34,7 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
       }
     });
 
-    push.register(function(token) {
-      console.log("Device token:", token.token);
-    });
+    $ionicPush.register();
   });
 
 })
