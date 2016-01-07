@@ -297,7 +297,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       var notification = {
         //"user_ids": ["568b81139fee5b1100ad1acb"],
         "tokens": [localStorage.get("token")],
-        "production": false,
         "notification": {
           "alert": "Hello World!",
           "scheduled": new Date() + 10000,
@@ -327,7 +326,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     var dataString = JSON.stringify(notification);
 
     // Here's our App's PRIVATE API KEY, must be encoded for Authroization
-    var encodedAPIKey = btoa("0855bb2ee64bd357b02fe4be9dab13849a0ef847389961be");
+    var encodedAPIKey = btoa("0855bb2ee64bd357b02fe4be9dab13849a0ef847389961be" + ":");
 
     var config = {
       headers: {
