@@ -312,6 +312,11 @@ if ($scope.freezebuttons == false) {
   $scope.saveCreditCard = function () {
     console.log($scope.data.cardNumber);
 
+
+ $ionicLoading.show({
+      template: 'Sending info to server'
+    });
+
     $http({
           method: 'POST',
           url: APIServer.url() + '/saveCreditCard',
@@ -333,8 +338,17 @@ if ($scope.freezebuttons == false) {
           }
             
           }).then (function (response) {
+
+             $ionicLoading.hide();
+
+            if (response.data.message == "SUCCESS") {
             console.log(response);
             $state.go("preapp.settings");
+          }
+          else {
+            console.log(response.data);
+            alert("Error: " + response.data.reason.message);
+          }
           });
   }
   
@@ -400,8 +414,9 @@ if ($scope.freezebuttons == false) {
                 }
                   
                 }).then (function (response) {
-                  console.log(response);
-                  $state.go("preapp.settings");
+                  alert("Succesfully connected with stripe");
+                  $state.go("preapp.settings",{},{reload:true});
+
                 });
 
               //localStorage.set("stripeAccessToken", accessToken);

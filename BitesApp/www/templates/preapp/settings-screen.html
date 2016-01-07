@@ -38,6 +38,12 @@
     <button ng-show="isChef.checked && !chefStripeConnected " class="button button-full button-balanced" ng-click="linkStripeAccount()" style="width:100%; margin-left:0%; margin-right:0%;">
           Connect Chef Account with Stripe
     </button>
+
+      <label class="item item-input" ng-show="isChef.checked && chefStripeConnected">
+      <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
+      <p style="font-size:18px;">Chef account has been connected to Stripe</p>
+    </label>
+
 </div>
 
 <div>

@@ -235,13 +235,19 @@ module.exports = function(app, options) {
 				  card: {
 				  	//will eventually change this data to be the entered data, for now just use testing card info
 				    "number": req.body.cardNumber,
-				    "exp_month": req.body.cvc,
-				    "exp_year": req.body.exp_month,
-				    "cvc": req.body.exp_year
+				    "exp_month": req.body.exp_month,
+				    "exp_year": req.body.exp_year,
+				    "cvc": req.body.cvc
 				  }
 				}, function(err, token) {
 				  	//once token has been made use that token to create customer object so that card data will be saved for future transactions
 				  	
+				  	if (err) {
+				  		res.json({message:"FAIL",reason:err});
+				  		//throw err;
+				  	}
+				  	else {
+
 				  	console.log("successfully created token " + token.id);
 				  	
 				  	//create the Customer object
@@ -249,6 +255,11 @@ module.exports = function(app, options) {
 					  description: 'Customer for test@example.com',
 					  source: token.id // obtained with Stripe.js
 					}, function(err, customer) {
+
+						if (err) {
+							res.json({message:"FAIL",reason:err});
+							//throw err;
+						}
 					  
 					  //Customer has been created, save the Customer id to the user info in database
 					  console.log("successfully created customer " + customer.id);
@@ -259,8 +270,10 @@ module.exports = function(app, options) {
 
 					  User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
 			            if (err) {
-			                return done(err);
+			            	res.json({message:"FAIL",reason:err});
+			               // return done(err);
 			            }
+			            else {
 			            
 			            if (user) {
 			            	console.log("user.email" + user.email);
@@ -269,12 +282,16 @@ module.exports = function(app, options) {
 			                user.creditCardLastFourDigits = lastFour;
 			                user.save(function(err) {
 				                if (err){
+				                	res.json({message:"FAIL",reason:err});
 				                    console.log('Error')
 				                } else {
+				                	res.json({message:"SUCCESS"});
 				                    console.log('Sucess')
 				                }
 				            });
 			            } 
+
+			        }
 
 			           	}); 
 
@@ -282,6 +299,7 @@ module.exports = function(app, options) {
 					  return customerID;
 					});
 
+	}
 
 				});
 				//return customerID;
