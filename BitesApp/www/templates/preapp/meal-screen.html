@@ -21,7 +21,7 @@
             <p>By {{meal.userName}}</p>
 
             <!-- Might want to change this styling in the future -->
-            <h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
+            <h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
                 
             <div class="buttons" style="float: right;">
                 <button class="button button-icon  ion-location" style="font-size: .9em; margin-right: -10px;"> {{formatMealLocation(meal.mealLocation)}}</button>
@@ -75,22 +75,26 @@
             <script type="text/ng-template" id="about.html">
                 <div id="about">
                     <div class="row">
-                        <p style="font-size: 1.1em;" class="col button-icon ion-location"> Location: </p>
-                        <p style="font-size: 1.1em; margin-right: -10px;; float: right" class="col"> {{meal.mealLocation}} </p>
+                        <p style="font-size: 1em; color: green;" class="col-7 button-icon ion-location"></p>
+                        <p style="color: grey; font-size: 1em;" class="col-33">Location:</p>
+                        <p style="font-size: 1em; margin-right: -10px; text-align: right" class="col-60"> {{meal.mealLocation}} </p>
                     </div>
                     <div class="row">
-                        <p style="font-size: 1.1em;" class="col button-icon ion-android-alarm-clock"> Order By: </p>
-                        <p style="font-size: 1.1em; float: right;" class="col"> {{meal.deadline | amCalendar}} </p>
-                    </div>
-
-                    <div class="row">
-                        <p style="font-size: 1.1em;" class="col button-icon ion-clock"> Pickup Time: </p>
-                        <p style="font-size: 1.1em; float: right" class="col">{{meal.pickup | amCalendar}}</p>
+                        <p style="font-size: 1em; color: green;" class="col-7 button-icon ion-android-alarm-clock"></p> 
+                        <p style="color: grey; font-size: 1em;" class="col-33">Order By:</p>
+                        <p style="font-size: 1em; margin-right: -10px; text-align: right" class="col-60">{{meal.deadline | amCalendar}} </p>
                     </div>
 
                     <div class="row">
-                        <p style="font-size: 1.1em;" class="col button-icon ion-fork"> Max Order: </p>
-                        <p style="font-size: 1.1em; float: right" class="col"> {{meal.maxOrder}} People</p>
+                        <p style="font-size: 1em; color: green;" class="col-7 button-icon ion-clock"></p>
+                        <p style="color: grey; font-size: 1em;" class="col-40">Pickup Time:</p>
+                        <p style="font-size: 1em; display: block; float: right" class="col-53">{{meal.pickup | amCalendar}}</p>
+                    </div>
+
+                    <div class="row">
+                        <p style="font-size: 1em; color: green;" class="col-7 button-icon ion-fork"></p>
+                        <p style="color: grey; font-size: 1em;" class="col-33">Orders:</p>
+                        <p style="font-size: 1em; display: inline-block; text-align: right;" class="col-20 col-offset-40"> {{meal.maxOrder}} People</p>
                     </div>
                 </div>
             </script>

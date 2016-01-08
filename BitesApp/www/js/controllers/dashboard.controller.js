@@ -9,7 +9,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -106,23 +106,38 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
   $scope.deleteMeal = function(oid) {
-    $http({
-      method: 'POST',
-      url: APIServer.url() + '/meals/delete/' + oid,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-
-      
-      // I have no idea if this is necessary
-      transformRequest: function(obj) {
-        var str = [];
-        for(var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-        return str.join("&");
+    var confirmPopup = $ionicPopup.confirm({
+       title: 'Are you sure?',
+       template: 'Are you sure you want to delete the Meal?'
+     });
+     confirmPopup.then(function(res) {
+      if(res) {
+        $http({
+          method: 'POST',
+          url: APIServer.url() + '/meals/delete/' + oid,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    
+            
+            // I have no idea if this is necessary
+            transformRequest: function(obj) {
+              var str = [];
+              for(var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              return str.join("&");
+            }
+          }).then(function (response) {
+              var myPopup = $ionicPopup.show({
+                title: "Meal Deleted",
+                scope: $scope
+              });
+          
+              $timeout(function() {
+                myPopup.close(); 
+              }, 1250);
+              $state.go($state.current, {}, {reload: true});
+        })
       }
-    }).then(function (response) {
-        alert("Meal Deleted");
-        $state.go($state.current, {}, {reload: true});
-    })
+    });
   }
 
   $scope.calculateRatingStars = function(rating) {
@@ -382,7 +397,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       }
 
     }).then(function (response) {
-        alert("Rating Submitted");
+      var myPopup = $ionicPopup.show({
+        title: "Rating Submitted",
+        scope: $scope
+      });
+  
+      $timeout(function() {
+        myPopup.close(); 
+      }, 1250);     
     })
   }
   // Setting the rating variables

@@ -7,7 +7,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
 
 
-.controller('LoginCtrl', function($scope, $window, $ionicPush, $location, $http, APIServer, $state, localStorage) {
+.controller('LoginCtrl', function($scope, $window, $ionicPush, $location, $http, APIServer, $state, localStorage, $timeout, $ionicPopup) {
    $scope.data = {};
 
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -73,7 +73,16 @@ angular.module('login.controllers', ['ionic-ratings'])
           console.log(response.data);
 
           if (response.data.accessToken) {
-            alert("Login Successful!!!!");
+            var myPopup = $ionicPopup.show({
+              template: "<h2>Welcome to Bites!</h2>",
+              title: "Login Successful!!!",
+              scope: $scope
+            });
+
+            $timeout(function() {
+              myPopup.close(); //close the popup after 3 seconds for some reason
+            }, 1000);
+
             localStorage.set("loggedIn",true);
             localStorage.set("userToken", response.data.accessToken);
             // kick off the platform web client
@@ -110,10 +119,25 @@ angular.module('login.controllers', ['ionic-ratings'])
   }
 
   else if ($scope.data.agreedToTerms == false || typeof $scope.data.agreedToTerms == "undefined") {
-    alert("Must Agree to Terms of Service");
+    var myPopup = $ionicPopup.show({
+      title: "Must Agree to Terms of Service",
+      scope: $scope
+    });
+
+    $timeout(function() {
+      myPopup.close(); 
+    }, 1250);
+
   }
   else {
-    alert("Passwords don't match!")
+    var myPopup = $ionicPopup.show({
+      title: "Passwords don't match!",
+      scope: $scope
+    });
+
+    $timeout(function() {
+      myPopup.close(); 
+    }, 1250);
   }
 }
   //adjust form stuff
@@ -151,7 +175,15 @@ angular.module('login.controllers', ['ionic-ratings'])
         console.log(response.data);
 
          if (response.data.accessToken) {
-          alert("Login Successful!!!!");
+            var myPopup = $ionicPopup.show({
+              template: "<h2>Welcome to Bites!</h2>",
+              title: "Login Successful!!!",
+              scope: $scope
+            });
+
+            $timeout(function() {
+              myPopup.close(); //close the popup after 3 seconds for some reason
+            }, 1000);
           localStorage.set("userToken", response.data.accessToken);
           localStorage.set("loggedIn",true);
           $state.go("preapp.dashboard");
