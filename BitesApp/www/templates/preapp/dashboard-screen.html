@@ -48,7 +48,7 @@
 	    		<p class="chefDash" ng-click="goChef(meal.userOID)">By {{meal.userName}}</p>
 
 	    		<!-- Might want to change this styling in the future -->
-	    		<h2 style="font-size: 2em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
+	    		<h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{meal.price}}</h2>
 	    		
 	    		<div class="buttons" style= "float: right;">
 	    			<button class="button button-icon  ion-location" style="font-size: .9em; margin-right: -10px;"> {{formatMealLocation(meal.mealLocation)}}</button>
@@ -60,7 +60,7 @@
 	   		</div>
 
 	    	<div class="item item-image" style="margin-top: -15px;">
-	      		<img ng-click="pushNotification()" src="{{meal.photo}}">
+	      		<img src="{{meal.photo}}">
 	    	</div>
 	    	
 	    	<div class="item item-divider">

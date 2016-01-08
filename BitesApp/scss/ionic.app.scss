@@ -42,32 +42,68 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
    	background-color: white;
   }
 
-.left {
-    color: #000;
+@media screen and (max-width: 320px) {
+  .left {
+      color: #000;
+      display: inline-block; 
+      float: left;
+      text-align: center;
+      padding-bottom: 2px;
+  }
+  
+  .left-active {
+    border-bottom: thick solid #33cd5f;
     display: inline-block; 
     float: left;
-    margin-left: 5px;
-}
-
-.left-active {
-  border-bottom: thick solid #33cd5f;
-  display: inline-block; 
-  float: left;
-  margin-left: 5px;
-}
-
-.right-active {
-  border-bottom: thick solid #33cd5f;
-  display: inline-block; 
-  float: right;
-  margin-right: 5px;
-}
-
-.right {
-    color: #000;
+    text-align: center;
+    padding-bottom: 2px;
+  }
+  
+  .right-active {
+    border-bottom: thick solid #33cd5f;
     display: inline-block; 
     float: right;
-    margin-right: 5px;
+    text-align: center;
+    padding-bottom: 2px;
+  }
+  
+  .right {
+      color: #000;
+      display: inline-block; 
+      float: right;
+      text-align: center;
+      padding-bottom: 2px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  .left {
+      color: #000;
+      display: inline-block; 
+      float: left;
+      text-align: center;
+  }
+  
+  .left-active {
+    border-bottom: thick solid #33cd5f;
+    display: inline-block; 
+    float: left;
+    text-align: center;
+  }
+  
+  .right-active {
+    border-bottom: thick solid #33cd5f;
+    display: inline-block; 
+    float: right;
+    text-align: center;
+  }
+  
+  .right {
+      color: #000;
+      display: inline-block; 
+      float: right;
+      text-align: center;
+  }
 }
 
 .rate {
@@ -142,3 +178,4 @@ ul.rating li i {
   max-width:100%;
   max-height:100%;
 }
+

@@ -225,7 +225,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }];
 
   $scope.chefTabs = [{
-    title: 'Currently Cooking',
+    title: 'Now Cooking',
     url: 'current.html',
     style: 'left-active'
   }, {

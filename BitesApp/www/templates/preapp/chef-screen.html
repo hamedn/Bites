@@ -22,13 +22,9 @@
             </div>
 
             <div class="item">
-                <div id="chefTabs">
-                    <div ng-repeat="tab in chefTabs" ng-class="tab.style" ng-click="onClickChefTab(tab)">
-                        <div class="row">
-                            <div class="col">
-                                <h2 style="padding: 1px;font-size: 1em;margin-bottom: -2px;">{{tab.title}}</h2>
-                            </div>
-                        </div>
+                <div id="chefTabs" class="row">
+                    <div ng-repeat="tab in chefTabs" class="col" ng-class="tab.style" ng-click="onClickChefTab(tab)">
+                        <h2 style="padding-bottom: 4px;">{{tab.title}}</h2>
                     </div>
                 </div>
             </div>
