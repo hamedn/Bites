@@ -201,7 +201,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
 
     url = APIServer.url() + '/auth/facebook';
-        loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+        loginWindow = $window.open(url, '_blank', 'location=yes,toolbar=yes,hidden=no');
 
         loginWindow.addEventListener('loadstart', function (event) {
           hasToken = event.url.indexOf('?oauth_token=');
@@ -225,7 +225,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
     url = APIServer.url() + '/auth/facebook';
     console.log(url);
-        loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+        loginWindow = $window.open(url, '_blank', 'location=yes,toolbar=yes,hidden=no');
 
         loginWindow.addEventListener('loadstart', function (event) {
 

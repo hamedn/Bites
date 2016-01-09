@@ -264,6 +264,9 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       tab.style = 'right-active';
       $scope.chefTabs[0].style = 'left';
     }
+
+                      $scope.$apply();
+
   }
 
   $scope.onClickTab = function(tab) {
@@ -277,6 +280,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       tab.style = 'right-active';
       $scope.tabs[0].style = 'left';
     }
+
+
+$ionicScrollDelegate.$getByHandle("scrollArea").resize();
+              $scope.$apply();
+
   }
 
   $scope.isActiveTab = function(tabUrl) {
