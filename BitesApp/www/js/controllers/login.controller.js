@@ -73,7 +73,10 @@ angular.module('login.controllers', ['ionic-ratings'])
           console.log(response.data);
 
           if (response.data.accessToken) {
-            var myPopup = $ionicPopup.show({
+           
+
+           
+           var myPopup = $ionicPopup.show({
               template: "<h2>Welcome to Bites!</h2>",
               title: "Login Successful!!!",
               scope: $scope
@@ -175,6 +178,10 @@ angular.module('login.controllers', ['ionic-ratings'])
         console.log(response.data);
 
          if (response.data.accessToken) {
+
+
+          /*
+          Popup should only happen the first time, after that it become unprofessional. 
             var myPopup = $ionicPopup.show({
               template: "<h2>Welcome to Bites!</h2>",
               title: "Login Successful!!!",
@@ -183,7 +190,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
             $timeout(function() {
               myPopup.close(); //close the popup after 3 seconds for some reason
-            }, 1000);
+            }, 1000);*/
           localStorage.set("userToken", response.data.accessToken);
           localStorage.set("loggedIn",true);
           $state.go("preapp.dashboard");
