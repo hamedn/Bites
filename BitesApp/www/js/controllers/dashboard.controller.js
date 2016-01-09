@@ -9,7 +9,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -266,6 +266,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     }
 
                       $scope.$apply();
+                      $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
 
   }
 
@@ -281,9 +282,9 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       $scope.tabs[0].style = 'left';
     }
 
-
-$ionicScrollDelegate.$getByHandle("scrollArea").resize();
-              $scope.$apply();
+    console.log("adjut scroll");
+    $scope.$apply();
+    $ionicScrollDelegate.$getByHandle("scrollArea").resize();
 
   }
 
