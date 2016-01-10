@@ -155,35 +155,53 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
                       '_id': { $in: mealList}
                   }, function(err, docs){
                        finalScore = 0;
-                       for ( i = 0; i < docs.length; i++) {
-                        finalScore += docs[i].rating;
-                        var meal = docs[i];
-                        meal.profilePicture = user.profilePicture;
+                        noreviews = 0;
 
-                       meal.save(function(err) {
-                      if (err)
-                        throw err;
-                      else {
-                        
+                       for ( i = 0; i < docs.length; i++) {
+
+                        if (docs[i].rating != -5) {
+                        finalScore += docs[i].rating;
+
 
                       }
-                    });
+                      else {
+                        noreviews++;
+                      }
 
+                    
+
+                    var meal = docs[i];
+                        meal.profilePicture = user.profilePicture;
+
+
+                           meal.save(function(err) {
+                            if (err)
+                              throw err;
+                            else {
+                              
+
+                            }
+                          });
+
+                           
 
                        }
 
 
-                       user.rating = finalScore/(docs.length);
+
+                       if ((docs.length - noreviews) > 0) {
+                       user.rating = finalScore/(docs.length - noreviews);
 
 
                        user.save(function(err) {
                       if (err)
                         throw err;
                       else {
-                        console.log({"rating":(finalScore/(docs.length))})
+                        console.log({"rating":(finalScore/(docs.length-noreviews))})
 
                       }
                     })
+                     }
 
                   })
                 }

@@ -345,7 +345,7 @@ module.exports = function(app, options) {
 				stripe.charges.create({
 				  amount: payment,
 				  currency: 'usd',
-				  source: {source},
+				  source: source,
 				  application_fee: fee
 				}, {stripe_account: receiver},
 				  function(err, charge) {
