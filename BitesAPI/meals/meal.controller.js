@@ -153,7 +153,42 @@ router.post('/delete/:oid', function(req, res, next) {
 		if (err) {
 			throw err;
 		} else {
-			res.json({message:"meal successfully deleted"});
+
+			useroid = meal.userOID;
+			var oid = new mongo.ObjectID(useroid);
+
+			User.findOne({'_id': oid}, function(err, user) {
+				if (err)
+					throw err;
+				if (user != null) {
+
+					search_term = {"$oid":req.params.oid};
+
+					for (var i=user.mealArray.length-1; i>=0; i--) {
+					    if (user.mealArray[i] == search_term) {
+					        user.mealArray.splice(i, 1);
+					        console.log("found and removed meal");
+					    }
+					}
+
+					user.save(function(err) {
+						if (err)
+							throw err;
+						else {
+							res.json({message:"meal successfully deleted"});
+
+
+						}
+					})
+
+
+
+				}
+				else {
+					console.log("USER IS NULL!!!!");
+				}
+			});
+
 		}
 
 	});
