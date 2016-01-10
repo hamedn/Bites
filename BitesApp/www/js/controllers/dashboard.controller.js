@@ -324,6 +324,17 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   }
 
+  $scope.formatPrice = function(price) {
+    console.log(price);
+    if (price % 1 == 0) {
+      return price + ".00";
+    } else if ((price*10) % 1 == 0) {
+      return price + "0";
+    } else {
+      return price;
+    }
+  }
+
   $scope.pushNotification = function() {
       console.log(localStorage.get("token"));
       var notification = {
