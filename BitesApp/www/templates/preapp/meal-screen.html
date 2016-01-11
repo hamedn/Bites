@@ -76,27 +76,26 @@
                 <div id="about">
                     <div class="row">
                         
-                        <p style="font-size: 1em; color: green;" class="col-center button-icon ion-location"></p>
-                        <p style="color: grey; font-size: 1em;" class="col-center">Location:</p>
+                        <p style="margin-left: 3px; font-size: 1em; color: green;" class="col button-icon ion-location"><span style="color: grey; margin-left: 2px; font-size: 1em;">  Location:</span></p>
                         
                         <p style="font-size: 1em; text-align: right; float: right;" class="col"> {{meal.mealLocation}} </p>
                     </div>
                     <div class="row">
-                        <p style="font-size: 1em; color: green;" class="col-center button-icon ion-android-alarm-clock"></p> 
-                        <p style="color: grey; font-size: 1em;" class="col-center">Order By:</p>
-                        <p style="font-size: 1em; text-align: right" class="col">{{meal.deadline | amCalendar}} </p>
+                        <p style="font-size: 1em; color: green;" class="col button-icon ion-android-alarm-clock"><span style="color: grey; font-size: 1em;">  Order By:</span></p> 
+
+                        <p style="font-size: 1em; text-align: right; float: right;" class="col">{{meal.deadline | amCalendar}} </p>
                     </div>
 
                     <div class="row">
-                        <p style="font-size: 1em; color: green;" class="col-center button-icon ion-clock"></p>
-                        <p style="color: grey; font-size: 1em;" class="col-center">Pickup Time:</p>
-                        <p style="font-size: 1em; text-align: right" class="col">{{meal.pickup | amCalendar}}</p>
+                        <p style="font-size: 1em; color: green;" class="col button-icon ion-clock"><span style="color: grey; font-size: 1em;">  Pickup Time:</span></p>
+
+                        <p style="font-size: 1em; text-align: right; float: right;" class="col">{{meal.pickup | amCalendar}}</p>
                     </div>
 
                     <div class="row">
-                        <p style="font-size: 1em; color: green;" class="col-center button-icon ion-fork"></p>
-                        <p style="color: grey; font-size: 1em;" class="col-center">Orders:</p>
-                        <p style="font-size: 1em; display: inline-block; text-align: right;" class="col"> {{meal.maxOrder}} People</p>
+                        <p style="margin-left: 3px; font-size: 1em; color: green;" class="col button-icon ion-fork"><span style="margin-left: 5px; color: grey; font-size: 1em;">  Orders:</span></p>
+
+                        <p style="font-size: 1em; text-align: right; float: right;" class="col"> {{meal.maxOrder}} People</p>
                     </div>
                 </div>
             </script>
