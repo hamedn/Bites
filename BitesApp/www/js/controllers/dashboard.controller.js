@@ -273,8 +273,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       $scope.chefTabs[0].style = 'left';
     }
 
-                      $scope.$apply();
-                      $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+       $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
 
   }
 
@@ -291,7 +290,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     }
 
     console.log("adjut scroll");
-    $scope.$apply();
     $ionicScrollDelegate.$getByHandle("scrollArea").resize();
 
   }
