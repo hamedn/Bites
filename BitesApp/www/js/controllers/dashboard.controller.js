@@ -59,7 +59,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
     req.then(function(result) {  // this is only run after $http completes
       var meals = result.data;
-      for (i = 0; i < meals.length; i++) {
+      for (i = meals.length-1; i >= 0; i--) {
         var individualMeal = meals[i];
         if (individualMeal.photo) {
           individualMeal.photo = APIServer.url() +"/"+individualMeal.photo;
@@ -67,7 +67,20 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
         else {
           individualMeal.photo = "img/foodcard.jpg";
         }
+
+         var fixedDate = new Date(individualMeal.pickup);
+        var now = new Date();
+
+          var timeDif = fixedDate - now;
+
+          if (timeDif <= 0 ) {
+            meals.splice(i,1)
+
+          }
       }
+
+
+     
 
        $scope.meals = meals;
        //console.log(result.data);

@@ -21,95 +21,6 @@ function randomString(length, chars) {
     return result;
 };
 
-router.post('/', function(req, res, next) {
-
-
-	var mealTitle = req.body.title;
-	var mealPrice = req.body.price;
-	var mealDesc = req.body.description;
-	var mealDate = req.body.mealDate;
-	var mealDeadline = req.body.orderDeadline;
-	var mealPickup = req.body.pickup;
-	var mealMaxOrder = req.body.maxOrder;
-	var mealNumOrder = req.body.numOrder;
-	var mealLocation = req.body.mealLocation;
-	var mealIngredients = req.body.ingredients;
-	var mealName = req.body.name;
-	var mealPicture = req.body.picture;
-	var mealCharId = randomString(64, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'); 
-	
-	var meal = new Meal();
-	meal.title = mealTitle;
-	meal.price = mealPrice;
-	meal.charId = mealCharId;
-	meal.description = mealDesc;
-	meal.deadline = mealDeadline;
-	meal.pickup = mealPickup;
-	meal.maxOrder = mealMaxOrder;
-	meal.mealLocation = mealLocation;
-	meal.ingredients = mealIngredients;
-	meal.chefName = mealName;
-	meal.picture = mealPicture;
-	meal.charId = mealCharId;
-	meal.rating = -5;
-	meal.ratingCount = 0;
-	meal.ratingArr = [];
-	meal.userOID = req.body.userOID;
-	meal.userName = req.body.userName;
-
-	/*
-	meal.deadline = mealDeadline;
-	meal.pickup = mealPickup;
-	meal.maxOrder = mealMaxOrder;
-	meal.location = mealLocation;
-	meal.ingredients = mealIngredients;
-	meal.name = mealName;
-	*/
-
-
-var o_id = new mongo.ObjectID(req.body.userOID);
-
-	User.findOne({'_id': o_id}, function(err, user) {
-				if (err)
-					throw err;
-				console.log(user);
-				user.mealArray.push(meal._id)
-
-				user.save(function(err) {
-					if (err)
-						throw err;
-					else {
-
-						meal.profilePicture = user.profilePicture
-
-
-
-							meal.save(function(err) {
-						    if (err)
-						        throw err;
-						    else {
-								res.json({message:"meal post successful",id:meal._id,data:req.body});
-										
-						    }
-						});
-
-
-
-					}
-				})
-
-			});
-
-
-
-
-
-
-
-
-	
-
-});
 
 router.post('/rating', function(req, res, next) {
 	var indivRate = parseInt(req.body.rating);
@@ -329,5 +240,108 @@ console.log("THIS IS DA ID" + req.params.oid)
 
 
 module.exports = function(app) {
+
+var env = app.get('env');
+var cred = require("../credentials");
+
+router.post('/', function(req, res, next) {
+
+
+	var mealTitle = req.body.title;
+	var mealPrice = req.body.price;
+	var mealDesc = req.body.description;
+	var mealDate = req.body.mealDate;
+	var mealDeadline = req.body.orderDeadline;
+	var mealPickup = req.body.pickup;
+	var mealMaxOrder = req.body.maxOrder;
+	var mealNumOrder = req.body.numOrder;
+	var mealLocation = req.body.mealLocation;
+	var mealIngredients = req.body.ingredients;
+	var mealName = req.body.name;
+	var mealPicture = req.body.picture;
+	var mealCharId = randomString(64, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'); 
+	
+	var meal = new Meal();
+	meal.title = mealTitle;
+	meal.price = mealPrice;
+	meal.charId = mealCharId;
+	meal.description = mealDesc;
+	meal.deadline = mealDeadline;
+	meal.pickup = mealPickup;
+	meal.maxOrder = mealMaxOrder;
+	meal.mealLocation = mealLocation;
+	meal.ingredients = mealIngredients;
+	meal.chefName = mealName;
+	meal.picture = mealPicture;
+	meal.charId = mealCharId;
+	meal.rating = -5;
+	meal.ratingCount = 0;
+	meal.ratingArr = [];
+	meal.userOID = req.body.userOID;
+	meal.userName = req.body.userName;
+
+
+
+	meal.photo = cred.location[env] + "defaultmeal.jpg";
+	/*
+
+
+
+	meal.deadline = mealDeadline;
+	meal.pickup = mealPickup;
+	meal.maxOrder = mealMaxOrder;
+	meal.location = mealLocation;
+	meal.ingredients = mealIngredients;
+	meal.name = mealName;
+	*/
+
+
+var o_id = new mongo.ObjectID(req.body.userOID);
+
+	User.findOne({'_id': o_id}, function(err, user) {
+				if (err)
+					throw err;
+				console.log(user);
+				user.mealArray.push(meal._id)
+
+				user.save(function(err) {
+					if (err)
+						throw err;
+					else {
+
+						meal.profilePicture = user.profilePicture
+
+
+
+							meal.save(function(err) {
+						    if (err)
+						        throw err;
+						    else {
+								res.json({message:"meal post successful",id:meal._id,data:req.body});
+										
+						    }
+						});
+
+
+
+					}
+				})
+
+			});
+
+
+
+
+
+
+
+
+	
+
+});
+
+
+
+
   app.use('/meals', router);
 };
