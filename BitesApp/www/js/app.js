@@ -22,6 +22,7 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
     }
 
     // Parse Code
+/*
     console.log(window);
     window.parsePlugin.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "LJ4EM4k962Qb3gLOVFy1kTHAyhJx7C9FANcnuWQw", function() {
       console.log('Parse initialized successfully.');
@@ -35,15 +36,13 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
             // update the view to show that we have the install ID
             console.log('Retrieved install id: ' + id);
 
-              /**
-               * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
-               * 
+          
                var install_data = {
                   installation_id: id,
                   channels: ['SampleChannel']
                }
                *
-               */
+               
 
           }, function(e) {
             console.log('Failure to retrieve install id.');
@@ -55,7 +54,7 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
 
     }, function(e) {
         console.log('Failure to initialize Parse.');
-    });
+    });*/
 
     // To make this work for dev push notifications
     // run 'ionic config set dev_push true' in terminal
