@@ -149,49 +149,64 @@ router.post('/rating', function(req, res, next) {
 router.post('/delete/:oid', function(req, res, next) {
 	var o_id = new mongo.ObjectID(req.params.oid);
 
-	Meal.remove({'_id': o_id}, function(err, meal) {
-		if (err) {
+
+	Meal.findOne({'_id': o_id}, function(err, meal) {
+		if (err)
 			throw err;
-		} else {
+		if (meal != null) {
+				Meal.remove({'_id': o_id}, function(err, result) {
+					if (err) {
+						throw err;
+					} else {
 
-			useroid = meal.userOID;
-			var oid = new mongo.ObjectID(useroid);
+						useroid = meal.userOID;
+						var oid = new mongo.ObjectID(useroid);
+						console.log("REMOVED MEAL");
+						console.log(meal);
+						User.findOne({'_id': oid}, function(err, user) {
+							if (err)
+								throw err;
+							if (user != null) {
 
-			User.findOne({'_id': oid}, function(err, user) {
-				if (err)
-					throw err;
-				if (user != null) {
+								search_term = new mongo.ObjectID(req.params.oid);
 
-					search_term = {"$oid":req.params.oid};
+								for (var i=user.mealArray.length-1; i>=0; i--) {
 
-					for (var i=user.mealArray.length-1; i>=0; i--) {
-					    if (user.mealArray[i] == search_term) {
-					        user.mealArray.splice(i, 1);
-					        console.log("found and removed meal");
-					    }
+								    if (user.mealArray[i].toString().toUpperCase().trim() == req.params.oid.toString().toUpperCase().trim()) {
+								        user.mealArray.splice(i, 1);
+								        console.log("found and removed meal");
+								    }
+								}
+
+								user.save(function(err) {
+									if (err)
+										throw err;
+									else {
+										res.json({message:"meal successfully deleted"});
+
+
+									}
+								})
+
+
+
+							}
+							else {
+								console.log("USER IS NULL!!!!");
+							}
+						});
+
 					}
 
-					user.save(function(err) {
-						if (err)
-							throw err;
-						else {
-							res.json({message:"meal successfully deleted"});
+				});
 
-
-						}
-					})
-
-
-
-				}
-				else {
-					console.log("USER IS NULL!!!!");
-				}
-			});
 
 		}
-
+	
 	});
+
+
+
 });
 
 router.get('/search/:oid', function(req, res, next) {

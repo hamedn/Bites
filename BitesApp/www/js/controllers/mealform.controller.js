@@ -104,6 +104,9 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         $scope.data.ingredients = null;
        $scope.data.name = null;
 
+$scope.$apply();
+
+
   }
 
 
