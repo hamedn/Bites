@@ -183,6 +183,14 @@ router.post('/uploadPicture', function(req, res, next) {
 */
 
 
+
+
+
+
+module.exports = function(app) {
+
+var env = app.get('env');
+var cred = require("../credentials");
 var multipartMiddleware = multipart();
 router.post('/uploadPicture/:oid', multipartMiddleware, function(req, resp) {
 
@@ -211,7 +219,7 @@ console.log("THIS IS DA ID" + req.params.oid)
 				if (err)
 					throw err;
 
-				meal.photo = destFileName;
+				meal.photo = cred.location[env] + destFileName;
 				meal.save(function(err) {
 					if (err)
 						throw err;
@@ -237,12 +245,6 @@ console.log("THIS IS DA ID" + req.params.oid)
 });
 
 
-
-
-module.exports = function(app) {
-
-var env = app.get('env');
-var cred = require("../credentials");
 
 router.post('/', function(req, res, next) {
 

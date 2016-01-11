@@ -61,12 +61,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       var meals = result.data;
       for (i = meals.length-1; i >= 0; i--) {
         var individualMeal = meals[i];
-        if (individualMeal.photo) {
-          individualMeal.photo = APIServer.url() +"/"+individualMeal.photo;
-        }
-        else {
-          individualMeal.photo = "img/foodcard.jpg";
-        }
+      
 
          var fixedDate = new Date(individualMeal.pickup);
         var now = new Date();
