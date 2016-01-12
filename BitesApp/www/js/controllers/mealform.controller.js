@@ -169,7 +169,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         console.log(response);
         
         if (response.data.id) {
-        if ($scope.photo != null && $scope.photo.length > 1) {
+        if ($scope.photo != null && $scope.photo != "" && $scope.photo.length > 1) {
           $ionicLoading.show({
             template: 'Uploading photo'
           });
