@@ -90,7 +90,6 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
   }
 
   $scope.resetForm = function (){
-    $scope.photo = null;
     $scope.data.mealDate = null;
     $scope.data.pickup = null;
     $scope.data.orderDeadline = null;
@@ -103,11 +102,20 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
        $scope.data.mealLocation = null;
         $scope.data.ingredients = null;
        $scope.data.name = null;
+        $scope.photo = "";
 
-$scope.$apply();
+      $scope.$apply();
 
 
   }
+
+  $scope.getImage = function(src) {
+  if (src !== "") {
+    return src;  
+  } else {
+   return "//:0"; 
+  }
+};
 
 
   $scope.newMeal = function() {
