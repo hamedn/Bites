@@ -218,6 +218,34 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
 
     }
 
+  // Initializing Parse Backend
+  var Parse = require('parse/node');
+  Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", "NASRqPkVWZU7RnKy3mhNQF2QvpZT3ozZWnmnk3XH");
+
+  var query = new Parse.Query(Parse.Installation)
+    , data = {
+        "alert": "A message!", 
+      };
+  
+  
+  Parse.Push.send({
+    where: query,
+    data: data
+    }, {
+      success: function () {
+        console.log("arguments", arguments);
+      },
+      error: function (error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+  });
+
+  //Should send info to Everyone
+  //var meals = Meal.find({}, function(err, meals) {
+  //  if (err)
+  //    throw err;
+  //  
+  //}); 
 
   setInterval(ratingAggregator, 1000 * 60 * 60);
   ratingAggregator();

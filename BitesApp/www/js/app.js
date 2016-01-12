@@ -22,7 +22,7 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
     }
 
     // Parse Code
-    Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "LJ4EM4k962Qb3gLOVFy1kTHAyhJx7C9FANcnuWQw", function() {
+    Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", function() {
       console.log('Parse initialized successfully.');
 
 
