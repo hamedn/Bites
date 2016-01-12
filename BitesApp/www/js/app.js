@@ -125,7 +125,8 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
   .state('preapp.stripescreen', {
     url: '/stripescreen',
     templateUrl: 'templates/preapp/stripe-screen.html',
-    controller: 'SettingsCtrl'
+    controller: 'SettingsCtrl',
+    params: {source: null}
   })
 
   .state('preapp.settings', {

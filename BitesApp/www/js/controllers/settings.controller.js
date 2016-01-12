@@ -19,6 +19,8 @@ $scope.data = {};
 
   $scope.$on('$ionicView.enter', function(e) {
 
+    console.log("state.params.source" + $state.params.source);
+
     var acc = localStorage.get("userToken");
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
@@ -441,7 +443,11 @@ if ($scope.freezebuttons == false) {
   }
 
   $scope.cancelChangeCreditCardInfo = function() {
-    $state.go("preapp.settings");
+    if ($state.params.source == "meal")
+      $state.go("preapp.meal");
+    else
+      $state.go("preapp.settings");
+    
   }
 
 })

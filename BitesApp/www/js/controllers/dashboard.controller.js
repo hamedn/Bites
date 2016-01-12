@@ -468,7 +468,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
        title: 'Confirm Purchase',
        template: 'You will be making a purchase for $' + $scope.meal.price + '.'
      });
-      
+
        confirmPopup.then(function(res) {
          if(res) {
             console.log("accepted");
@@ -525,7 +525,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
       noCardPopup.then(function(res){
         if (res) {
-          $state.go("preapp.stripescreen");
+          console.log("state url" + $stateParams.url);
+          $state.go("preapp.stripescreen", {source: "meal"});
         } 
       });
    }
