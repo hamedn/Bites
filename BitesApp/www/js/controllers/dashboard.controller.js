@@ -20,6 +20,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $scope.pastChefMeals = pastChefMeals.data;
     $scope.yourAccount = currentChefMeals.yourAccount;
     
+    $scope.customerStripeToken = resp.data.stripeCustomerToken;
     $scope.doRefresh();
 
 
@@ -462,45 +463,72 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   $scope.toOrder = function() {
     console.log("in to order, price = " + $scope.meal.price);
 
-    //POST data to /makeTransaction
-    //......
+    if($scope.customerStripeToken) {
+      var confirmPopup = $ionicPopup.confirm({
+       title: 'Confirm Purchase',
+       template: 'You will be making a purchase for $' + $scope.meal.price + '.'
+     });
+      
+       confirmPopup.then(function(res) {
+         if(res) {
+            console.log("accepted");
+            //POST data to /makeTransaction
+            //......
 
-    //POST data to save for myorders
-    $http({
-          method: 'POST',
-          url: APIServer.url() + '/saveOrder',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            //POST data to save for myorders
+            $http({
+                
+              method: 'POST',
+              url: APIServer.url() + '/saveOrder',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-          transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-          },
+              transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+              },
 
-          data:  {
-            orderName: $scope.meal.title,
-            mealUsername: $scope.meal.userName,
-            orderDate: $scope.meal.deadline,
-            pickupDate: $scope.meal.pickup,
-            price: $scope.meal.price,
-            chefName: $scope.meal.userName,
-            description: $scope.meal.description,
-            userToken: localStorage.get("userToken")
-          }
-            
-          }).then (function(response) {
+              data:  {
+                orderName: $scope.meal.title,
+                mealUsername: $scope.meal.userName,
+                orderDate: $scope.meal.deadline,
+                pickupDate: $scope.meal.pickup,
+                price: $scope.meal.price,
+                chefName: $scope.meal.userName,
+                description: $scope.meal.description,
+                userToken: localStorage.get("userToken")
+              }
+                
+              }).then (function(response) {
 
-              $ionicLoading.hide();
+                $ionicLoading.hide();
 
-              if (response.data.message == "SUCCESS") {
-                console.log(response);
-                $state.go("preapp.dashboard");
-              } else {
-                  console.log(response.data);
-                  alert("Error: " + response.data.reason.message);
+                if (response.data.message == "SUCCESS") {
+                  console.log(response);
+                  $state.go("preapp.dashboard");
+                } else {
+                    console.log(response.data);
+                    alert("Error: " + response.data.reason.message);
                 }
-          });
+              });
+
+       } else {
+          console.log("rejected");
+       } 
+     });
+   } else {
+      var noCardPopup = $ionicPopup.confirm({
+       title: 'No Credit Card',
+       template: 'You do not have a credit card on file. Would you like to enter one now?'
+      });
+
+      noCardPopup.then(function(res){
+        if (res) {
+          $state.go("preapp.stripescreen");
+        } 
+      });
+   }
 
   }
 })
