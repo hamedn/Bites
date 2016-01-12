@@ -134,15 +134,23 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
               return str.join("&");
             }
           }).then(function (response) {
-              var myPopup = $ionicPopup.show({
+
+
+               var myPopup = $ionicPopup.show({
                 title: "Meal Deleted",
                 scope: $scope
               });
           
               $timeout(function() {
                 myPopup.close(); 
-              }, 1250);
-              $state.go($state.current, {}, {reload: true});
+                $state.go($state.current, {}, {reload: true});
+
+              }, 2000);
+
+              $scope.getChefMeals();
+
+
+             
         })
       }
     });
@@ -190,7 +198,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   // Placeholder goChef function
   $scope.goChef = function(oid) {
     currentChefMeals.yourAccount = false;
-    if (oid == 'null') {
+    if (oid == 'null' || oid == localStorage.get("oid")) {
       oid = localStorage.get("oid");
       currentChefMeals.yourAccount = true;
     }
