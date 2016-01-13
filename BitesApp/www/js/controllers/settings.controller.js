@@ -30,19 +30,21 @@ $scope.data = {};
       $scope.self = resp.data;
 
       //check if user has any past orders
-      if (resp.data.orders)
+      if (resp.data.orders) {
         $scope.orders = resp.data.orders;
-      else 
+        console.log("getMonth in pickupDate");
+      }
+      else {
         $scope.noOrders = true;
-
-      console.log("getMonth" + orders.pickupDate.getMonth());
+      }
 
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
           //show, "no card on file" and "enter in card details" button
+          console.log("no stripe customer token");
           $scope.savedCard = false;
       } else {
-          //show "current card on file"
+          //show "current card on file: ***"
           $scope.savedCard = true;
           $scope.lastFour = resp.data.creditCardLastFourDigits;
       }
@@ -438,7 +440,7 @@ if ($scope.freezebuttons == false) {
   } 
 
   $scope.changeCreditCardInfo = function() {
-    $state.go("preapp.stripescreen");
+    $state.go("preapp.stripescreen", "settings");
   }
 
   $scope.cancelChangeCreditCardInfo = function() {

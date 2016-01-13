@@ -327,7 +327,7 @@ module.exports = function(app, options) {
 				var receiver = req.body.receiver;
 
 				var fee = 0.03 * payment;
-
+				/*
 				User.findOne({ 'accessToken' :  source }, function(err, user) {
 		            if (err) {
 		                return done(err);
@@ -338,15 +338,24 @@ module.exports = function(app, options) {
 		            } 
 
 		        });
-
+	*/
 				stripe.charges.create({
 				  amount: payment,
 				  currency: 'usd',
-				  source: source,
+				  customer: source,
+				  destination: receiver,
+				  description: "Purchase with Bites",
 				  application_fee: fee
-				}, {stripe_account: receiver},
+				},
 				  function(err, charge) {
 				    // check for `err`
+				    if (err) {
+				    	console.log("error making transaction" + err);
+				    	return err;
+				    } else {
+				    	console.log("made transaction");
+				    	return res.json({message: "SUCCESS"});
+				    };
 				    // do something with `charge`
 				  });
 			});
@@ -371,7 +380,7 @@ module.exports = function(app, options) {
 			                    return res.json({message:"Error " + err});
 			                } else {
 			                	return res.json({message:"SUCCESS"});
-			                    console.log('Sucess');
+			                    console.log('Success');
 			                }
 			            });
 		            } 

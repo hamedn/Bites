@@ -120,11 +120,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
-    /*
+    
     $ionicLoading.show({
       template: 'Posting meal data'
     });
-    */
+    
 
     var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
                $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
@@ -152,11 +152,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
             
     }).then (function (response) {
 
-            //$ionicLoading.hide();
             console.log("response" + response);
 
             if (response.data.message == "SUCCESS") {
-                console.log(response);
+                console.log("response chefToken " + response.data.chefToken);
+                chefToken = response.data.chefToken;
                 
                 $http({
                   method: 'POST',
@@ -185,7 +185,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                     ingredients: $scope.data.ingredients,
                     name: $scope.data.name,
                     userOID: localStorage.get("oid"),
-                    userName: localStorage.get("name") 
+                    userName: localStorage.get("name") ,
+                    chefToken: chefToken
                   }
                 }).then(function (response) {
                     $ionicLoading.hide();
@@ -196,17 +197,12 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                       $ionicLoading.show({
                         template: 'Uploading photo'
                       });
-                    
-
-
 
                     $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
                       alert("Meal successfully posted");
                       $scope.resetForm();
                       $ionicLoading.hide();
                        $state.go("preapp.dashboard");
-
-
 
                     }, function(err) {
                       $ionicLoading.hide();
@@ -228,8 +224,6 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                   else {
                     alert("Server error. Could not load meal id.");
                   }
-
-
 
                 })
 

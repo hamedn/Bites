@@ -9,7 +9,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $ionicLoading, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -20,7 +20,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     $scope.pastChefMeals = pastChefMeals.data;
     $scope.yourAccount = currentChefMeals.yourAccount;
     
-    $scope.customerStripeToken = resp.data.stripeCustomerToken;
+    //$scope.customerStripeToken = resp.data.stripeCustomerToken;
+    //console.log("scope stripeCustomerToken " + resp.data.stripeCustomerToken);
     $scope.doRefresh();
 
 
@@ -37,7 +38,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       localStorage.set("oid",resp.data._id);
       localStorage.set("name",resp.data.name);
       localStorage.set("isChef",resp.data.isChef);
-
+      localStorage.set("stripeCustomerToken", resp.data.stripeCustomerToken);
     });
 
   })
@@ -222,7 +223,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   // Settings goSettings function
   $scope.goSettings = function() {
-    $state.go("preapp.settings")
+    $state.go("preapp.settings");
   }
 
   $scope.goMyOrders = function() {
@@ -462,8 +463,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.toOrder = function() {
     console.log("in to order, price = " + $scope.meal.price);
-
-    if($scope.customerStripeToken) {
+    
+    if(localStorage.get("stripeCustomerToken")) {
         
         var confirmPopup = $ionicPopup.confirm({
           title: 'Confirm Purchase',
@@ -474,6 +475,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
          if(res) {
             console.log("accepted");
             
+            $ionicLoading.show({
+              template: 'Making transaction'
+            });
+
             //POST data to /makeTransaction
             $http({ 
               method: 'POST',
@@ -489,8 +494,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
               data:  {
                 //data to make transaction
-                payment: $scope.meal.price,
-                source: localStorage.get("userToken"),
+                transAmount: $scope.meal.price,
+                source: localStorage.get("stripeCustomerToken"),
                 receiver: $scope.meal.chefToken
               }
                 
@@ -499,7 +504,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                 $ionicLoading.hide();
 
                 if (response.data.message == "SUCCESS") {
-                  console.log(response);
+                  console.log("success");
                   var chefToken = response.data.chefToken;
                   //POST data to save for myorders
                   $http({
@@ -532,7 +537,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                       $ionicLoading.hide();
 
                       if (response.data.message == "SUCCESS") {
-                        console.log(response);
+                        console.log("added order to my orders");
                         $state.go("preapp.dashboard");
                       } else {
                           console.log(response.data);
@@ -542,12 +547,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
                 } else {
+                    $ionicLoading.hide();
                     console.log(response.data);
                     alert("Error: " + response.data.reason.message);
                 }
               });
 
        } else {
+          $ionicLoading.hide();
           console.log("rejected");
        } 
      });

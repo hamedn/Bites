@@ -8,7 +8,8 @@ var orderSchema = new Schema({
 	pickupDate: Date,
 	chefName: String,
 	description: String,
-	price: String
+	price: String,
+	photo:String
 });
 
 var userSchema = new Schema({
