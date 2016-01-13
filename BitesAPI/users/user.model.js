@@ -9,7 +9,8 @@ var orderSchema = new Schema({
 	chefName: String,
 	description: String,
 	price: String,
-	photo:String
+	photo:String,
+	mealId: String
 });
 
 var userSchema = new Schema({

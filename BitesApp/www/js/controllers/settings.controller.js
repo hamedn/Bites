@@ -11,16 +11,29 @@ $scope.chefStripeConnected = false;
 $scope.isChef = {checked:true};
 $scope.savedCard = false;
 $scope.noOrders = false;
+$scope.showCurrentOrders = true;
+$scope.currentOrders = [];
+$scope.pastOrders = [];
 $scope.lastFour = "";
 $scope.orders = {};
 $scope.data = {};
+
+$scope.chefTabs = [{
+  title: 'Current Orders',
+  url: 'current.html',
+  style: 'left-active'
+}, {
+  title: 'Past Orders',
+  url: 'past.html',
+  style: 'right'
+}];
 
 
 
   $scope.$on('$ionicView.enter', function(e) {
 
-    console.log("state.params.source" + $state.params.source);
-
+    $scope.currentOrders = [];
+    $scope.pastOrders = [];
     var acc = localStorage.get("userToken");
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
@@ -30,9 +43,9 @@ $scope.data = {};
       $scope.self = resp.data;
 
       //check if user has any past orders
-      if (resp.data.orders) {
+      if (resp.data.orders && resp.data.orders.length > 0) {
         $scope.orders = resp.data.orders;
-        console.log("getMonth in pickupDate");
+        $scope.findPastAndPresentOrders();
       }
       else {
         $scope.noOrders = true;
@@ -41,7 +54,6 @@ $scope.data = {};
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
           //show, "no card on file" and "enter in card details" button
-          console.log("no stripe customer token");
           $scope.savedCard = false;
       } else {
           //show "current card on file: ***"
@@ -451,6 +463,62 @@ if ($scope.freezebuttons == false) {
     else
       $state.go("preapp.settings");
     
+  }
+
+  $scope.findPastAndPresentOrders = function() {
+    /*
+      console.log("finding past and present orders");
+      var currentDate = new Date();
+      console.log("currentDate: " + currentDate + " " + $scope.orders[0].pickupDate);
+      for (var order in $scope.orders) {
+        //if (order.pickupDate) {
+          var currentDate = new Date();
+          console.log("currentDate: " + currentDate);
+        //}
+      }
+      */
+
+      var now = new Date();
+      
+      for (var i = 0; i < $scope.orders.length; i++) {
+        $http.get(APIServer.url() + '/meals/search/' + $scope.orders[i].mealId).then(function(resp) {
+          var fixedDate = new Date(resp.data.pickup);
+          var timeDif = fixedDate - now;
+
+          console.log("timeDif" + timeDif);
+
+          if (timeDif > 0 ) {
+            $scope.currentOrders.push(resp.data);
+          } else {
+            resp.data.rating = (Math.round(resp.data.rating * 2) / 2).toFixed(1);
+            $scope.pastOrders.push(resp.data);
+          }
+        })
+      }
+  }
+
+  $scope.onClickChefTab = function(tab) {
+    $scope.currentChefTab = tab.url;
+    if (tab.url == 'current.html') {
+      tab.style = 'left-active';
+      $scope.chefTabs[1].style = 'right';
+      $scope.showCurrentOrders = true;
+    }
+
+    if (tab.url == 'past.html') {
+      tab.style = 'right-active';
+      $scope.chefTabs[0].style = 'left';
+      console.log("show current orders: " + $scope.showCurrentOrders);
+      $scope.showCurrentOrders = false;
+    }
+
+    //$ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+
+  }
+
+  $scope.mealClicked = function() {
+    console.log("meal clicked");
+    $state.go("preapp.meal");
   }
 
 })

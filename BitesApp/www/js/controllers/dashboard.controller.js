@@ -529,7 +529,9 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                       chefName: $scope.meal.userName,
                       description: $scope.meal.description,
                       userToken: localStorage.get("userToken"),
-                      chefToken: chefToken
+                      chefToken: chefToken,
+                      photo: meal.photo,
+                      mealId: meal._id
                     }
                       
                     }).then (function(response) {
