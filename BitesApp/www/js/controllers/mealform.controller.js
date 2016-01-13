@@ -120,10 +120,11 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
+    /*
     $ionicLoading.show({
       template: 'Posting meal data'
     });
-
+    */
 
     var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
                $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
@@ -133,82 +134,119 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
 
-
     $http({
-      method: 'POST',
-      url: APIServer.url() + '/meals',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          method: 'POST',
+          url: APIServer.url() + '/getChefToken',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-      
-      // I have no idea if this is necessary
-      transformRequest: function(obj) {
-        var str = [];
-        for(var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-        return str.join("&");
-      },
-      
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
 
-      data: {
-        title: $scope.data.title,
-        description: $scope.data.description,
-        orderDeadline: orderDeadlineFixed,
-        pickup: pickupFixed,
-        price: $scope.data.price,
-        maxOrder: $scope.data.maxOrder,
-        numOrder: $scope.data.numOrder,
-        mealLocation: $scope.data.mealLocation,
-        ingredients: $scope.data.ingredients,
-        name: $scope.data.name,
-        userOID: localStorage.get("oid"),
-        userName: localStorage.get("name")
+          data:  {
+            userToken: localStorage.get("userToken")
+          }
+            
+    }).then (function (response) {
 
-      }
-    }).then(function (response) {
-        $ionicLoading.hide();
-        console.log(response);
-        
-        if (response.data.id) {
-        if ($scope.photo != null && $scope.photo != "" && $scope.photo.length > 1) {
-          $ionicLoading.show({
-            template: 'Uploading photo'
-          });
-        
+            //$ionicLoading.hide();
+            console.log("response" + response);
 
+            if (response.data.message == "SUCCESS") {
+                console.log(response);
+                
+                $http({
+                  method: 'POST',
+                  url: APIServer.url() + '/meals',
+                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
+                  
+                  // I have no idea if this is necessary
+                  transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                  },
+                  
 
-        $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
-          alert("Meal successfully posted");
-          $scope.resetForm();
-          $ionicLoading.hide();
-           $state.go("preapp.dashboard");
-
-
-
-        }, function(err) {
-          $ionicLoading.hide();
-          alert("Server error");
-            console.log("ERROR: " + JSON.stringify(err));
-        }, function (progress) {
-            // constant progress updates
-        });
-        }
-        else {
-          alert("Meal successfully posted");
-          $ionicLoading.hide();
-                     $scope.resetForm();
-
-           $state.go("preapp.dashboard");
-
-        }
-      }
-      else {
-        alert("Server error. Could not load meal id.");
-      }
+                  data: {
+                    title: $scope.data.title,
+                    description: $scope.data.description,
+                    orderDeadline: orderDeadlineFixed,
+                    pickup: pickupFixed,
+                    price: $scope.data.price,
+                    maxOrder: $scope.data.maxOrder,
+                    numOrder: $scope.data.numOrder,
+                    mealLocation: $scope.data.mealLocation,
+                    ingredients: $scope.data.ingredients,
+                    name: $scope.data.name,
+                    userOID: localStorage.get("oid"),
+                    userName: localStorage.get("name") 
+                  }
+                }).then(function (response) {
+                    $ionicLoading.hide();
+                    console.log(response);
+                    
+                    if (response.data.id) {
+                    if ($scope.photo != null && $scope.photo != "" && $scope.photo.length > 1) {
+                      $ionicLoading.show({
+                        template: 'Uploading photo'
+                      });
+                    
 
 
 
-    })
+                    $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
+                      alert("Meal successfully posted");
+                      $scope.resetForm();
+                      $ionicLoading.hide();
+                       $state.go("preapp.dashboard");
+
+
+
+                    }, function(err) {
+                      $ionicLoading.hide();
+                      alert("Server error");
+                        console.log("ERROR: " + JSON.stringify(err));
+                    }, function (progress) {
+                        // constant progress updates
+                    });
+                    }
+                    else {
+                      alert("Meal successfully posted");
+                      $ionicLoading.hide();
+                      $scope.resetForm();
+
+                       $state.go("preapp.dashboard");
+
+                    }
+                  }
+                  else {
+                    alert("Server error. Could not load meal id.");
+                  }
+
+
+
+                })
+
+            } else if (response.data.message == "NO CHEF TOKEN") {
+              console.log(response.data);
+              alert("Sorry, you are not a registered chef and only chefs may post meals");
+              $state.go("preapp.dashboard");
+            } else {
+              console.log(response.data);
+              alert("Error: " + response.data.reason.message);
+            }
+    });
+
+
+
+
+
 
 
      

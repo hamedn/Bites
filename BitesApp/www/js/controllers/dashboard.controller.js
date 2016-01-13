@@ -464,22 +464,20 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     console.log("in to order, price = " + $scope.meal.price);
 
     if($scope.customerStripeToken) {
-      var confirmPopup = $ionicPopup.confirm({
-       title: 'Confirm Purchase',
-       template: 'You will be making a purchase for $' + $scope.meal.price + '.'
-     });
+        
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Confirm Purchase',
+          template: 'You will be making a purchase for $' + $scope.meal.price + '.'
+        });
 
-       confirmPopup.then(function(res) {
+        confirmPopup.then(function(res) {
          if(res) {
             console.log("accepted");
+            
             //POST data to /makeTransaction
-            //......
-
-            //POST data to save for myorders
-            $http({
-                
+            $http({ 
               method: 'POST',
-              url: APIServer.url() + '/saveOrder',
+              url: APIServer.url() + '/makeTransaction',
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
               transformRequest: function(obj) {
@@ -490,14 +488,10 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
               },
 
               data:  {
-                orderName: $scope.meal.title,
-                mealUsername: $scope.meal.userName,
-                orderDate: $scope.meal.deadline,
-                pickupDate: $scope.meal.pickup,
-                price: $scope.meal.price,
-                chefName: $scope.meal.userName,
-                description: $scope.meal.description,
-                userToken: localStorage.get("userToken")
+                //data to make transaction
+                payment: $scope.meal.price,
+                source: localStorage.get("userToken"),
+                receiver: $scope.meal.chefToken
               }
                 
               }).then (function(response) {
@@ -506,7 +500,47 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
                 if (response.data.message == "SUCCESS") {
                   console.log(response);
-                  $state.go("preapp.dashboard");
+                  var chefToken = response.data.chefToken;
+                  //POST data to save for myorders
+                  $http({
+                      
+                    method: 'POST',
+                    url: APIServer.url() + '/saveOrder',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+                    transformRequest: function(obj) {
+                      var str = [];
+                      for(var p in obj)
+                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                      return str.join("&");
+                    },
+
+                    data:  {
+                      orderName: $scope.meal.title,
+                      mealUsername: $scope.meal.userName,
+                      orderDate: $scope.meal.deadline,
+                      pickupDate: $scope.meal.pickup,
+                      price: $scope.meal.price,
+                      chefName: $scope.meal.userName,
+                      description: $scope.meal.description,
+                      userToken: localStorage.get("userToken"),
+                      chefToken: chefToken
+                    }
+                      
+                    }).then (function(response) {
+
+                      $ionicLoading.hide();
+
+                      if (response.data.message == "SUCCESS") {
+                        console.log(response);
+                        $state.go("preapp.dashboard");
+                      } else {
+                          console.log(response.data);
+                          alert("Error: " + response.data.reason.message);
+                      }
+                    });
+
+
                 } else {
                     console.log(response.data);
                     alert("Error: " + response.data.reason.message);

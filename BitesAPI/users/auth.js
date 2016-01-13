@@ -223,10 +223,7 @@ module.exports = function(app, options) {
 			});
 			
 			app.post('/saveCreditCard', function(req,res,next) {
-				
-				console.log("reached /saveCreditCard. data is " + req.body.cardNumber + req.body.cvc + req.body.exp_month + req.body.exp_year);
-
-				//var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
+			
 				var customerID = "";
 				var lastFour = req.body.cardNumber.slice(-4);
 
@@ -241,71 +238,60 @@ module.exports = function(app, options) {
 				  }
 				}, function(err, token) {
 				  	//once token has been made use that token to create customer object so that card data will be saved for future transactions
-				  	
 				  	if (err) {
 				  		res.json({message:"FAIL",reason:err});
 				  		//throw err;
-				  	}
-				  	else {
+				  	} else {
 
-				  	console.log("successfully created token " + token.id);
+				  		console.log("successfully created token " + token.id);
 				  	
-				  	//create the Customer object
-				  	stripe.customers.create({
-					  description: 'Customer for test@example.com',
-					  source: token.id // obtained with Stripe.js
-					}, function(err, customer) {
+					  	//create the Customer object
+					  	stripe.customers.create({
+						  description: 'Customer for test@example.com',
+						  source: token.id // obtained with Stripe.js
+						}, function(err, customer) {
 
-						if (err) {
-							res.json({message:"FAIL",reason:err});
-							//throw err;
+							if (err) {
+								console.log("failed to create customer");
+								res.json({message:"FAIL",reason:err});
+								//throw err;
+							} else {
+								//Customer has been created, save the Customer id to the user info in database
+								console.log("successfully created customer " + customer.id);
+								customerID = customer.id;
+								console.log("userToken" + req.body.userToken);
+
+								User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
+						        	if (err) {
+						          		res.json({message:"FAIL",reason:err});
+						            	// return done(err);
+						        	} else {
+							            if (user) {
+							                console.log("found user");
+							                user.stripeCustomerToken = customerID;
+							                user.creditCardLastFourDigits = lastFour;
+							                user.save(function(err) {
+								            	if (err){
+								                	res.json({message:"FAIL",reason:err});
+								                    console.log('Error')
+								                } else {
+								                	res.json({message:"SUCCESS"});
+								                    console.log('Sucess')
+								                }
+								            });
+							            } 
+						        	}
+
+					        }); 
 						}
-					  
-					  //Customer has been created, save the Customer id to the user info in database
-					  console.log("successfully created customer " + customer.id);
-					  customerID = customer.id;
 
-
-					  console.log("userToken" + req.body.userToken);
-
-					  User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
-			            if (err) {
-			            	res.json({message:"FAIL",reason:err});
-			               // return done(err);
-			            }
-			            else {
-			            
-			            if (user) {
-			            	console.log("user.email" + user.email);
-			                console.log("found user");
-			                user.stripeCustomerToken = customerID;
-			                user.creditCardLastFourDigits = lastFour;
-			                user.save(function(err) {
-				                if (err){
-				                	res.json({message:"FAIL",reason:err});
-				                    console.log('Error')
-				                } else {
-				                	res.json({message:"SUCCESS"});
-				                    console.log('Sucess')
-				                }
-				            });
-			            } 
-
-			        }
-
-			           	}); 
-
-
-					  return customerID;
+					  	return customerID;
 					});
 
-	}
+			}
 
-				});
-				//return customerID;
-				
-			
 			});
+		});
 
 			app.post('/saveChefStripeDetails', function(req,res,next) {
 				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
@@ -337,10 +323,21 @@ module.exports = function(app, options) {
 				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
 
 				var payment = req.body.transAmount * 100;
-				var source = req.body.customerToken;
-				var receiver = req.body.chefToken;
+				var source = req.body.source;
+				var receiver = req.body.receiver;
 
 				var fee = 0.03 * payment;
+
+				User.findOne({ 'accessToken' :  source }, function(err, user) {
+		            if (err) {
+		                return done(err);
+		            }
+		            
+		            if (user) {
+		            	source = user.stripeCustomerToken;
+		            } 
+
+		        });
 
 				stripe.charges.create({
 				  amount: payment,
@@ -394,7 +391,27 @@ module.exports = function(app, options) {
 				})(req,res,next);
 			});
 
-			
+			app.post('/getChefToken', function(req, res) {
+				console.log("retrieving chef token");
+				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
+		            if (err) {
+		                return done(err);
+		            }
+		            
+		            if (user) {
+		            	console.log("found user");
+		            	if (user.chefStripeUserId) {
+		            		console.log("chef id");
+		            		return res.json({message: "SUCCESS", chefToken: user.chefStripeUserId});
+		            	} else {
+		            		return res.json({message: "NO CHEF TOKEN"});
+		            	}
+		            	
+		            } 
+
+		        }); 
+
+			});
 
 			app.get('/auth/facebook',
 				passport.authenticate('facebook', {
@@ -427,7 +444,7 @@ module.exports = function(app, options) {
 
 			app.get('/auth/stripe/callback', function() {
 				console.log("reached callback");
-			})
+			});
 
 		}
 	}

@@ -349,16 +349,15 @@ if ($scope.freezebuttons == false) {
             
           }).then (function (response) {
 
-             $ionicLoading.hide();
+            $ionicLoading.hide();
 
             if (response.data.message == "SUCCESS") {
-            console.log(response);
-            $state.go("preapp.settings");
-          }
-          else {
-            console.log(response.data);
-            alert("Error: " + response.data.reason.message);
-          }
+                console.log(response);
+                $scope.cancelChangeCreditCardInfo();
+            } else {
+              console.log(response.data);
+              alert("Error: " + response.data.reason.message);
+            }
           });
   }
   
