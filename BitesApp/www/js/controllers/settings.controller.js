@@ -50,8 +50,8 @@ $scope.data = {};
       }
 
       //check if chef is connected to stripe
-      if (resp.data.chefStripeAccessToken)
-          $scope.chefStripeConnected = true;
+      if (resp.data.chefStripeAccessToken) {};
+          //$scope.chefStripeConnected = true;
 
     });
 
@@ -395,10 +395,10 @@ if ($scope.freezebuttons == false) {
             },
 
             data:  {
-              client_secret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
               clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
-              code: code,
-              grant_type: "authorization_code"
+              response_type:"code",
+              scope: "read_write",
+              code: code
             }
           }).then( function (body) {
               /*NO ERROR CHECKING BUILT IN YET */

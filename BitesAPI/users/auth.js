@@ -326,6 +326,8 @@ module.exports = function(app, options) {
 				var source = req.body.source;
 				var receiver = req.body.receiver;
 
+				console.log("source " + source + " , receiver " + receiver);
+
 				var fee = 0.03 * payment;
 				/*
 				User.findOne({ 'accessToken' :  source }, function(err, user) {
