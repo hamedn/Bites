@@ -240,7 +240,7 @@ var Meal = require('mongoose').model('Meal');
 
   try {
 
-    new CronJob('* 3,11,16 * * *', function() {
+    new CronJob('* 00 3,11,16 * * *', function() {
       mealName  = null;
     mealType = "Dinner"
     var earliestTime = new Date();
