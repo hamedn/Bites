@@ -222,7 +222,7 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
 
 
 var getPush = function (mealName, meal) {
-  return meal + " today: " + mealName + "! Order with Bites!";
+  return "Hungry? Get " + mealName + " for " + meal +"!";
 }
  
 
