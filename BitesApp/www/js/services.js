@@ -34,20 +34,20 @@ angular.module('starter.services', [])
 
 
 
-    
+    /*
    getMeals: function() {
       return $http.get('https://bitesapp.herokuapp.com/meals/getAll').then(function(resp) {
           return resp;
         });
     }
+*/
 
 
-/*
 getMeals:function() {
       return $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
           return resp;
         });
-    }*/
+    }
 
 
   };

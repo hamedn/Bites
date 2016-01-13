@@ -218,16 +218,62 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
 
     }
 
+
+
+
+var getPush = function (mealName, meal) {
+  return meal + " today: " + mealName + "! Order with Bites!";
+}
+ 
+
+
+
+
+var Meal = require('mongoose').model('Meal');
+
+
   // Initializing Parse Backend
   var Parse = require('parse/node');
   var CronJob = require('cron').CronJob;
   Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", "NASRqPkVWZU7RnKy3mhNQF2QvpZT3ozZWnmnk3XH");
 
+
   try {
-    new CronJob('00 00 17 * * *', function() {
+
+    new CronJob('* 3,11,16 * * *', function() {
+      mealName  = null;
+    mealType = "Dinner"
+    var earliestTime = new Date();
+    var latestTime = new Date();
+
+    if ((new Date()).getHours() <= 12) {
+      mealType = "Lunch";
+      earliestTime.setHours(11) //GTE
+      latestTime.setHours(16) // LTE
+    }
+    else { // dinner
+      earliestTime.setHours(16) //GTE
+      latestTime.setHours(23) // LTE
+
+    }
+
+    Meal.find({
+      pickup: {
+        $gte: earliestTime,
+        $lt: latestTime
+      }
+    }, function(err, meals) {
+
+      if (meals.length > 0) {
+        mealName = meals[0].title;
+            var txt = getPush(mealName,mealType);
+
+
+          if (mealName != null && mealName.length>1) {
+
       var query = new Parse.Query(Parse.Installation)
         , data = {
-            "alert": "Check out what's for Dinner!", 
+            "alert": txt, 
           };
   
       Parse.Push.send({
@@ -236,14 +282,30 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
         }, {
           success: function () {
             //console.log("arguments", arguments);
-            console.log("Push Notification Sent");
+            console.log(getPush(mealName,mealType));
           },
           error: function (error) {
             console.log("Error: " + error.code + " " + error.message);
           }
       });
-      console.log('You will see this message at 5:00');
-    }, null, true, 'America/Los_Angeles');
+
+    }
+
+
+      }
+
+
+    });
+
+
+
+
+
+
+
+
+      //console.log('You will see this message at 5:00');
+    }, null, true, 'America/New_York');
   } catch(ex) {
     console.log("cron pattern not valid");
   }
