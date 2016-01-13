@@ -223,31 +223,6 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
   var CronJob = require('cron').CronJob;
   Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", "NASRqPkVWZU7RnKy3mhNQF2QvpZT3ozZWnmnk3XH");
 
-  var pushNotification = function() {
-    var query = new Parse.Query(Parse.Installation)
-      , data = {
-          "alert": "Check out what's for Dinner!", 
-        };
-
-    Parse.Push.send({
-      where: query,
-      data: data
-      }, {
-        success: function () {
-          //console.log("arguments", arguments);
-          console.log("Push Notification Sent");
-        },
-        error: function (error) {
-          console.log("Error: " + error.code + " " + error.message);
-        }
-    });  
-  }
-
-  var consoleTest = function() {
-    console.log("Truth");
-  }
-  // Testing it out
-  //'00 22 16 * * *'
   try {
     new CronJob('00 00 17 * * *', function() {
       var query = new Parse.Query(Parse.Installation)
@@ -267,7 +242,7 @@ UPDATES ALL USER RATINGS WITHIN A TIME INTERVAL!
             console.log("Error: " + error.code + " " + error.message);
           }
       });
-      console.log('You will see this message at 4:33');
+      console.log('You will see this message at 5:00');
     }, null, true, 'America/Los_Angeles');
   } catch(ex) {
     console.log("cron pattern not valid");
