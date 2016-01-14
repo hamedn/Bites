@@ -447,8 +447,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   $scope.ratingsObject = {
     iconOn : 'ion-ios-star',
     iconOff : 'ion-ios-star-outline',
-    iconOnColor: 'rgb(200, 200, 100)',
-    iconOffColor: 'rgb(200, 100, 100)',
+    iconOnColor: '#33cd5f',
+    iconOffColor: '#33cd5f',
     rating: 3,
     minRating: 1,
     callback: function(rating) {
