@@ -232,6 +232,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   
   $scope.toMeal = function(mealCurrent) {
     currentMeal.meal = mealCurrent;
+    console.log(currentMeal.meal._id);
     console.log(currentMeal.meal)
     $state.go("preapp.meal")
   }
@@ -463,7 +464,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
   $scope.toOrder = function() {
     console.log("in to order, price = " + $scope.meal.price);
-    
+    console.log(localStorage.get("stripeCustomerToken") + "localstorage");
     if(localStorage.get("stripeCustomerToken")) {
         
         var confirmPopup = $ionicPopup.confirm({
@@ -530,8 +531,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                       description: $scope.meal.description,
                       userToken: localStorage.get("userToken"),
                       chefToken: chefToken,
-                      photo: meal.photo,
-                      mealId: meal._id
+                      mealId: $scope.meal._id
                     }
                       
                     }).then (function(response) {
