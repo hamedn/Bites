@@ -297,7 +297,7 @@ var Meal = require('mongoose').model('Meal');
     });
 
       //console.log('You will see this message at 5:00');
-    }, null, true, 'America/Los_Angeles');
+    }, null, true, 'America/New_York');
   } catch(ex) {
     console.log("cron pattern not valid");
   }
