@@ -239,8 +239,8 @@ var Meal = require('mongoose').model('Meal');
 
 
   try {
-
-    new CronJob('* 00 3,11,16 * * *', function() {
+    // Send Push Notifications at 11am and 4pm: 00 00 11,16 * * *
+    new CronJob('00 00 11,16 * * *', function() {
       mealName  = null;
     mealType = "Dinner"
     var earliestTime = new Date();
@@ -263,31 +263,30 @@ var Meal = require('mongoose').model('Meal');
         $lt: latestTime
       }
     }, function(err, meals) {
+      if (err)
+        throw err;
 
       if (meals.length > 0) {
         mealName = meals[0].title;
-            var txt = getPush(mealName,mealType);
+        var txt = getPush(mealName,mealType);
 
-
-          if (mealName != null && mealName.length>1) {
-
-      var query = new Parse.Query(Parse.Installation)
-        , data = {
-            "alert": txt, 
-          };
-  
-      Parse.Push.send({
-        where: query,
-        data: data
-        }, {
-          success: function () {
-            //console.log("arguments", arguments);
-            console.log(getPush(mealName,mealType));
-          },
-          error: function (error) {
-            console.log("Error: " + error.code + " " + error.message);
-          }
-      });
+        if (mealName != null && mealName.length>1) {
+          var query = new Parse.Query(Parse.Installation)
+            , data = {
+                "alert": txt, 
+              };
+          Parse.Push.send({
+            where: query,
+            data: data
+            }, {
+              success: function () {
+                //console.log("arguments", arguments);
+                console.log(getPush(mealName,mealType));
+              },
+              error: function (error) {
+                console.log("Error: " + error.code + " " + error.message);
+              }
+          });
 
     }
 
@@ -297,19 +296,12 @@ var Meal = require('mongoose').model('Meal');
 
     });
 
-
-
-
-
-
-
-
       //console.log('You will see this message at 5:00');
-    }, null, true, 'America/New_York');
+    }, null, true, 'America/Los_Angeles');
   } catch(ex) {
     console.log("cron pattern not valid");
   }
-
+ 
 
   //Should send info to Everyone
   //var meals = Meal.find({}, function(err, meals) {

@@ -5,9 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.service.push', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services','splash.controllers'])
+angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.service.analytics', 'angularMoment', 'login.controllers','dashboard.controllers','settings.controllers','mealform.controllers', 'starter.services','splash.controllers'])
 
-.run(function($ionicPlatform, $ionicPush, localStorage) {
+.run(function($ionicPlatform, $ionicAnalytics, localStorage) {
+
+  $ionicAnalytics.register();
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
