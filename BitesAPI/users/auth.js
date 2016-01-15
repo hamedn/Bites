@@ -330,18 +330,9 @@ module.exports = function(app, options) {
 				console.log("source " + source + " , receiver " + receiver);
 
 				var fee = 0.03 * payment;
-				/*
-				User.findOne({ 'accessToken' :  source }, function(err, user) {
-		            if (err) {
-		                return done(err);
-		            }
-		            
-		            if (user) {
-		            	source = user.stripeCustomerToken;
-		            } 
 
-		        });
-	*/
+				payment = payment - fee;
+				
 				stripe.charges.create({
 				  amount: payment,
 				  currency: 'usd',
@@ -374,7 +365,7 @@ module.exports = function(app, options) {
 		            if (user) {
 		            	console.log("user.email" + user.email);
 
-		            	var newOrder = {orderName: req.body.orderName, orderDate: req.body.orderDate, pickupDate: req.body.pickupDate, price: req.body.price, chefName: req.body.chefName, description: req.body.description, mealId: req.body.mealId};
+		            	var newOrder = {mealId: req.body.mealId};
 
 		                user.orders.push(newOrder);
 

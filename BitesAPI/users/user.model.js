@@ -3,13 +3,6 @@ var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
-	orderName: String,
-	orderDate: Date,
-	pickupDate: Date,
-	chefName: String,
-	description: String,
-	price: String,
-	photo:String,
 	mealId: String
 });
 

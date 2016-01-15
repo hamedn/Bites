@@ -466,18 +466,7 @@ if ($scope.freezebuttons == false) {
   }
 
   $scope.findPastAndPresentOrders = function() {
-    /*
-      console.log("finding past and present orders");
-      var currentDate = new Date();
-      console.log("currentDate: " + currentDate + " " + $scope.orders[0].pickupDate);
-      for (var order in $scope.orders) {
-        //if (order.pickupDate) {
-          var currentDate = new Date();
-          console.log("currentDate: " + currentDate);
-        //}
-      }
-      */
-
+  
       var now = new Date();
       
       for (var i = 0; i < $scope.orders.length; i++) {

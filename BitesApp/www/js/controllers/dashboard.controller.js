@@ -521,17 +521,9 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                       return str.join("&");
                     },
 
-                    data:  {
-                      orderName: $scope.meal.title,
-                      mealUsername: $scope.meal.userName,
-                      orderDate: $scope.meal.deadline,
-                      pickupDate: $scope.meal.pickup,
-                      price: $scope.meal.price,
-                      chefName: $scope.meal.userName,
-                      description: $scope.meal.description,
-                      userToken: localStorage.get("userToken"),
-                      chefToken: chefToken,
-                      mealId: $scope.meal._id
+                    data:  { 
+                      mealId: $scope.meal._id,
+                      userToken: localStorage.get("userToken")
                     }
                       
                     }).then (function(response) {
@@ -542,7 +534,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                         console.log("added order to my orders");
                         $state.go("preapp.dashboard");
                       } else {
-                          console.log(response.data);
+                          console.log("did not add to orders " + response.data.reason.message);
                           alert("Error: " + response.data.reason.message);
                       }
                     });
