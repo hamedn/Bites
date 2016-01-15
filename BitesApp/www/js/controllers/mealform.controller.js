@@ -1,7 +1,7 @@
 angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
-.controller('MealFormCtrl', function($scope,$ionicLoading, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
+.controller('MealFormCtrl', function($scope,$ionicLoading, $ionicAnalytics, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
   $scope.data = {};
   
   $scope.goDash = function() {
@@ -200,6 +200,19 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
                     $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
                       alert("Meal successfully posted");
+                      $ionicAnalytics.track("Meal w/ Picture Posted", {
+                        meal: {
+                          title: $scope.data.title,
+                          price: $scope.data.price,
+                          maxOrder: $scope.data.maxOrder,
+                          pickup: pickupFixed,
+                          orderDeadline: orderDeadlineFixed
+                        },
+                        user: {
+                          oid: localStorage.get("oid"),
+                          name: localStorage.get("name")
+                        }
+                      });
                       $scope.resetForm();
                       $ionicLoading.hide();
                        $state.go("preapp.dashboard");
@@ -214,6 +227,19 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                     }
                     else {
                       alert("Meal successfully posted");
+                      $ionicAnalytics.track("Meal w/o Picture Posted", {
+                        meal: {
+                          title: $scope.data.title,
+                          price: $scope.data.price,
+                          maxOrder: $scope.data.maxOrder,
+                          pickup: pickupFixed,
+                          orderDeadline: orderDeadlineFixed
+                        },
+                        user: {
+                          oid: localStorage.get("oid"),
+                          name: localStorage.get("name")
+                        }
+                      });
                       $ionicLoading.hide();
                       $scope.resetForm();
 

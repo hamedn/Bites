@@ -9,7 +9,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $ionicLoading, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
@@ -137,8 +137,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
             }
           }).then(function (response) {
 
+              $ionicAnalytics.track("Meal Deleted", {
+                meal: {
+                  id: oid
+                }
+              });
 
-               var myPopup = $ionicPopup.show({
+              var myPopup = $ionicPopup.show({
                 title: "Meal Deleted",
                 scope: $scope
               });
@@ -352,63 +357,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     }
   }
 
-  $scope.pushNotification = function() {
-      console.log(localStorage.get("token"));
-      var notification = {
-        //"user_ids": ["568b81139fee5b1100ad1acb"],
-        "tokens": [localStorage.get("token")],
-        "notification": {
-          "alert": "Hello World!",
-          "scheduled": new Date() + 10000,
-          "ios":{
-            "badge":1,
-            "sound":"ping.aiff",
-            "expiry": 1423238641,
-            "priority": 10,
-            "contentAvailable": 1,
-            "payload":{
-              "key1":"value",
-              "key2":"value"
-            }
-          },
-          "android":{
-            "collapseKey":"foo",
-            "delayWhileIdle":true,
-            "timeToLive":300,
-            "payload":{
-              "key1":"value",
-              "key2":"value"
-            }
-          }
-        }    
-      };
-
-    var dataString = JSON.stringify(notification);
-
-    // Here's our App's PRIVATE API KEY, must be encoded for Authroization
-    var encodedAPIKey = btoa("0855bb2ee64bd357b02fe4be9dab13849a0ef847389961be" + ":");
-
-    var config = {
-      headers: {
-        "Content-Type": "application/json", 
-        "X-Ionic-Application-Id": "b24a5ed6", 
-        'Authorization' : 'basic ' + encodedAPIKey
-      }
-    }
-
-    $http.post("https://push.ionic.io/api/v1/push", dataString, config)
-    .success(function(data, status, headers, config) {
-      console.log(data);
-      console.log(status);
-      console.log(headers);
-      console.log(config);
-      console.log("Push Success");
-    })
-    .error(function (data, status, header, config) {
-      console.log(data);
-    })
-  }
-
   $scope.submitRating = function() {
     console.log($scope.rate);
     console.log($scope.meal._id);
@@ -434,6 +382,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       }
 
     }).then(function (response) {
+
+      $ionicAnalytics.track("Rating Submitted", {
+        meal: {
+          rating: $scope.ratingsObject.rating,
+          id: $scope.meal._id
+        }
+      });
+
       var myPopup = $ionicPopup.show({
         title: "Rating Submitted",
         scope: $scope
@@ -531,6 +487,17 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
                       $ionicLoading.hide();
 
                       if (response.data.message == "SUCCESS") {
+                        $ionicAnalytics.track("Meal Ordered", {
+                          meal: {
+                            id: $scope.meal._id,
+                            name: $scope.meal.name,
+                            price: $scope.meal.price
+                          },
+                          user: {
+                            id: localStorage.get('oid')
+                          }
+                        });
+
                         console.log("added order to my orders");
                         $state.go("preapp.dashboard");
                       } else {

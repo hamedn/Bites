@@ -7,7 +7,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
 
 
-.controller('LoginCtrl', function($scope, $window, $ionicPush, $location, $http, APIServer, $state, localStorage, $timeout, $ionicPopup) {
+.controller('LoginCtrl', function($scope, $window, $ionicAnalytics, $location, $http, APIServer, $state, localStorage, $timeout, $ionicPopup) {
    $scope.data = {};
 
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -74,7 +74,13 @@ angular.module('login.controllers', ['ionic-ratings'])
 
           if (response.data.accessToken) {
            
-
+            $ionicAnalytics.track("Local User Created", {
+              user: {
+                name: response.data.oid,
+                email: $scope.data.email,
+                isChef: $scope.data.chef
+              }
+            });
            
            var myPopup = $ionicPopup.show({
               template: "<h2>Welcome to Bites!</h2>",
@@ -159,7 +165,12 @@ angular.module('login.controllers', ['ionic-ratings'])
         console.log(response.data);
 
          if (response.data.accessToken) {
-
+          $ionicAnalytics.track("User Login", {
+            user: {
+              id: response.data.oid,
+              email: $scope.data.email
+            }
+          });
 
           /*
           Popup should only happen the first time, after that it become unprofessional. 
@@ -199,6 +210,11 @@ angular.module('login.controllers', ['ionic-ratings'])
             $location.path('/');
             localStorage.set("userToken", token);
              localStorage.set("loggedIn",true);
+            $ionicAnalytics.track("Facebook Login", {
+              user: {
+                name: "PLACEHOLDER"
+              }
+            });
             $state.go("preapp.dashboard");
 
             //Logged in, change screen and pass token in
@@ -226,6 +242,13 @@ angular.module('login.controllers', ['ionic-ratings'])
             $location.path('/');
             localStorage.set("userToken", token);
             localStorage.set("loggedIn",true);
+
+            $ionicAnalytics.track("Facebook Register", {
+              user: {
+                name: "PLACEHOLDER"
+              }
+            });
+
             $state.go("preapp.registerfacebook");
 
             //Logged in, change screen and pass token in
