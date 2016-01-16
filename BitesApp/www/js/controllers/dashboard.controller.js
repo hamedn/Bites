@@ -10,7 +10,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 .controller('DashCtrl',  function($scope, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
-  $scope.$on('$ionicView.enter', function(e) {
+ 
+  $scope.isChef = function() {
+    return localStorage.get("isChef") == "true";
+  }
+
+ $scope.$on('$ionicView.enter', function(e) {
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
     $scope.hStars = hStars.data;
@@ -38,6 +43,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
       localStorage.set("oid",resp.data._id);
       localStorage.set("name",resp.data.name);
       localStorage.set("isChef",resp.data.isChef);
+      localStorage.set("stripeChef",resp.data.chefStripeAccessToken);
       localStorage.set("stripeCustomerToken", resp.data.stripeCustomerToken);
     });
 
@@ -199,7 +205,12 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   $scope.doRefresh();
 
   $scope.goMeal = function() {
-    $state.go("preapp.newmeal");    
+if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") != "undefined" ) {
+    $state.go("preapp.newmeal");   
+    }
+    else {
+      alert("Chef account not connected with stripe. Please do so in settings");
+    } 
   }
 
   // Placeholder goChef function

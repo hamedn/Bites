@@ -61,9 +61,15 @@ $scope.chefTabs = [{
           $scope.lastFour = resp.data.creditCardLastFourDigits;
       }
 
-      //check if chef is connected to stripe
-      if (resp.data.chefStripeAccessToken) {};
-          //$scope.chefStripeConnected = true;
+      //check if chef is connected to stripe, and also >5 to make sure its a reasonable token
+      if (resp.data.chefStripeAccessToken && resp.data.chefStripeAccessToken.length > 5) {
+        //alert(resp.data.chefStripeAccessToken)
+        $scope.chefStripeConnected = true;
+
+      };
+      localStorage.set("stripeChef",resp.data.chefStripeAccessToken);
+
+
 
     });
 

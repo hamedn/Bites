@@ -117,7 +117,7 @@ module.exports = function(app, options) {
 			                newUser.rating = 5;
 			                newUser.profilePicture = credentials.location[env] + "defaultprofile.gif"
 			                newUser.password = newUser.generateHash(password);
-			               	newUser.accessToken = newUser.generateHash(password);
+			               	newUser.accessToken = newUser.generateHash(password + Math.random());
 			               	
 			                newUser.save(function(err) {
 			                    if (err)
