@@ -71,7 +71,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
         var individualMeal = meals[i];
       
 
-         var fixedDate = new Date(individualMeal.pickup);
+         var fixedDate = new Date(individualMeal.deadline);
         var now = new Date();
 
           var timeDif = fixedDate - now;
