@@ -29,6 +29,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     //console.log("scope stripeCustomerToken " + resp.data.stripeCustomerToken);
     $scope.doRefresh();
 
+    if ($state.params.source == "myorders") {
+      console.log("coming from myorders " + $state.params.sourceId);
+      $scope.showMeal($state.params.sourceId);
+        
+    } else {
+        console.log("not coming from myorders " + $state.params.sourceId);
+    }
 
 /*
     var pickupUgly = $scope.meal.deadline
@@ -48,6 +55,16 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     });
 
   })
+
+  $scope.showMeal = function(mealId) {
+    console.log("showMeal with id " + mealId);
+    $http.get(APIServer.url() + '/meals/search/' + mealId).then(function(resp) {
+        
+        console.log("found meal");
+        currentMeal.meal = resp.data;
+        $scope.meal = currentMeal.meal;
+      })
+  }
 
   $scope.formatMealLocation = function(mealLocation) {
     if (mealLocation) {
@@ -326,7 +343,10 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   }
 
   $scope.goDash = function() {
-    $state.go("preapp.dashboard");
+    if ($state.params.source == "myorders")
+      $state.go("preapp.myorders");
+    else 
+      $state.go("preapp.dashboard");
   }
 
   $scope.findMeal = function() {

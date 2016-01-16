@@ -159,7 +159,8 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
   .state('preapp.meal', {
     url: '/meal/{id}',
     templateUrl: 'templates/preapp/meal-screen.html',
-    controller: "DashCtrl"
+    controller: "DashCtrl",
+    params: {source: null, sourceId: null}
   })
 
 

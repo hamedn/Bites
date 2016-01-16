@@ -24,13 +24,13 @@
   </div>
 </div>
 
-<div ng-repeat="order in currentOrders" ng-show="showCurrentOrders" ng-click="order.mealId">
-  <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+<div ng-repeat="order in currentOrders" ng-show="showCurrentOrders">
+  <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px" ng-click="mealClicked(order._id)">
     <div class="item item-avatar">
       <img src="{{order.photo}}" style="width: 70px; height:50px; margin-top: 10px;">
       <h2>{{order.title}} cooked by {{order.userName}}</h2>
-      <h2>Pickup: {{order.pickup | amCalendar}}</h2>
-      <h2>{{order.description}}</h2>
+      <h3>Pickup: {{order.pickup | amCalendar}}</h3>
+      <h3>Where: {{order.mealLocation}}</h3>
     </div>
   </div>
 </div>

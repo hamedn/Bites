@@ -514,7 +514,7 @@ if ($scope.freezebuttons == false) {
   $scope.mealClicked = function(id) {
     console.log("meal clicked id: " + id);
 
-    $state.go("preapp.meal");
+    $state.go("preapp.meal", {source: "myorders", sourceId: id});
   }
 
 })
