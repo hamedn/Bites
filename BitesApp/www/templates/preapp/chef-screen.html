@@ -62,6 +62,9 @@
                     <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-assertive" ng-click="deleteMeal(meal._id); getChefMeals();">Delete</button>
                     </div>
+                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                        <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
+                    </div>
                     <div ng-hide="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="toMeal(meal)">Learn More</button>
                     </div>

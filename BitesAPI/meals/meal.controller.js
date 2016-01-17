@@ -261,7 +261,7 @@ router.post('/', function(req, res, next) {
 	var mealIngredients = req.body.ingredients;
 	var mealName = req.body.name;
 	var mealPicture = req.body.picture;
-	var mealCharId = randomString(64, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'); 
+	var mealCharId = randomString(6, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'); 
 	
 	var meal = new Meal();
 	meal.title = mealTitle;

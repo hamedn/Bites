@@ -9,8 +9,43 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $cordovaClipboard, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
  
+  $scope.shareMeal = function(m) {
+    //console.log(m);
+    var extension = m.charId;
+    var link = APIServer.url() + "/m/" + extension;
+    console.log(link);
+   // console.log("COPIED TO CLIPBAORD" + extension);
+
+   $cordovaClipboard
+    .copy(link)
+    .then(function () {
+       var myPopup = $ionicPopup.show({
+              title: "Link successfully copied to clipboard",
+              scope: $scope
+            });
+
+            $timeout(function() {
+              myPopup.close(); //close the popup after 3 seconds for some reason
+            }, 2500);
+
+
+    }, function () {
+      var myPopup = $ionicPopup.show({
+              title: "Clipboard access error",
+              scope: $scope
+            });
+
+            $timeout(function() {
+              myPopup.close(); //close the popup after 3 seconds for some reason
+            }, 2500);
+
+    });
+
+  }
+
+
   $scope.isChef = function() {
     return localStorage.get("isChef") == "true";
   }
@@ -137,6 +172,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     //  return 0
     //}
   }
+
+  
 
   $scope.deleteMeal = function(oid) {
     var confirmPopup = $ionicPopup.confirm({
