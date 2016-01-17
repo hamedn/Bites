@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Customer = new Schema({
+	name: String,
+	email: String
+});
+
 var mealSchema = new Schema({
 	title: String,
 	description: String,
@@ -22,9 +27,13 @@ var mealSchema = new Schema({
 	userName: String,
 	photo:String,
 	profilePicture:String,
-	chefToken: String
+	chefToken: String,
+	customers:[Customer]
 });
 
 
 var Meal = mongoose.model('Meal', mealSchema);
-module.exports = Meal;
+//module.exports = Meal;
+module.exports = {
+	Meal: Meal
+}

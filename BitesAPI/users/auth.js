@@ -5,6 +5,7 @@ var User = require('./user.model.js'),
 	LocalStrategy = require('passport-local').Strategy,
 	StripeStrategy = require('passport-stripe').Strategy;
 
+var Meal = require("../meals/meal.model.js").Meal;
 var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 var express = require('express');
 var router = express.Router();
@@ -356,7 +357,7 @@ module.exports = function(app, options) {
 
 			app.post('/saveOrder', function(req, res) {
 				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
-
+				var userName = "", userEmail = "";
 				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
 		            if (err) {
 		                return done(err);
@@ -368,18 +369,40 @@ module.exports = function(app, options) {
 		            	var newOrder = {mealId: req.body.mealId};
 
 		                user.orders.push(newOrder);
+		                userName = user.name;
+		                userEmail = user.email;
 
 		                user.save(function(err) {
 			                if (err){
 			                    return res.json({message:"Error " + err});
 			                } else {
-			                	return res.json({message:"SUCCESS"});
+			                	//return res.json({message:"SUCCESS"});
 			                    console.log('Success');
 			                }
 			            });
 		            } 
 
-		        }); 
+		        });
+
+    			Meal.findOne({'_id': req.body.mealId}, function(err, meal) {
+		        	console.log("found meal");
+					if (err)
+						return res.json({message: "Error " + err});
+					if (meal) {
+						var newMeal = {name: userName, email: userEmail};
+						meal.customers.push(newMeal);
+						console.log("pushing meal to customers array");
+
+						meal.save(function(err) {
+			                if (err){
+			                    return res.json({message:"Error " + err});
+			                } else {
+			                	return res.json({message:"SUCCESS"});
+			                }
+		            	});
+					}
+				});
+
 
 			});
 

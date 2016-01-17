@@ -487,8 +487,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   };
 
   $scope.toOrder = function() {
-    console.log("in to order, price = " + $scope.meal.price);
-    console.log(localStorage.get("stripeCustomerToken") + "localstorage");
+    
     if(localStorage.get("stripeCustomerToken")) {
         
         var confirmPopup = $ionicPopup.confirm({
@@ -498,7 +497,6 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
         confirmPopup.then(function(res) {
          if(res) {
-            console.log("accepted");
             
             $ionicLoading.show({
               template: 'Making transaction'
@@ -531,9 +529,9 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                 if (response.data.message == "SUCCESS") {
                   console.log("success");
                   var chefToken = response.data.chefToken;
+
                   //POST data to save for myorders
                   $http({
-                      
                     method: 'POST',
                     url: APIServer.url() + '/saveOrder',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -550,7 +548,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                       userToken: localStorage.get("userToken")
                     }
                       
-                    }).then (function(response) {
+                    }).then(function(response) {
 
                       $ionicLoading.hide();
 
@@ -584,7 +582,6 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
        } else {
           $ionicLoading.hide();
-          console.log("rejected");
        } 
      });
    } else {
