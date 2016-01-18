@@ -17,6 +17,8 @@ if (err)
 require('./manifest')(app);
 require('./website')(app);
 
+app.use(require('morgan')('dev'));
+
 
 app.listen(process.env.PORT || 3000);
 //app.listen(Config.get('/server/port'));
