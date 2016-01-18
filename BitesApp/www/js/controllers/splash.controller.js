@@ -22,26 +22,27 @@ console.log('hello workd"')
 
         var startTime = new Date().getTime();
 $http({
-    method: 'GET',
     url: APIServer.url() + '/users/byToken',
     timeout : 4000, 
     headers:{'accesstoken': acc }
     }).success(function(resp, status, header, config){
 
+      console.log(resp);
+      console.log("----------");
+        if (resp._id) {
 
-        if (resp.data && resp.data._id) {
-
+    method: 'GET',
                 console.log("ANY LUCK???");
 
           console.log("TRANSITION TO DASHBOARD");
           $state.go("preapp.dashboard");
-         localStorage.set("oid",resp.data._id);
-         localStorage.set("name",resp.data.name);
-         localStorage.set("isChef",resp.data.isChef);
+         localStorage.set("oid",resp._id);
+         localStorage.set("name",resp.name);
+         localStorage.set("isChef",resp.isChef);
 
       }
       else {
-        "No response. Must log in again."
+        console.log("No response. Must log in again.")
       }
       //alert(resp);
       $ionicLoading.hide();
@@ -52,10 +53,13 @@ $http({
             //time out handeling
           //  alert('time out');
             $ionicLoading.hide();
+            console.log("time out");
 
         } else{
             //other error hanndling
             $ionicLoading.hide();
+                        console.log("other errors");
+
 
         }
     })
