@@ -159,7 +159,78 @@ if ($scope.freezebuttons == false) {
 
   }
 
+  $scope.submitRating = function() {
+    console.log($scope.rate);
+    console.log($scope.meal._id);
 
+    $http({
+      method: 'POST',
+      url: APIServer.url() + '/meals/rating',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+      
+      // I have no idea if this is necessary
+      transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      },
+      
+
+      data: {
+        rating: $scope.ratingsObject.rating,
+        oid: $scope.meal._id
+      }
+
+    }).then(function (response) {
+
+      $ionicAnalytics.track("Rating Submitted", {
+        meal: {
+          rating: $scope.ratingsObject.rating,
+          id: $scope.meal._id
+        }
+      });
+
+      var myPopup = $ionicPopup.show({
+        title: "Rating Submitted",
+        scope: $scope
+      });
+  
+      $timeout(function() {
+        myPopup.close(); 
+      }, 1250);  
+
+      $scope.goMyOrders();   
+    })
+  }
+
+  $scope.ratingsObject = {
+    iconOn : 'ion-ios-star',
+    iconOff : 'ion-ios-star-outline',
+    iconOnColor: '#33cd5f',
+    iconOffColor: '#33cd5f',
+    rating: 3,
+    minRating: 1,
+    callback: function(rating) {
+      $scope.ratingsCallback(rating);
+    }
+  };
+
+  $scope.goMyOrders = function() {
+    $state.go("preapp.myorders");
+  }
+
+  $scope.goRatings = function(order) {
+    $scope.meal._id = order._id;
+    console.log($scope.meal._id);
+    $state.go('preapp.rating');
+  }
+  
+  $scope.ratingsCallback = function(rating) {
+    console.log('Selected rating is : ', rating);
+    $scope.ratingsObject.rating = rating;
+  };
 
   $scope.processImage = function (imgURL) {
 

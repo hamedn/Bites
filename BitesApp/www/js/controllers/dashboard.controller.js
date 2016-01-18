@@ -465,7 +465,9 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   
       $timeout(function() {
         myPopup.close(); 
-      }, 1250);     
+      }, 1250);  
+
+      $scope.goMyOrders();   
     })
   }
   // Setting the rating variables
@@ -481,6 +483,10 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
     }
   };
 
+  $scope.goRatings = function() {
+    $state.go('preapp.rating');
+  }
+  
   $scope.ratingsCallback = function(rating) {
     console.log('Selected rating is : ', rating);
     $scope.ratingsObject.rating = rating;

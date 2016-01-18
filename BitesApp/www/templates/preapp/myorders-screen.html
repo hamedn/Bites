@@ -13,10 +13,12 @@
 <ion-content scroll="true">
   
 <div ng-show="noOrders">
-  <p>What's wrong with you? You havn't made any orders...</p>
+  <div class="row" style="text-align: center; color: grey;">
+    Can't eat if you haven't ordered anything! Head on over to the dash to check out what's cooking!
+  </div>
 </div>
 
-<div class="item">
+<div class="item" ng-hide="noOrders">
   <div id="chefTabs" class="row">
     <div ng-repeat="tab in chefTabs" class="col" ng-class="tab.style" ng-click="onClickChefTab(tab)">
         <h2 style="padding-bottom: 4px;">{{tab.title}}</h2>
@@ -43,6 +45,10 @@
       <h2>{{order.title}} cooked by {{order.userName}}</h2>
       <h2>Pickup: {{order.pickup | amCalendar}}</h2>
       <h2>{{order.description}}</h2>
+      <div class="buttons" style="margin: 0 auto;">
+          <button class="button button-balanced" ng-click="goRating(order)">Rate Now!</button>
+      </div>
+
     </div>
   </div>
 </div>

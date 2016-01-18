@@ -176,6 +176,12 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
     controller: "DashCtrl"
   })
 
+  .state('preapp.rating', {
+    url: '/rating',
+    templateUrl: 'templates/preapp/rating-screen.html',
+    controller: "SettingsCtrl"
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',

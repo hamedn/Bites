@@ -1,0 +1,32 @@
+<ion-view dash-screen view-title="Bites" class="bg2" >
+    <ion-header-bar align-title="center" class="bar-balanced">
+    	<div class="buttons">
+    		<button class="button button-icon ion-ios-arrow-back" ng-click="goMyOrders()">
+    		</button>
+    	</div>
+
+    	<h1 class="title">Bites</h1>
+
+    	<div class="buttons">
+    		<button class="button button-icon ion-android-add" ng-click="goMeal()"></button>
+    	</div>
+
+    </ion-header-bar>
+
+<ion-content scroll="true" delegate-handle="scrollArea">
+
+    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+        <div class="item item-divider">
+            <p align="center">The chef would love your feedback!</p>
+        </div>
+        <div class="rate">
+            <ionic-ratings ratingsobj='ratingsObject'></ionic-ratings>
+        </div>
+
+        <button style="margin: 5px auto 5px;" class="rate-button button button-small button-balanced" ng-click="submitRating()">Rate the Meal</button>
+
+    </div>
+
+</ion-content>
+
+</ion-view>

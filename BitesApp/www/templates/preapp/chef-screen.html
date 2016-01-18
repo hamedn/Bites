@@ -76,12 +76,18 @@
 
         <script type="text/ng-template" id="past.html">
             <div id="past" ng-repeat="meal in pastChefMeals">
-                <div class="list card" style="padding: 10px; margin: 0px 5% 1.5% 5%; border-radius:5px;">
-                    <div style="float: left; margin-top: 5px;"> {{meal.title}}: </div>
-                    <div style="float: right;">
-                        <div class="hstars ion-ios-star" style="font-size: 25px; margin-top: 2px;">{{meal.rating}}/5</div>
+                <div class="list card" style="padding: 10px; margin: 0px 5% 5% 5%; border-radius:5px;">
+                    <div class="row" style="">
+                        <div class="col" style="margin-bottom: 5px; margin-top: -5px; border-bottom: 1px green solid; text-align: center;"> {{meal.title}} </div>
                     </div>
-                    <div style="float: right; margin: 5px 5px 0 0;"> 3/{{meal.maxOrder}} Orders</div>
+                    <div class="row">
+                        <div class="col" style="text-align: center;">
+                            <div class="hstars ion-ios-star" style="font-size: 22px;">{{meal.rating}}/5</div>
+                        </div>
+                        <div class="col" style="text-align: center;">
+                            <div style="font-size: 20px;"> 3/{{meal.maxOrder}} Orders</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </script>
