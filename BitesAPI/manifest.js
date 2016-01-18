@@ -77,6 +77,8 @@ switch(app.get('env')) {
 };
 
 
+console.log("ENVIRONMENT: " + app.get('env'));
+
 mongoose.connection.on('error', function () {
   throw new Error('unable to connect to database at ' + Config.get('/mongo/uri'));
 });
