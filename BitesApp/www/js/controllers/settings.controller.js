@@ -457,7 +457,7 @@ if ($scope.freezebuttons == false) {
 
       url = APIServer.url() + "/auth/stripe";
       
-      loginWindow = $window.open(url, '_blank', 'location=no,toolbar=no,hidden=no');
+      loginWindow = $window.open(url, '_blank', 'location=yes,toolbar=yes,hidden=no');
 
       loginWindow.addEventListener('loadstart', function (event) {
 

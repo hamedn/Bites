@@ -3,12 +3,12 @@ module.exports = {
 
 	location: {
 		development: "http://localhost:3000/",
-		production: "http://bitesapp.herokuapp.com/"
+		production: "http://bitesapp.com/"
 	},
 
 	stripecallback: {
 		development: "http://localhost:3000/auth/stripe/callback",
-		production: "http://bitesapp.herokuapp.com/auth/stripe/callback"
+		production: "http://bitesapp.com/auth/stripe/callback"
 	},
 
 	mongo: {
@@ -32,7 +32,7 @@ module.exports = {
 			production: {
 				appId: '1596595767272078',
 				appSecret: '57a67c051886e350c539c4cc3913ea3c',
-				callBackURL: 'http://bitesapp.herokuapp.com/auth/facebook/callback',
+				callBackURL: 'http://bitesapp.com/auth/facebook/callback',
 				successURL: '/success',
 				failURL: '/fail'
 			}

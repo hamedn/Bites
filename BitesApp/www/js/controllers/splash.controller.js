@@ -27,7 +27,12 @@ $http({
     timeout : 4000, 
     headers:{'accesstoken': acc }
     }).success(function(resp, status, header, config){
+
+
         if (resp.data && resp.data._id) {
+
+                console.log("ANY LUCK???");
+
           console.log("TRANSITION TO DASHBOARD");
           $state.go("preapp.dashboard");
          localStorage.set("oid",resp.data._id);
