@@ -332,6 +332,7 @@ $http({
                 code: code,
                 grant_type: "authorization_code"
               }
+              
             }).then( function (body) {
                 /*NO ERROR CHECKING BUILT IN YET */
                 console.log("successfully posted code to stripe");
@@ -345,6 +346,8 @@ $http({
         })
 
   }
+
+
 
 
 })
