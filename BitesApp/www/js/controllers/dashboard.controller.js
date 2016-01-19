@@ -301,6 +301,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   }
   
   $scope.toMeal = function(mealCurrent, oid) {
+    
+
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal._id);
     console.log(currentMeal.meal)
