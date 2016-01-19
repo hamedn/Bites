@@ -330,7 +330,7 @@ module.exports = function(app, options) {
 
 				console.log("source " + source + " , receiver " + receiver);
 
-				var fee = 0.03 * payment;
+				var fee = 0.10 * payment;
 
 				payment = payment - fee;
 				
