@@ -9,7 +9,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
 
-.controller('DashCtrl',  function($scope, $cordovaClipboard, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
+.controller('DashCtrl',  function($scope, $cordovaClipboard, $ionicModal, $ionicLoading, $ionicAnalytics, $ionicScrollDelegate ,$rootScope, $state, $stateParams, $ionicPopup, $timeout, Camera, pastChefMeals, currentChefMeals, Meals, hStars, halfStar, uhStars, currentProfile, currentMeal, localStorage, APIServer, $http, $ionicSideMenuDelegate) {
  
   $scope.shareMeal = function(m) {
     //console.log(m);
@@ -301,6 +301,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   }
   
   $scope.toMeal = function(mealCurrent, oid) {
+    
+
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal._id);
     console.log(currentMeal.meal)
@@ -613,7 +615,38 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
           $state.go("preapp.stripescreen", {source: "meal"});
         } 
       });
+
    }
 
   }
+
+  $scope.viewCustomerList = function(meal) {
+    console.log("show customer list");
+    $scope.orderCustomers = meal.customers;
+
+    if ($scope.orderCustomers.length == 0)
+      $scope.noCustomers = true;
+
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+
+    console.log("after show modal");
+  }
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  
 })

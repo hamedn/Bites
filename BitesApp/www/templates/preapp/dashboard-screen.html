@@ -65,11 +65,11 @@
 	    	
 	    	<div class="item item-divider">
 	    		<div class="buttons">
-	    			<button class="button button-icon ion-person" style= "float: left; display: inline-block;"> {{meal.maxOrder}} Orders</button>
+	    			<button class="button button-icon ion-pizza" style= "float: left; display: inline-block;"> {{meal.maxOrder - meal.numOrder}} Meals Available</button>
 	    		</div>
 
 	    		<div class="buttons">
-	    			<button class="button button-balanced" ion-nav-animation="slide-in-up" style= "float: right; display: inline-block;" ng-click="toMeal(meal, meal.userOID)">Order Now</button>
+	    			<button class="button button-balanced" ion-nav-animation="slide-in-up" style= "float: right; display: inline-block;" ng-click="toMeal(meal, meal.userOID)">Order</button>
 	    		</div>
 	    	</div>
 	    </div>

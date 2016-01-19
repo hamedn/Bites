@@ -65,13 +65,44 @@
                     <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
                     </div>
+
+
+
+
+
+
+                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                        <button class="button button-balanced" ng-click="viewCustomerList(meal)">Customer List</button>
+                    </div>
+
+
                     <div ng-hide="yourAccount" class="buttons" style="margin: 0 auto;">
-                        <button class="button button-balanced" ng-click="toMeal(meal)">Learn More</button>
+                        <button class="button button-balanced" ng-click="toMeal(meal,chef._id)">Order</button>
                     </div>
                 </div>
                 </div>  
             </div>
+
         </div>
+        </script>
+
+        <script id="my-modal.html" type="text/ng-template">
+          <ion-modal-view id="my-modal.html">
+            <ion-header-bar>
+              <h1 class="title">Customer List</h1>
+                <div class="buttons">
+                    <button class="button button-icon" ng-click="closeModal()">Close</button>
+                </div>
+            </ion-header-bar>
+            <ion-content>
+              <div ng-repeat="customer in orderCustomers">
+                {{customer.name}}
+              </div>
+              <div>
+                <h6 style="text-align:center">Sorry, you don&#39;t have any orders yet. Check again later.</h6>
+              </div>
+            </ion-content>
+          </ion-modal-view>
         </script>
 
         <script type="text/ng-template" id="past.html">
