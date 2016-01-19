@@ -7829,3 +7829,15 @@ ul.rating li i {
   background-color: #67BF68;
   color: white;
   font-size: 1.3em; }
+
+.settingList {
+  padding: 14px; }
+
+.settingListUnactive {
+  padding: 14px; }
+
+.settingLogOut {
+  background-color: #ef473a;
+  color: white;
+  text-align: center;
+  padding: 14px; }

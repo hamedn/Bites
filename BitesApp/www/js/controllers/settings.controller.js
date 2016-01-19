@@ -11,6 +11,7 @@ $scope.chefStripeConnected = false;
 $scope.isChef = {checked:true};
 $scope.savedCard = false;
 $scope.noOrders = false;
+$scope.editProfile = false;
 $scope.showCurrentOrders = true;
 $scope.currentOrders = [];
 $scope.pastOrders = [];
@@ -29,9 +30,8 @@ $scope.chefTabs = [{
 }];
 
 
-
   $scope.$on('$ionicView.enter', function(e) {
-
+    $scope.editProfile = false;
     $scope.currentOrders = [];
     $scope.pastOrders = [];
     var acc = localStorage.get("userToken");

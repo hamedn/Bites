@@ -184,3 +184,18 @@ ul.rating li i {
   color: white;
   font-size: 1.3em;
 }
+
+.settingList { 
+  padding: 14px;
+}
+
+.settingListUnactive { 
+  padding: 14px;
+}
+
+.settingLogOut {
+  background-color: $assertive; 
+  color: white;
+  text-align: center;
+  padding: 14px;
+}

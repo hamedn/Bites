@@ -11,48 +11,38 @@
     </ion-header-bar>
 
 <ion-content scroll="true">
-    
 
-<div class ="list">
-
-    <ion-toggle ng-model="isChef.checked" ng-change="toggleChef()">
-        Chef Account
-    </ion-toggle>
+<ion-toggle class="item item-text-wrap"ng-model="isChef.checked" ng-change="toggleChef()">
+    Chef Account
+</ion-toggle>
 
     <!-- Stripe Credit Card Settings -->
-    <label class="item item-input" ng-show="savedCard">
-      <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
-      <p style="font-size:18px;">Current Card On File:  &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; {{lastFour}}</p>
-    </label>
-
-    <label class="item item-input" ng-show="!savedCard">
-        <p>No current card on file.</p>
-    </label>
-
+<div style="font-size:18px;" class="item item-input" ng-show="savedCard">
+  <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
+  Current Card On File:  &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; {{lastFour}}
 </div>
 
-<div>
-    <button ng-show="isChef.checked && !chefStripeConnected " class="button button-full button-balanced" ng-click="linkStripeAccount()" style="width:100%; margin-left:0%; margin-right:0%;">
-          Connect Chef Account with Stripe
-    </button>
+<div class="item item-input settingListUnactive" ng-show="!savedCard">
+    No current card on file
+</div>
 
-      <label class="item item-input" ng-show="isChef.checked && chefStripeConnected">
+<div class="item item-input settingList" ng-show="isChef.checked && !chefStripeConnected " class="item item-input button button-full button-balanced" ng-click="linkStripeAccount()">
+  Connect Chef Account with Stripe  
+</div>
+
+<div class="item item-input" ng-show="isChef.checked && chefStripeConnected">
+    <div class="item item-input">
       <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
       <p style="font-size:18px;">Stripe successfully connected</p>
-    </label>
-
+    </div>
 </div>
 
-<div>
-    <button class="button button-full button-balanced" ng-show="savedCard" ng-click="changeCreditCardInfo()">
-          Change Credit Card Information
-    </button>
+<div class="item item-input settingList" ng-show="savedCard" ng-click="changeCreditCardInfo()">
+  Change Credit Card Information
 </div>
 
-<div>
-    <button class="button button-full button-balanced" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
-          Enter Credit Card Information
-    </button>
+<div class="item item-input settingList" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
+  Enter Credit Card Information
 </div>
 
 <!-- we can add an automatic save
@@ -66,31 +56,23 @@
 
 
 
-<div class ="list" style="background-color:white">
-
+<div class ="item" style="background-color:white">
+  <p style="font-size: 1.1em; padding-bottom: 5px; text-align: center;">Edit Profile Picture</p>
     
-        <p>Edit Profile Picture</p>
-            <img src="{{self.profilePicture}}" class="profile-avatar">
+    <img src="{{self.profilePicture}}" class="profile-avatar">
 
 
     <div class="button-bar">
-      <a class="button button-icon ion-camera" ng-click="fromCamera()"> Camera</a>
-      <a class="button button-icon ion-camera" ng-click="fromLibrary()"> Library</a>
+      <a class="button button-icon ion-camera" ng-click="fromCamera()" style="text-overflow: clip;"> Camera</a>
+      <a class="button button-icon ion-camera" ng-click="fromLibrary()" style="text-overflow: clip;"> Library</a>
       <a class="button button-balanced" ng-click="saveImage()">Save</a>
     </div>
 
 </div>
 
-
-
-
-
-</ul>
-
-    <button class="button button-full button-assertive" ng-click="logOut()" style="margin-top:4%;">
-      Log Out
-    </button>
-
+<div class="item button-full settingLogOut" ng-click="logOut()">
+  Log Out
+</div>
 </ion-content>
 
 </ion-view>
