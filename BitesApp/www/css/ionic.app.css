@@ -7790,6 +7790,12 @@ ul.rating li i {
   text-align: center;
   margin-top: -1%; }
 
+.profile-rating-text {
+  text-align: center;
+  margin: -1% 0 5% 0;
+  text-align: center;
+  padding: 0; }
+
 .stars {
   font-size: 30px;
   margin: 0 auto;

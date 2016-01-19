@@ -228,7 +228,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     uhStars.data = [];
     halfStar.data = [];
     
-
     var decimal = rating - Math.round(rating);
     console.log("Var Decimal: " + decimal);
 
@@ -282,10 +281,14 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
       
       currentProfile.data = resp.data;
 
-      $scope.calculateRatingStars(currentProfile.data.rating);
-      $scope.getChefMeals();
-
-      $state.go("preapp.chef");
+      if (currentProfile.data.rating == -5) {
+        $scope.chefRating = false;
+      } else {
+        $scope.calculateRatingStars(currentProfile.data.rating);
+        $scope.getChefMeals();
+        $scope.chefRating = true;
+        $state.go("preapp.chef");       
+      }
 
     });
 

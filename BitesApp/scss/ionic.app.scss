@@ -138,6 +138,17 @@ ul.rating li i {
   margin-top: -1%;
 }
 
+.profile-rating-text {
+  text-align: center;
+  margin: -1% 0 5% 0;
+  text-align: center;
+  padding: 0;
+}
+
+.profile-rating-actual-text {
+  color: $balanced;
+}
+
 .stars {
   font-size: 30px;
   margin: 0 auto;
