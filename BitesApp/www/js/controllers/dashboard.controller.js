@@ -300,11 +300,22 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
     $state.go("preapp.myorders");
   }
   
-  $scope.toMeal = function(mealCurrent) {
+  $scope.toMeal = function(mealCurrent, oid) {
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal._id);
     console.log(currentMeal.meal)
-    $state.go("preapp.meal")
+    currentProfile.oid = oid;
+
+    $http.get(APIServer.url() + '/users/individual/' + oid).then(function(resp) {
+      
+      currentProfile.data = resp.data;
+
+      $scope.calculateRatingStars(currentProfile.data.rating);
+      $scope.getChefMeals();
+
+      $state.go("preapp.meal");
+
+    });
   }
 
 

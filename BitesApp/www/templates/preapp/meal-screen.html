@@ -8,61 +8,36 @@
     	<h1 class="title">Bites</h1>
 
     	<div class="buttons">
-    		<button class="button button-icon ion-android-add" ng-click="goMeal()"></button>
+    		<button class="button button-icon" ng-click="shareMeal(meal)">Share</button>
     	</div>
 
     </ion-header-bar>
 
 <ion-content scroll="true" delegate-handle="scrollArea">
-    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
-        <div class="item item-avatar">
-            <img src="{{meal.profilePicture}}">
-            <h2>{{meal.title}}</h2>
-            <p>By {{meal.userName}}</p>
-
-            <!-- Might want to change this styling in the future -->
-            <h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{formatPrice(meal.price)}}</h2>
-                
-            <div class="buttons" style="float: right;">
-                <button class="button button-icon  ion-location" style="font-size: .9em; margin-right: -10px;"> {{formatMealLocation(meal.mealLocation)}}</button>
-                <button class="button button-icon ion-clock" style="font-size: .9em;"> {{meal.pickup | amCalendar}} </button>
-            </div>
-        </div>
-
-            
-        <div class="item item-image" style="margin-top: -15px;">
+    <div>
+        <div class="item item-image">
             <img src="{{meal.photo}}">
         </div>
-            
-        <div class="item item-divider">
-            <p> {{meal.description}} </p>
-            <div class="row">
-                <div class="buttons" style="margin: 0 auto;">
-                     <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
-                    <button class="button button-balanced" ng-click="toOrder()">Order Now</button>
-                </div>
-            </div>
-        </div>  
-
-    </div>
-
-    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
-        <div class="item item-divider">
-            <div id="tabs">
-                <div ng-repeat="tab in tabs" ng-class="tab.style" ng-click="onClickTab(tab)">
-                    <div>
-                        <h2 style="padding: 1px;font-size: 1.5em;">{{tab.title}}</h2>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <div class="item">
+            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px; text-overflow: clip;">{{meal.title}}</h2>
+            <h2 style="text-align: center; padding-bottom: 7px;">by</h2>
+            <img src="{{chef.profilePicture}}" class="profile-avatar">
+            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">{{chef.name}}</h2>
+            <div class="profile-rating">
+                <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
+                <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
+                <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
+            </div> 
+        </div> 
 
         <div class="item item-text-wrap">
-            <div ng-include="currentTab"></div>
+            <p style="text-align: center; font-size: 1.3em;">Description</p>
+            <p style="text-align: center; font-size: 1.1em;">{{meal.description}}</p>
+        </div>
+        <div class="item item-text-wrap">
 
-            <script type="text/ng-template" id="about.html">
                 <div id="about">
+                    <p style="text-align: center; font-size: 1.3em;">About</p>
                     <div class="row">
                         
                         <p style="margin-left: 3px; font-size: 1em; color: green;" class="col button-icon ion-location"><span style="color: grey; margin-left: 2px; font-size: 1em;">  Location:</span></p>
@@ -87,15 +62,25 @@
                         <p style="font-size: 1em; text-align: right; float: right;" class="col"> {{meal.maxOrder}} People</p>
                     </div>
                 </div>
-            </script>
-
-            <script type="text/ng-template" id="ingredients.html">
-                <div id="ingredients">
-                    <p style="font-size: 1.1em">{{meal.ingredients}}</p>
-                </div>
-            </script>
         </div>
 
+        <div class="item item-text-wrap">
+            <div id="ingredients">
+                <p style="text-align: center; font-size: 1.3em;">Ingredients</p>
+                <p style="font-size: 1.1em; text-align: center;">{{meal.ingredients}}</p>
+            </div> 
+        </div>
+        <div class="item item-text-wrap">
+            <div style="row">
+                <div class="col" style="text-align: center;">
+                    <h2 style="font-size: 2em; color: green;">${{formatPrice(meal.price)}}</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="item item-text-wrap button-balanced confirm" ng-click="toOrder()" style="text-align: center; padding: 25px;">
+            Confirm Purchase
+        </div>
 </ion-content>
 
 </ion-view>
