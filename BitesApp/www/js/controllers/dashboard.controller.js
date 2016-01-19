@@ -629,6 +629,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
     if ($scope.orderCustomers.length == 0)
       $scope.noCustomers = true;
+    else
+      $scope.noCustomers = false;
 
     $ionicModal.fromTemplateUrl('my-modal.html', {
       scope: $scope,
