@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+/*
 var Customer = new Schema({
 	name: String,
 	email: String
 });
-
+*/
 var mealSchema = new Schema({
 	title: String,
 	description: String,
@@ -28,7 +28,7 @@ var mealSchema = new Schema({
 	photo:String,
 	profilePicture:String,
 	chefToken: String,
-	customers:[Customer]
+	customers:[]
 });
 
 

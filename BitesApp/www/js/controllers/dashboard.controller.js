@@ -512,13 +512,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
     
     if(localStorage.get("stripeCustomerToken")) {
         
-        var confirmPopup = $ionicPopup.confirm({
-          title: 'Confirm Purchase',
-          template: 'You will be making a purchase for $' + $scope.meal.price + '.'
-        });
-
-        confirmPopup.then(function(res) {
-         if(res) {
+      
             
             $ionicLoading.show({
               template: 'Making transaction'
@@ -587,7 +581,22 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                         });
 
                         console.log("added order to my orders");
-                        $state.go("preapp.dashboard");
+                          var myPopup = $ionicPopup.show({
+              title: "Meal added to My Orders",
+              scope: $scope
+            });
+
+            $timeout(function() {
+                                      $state.go("preapp.dashboard");
+
+
+
+              myPopup.close(); //close the popup after 3 seconds for some reason
+            }, 2500);
+
+
+
+
                       } else {
                           console.log("did not add to orders " + response.data.reason.message);
                           alert("Error: " + response.data.reason.message);
@@ -602,10 +611,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                 }
               });
 
-       } else {
-          $ionicLoading.hide();
-       } 
-     });
+       
    } else {
       var noCardPopup = $ionicPopup.confirm({
        title: 'No Credit Card',

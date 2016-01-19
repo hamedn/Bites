@@ -9,7 +9,7 @@ var Meal = require("../meals/meal.model.js").Meal;
 var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
 var express = require('express');
 var router = express.Router();
-
+var mongo = require('mongodb');
 var flash    = require('connect-flash');
 
 passport.serializeUser(function(user, done) {
@@ -374,23 +374,30 @@ module.exports = function(app, options) {
 
 		                user.save(function(err) {
 			                if (err){
-			                    return res.json({message:"Error " + err});
+			                    return res.json({message:"Error " ,reason:err});
 			                } else {
 			                	
-				    			Meal.findOne({'_id': req.body.mealId}, function(err, meal) {
+				    			Meal.findOne({'_id':  mongo.ObjectID(req.body.mealId) }, function(err, meal) {
 						        	console.log("found meal");
-									if (err)
+									if (err) {
+										console.log('couldnt find meal');
 										return res.json({message: "Error " + err});
-									if (meal) {
-										var newMeal = {name: userName, email: userEmail};
-										meal.customers.push(newMeal);
+									}
+									else if (meal) {
+										var newCustomer = {name: userName, email: userEmail};
+										meal.customers.push(newCustomer);
 										meal.numOrder++;
 										console.log("pushing meal to customers array");
 
 										meal.save(function(err) {
 							                if (err){
+							                								                    console.log("FINAL FAIL");
+
 							                    return res.json({message:"Error " + err});
+
 							                } else {
+							                								                	console.log("FINAL SUCCESS");
+
 							                	return res.json({message:"SUCCESS"});
 							                }
 						            	});

@@ -283,7 +283,7 @@ router.post('/', function(req, res, next) {
 	meal.userOID = req.body.userOID;
 	meal.userName = req.body.userName;
 	meal.chefToken = req.body.chefToken;
-
+	meal.customers = [];
 
 
 	meal.photo = cred.location[env] + "defaultmeal.jpg";
