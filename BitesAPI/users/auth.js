@@ -376,7 +376,31 @@ module.exports = function(app, options) {
 			                if (err){
 			                    return res.json({message:"Error " + err});
 			                } else {
-			                	//return res.json({message:"SUCCESS"});
+			                	
+				    			Meal.findOne({'_id': req.body.mealId}, function(err, meal) {
+						        	console.log("found meal");
+									if (err)
+										return res.json({message: "Error " + err});
+									if (meal) {
+										var newMeal = {name: userName, email: userEmail};
+										meal.customers.push(newMeal);
+										meal.numOrder++;
+										console.log("pushing meal to customers array");
+
+										meal.save(function(err) {
+							                if (err){
+							                    return res.json({message:"Error " + err});
+							                } else {
+							                	return res.json({message:"SUCCESS"});
+							                }
+						            	});
+									}
+								});
+
+
+
+
+
 			                    console.log('Success');
 			                }
 			            });
@@ -384,24 +408,6 @@ module.exports = function(app, options) {
 
 		        });
 
-    			Meal.findOne({'_id': req.body.mealId}, function(err, meal) {
-		        	console.log("found meal");
-					if (err)
-						return res.json({message: "Error " + err});
-					if (meal) {
-						var newMeal = {name: userName, email: userEmail};
-						meal.customers.push(newMeal);
-						console.log("pushing meal to customers array");
-
-						meal.save(function(err) {
-			                if (err){
-			                    return res.json({message:"Error " + err});
-			                } else {
-			                	return res.json({message:"SUCCESS"});
-			                }
-		            	});
-					}
-				});
 
 
 			});

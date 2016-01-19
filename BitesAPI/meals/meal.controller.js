@@ -270,6 +270,7 @@ router.post('/', function(req, res, next) {
 	meal.description = mealDesc;
 	meal.deadline = mealDeadline;
 	meal.pickup = mealPickup;
+	meal.numOrder = 0;
 	meal.maxOrder = mealMaxOrder;
 	meal.mealLocation = mealLocation;
 	meal.ingredients = mealIngredients;
