@@ -43,7 +43,7 @@
 	    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
 
 	    	<div class="item item-avatar">
-	    		<img src="{{meal.profilePicture}}">
+	    		<img src="{{meal.profilePicture}}" ng-click="goChef(meal.userOID)">
 	    		<h2>{{meal.title}}</h2>
 	    		<p class="chefDash" ng-click="goChef(meal.userOID)">By {{meal.userName}}</p>
 
@@ -59,7 +59,7 @@
 	    		</div>
 	   		</div>
 
-	    	<div class="item item-image" style="margin-top: -15px;">
+	    	<div class="item item-image" style="margin-top: -15px;" ng-click="toMeal(meal, meal.userOID)">
 	      		<img src="{{meal.photo}}">
 	    	</div>
 	    	
