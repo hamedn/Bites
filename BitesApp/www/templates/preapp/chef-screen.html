@@ -98,7 +98,7 @@
               <div ng-repeat="customer in orderCustomers">
                 {{customer.name}}
               </div>
-              <div>
+              <div ng-show="noCustomers">
                 <h6 style="text-align:center">Sorry, you don&#39;t have any orders yet. Check again later.</h6>
               </div>
             </ion-content>
