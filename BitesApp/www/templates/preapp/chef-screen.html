@@ -57,15 +57,13 @@
             </div>
             
             <div class="item item-divider">
-                <div ng-show="yourAccount">
-                    <div class="buttons" style="margin: 0 auto;">
-                        <button class="button button-assertive" ng-click="deleteMeal(meal._id); getChefMeals();">Delete</button>
+                <div ng-show="yourAccount" >
+                    <div class="row">
+                        <button class="button button-balanced col" ng-click="shareMeal(meal)" style="border-radius:0px;">Share</button>
+                        <button class="button button-balanced col" ng-click="viewCustomerList(meal)" style="border-radius:0px;">Customer List</button>
                     </div>
-                    <div class="buttons" style="margin: 0 auto;">
-                        <button class="button button-balanced" ng-click="shareMeal(meal)" style="width:47%; display: inline-block;">Share</button>
-                    </div>
-                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
-                        <button class="button button-balanced" ng-click="viewCustomerList(meal)" style="width:50%; display:inline-block;">Customer List</button>
+                    <div class="row">
+                        <button class="button button-assertive col" ng-click="deleteMeal(meal._id); getChefMeals();" style="width: 100%;">Delete</button>
                     </div>
                  </div>
 
