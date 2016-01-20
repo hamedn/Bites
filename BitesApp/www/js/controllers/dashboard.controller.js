@@ -277,9 +277,15 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
     currentProfile.oid = oid;
 
+
     $http.get(APIServer.url() + '/users/individual/' + oid).then(function(resp) {
       
       currentProfile.data = resp.data;
+
+
+            console.log("TRIED TO GO CHEF");
+
+
 
       if (currentProfile.data.rating == -5) {
         $scope.chefRating = false;
@@ -287,8 +293,13 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
         $scope.calculateRatingStars(currentProfile.data.rating);
         $scope.getChefMeals();
         $scope.chefRating = true;
-        $state.go("preapp.chef");       
+
       }
+
+
+
+        $state.go("preapp.chef");       
+      
 
     });
 
