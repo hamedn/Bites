@@ -315,6 +315,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   
   $scope.toMeal = function(mealCurrent, oid) {
     
+if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stripeCustomerToken") != "undefined") {
+
 
     currentMeal.meal = mealCurrent;
     console.log(currentMeal.meal._id);
@@ -332,6 +334,10 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
     });
   }
+  else {
+    alert("No credit card information. Please configure in settings.");
+  }
+}
 
 
   // Get the Photo

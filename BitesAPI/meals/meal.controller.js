@@ -50,6 +50,10 @@ router.post('/rating', function(req, res, next) {
 	    	if (err)
 	        	throw err;
 	    	else {
+
+
+
+
 	    		res.json({message:"rating post successful"});
 	    		//done(null, meal);
 	    	}
@@ -284,7 +288,7 @@ router.post('/', function(req, res, next) {
 	meal.userName = req.body.userName;
 	meal.chefToken = req.body.chefToken;
 	meal.customers = [];
-
+	meal.raters = [];
 
 	meal.photo = cred.location[env] + "defaultmeal.jpg";
 	/*

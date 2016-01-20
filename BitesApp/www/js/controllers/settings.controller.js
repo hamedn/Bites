@@ -1,7 +1,7 @@
 angular.module('settings.controllers', ['ionic-ratings']) 
 
 
-.controller("SettingsCtrl", function($scope, $window,$ionicLoading, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
+.controller("SettingsCtrl", function($scope, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
 
@@ -160,9 +160,7 @@ if ($scope.freezebuttons == false) {
   }
 
   $scope.submitRating = function() {
-    console.log($scope.rate);
-    console.log($scope.meal._id);
-
+   
     $http({
       method: 'POST',
       url: APIServer.url() + '/meals/rating',
@@ -180,7 +178,7 @@ if ($scope.freezebuttons == false) {
 
       data: {
         rating: $scope.ratingsObject.rating,
-        oid: $scope.meal._id
+        oid: localStorage.get("rateID")
       }
 
     }).then(function (response) {
@@ -188,7 +186,7 @@ if ($scope.freezebuttons == false) {
       $ionicAnalytics.track("Rating Submitted", {
         meal: {
           rating: $scope.ratingsObject.rating,
-          id: $scope.meal._id
+          id: localStorage.get("rateID")
         }
       });
 
@@ -222,8 +220,10 @@ if ($scope.freezebuttons == false) {
   }
 
   $scope.goRatings = function(order) {
-    $scope.meal._id = order._id;
-    console.log($scope.meal._id);
+    localStorage.set("rateID", order._id)
+
+
+    console.log("ID:" + order._id);
     $state.go('preapp.rating');
   }
   

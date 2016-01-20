@@ -24,7 +24,8 @@ var mealSchema = new Schema({
 	photo:String,
 	profilePicture:String,
 	chefToken: String,
-	customers:[]
+	customers:[],
+	raters:[]
 });
 
 

@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div ng-repeat="order in pastOrders" ng-show="!showCurrentOrders">
+<div ng-repeat="order in currentOrders" ng-show="!showCurrentOrders">
   <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
 
     <div class="item item-avatar">
@@ -46,7 +46,7 @@
       <h2>Pickup: {{order.pickup | amCalendar}}</h2>
       <h2>{{order.description}}</h2>
       <div class="buttons" style="margin: 0 auto;">
-          <button class="button button-balanced" ng-click="goRating(order)">Rate Now!</button>
+          <button class="button button-balanced" ng-click="goRatings(order)">Rate Now!</button>
       </div>
 
     </div>
