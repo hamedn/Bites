@@ -115,7 +115,7 @@ module.exports = function(app, options) {
 			                console.log(req.body.name);
 			                newUser.mealArray = [];
 			                newUser.email = email;
-			                newUser.rating = 5;
+			                newUser.rating = -5;
 			                newUser.profilePicture = credentials.location[env] + "defaultprofile.gif"
 			                newUser.password = newUser.generateHash(password);
 			               	newUser.accessToken = newUser.generateHash(password + Math.random());
@@ -164,7 +164,7 @@ module.exports = function(app, options) {
 						profilePicture: profile.photos[0].value
 					});
 					user.mealArray = [];
-					user.rating = 5;
+					user.rating = -5;
 					user.accessToken = accessToken;
 					user.save(function(err) {
 						if (err) return done(err,null);

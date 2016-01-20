@@ -15,8 +15,8 @@
         <div class="item">
             <img src="{{chef.profilePicture}}" class="profile-avatar">
             <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">{{chef.name}}</h2>
-            <div class="profile-rating-text" ng-show="chefRating"><h2 style="color: #67BF68;">Not Rated Yet!</h2></div>
-            <div class="profile-rating" ng-show="!chefRating">
+            <div class="profile-rating-text" ng-show="chef.rating == -5"><h2 style="color: #67BF68;">Not Rated Yet!</h2></div>
+            <div class="profile-rating" ng-show="chef.rating != -5">
                 <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
                 <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
                 <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
@@ -37,13 +37,12 @@
 
         <script type="text/ng-template" id="current.html">
         <div id="current" ng-repeat="meal in currentChefMeals">
-            <div ng-show="afield=true"class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+            <div ng-show="afield=true" class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
                 <div class="item item-avatar">
                     <img src="{{meal.profilePicture}}">
                     <h2>{{meal.title}}</h2>
                     <p>By {{meal.userName}}</p>
 
-                <!-- Might want to change this styling in the future -->
                 <h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{formatPrice(meal.price)}}</h2>
                     
                 <div class="buttons" style="float: right;">
@@ -58,27 +57,27 @@
             </div>
             
             <div class="item item-divider">
-                <p> {{meal.description}} </p>
-                <div class="row">
-                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                <div ng-show="yourAccount">
+                    <div class="buttons" style="margin: 0 auto;">
                         <button class="button button-assertive" ng-click="deleteMeal(meal._id); getChefMeals();">Delete</button>
                     </div>
-                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                    <div class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
                     </div>
 
                     <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="viewCustomerList(meal)">Customer List</button>
                     </div>
+                 </div>
 
+                <div>
+                    <button class="button button-icon ion-pizza" ng-hide="yourAccount" style= "float: left; display: inline-block;"> {{meal.maxOrder - meal.numOrder}} Meals Available</button>
 
-                    <div ng-hide="yourAccount" class="buttons" style="margin: 0 auto;">
-                        <button class="button button-balanced" ng-click="toMeal(meal,chef._id)">Order</button>
+                    <div ng-hide="yourAccount || (meal.maxOrder - meal.numOrder) <= 0" class="buttons" style="margin: 0 auto;">
+                        <button class="button button-balanced" ng-click="toMeal(meal,chef._id)" style="float:right;">Order</button>
                     </div>
-                </div>
                 </div>  
             </div>
-
         </div>
         </script>
 
@@ -114,12 +113,13 @@
                     <div class="row" style="">
                         <div class="col" style="margin-bottom: 5px; margin-top: -5px; border-bottom: 1px green solid; text-align: center;"> {{meal.title}} </div>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-show="meal.numOrder > 0">
                         <div class="col" style="text-align: center;">
-                            <div class="hstars ion-ios-star" style="font-size: 22px;">{{meal.rating}}/5</div>
+                            <div class="hstars ion-ios-star" ng-show="meal.rating != -5" style="font-size: 22px;">{{meal.rating}}/5</div>
+                            <div ng-show="meal.rating == -5" style="font-size: 22px;">No Ratings</div>
                         </div>
                         <div class="col" style="text-align: center;">
-                            <div style="font-size: 20px;"> 3/{{meal.maxOrder}} Orders</div>
+                            <div style="font-size: 20px;"> {{meal.numOrder}}/{{meal.maxOrder}} Sold</div>
                         </div>
                     </div>
                 </div>
