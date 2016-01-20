@@ -67,11 +67,6 @@
                         <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
                     </div>
 
-
-
-
-
-
                     <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="viewCustomerList(meal)">Customer List</button>
                     </div>
@@ -88,8 +83,8 @@
         </script>
 
         <script id="my-modal.html" type="text/ng-template">
-          <ion-modal-view id="my-modal.html">
-            <ion-header-bar>
+          <ion-modal-view id="my-modal.html" class="bg2">
+            <ion-header-bar class="bar-balanced">
               <h1 class="title">Customer List</h1>
                 <div class="buttons">
                     <button class="button button-icon" ng-click="closeModal()">Close</button>
@@ -97,7 +92,14 @@
             </ion-header-bar>
             <ion-content>
               <div ng-repeat="customer in orderCustomers">
-                {{customer.name}}
+                <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+                    <div class="item item-avatar">
+                        <img src="{{customer.profilePicture}}" style="width: 70px; height:50px; margin-top: 10px;">
+                        <h2>{{customer.name}}</h2> 
+                        <h3>{{customer.email}}</h3>
+                        <h3>{{customer.phone}}</h3>
+                    </div>
+                </div>
               </div>
               <div ng-show="noCustomers">
                 <h6 style="text-align:center">Sorry, you don&#39;t have any orders yet. Check again later.</h6>

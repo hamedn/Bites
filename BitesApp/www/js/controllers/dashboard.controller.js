@@ -511,9 +511,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   $scope.toOrder = function() {
     
     if(localStorage.get("stripeCustomerToken")) {
-        
-      
-            
+
             $ionicLoading.show({
               template: 'Making transaction'
             });
@@ -543,7 +541,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                 $ionicLoading.hide();
 
                 if (response.data.message == "SUCCESS") {
-                  console.log("success");
+                  console.log("transaction successfully made");
                   var chefToken = response.data.chefToken;
 
                   //POST data to save for myorders
@@ -580,26 +578,22 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                           }
                         });
 
+                        $state.go("preapp.dashboard");
+
                         console.log("added order to my orders");
-                          var myPopup = $ionicPopup.show({
-              title: "Meal added to My Orders",
-              scope: $scope
-            });
+                        var myPopup = $ionicPopup.show({
+                            title: "Meal added to My Orders",
+                            scope: $scope
+                        });
 
-            $timeout(function() {
-                                      $state.go("preapp.dashboard");
-
-
-
-              myPopup.close(); //close the popup after 3 seconds for some reason
-            }, 2500);
-
-
-
+                        $timeout(function() {
+                          $state.go("preapp.dashboard");
+                          myPopup.close(); //close the popup after 3 seconds for some reason
+                        }, 2500);
 
                       } else {
-                          console.log("did not add to orders " + response.data.reason.message);
-                          alert("Error: " + response.data.reason.message);
+                          console.log("did not add to orders " + response.data.message);
+                          alert("Error: " + response.data.message);
                       }
                     });
 
@@ -607,7 +601,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                 } else {
                     $ionicLoading.hide();
                     console.log(response.data);
-                    alert("Error: " + response.data.reason.message);
+                    alert("Error: " + response.data.message);
                 }
               });
 

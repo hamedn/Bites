@@ -358,6 +358,7 @@ module.exports = function(app, options) {
 			app.post('/saveOrder', function(req, res) {
 				//var stripe = require('stripe')(PLATFORM_SECRET_KEY);
 				var userName = "", userEmail = "";
+				var newCustomer = "";
 				User.findOne({ 'accessToken' :  req.body.userToken }, function(err, user) {
 		            if (err) {
 		                return done(err);
@@ -369,6 +370,7 @@ module.exports = function(app, options) {
 		            	var newOrder = {mealId: req.body.mealId};
 
 		                user.orders.push(newOrder);
+		                newCustomer = user;
 		                userName = user.name;
 		                userEmail = user.email;
 
@@ -384,29 +386,23 @@ module.exports = function(app, options) {
 										return res.json({message: "Error " + err});
 									}
 									else if (meal) {
-										var newCustomer = {name: userName, email: userEmail};
+										//var newCustomer = user;
 										meal.customers.push(newCustomer);
 										meal.numOrder++;
 										console.log("pushing meal to customers array");
 
 										meal.save(function(err) {
 							                if (err){
-							                								                    console.log("FINAL FAIL");
-
+							                	console.log("FINAL FAIL");
 							                    return res.json({message:"Error " + err});
 
 							                } else {
-							                								                	console.log("FINAL SUCCESS");
-
+							                	console.log("FINAL SUCCESS");
 							                	return res.json({message:"SUCCESS"});
 							                }
 						            	});
 									}
 								});
-
-
-
-
 
 			                    console.log('Success');
 			                }
