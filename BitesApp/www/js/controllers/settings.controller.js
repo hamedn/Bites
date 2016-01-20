@@ -178,7 +178,8 @@ if ($scope.freezebuttons == false) {
 
       data: {
         rating: $scope.ratingsObject.rating,
-        oid: localStorage.get("rateID")
+        oid: localStorage.get("rateID"),
+        userid: localStorage.get("oid");
       }
 
     }).then(function (response) {

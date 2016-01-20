@@ -45,6 +45,7 @@ router.post('/rating', function(req, res, next) {
 
 			meal.rating = sum / meal.ratingCount;
 		}
+		meal.raters.push(req.body.userid);
 
 		meal.save(function(err) {
 	    	if (err)
