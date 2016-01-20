@@ -36,14 +36,13 @@
         <div ng-include="currentChefTab"></div>
 
         <script type="text/ng-template" id="current.html">
-        <div id="current" ng-repeat="meal in currentChefMeals" >
-            <div ng-show="afield=true"class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+        <div id="current" ng-repeat="meal in currentChefMeals">
+            <div ng-show="afield=true" class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
                 <div class="item item-avatar">
                     <img src="{{meal.profilePicture}}">
                     <h2>{{meal.title}}</h2>
                     <p>By {{meal.userName}}</p>
 
-                <!-- Might want to change this styling in the future -->
                 <h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{formatPrice(meal.price)}}</h2>
                     
                 <div class="buttons" style="float: right;">
@@ -58,14 +57,14 @@
             </div>
             
             <div class="item item-divider">
-                <div class="row">
-                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                <div ng-show="yourAccount">
+                    <div class="buttons" style="margin: 0 auto;">
                         <button class="button button-assertive" ng-click="deleteMeal(meal._id); getChefMeals();">Delete</button>
                     </div>
-                    <div ng-show="yourAccount" class="buttons" style="margin: 0 auto;">
+                    <div class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="shareMeal(meal)">Share</button>
                     </div>
-
+                </div>
 
 
 
@@ -75,18 +74,14 @@
                         <button class="button button-balanced" ng-click="viewCustomerList(meal)">Customer List</button>
                     </div>
 
-
+                <div>
                     <button class="button button-icon ion-pizza" ng-hide="yourAccount" style= "float: left; display: inline-block;"> {{meal.maxOrder - meal.numOrder}} Meals Available</button>
 
                     <div ng-hide="yourAccount || (meal.maxOrder - meal.numOrder) <= 0" class="buttons" style="margin: 0 auto;">
                         <button class="button button-balanced" ng-click="toMeal(meal,chef._id)" style="float:right;">Order</button>
                     </div>
-                    
-
-                </div>
                 </div>  
             </div>
-
         </div>
         </script>
 
