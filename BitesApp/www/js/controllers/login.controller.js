@@ -83,14 +83,14 @@ angular.module('login.controllers', ['ionic-ratings'])
             });
            
            var myPopup = $ionicPopup.show({
-              template: "<h2>Welcome to Bites!</h2>",
-              title: "Login Successful!!!",
+              //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
+              title: "Welcome to Bites",
               scope: $scope
             });
 
             $timeout(function() {
               myPopup.close(); //close the popup after 3 seconds for some reason
-            }, 1000);
+            }, 2500);
 
             localStorage.set("loggedIn",true);
             localStorage.set("userToken", response.data.accessToken);
