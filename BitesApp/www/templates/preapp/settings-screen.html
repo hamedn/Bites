@@ -12,36 +12,44 @@
 
 <ion-content scroll="true">
 
+<div class="item item-divider">
+  Chef Toggle
+</div>
 <ion-toggle class="item item-text-wrap"ng-model="isChef.checked" ng-change="toggleChef()">
     Chef Account
 </ion-toggle>
 
+<div class="item item-divider">
+  Account Settings
+</div>
     <!-- Stripe Credit Card Settings -->
-<div style="font-size:18px;" class="item item-input" ng-show="savedCard">
+<div class="item settingListUnactive" ng-show="savedCard" style="text-align: center;">
   <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
   Current Card On File:  &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; {{lastFour}}
 </div>
 
-<div class="item item-input settingListUnactive" ng-show="!savedCard">
+<div class="item settingListUnactive" ng-show="!savedCard" style="text-align: center;">
     No current card on file
 </div>
 
-<div class="item item-input settingList" ng-show="isChef.checked && !chefStripeConnected " class="item item-input button button-full button-balanced" ng-click="linkStripeAccount()">
-  Connect Chef Account with Stripe  
+<div class="item settingList item-icon-right" ng-show="isChef.checked && !chefStripeConnected " class="item item-input button button-full button-balanced" ng-click="linkStripeAccount()">
+  <i class="icon ion-arrow-graph-up-right"></i>
+  Connect with Stripe  
 </div>
 
-<div class="item item-input" ng-show="isChef.checked && chefStripeConnected">
-    <div class="item item-input">
-      <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
-      <p style="font-size:18px;">Stripe successfully connected</p>
-    </div>
+<div class="item item-input item-icon-right settingList" ng-show="isChef.checked && chefStripeConnected">
+  <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
+  <i class="icon ion-arrow-graph-up-right"></i>
+  Stripe successfully connected
 </div>
 
-<div class="item item-input settingList" ng-show="savedCard" ng-click="changeCreditCardInfo()">
+<div class="item item-input item-icon-right settingList" ng-show="savedCard" ng-click="changeCreditCardInfo()">
+  <i class="icon ion-card"></i>
   Change Credit Card Information
 </div>
 
-<div class="item item-input settingList" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
+<div class="item item-icon-right item-input settingList" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
+  <i class="icon ion-card"></i>
   Enter Credit Card Information
 </div>
 
