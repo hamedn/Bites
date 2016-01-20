@@ -128,7 +128,7 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
           var timeDif = fixedDate - now;
 
-          if (timeDif <= 0 ) {
+          if (timeDif <= 0  || (individualMeal.maxOrder - individualMeal.numOrder) <= 0) {
             meals.splice(i,1)
 
           }
