@@ -112,6 +112,7 @@ module.exports = function(app, options) {
 			                var newUser  = new User();
 			                newUser.name = req.body.name;
 			                newUser.isChef = req.body.isChef;
+			                newUser.phone = req.body.phone;
 			                console.log(req.body.name);
 			                newUser.mealArray = [];
 			                newUser.email = email;
@@ -166,6 +167,7 @@ module.exports = function(app, options) {
 					user.mealArray = [];
 					user.rating = -5;
 					user.accessToken = accessToken;
+					user.phone = '000';
 					user.save(function(err) {
 						if (err) return done(err,null);
 						done(null,user);

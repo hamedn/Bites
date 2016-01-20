@@ -63,6 +63,7 @@ angular.module('login.controllers', ['ionic-ratings'])
             name: $scope.data.realname,
             email: $scope.data.email,
             password: $scope.data.password,
+            phone: $scope.data.phone,
             isChef: $scope.data.chef,
             chefStripeToken: localStorage.get("stripeAccessToken"),
             // COMMENTED OUT FOR CURRENT USE

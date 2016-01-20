@@ -24,7 +24,8 @@ var userSchema = new Schema({
 	chefStripeAccessToken: String,
 	chefStripeRefreshToken: String,
 	chefStripeUserId: String,
-	orders: [orderSchema]
+	orders: [orderSchema],
+	phone: String
 });
 
 
