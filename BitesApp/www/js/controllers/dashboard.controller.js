@@ -252,7 +252,6 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     if (halfStar.data.length == 1) {
       uhStars.data.splice(0, 1);
     }
-
   }
 
   $scope.doRefresh();
