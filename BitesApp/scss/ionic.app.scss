@@ -210,3 +210,11 @@ ul.rating li i {
   text-align: center;
   padding: 14px;
 }
+
+.price {
+  font-size: 1.5em;
+  color: $balanced; 
+  position: absolute; 
+  right: 10px; 
+  top: 5px;
+}

@@ -35,20 +35,20 @@
 
     </ion-header-bar>
 
-<ion-content scroll="true" class="bg2">
+<ion-content scroll="true">
 
 <ion-refresher on-refresh="doRefresh()" ></ion-refresher>
     
 	<div ng-repeat="meal in meals">
-	    <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
+	    <div class="list card" style="border-radius:5px; margin-bottom:0px">
 
 	    	<div class="item item-avatar">
 	    		<img src="{{meal.profilePicture}}" ng-click="goChef(meal.userOID)">
-	    		<h2>{{meal.title}}</h2>
+	    		<h2>{{formatMealName(meal.title)}}</h2>
 	    		<p class="chefDash" ng-click="goChef(meal.userOID)">By {{meal.userName}}</p>
 
 	    		<!-- Might want to change this styling in the future -->
-	    		<h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{formatPrice(meal.price)}}</h2>
+	    		<h2 class="price" style="font-size: 1.5em;" align="right">${{formatPrice(meal.price)}}</h2>
 	    		
 	    		<div class="buttons" style= "float: right;">
 	    			<button class="button button-icon  ion-location" style="font-size: .9em; margin-right: -10px;"> {{formatMealLocation(meal.mealLocation)}}</button>

@@ -457,6 +457,15 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
     }
   }
 
+  $scope.formatMealName = function(name) {
+    //console.log(price);
+    if (name.length > 20) {
+      return name.substring(0, 20) + "...";
+    } else {
+      return name;
+    }
+  }
+
   $scope.submitRating = function() {
     console.log($scope.rate);
     console.log($scope.meal._id);

@@ -7850,3 +7850,10 @@ ul.rating li i {
   color: white;
   text-align: center;
   padding: 14px; }
+
+.price {
+  font-size: 1.5em;
+  color: #67BF68;
+  position: absolute;
+  right: 10px;
+  top: 5px; }
