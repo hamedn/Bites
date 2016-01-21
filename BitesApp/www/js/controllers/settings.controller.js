@@ -29,6 +29,22 @@ $scope.chefTabs = [{
   style: 'right'
 }];
 
+$scope.showRatings = function(meal) {
+  if (!meal.raters) return true;
+
+  dontshow = true;
+  meal.raters.forEach(function(entry) {
+    console.log("theirs"+entry);
+    console.log("mine"+localStorage.get("oid"))
+    if (entry == localStorage.get("oid"))  {
+      console.log("cannot show"+meal.title);
+      dontshow = false;
+    }
+  });
+
+  return dontshow;
+}
+
 
   $scope.$on('$ionicView.enter', function(e) {
     $scope.editProfile = false;
