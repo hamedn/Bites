@@ -249,12 +249,14 @@ console.log("THIS IS DA ID" + req.params.oid)
 
 router.post('/', function(req, res, next) {
 
-User.findOne({'accessToken': req.body.chefToken}, function(err, user) {
+User.findOne({'accessToken': req.body.access}, function(err, user) {
 		if (err) {
+			console.log(err)
 			throw err;
 		}
 		else if (user == null) {
-			throw err;
+			console.log("user is null")
+			//throw err;
 		}
 		else {
 		
