@@ -112,6 +112,28 @@ router.post('/changechef', function(req, res, next) {
 
 });
 
+router.post('/changephone', function(req, res, next) {
+	console.log(req.body);
+	User.findOne({'accessToken': req.body.accessToken}, function(err, user) {
+		if (err) {
+			res.send("fail");
+			throw err;
+		}
+
+		user.phone = req.body.phone;
+
+		user.save(function(err) {
+			if (err) res.send("fail");
+
+			res.send("success");
+			console.log("changed user " + req.body.accessToken + " phone to " + req.body.phone)
+		})
+
+		
+	});
+
+});
+
 var multipart = require('connect-multiparty');
 
 

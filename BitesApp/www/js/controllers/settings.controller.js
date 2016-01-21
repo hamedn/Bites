@@ -551,6 +551,56 @@ if ($scope.freezebuttons == false) {
     $state.go("preapp.stripescreen", "settings");
   }
 
+  $scope.changePhone = function() {
+    $state.go("preapp.phone", "settings");
+  }
+
+  $scope.cancelChangePhone = function() {
+    if ($state.params.source == "meal")
+      $state.go("preapp.meal");
+    else
+      $state.go("preapp.settings");
+    
+  }
+
+  $scope.savePhone = function () {
+
+
+    //$ionicLoading.show({
+    //  template: 'Sending info to server'
+    //});
+  
+    $http({
+          method: 'POST',
+          url: APIServer.url() + '/users/changephone',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+          transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+
+          data:  {
+            phone: $scope.data.phone,
+            userToken: localStorage.get("userToken")
+          }
+            
+          }).then (function (response) {
+
+            $ionicLoading.hide();
+
+            if (response.data.message == "SUCCESS") {
+                console.log(response);
+                $scope.cancelChangePhone();
+            } else {
+              console.log(response.data);
+              alert("Error: " + response.data.reason.message);
+            }
+          });
+  }
+
   $scope.cancelChangeCreditCardInfo = function() {
     if ($state.params.source == "meal")
       $state.go("preapp.meal");

@@ -182,6 +182,11 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
     controller: "SettingsCtrl"
   })
 
+  .state('preapp.phone', {
+    url: '/phone',
+    templateUrl: 'templates/preapp/phone-screen.html',
+    controller: "SettingsCtrl"
+  })
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
