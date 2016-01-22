@@ -10,14 +10,17 @@
 
     <div class="card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
       <div class="item item-text-wrap">
-      
+   
+          <label class="item item-input">
+              <input type="tel" placeholder="Phone Number" ng-model="data.phone">
+          </label>
+
           <ion-checkbox ng-model="data.chef">Do you want to be a Chef?</ion-checkbox>
-          <div style=" width: 100%;" ng-show="data.chef">
-            <iframe  src="http://www.w3schools.com"></iframe>
+
+          <div style="width: 100%; padding: 15px;">
+            <a href="http://www.bitesapp.com">Link to Terms of Service</a>
           </div>
-          <div style="width: 100%;" ng-hide="data.chef">
-            <iframe src="http://www.w3schools.com/js/"></iframe>
-          </div>
+          <ion-checkbox ng-model="data.agreedToTerms">I have read and agree to the Terms of Service</ion-checkbox>
 
       </div>
     </div>

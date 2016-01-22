@@ -303,7 +303,8 @@ $http({
 
         data:  {
           accessToken: localStorage.get("userToken"),
-          isChef: $scope.data.chef
+          isChef: $scope.data.chef,
+          phone: $scope.data.phone
         }
     }).then (function (response) {
 
