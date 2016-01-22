@@ -19,12 +19,12 @@
             <img src="{{meal.photo}}">
         </div>
         <div class="item">
-            <h2 style="font-size: 2em; text-align: center; padding-bottom: 2px; text-overflow: clip;">{{meal.title}}</h2>
+            <h2 style="font-size: 2em; text-align: center; padding-bottom: 2px; white-space: initial;">{{meal.title}}</h2>
         </div>
         <div class="item">
             <!--<h2 style="text-align: center; padding-bottom: 7px;">prepared by</h2>-->
-            <img src="{{chef.profilePicture}}" class="profile-avatar">
-            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">by {{chef.name}}</h2>
+            <img src="{{chef.profilePicture}}" ng-click="goChef(meal.userOID)" class="profile-avatar">
+            <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;" ng-click="goChef(meal.userOID)">by {{chef.name}}</h2>
             <div class="profile-rating">
                 <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
                 <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
