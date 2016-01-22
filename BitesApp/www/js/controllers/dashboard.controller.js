@@ -363,7 +363,7 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
   }];
 
   $scope.chefTabs = [{
-    title: 'Now Cooking',
+    title: 'Cooking',
     url: 'current.html',
     style: 'left-active'
   }, {
@@ -387,8 +387,16 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
       tab.style = 'right-active';
       $scope.chefTabs[0].style = 'left';
     }
+    $scope.apply();
 
-       $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+
+ $timeout(function() {
+        $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+        $ionicScrollDelegate.$getByHandle("scrollArea2").scrollTop();
+  }, 500);  
+
+
+    
 
   }
 
