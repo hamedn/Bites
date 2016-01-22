@@ -97,9 +97,10 @@ router.post('/changechef', function(req, res, next) {
 			res.send("fail");
 			throw err;
 		}
-		if (req.body.phone.length > 0)
+		if (req.body.phone.length > 0) {
 			user.isChef = req.body.isChef;
 			user.phone = req.body.phone;
+		}
 		else {
 			user.isChef = req.body.isChef;
 		}

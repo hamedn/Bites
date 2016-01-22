@@ -1,7 +1,7 @@
 angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
 
-.controller('MealFormCtrl', function($scope,$ionicLoading, $ionicAnalytics, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
+.controller('MealFormCtrl', function($scope,$ionicLoading, $ionicAnalytics, $ionicPopup, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
   $scope.data = {};
   
   $scope.goDash = function() {
@@ -117,6 +117,13 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
   }
 };
 
+  $scope.checkPrice = function(price) {
+    if (price % 1 != 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   $scope.newMeal = function() {
 
@@ -154,7 +161,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
             console.log("response" + response);
 
-            if (response.data.message == "SUCCESS") {
+            if (response.data.message == "SUCCESS" && $scope.checkPrice(response.data.price)) {
                 console.log("response chefToken " + response.data.chefToken);
                 chefToken = response.data.chefToken;
                 
@@ -256,8 +263,30 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
             } else if (response.data.message == "NO CHEF TOKEN") {
               console.log(response.data);
-              alert("Sorry, you are not a registered chef and only chefs may post meals");
+              var myPopup = $ionicPopup.show({
+                //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
+                title: "Sorry, you are not a registered chef and only chefs may post meals",
+                scope: $scope
+              });
+
+              $timeout(function() {
+                myPopup.close(); //close the popup after 3 seconds for some reason
+              }, 2000);
+              
               $state.go("preapp.dashboard");
+            } else if (!$scope.checkPrice(response.data.price)) {
+              console.log(response.data.price);
+
+              var myPopup = $ionicPopup.show({
+                //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
+                title: "Please enter a Whole Number for the Price",
+                scope: $scope
+              });
+
+              $timeout(function() {
+                myPopup.close(); //close the popup after 3 seconds for some reason
+              }, 2000);
+
             } else {
               console.log(response.data);
               alert("Error: " + response.data.reason.message);
