@@ -19,7 +19,9 @@
             <img src="{{meal.photo}}">
         </div>
         <div class="item">
-            <h2 style="text-align: center; margin: 5px 0 10px 0; padding-bottom: 2px; text-overflow: clip;">{{meal.title}}</h2>
+            <h2 style="font-size: 2em; text-align: center; padding-bottom: 2px; text-overflow: clip;">{{meal.title}}</h2>
+        </div>
+        <div class="item">
             <!--<h2 style="text-align: center; padding-bottom: 7px;">prepared by</h2>-->
             <img src="{{chef.profilePicture}}" class="profile-avatar">
             <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">by {{chef.name}}</h2>
@@ -31,13 +33,13 @@
         </div> 
 
         <div class="item item-text-wrap">
-            <p style="text-align: center; font-size: 1.3em;">Description</p>
+            <p style="text-align: center; font-size: 1.5em;">Description</p>
             <p style="text-align: center; font-size: 1.1em;">{{meal.description}}</p>
         </div>
         <div class="item item-text-wrap">
 
                 <div id="about">
-                    <p style="text-align: center; font-size: 1.3em;">About</p>
+                    <p style="text-align: center; font-size: 1.5em;">About</p>
                     <div class="row">
                         
                         <p style="margin-left: 3px; font-size: 1em; color: green;" class="col button-icon ion-location"><span style="color: grey; margin-left: 2px; font-size: 1em;">  Location:</span></p>
@@ -66,7 +68,7 @@
 
         <div class="item item-text-wrap">
             <div id="ingredients">
-                <p style="text-align: center; font-size: 1.3em;">Ingredients</p>
+                <p style="text-align: center; font-size: 1.5em;">Ingredients</p>
                 <p style="font-size: 1.1em; text-align: center;">{{meal.ingredients}}</p>
             </div> 
         </div>
