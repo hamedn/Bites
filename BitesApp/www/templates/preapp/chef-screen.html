@@ -56,14 +56,14 @@
                 <img src="{{meal.photo}}">
             </div>
             
-            <div class="item item-divider">
                 <div ng-show="yourAccount" >
                     <div class="row">
-                        <button class="button button-balanced col" ng-click="shareMeal(meal)" style="border-radius:0px;">Share</button>
-                        <button class="button button-balanced col" ng-click="viewCustomerList(meal)" style="border-radius:0px;">Customer List</button>
+                        <div class="item col" ng-click="viewCustomerList(meal)" style="border-radius:0px; padding: 14px; border-right: 1px solid grey; text-align: center;">Customer List</div>
+                        <div class="item col" ng-click="shareMeal(meal)" style="border-radius:0px; padding: 14px; border: 0; text-align: center;">Share</div>
+                        
                     </div>
                     <div class="row">
-                        <button class="button button-assertive col" ng-click="deleteMeal(meal._id); getChefMeals();" style="width: 100%;">Delete</button>
+                        <div class="button button-assertive col" ng-click="deleteMeal(meal._id); getChefMeals();" style="width: 100%;">Delete</div>
                     </div>
                  </div>
 
@@ -74,7 +74,7 @@
                         <button class="button button-balanced" ng-click="toMeal(meal,chef._id)" style="float:right;">Order</button>
                     </div>
                 </div>  
-            </div>
+
         </div>
         </script>
 
@@ -98,7 +98,7 @@
                 </div>
               </div>
               <div ng-show="noCustomers">
-                <h6 style="text-align:center">Sorry, you don&#39;t have any orders yet. Check again later.</h6>
+                <h6 style="text-align:center; color: grey; margin: 5px 20px 20px 20px;">Sorry, you don&#39;t have any orders yet. Check again later.</h6>
               </div>
             </ion-content>
           </ion-modal-view>
