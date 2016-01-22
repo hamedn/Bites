@@ -20,7 +20,7 @@
 </ion-toggle>
 
 <div class="item item-divider">
-  Account Settings
+  Financial Settings
 </div>
     <!-- Stripe Credit Card Settings -->
 <div class="item settingListUnactive" ng-show="savedCard" style="text-align: center;">
@@ -51,6 +51,15 @@
 <div class="item item-icon-right item-input settingList" ng-show="!savedCard" ng-click="changeCreditCardInfo()">
   <i class="icon ion-card"></i>
   Enter Credit Card Information
+</div>
+
+<div class="item item-divider">
+  Account Settings
+</div>
+
+<div class="item settingListUnactive" style="text-align: center;">
+  <!-- <input type="text" placeholder="Current Card On File" ng-model="data.cardNumber"/> -->
+  Current Phone on File:  {{self.phone}}
 </div>
 
 <div class="item item-icon-right item-input settingList" ng-click="changePhone()">

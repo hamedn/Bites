@@ -566,9 +566,9 @@ if ($scope.freezebuttons == false) {
   $scope.savePhone = function () {
 
 
-    //$ionicLoading.show({
-    //  template: 'Sending info to server'
-    //});
+    $ionicLoading.show({
+      template: 'Sending info to server'
+    });
   
     $http({
           method: 'POST',
@@ -584,14 +584,14 @@ if ($scope.freezebuttons == false) {
 
           data:  {
             phone: $scope.data.phone,
-            userToken: localStorage.get("userToken")
+            oid: localStorage.get("oid")
           }
             
           }).then (function (response) {
 
             $ionicLoading.hide();
 
-            if (response.data.message == "SUCCESS") {
+            if (response.data == "SUCCESS") {
                 console.log(response);
                 $scope.cancelChangePhone();
             } else {
