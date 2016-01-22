@@ -42,9 +42,22 @@ angular.module('login.controllers', ['ionic-ratings'])
           });
   }
 
+  $scope.checkEmail = function(email) {
+    // columbia.edu, barnard.edu
+    var university = email.substring(email.length - 12, email.length).toLowerCase();
+    console.log("Console Uni: " + university);
+    if (university == "columbia.edu") {
+      return true;
+    } else if (university == "@barnard.edu") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   $scope.registerLocal = function () {
 
-    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true) {
+    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true && $scope.checkEmail($scope.data.email) == true) {
       if (typeof $scope.data.chef == "undefined")
         $scope.data.chef = false;      
       $http({
@@ -61,7 +74,7 @@ angular.module('login.controllers', ['ionic-ratings'])
 
           data:  {
             name: $scope.data.realname,
-            email: $scope.data.email,
+            email: $scope.data.email.toLowerCase(),
             password: $scope.data.password,
             phone: $scope.data.phone,
             isChef: $scope.data.chef,
@@ -120,6 +133,18 @@ angular.module('login.controllers', ['ionic-ratings'])
     }, 1250);
 
   }
+
+  else if ($scope.checkEmail($scope.data.email) == false) {
+    var myPopup = $ionicPopup.show({
+      title: "Must be a Valid Columbia or Barnard Email Address",
+      scope: $scope
+    });
+
+    $timeout(function() {
+      myPopup.close(); 
+    }, 1250);  
+  }
+
   else {
     var myPopup = $ionicPopup.show({
       title: "Passwords don't match!",
@@ -159,7 +184,7 @@ angular.module('login.controllers', ['ionic-ratings'])
         },
 
         data:  {
-          email: $scope.data.email,
+          email: $scope.data.email.toLowerCase(),
           password: $scope.data.password
         }
     }).then (function (response) {
