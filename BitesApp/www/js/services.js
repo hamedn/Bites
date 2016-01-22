@@ -32,13 +32,13 @@ angular.module('starter.services', [])
 .factory('Meals', function($http) {
   return {
 
-/*
+
 getMeals:function() {
       return $http.get('http://bitesapp.com/meals/getAll').then(function(resp) {
           return resp;
         });
     }
-*/
+
 
     /*
    getMeals: function() {
@@ -48,13 +48,13 @@ getMeals:function() {
     }
 */
 
-
+/*
 getMeals:function() {
       return $http.get('http://localhost:3000/meals/getAll').then(function(resp) {
           return resp;
         });
     }
-
+*/
 
   };
 })
@@ -79,9 +79,9 @@ getMeals:function() {
 .factory('APIServer', function() {
   return {
     url: function() {
-      //return "http://bitesapp.com";
+      return "http://bitesapp.com";
       //return "https://bitesapp.herokuapp.com";
-      return "http://localhost:3000";
+      //return "http://localhost:3000";
     }
   };
 })

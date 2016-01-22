@@ -66,9 +66,11 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
     if ($state.params.source == "myorders") {
       console.log("coming from myorders " + $state.params.sourceId);
+      $scope.showConfirmButton = false;
       $scope.showMeal($state.params.sourceId);
         
     } else {
+        $scope.showConfirmButton = true;
         console.log("not coming from myorders " + $state.params.sourceId);
     }
 
