@@ -51,6 +51,16 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
  $scope.$on('$ionicView.enter', function(e) {
+
+
+if ($state.current.name != "preapp.dashboard") {
+        //$ionicScrollDelegate.scrollTop();
+
+      console.log("SCROLLED TO OP" + $state.current.name)
+    
+}
+
+
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
     $scope.hStars = hStars.data;
@@ -387,14 +397,13 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
       tab.style = 'right-active';
       $scope.chefTabs[0].style = 'left';
     }
-    $scope.apply();
-
+    $scope.$apply();
 
  $timeout(function() {
-        $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
-        $ionicScrollDelegate.$getByHandle("scrollArea2").scrollTop();
-  }, 500);  
-
+      console.log("time out");
+            $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+          //  $ionicScrollDelegate.$getByHandle("scrollArea2").scrollTop();
+      }, 250);  
 
     
 

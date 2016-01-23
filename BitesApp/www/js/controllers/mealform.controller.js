@@ -4,6 +4,13 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 .controller('MealFormCtrl', function($scope,$ionicLoading, $ionicAnalytics, $timeout, $ionicPopup, $window, $location, $http, APIServer,localStorage, Camera, $state, $jrCrop, $cordovaFileTransfer) {
   $scope.data = {};
   
+   $scope.$on('$ionicView.enter', function(e) {
+      $ionicScrollDelegate.scrollTop();
+    });
+
+
+
+
   $scope.goDash = function() {
     $state.go("preapp.dashboard");
   }

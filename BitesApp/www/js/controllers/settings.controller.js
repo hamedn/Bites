@@ -1,8 +1,11 @@
 angular.module('settings.controllers', ['ionic-ratings']) 
 
 
-.controller("SettingsCtrl", function($scope, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
+.controller("SettingsCtrl", function($scope,$ionicScrollDelegate, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
+$scope.$on('$ionicView.enter', function(e) {
+      $ionicScrollDelegate.scrollTop();
+    });
 
 
 //global variables
@@ -644,6 +647,16 @@ if ($scope.freezebuttons == false) {
       console.log("show current orders: " + $scope.showCurrentOrders);
       $scope.showCurrentOrders = false;
     }
+
+    $scope.$apply();
+
+
+     $timeout(function() {
+      console.log("time out");
+            $ionicScrollDelegate.$getByHandle("scrollArea3").resize();
+          //  $ionicScrollDelegate.$getByHandle("scrollArea2").scrollTop();
+      }, 250);  
+
 
     //$ionicScrollDelegate.$getByHandle("scrollArea2").resize();
 
