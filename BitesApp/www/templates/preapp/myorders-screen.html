@@ -12,13 +12,13 @@
 
 <ion-content scroll="true" delegate-handle="scrollArea3">
   
-<div ng-show="noOrders">
+<div ng-show="noOrders && ready">
   <div class="row" style="text-align: center; color: grey;">
     Can't eat if you haven't ordered anything! Head on over to the dash to check out what's cooking!
   </div>
 </div>
 
-<div class="item" ng-show="!noOrders">
+<div class="item" ng-show="!noOrders && ready">
   <div id="chefTabs" class="row">
     <div ng-repeat="tab in chefTabs" class="col" ng-class="tab.style" ng-click="onClickChefTab(tab)">
         <h2 style="padding-bottom: 4px;">{{tab.title}}</h2>

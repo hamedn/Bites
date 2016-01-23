@@ -49,6 +49,11 @@ $scope.showRatings = function(meal) {
 }
 
 
+
+  $scope.ready = false;
+
+
+
   $scope.$on('$ionicView.enter', function(e) {
     $scope.editProfile = false;
     $scope.currentOrders = [];
@@ -69,6 +74,8 @@ $scope.showRatings = function(meal) {
       else {
         $scope.noOrders = true;
       }
+
+      $scope.ready = true;
 
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
