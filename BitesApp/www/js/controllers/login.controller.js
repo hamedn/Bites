@@ -55,9 +55,17 @@ angular.module('login.controllers', ['ionic-ratings'])
     }
   }
 
+  $scope.checkPhone = function(phone) {
+    console.log("phone.length " + phone.length);
+    if (phone.length <= 15 && phone.length >= 7)
+      return true;
+    else 
+      return false;
+  }
+
   $scope.registerLocal = function () {
 
-    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true && $scope.checkEmail($scope.data.email) == true) {
+    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true && $scope.checkEmail($scope.data.email) == true && $scope.checkPhone($scope.data.phone)) {
       if (typeof $scope.data.chef == "undefined")
         $scope.data.chef = false;      
       $http({
@@ -136,13 +144,24 @@ angular.module('login.controllers', ['ionic-ratings'])
 
   else if ($scope.checkEmail($scope.data.email) == false) {
     var myPopup = $ionicPopup.show({
-      title: "Must be a Valid Columbia or Barnard Email Address",
+      title: "Your email must be a valid Columbia or Barnard email address.",
       scope: $scope
     });
 
     $timeout(function() {
       myPopup.close(); 
     }, 1250);  
+  }
+
+  else if ($scope.checkPhone($scope.data.email) == false) {
+     var myPopup = $ionicPopup.show({
+      title: "Not a valid phone number.",
+      scope: $scope
+    });
+
+    $timeout(function() {
+      myPopup.close(); 
+    }, 1250); 
   }
 
   else {
@@ -214,7 +233,14 @@ angular.module('login.controllers', ['ionic-ratings'])
           $state.go("preapp.dashboard");
         }
         else {
-          alert(response.data.message);
+          var myPopup = $ionicPopup.show({
+              title: "Sorry, no user found with that email.",
+              scope: $scope
+          });
+
+          $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+          }, 2500);
         }
 
 

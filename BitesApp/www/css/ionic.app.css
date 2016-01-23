@@ -9089,6 +9089,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+sup {
+  font-size: 50%; }
+
 .bg {
   background: url(../img/Food.jpg);
   background-size: 100%;
