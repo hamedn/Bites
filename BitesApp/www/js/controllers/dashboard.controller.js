@@ -63,6 +63,11 @@ if ($state.current.name != "preapp.dashboard") {
 
     $scope.meal = currentMeal.meal;
     $scope.chef = currentProfile.data;
+    if (localStorage.get("isChef") == "true") {
+      $scope.currentUserChef = true;
+    } else {
+      $scope.currentUserChef = false;
+    } 
     $scope.hStars = hStars.data;
     $scope.uhStars = uhStars.data;
     $scope.halfStars = halfStar.data;

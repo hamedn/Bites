@@ -1,4 +1,4 @@
-<ion-view dash-screen view-title="Bites" class="ng-class:{ 'bg2': noOrders, 'bg3': !noOrders };" >
+<ion-view dash-screen view-title="Bites" class="ng-class:{ 'bg2': (noOrders || !ready), 'bg3': !noOrders };" >
     <ion-header-bar align-title="center" class="bar-balanced">
       <div class="buttons">
         <button class="button button-icon ion-ios-arrow-back" ng-click="goDash()">

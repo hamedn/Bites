@@ -27,7 +27,8 @@
             <!--<h2 style="text-align: center; padding-bottom: 7px;">prepared by</h2>-->
             <img src="{{chef.profilePicture}}" ng-click="goChef(meal.userOID)" class="profile-avatar">
             <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;" ng-click="goChef(meal.userOID)">by {{chef.name}}</h2>
-            <div class="profile-rating">
+            <div class="profile-rating-text" ng-show="chef.rating == -5"><h2 style="color: #67BF68;">Not Rated Yet!</h2></div>
+            <div class="profile-rating" ng-show="chef.rating != -5">
                 <div ng-repeat="star in hStars" class="hstars ion-ios-star"></div>
                 <div ng-repeat="star in halfStars" class="halfstars ion-ios-star-half"></div>
                 <div ng-repeat="star in uhStars" class="stars ion-ios-star-outline"></div>
