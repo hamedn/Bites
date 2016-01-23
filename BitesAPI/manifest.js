@@ -238,6 +238,24 @@ var Meal = require('mongoose').model('Meal');
   var Parse = require('parse/node');
   var CronJob = require('cron').CronJob;
   Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", "NASRqPkVWZU7RnKy3mhNQF2QvpZT3ozZWnmnk3XH");
+  
+
+        data = {
+                "alert": "Now this should be received :)", 
+              };
+          Parse.Push.send({
+            channels:["Bites"],
+            data: data
+            }, {
+              success: function () {
+                //console.log("arguments", arguments);
+                console.log('sent');
+              },
+              error: function (error) {
+                console.log("Error: " + error.code + " " + error.message);
+              }
+          });
+
 
 
   try {
@@ -273,13 +291,12 @@ var Meal = require('mongoose').model('Meal');
         var txt = getPush(mealName,mealType);
 
         if (mealName != null && mealName.length>1) {
-          var query = new Parse.Query(Parse.Installation)
-            , data = {
+             data = {
                 "alert": txt, 
               };
           Parse.Push.send({
-            where: query,
-            data: data
+            data: data,
+            channels:["Bites"]
             }, {
               success: function () {
                 //console.log("arguments", arguments);

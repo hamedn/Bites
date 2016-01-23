@@ -100,7 +100,7 @@ $scope.showRatings = function(meal) {
 
 
     $scope.isChef = {checked:isChef};
-    
+    $scope.subscribe = {checked:(localStorage.get("push") == "1")};
 
 
   });
@@ -299,6 +299,32 @@ if ($scope.freezebuttons == false) {
           });
 
 
+}
+
+$scope.toggleSub = function () {
+  isSub = localStorage.get("push") == "1";
+  if (isSub) {
+    
+    parsePlugin.unsubscribe('Bites', function(msg) {
+        console.log("successfully unsubscribed");
+        $scope.subscribe.checked = false;
+        localStorage.set("push","0");
+    }, function(e) {
+        console.log("failed to unsubscribe");
+        alert("Server error. Please try again.");
+    });
+  }
+  else {
+   
+    parsePlugin.subscribe('Bites', function(msg) {
+        console.log("successfully subscribd");
+         $scope.subscribe.checked = true;
+        localStorage.set("push","1");
+    }, function(e) {
+        console.log("failed to subscribe");
+        alert("Server error. Please try again.");
+    });
+  }
 }
 
   

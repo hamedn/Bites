@@ -11,6 +11,11 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
 
   $ionicAnalytics.register();
 
+  ionic.Platform.ready(function(){
+    console.log("IONIC PLATFORM READY");
+})
+
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,38 +28,42 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-
+    console.log("The platform is ready.");
     // Parse Code
-    Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", function() {
-      console.log('Parse initialized successfully.');
+    parsePlugin.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "LJ4EM4k962Qb3gLOVFy1kTHAyhJx7C9FANcnuWQw", function() {
 
 
-      Parse.subscribe('Bites', function() {
-        console.log('Successfully subscribed to Bites.');
+        if (localStorage.get("push") == null || localStorage.get("push").length == 0 || localStorage.get("push") == "undefined") {
+        parsePlugin.subscribe('Bites', function() {
 
+            parsePlugin.getInstallationId(function(id) {
 
-          Parse.getInstallationId(function(id) {
-            // update the view to show that we have the install ID
-            console.log('Retrieved install id: ' + id);
+                /**
+                 * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
+                 * 
+                 var install_data = {
+                    installation_id: id,
+                    channels: ['SampleChannel']
+                 }
+                 *
+                 */
+                 console.log("I have set push to 1");
+                 localStorage.set("push","1");
 
-          
-               var install_data = {
-                  installation_id: id,
-                  channels: ['Bites']
-               }
-               
+            }, function(e) {
+                alert('error');
+            });
 
-          }, function(e) {
-            console.log('Failure to retrieve install id.');
-          });
-
-      }, function(e) {
-          console.log('Failed trying to subscribe to Bites.');
-      });
+        }, function(e) {
+            alert('error');
+        });
+        }
 
     }, function(e) {
-        console.log('Failure to initialize Parse.');
+        alert('error');
     });
+
+
 
     // To make this work for dev push notifications
     // run 'ionic config set dev_push true' in terminal
