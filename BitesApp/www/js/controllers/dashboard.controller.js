@@ -179,6 +179,7 @@ if ($state.current.name != "preapp.dashboard") {
           if (timeDif > 0 ) {
             currentChefMeals.data.push(resp.data);
           } else {
+            console.log("GOIN TO PAST MEALS: " + resp.data);
             resp.data.rating = (Math.round(resp.data.rating * 2) / 2).toFixed(1);
             pastChefMeals.data.push(resp.data);
 
@@ -302,6 +303,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
       if (currentProfile.data.rating == -5) {
         $scope.chefRating = false;
+        $scope.getChefMeals();
       } else {
         $scope.calculateRatingStars(currentProfile.data.rating);
         $scope.getChefMeals();
