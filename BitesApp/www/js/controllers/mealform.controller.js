@@ -179,6 +179,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
             if (response.data.message == "SUCCESS" && $scope.checkPrice($scope.data.price) && $scope.checkDates(orderDeadlineFixed, pickupFixed) && $scope.checkPrice($scope.data.maxOrder)) {
                 console.log("response chefToken " + response.data.chefToken);
                 chefToken = response.data.chefToken;
+                chefPhone = response.data.chefPhone;
+                console.log("the chef's phone number is " + chefPhone);
                 
                 $http({
                   method: 'POST',
@@ -209,7 +211,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                     userOID: localStorage.get("oid"),
                     userName: localStorage.get("name") ,
                     chefToken: chefToken,
-                    access:localStorage.get("userToken")
+                    access:localStorage.get("userToken"),
+                    chefPhone: chefPhone
                   }
                 }).then(function (response) {
                     $ionicLoading.hide();

@@ -227,9 +227,6 @@ if ($state.current.name != "preapp.dashboard") {
               }, 2000);
 
               $scope.getChefMeals();
-
-
-             
         })
       }
     });

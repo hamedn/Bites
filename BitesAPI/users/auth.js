@@ -439,7 +439,8 @@ module.exports = function(app, options) {
 		            	console.log("found user");
 		            	if (user.chefStripeUserId) {
 		            		console.log("chef id");
-		            		return res.json({message: "SUCCESS", chefToken: user.chefStripeUserId});
+		            		console.log("user.phone" + user.phone);
+		            		return res.json({message: "SUCCESS", chefToken: user.chefStripeUserId, chefPhone: user.phone});
 		            	} else {
 		            		return res.json({message: "NO CHEF TOKEN"});
 		            	}

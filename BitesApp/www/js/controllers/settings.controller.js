@@ -432,44 +432,74 @@ if ($scope.freezebuttons == false) {
 
   $scope.saveCreditCard = function () {
     console.log($scope.data.cardNumber);
+    if ($scope.data.cardNumber && $scope.data.cvc && $scope.data.exp_month && $scope.data.exp_year) {
+      if (Stripe.card.validateCardNumber($scope.data.cardNumber) && Stripe.card.validateExpiry($scope.data.exp_month, $scope.data.exp_year) && Stripe.card.validateCVC($scope.data.cvc)) {
+        console.log("send data, it is all checked and stuff");
 
+        $ionicLoading.show({
+          template: 'Sending info to server'
+        });
 
-    $ionicLoading.show({
-      template: 'Sending info to server'
-    });
+        $http({
+              method: 'POST',
+              url: APIServer.url() + '/saveCreditCard',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-    $http({
-          method: 'POST',
-          url: APIServer.url() + '/saveCreditCard',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+              },
 
-          transformRequest: function(obj) {
-            var str = [];
-            for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-          },
+              data:  {
+                cardNumber: $scope.data.cardNumber,
+                cvc: $scope.data.cvc,
+                exp_month: $scope.data.exp_month,
+                exp_year: $scope.data.exp_year,
+                userToken: localStorage.get("userToken")
+              }
+                
+              }).then (function (response) {
 
-          data:  {
-            cardNumber: $scope.data.cardNumber,
-            cvc: $scope.data.cvc,
-            exp_month: $scope.data.exp_month,
-            exp_year: $scope.data.exp_year,
-            userToken: localStorage.get("userToken")
-          }
-            
-          }).then (function (response) {
+                $ionicLoading.hide();
 
-            $ionicLoading.hide();
+                if (response.data.message == "SUCCESS") {
+                    console.log(response);
+                    $scope.cancelChangeCreditCardInfo();
+                } else {
+                  console.log(response.data);
+                  alert("Error: " + response.data.reason.message);
+                }
+              });
 
-            if (response.data.message == "SUCCESS") {
-                console.log(response);
-                $scope.cancelChangeCreditCardInfo();
-            } else {
-              console.log(response.data);
-              alert("Error: " + response.data.reason.message);
-            }
-          });
+      } else {
+        console.log("credit info not valid. please check all your information");
+        var myPopup = $ionicPopup.show({
+          title: "Your credit card info not valid. Could you check that you've entered all data in correctly?",
+          scope: $scope
+        });
+    
+        $timeout(function() {
+          myPopup.close(); 
+          $state.go($state.current, {}, {reload: true});
+
+        }, 2000);
+      }
+    } else {
+      console.log("you have missing credit card info");
+             
+      var myPopup = $ionicPopup.show({
+        title: "Oops, you didn't enter in all necessary information.",
+        scope: $scope
+      });
+  
+      $timeout(function() {
+        myPopup.close(); 
+        $state.go($state.current, {}, {reload: true});
+
+      }, 2000);
+    }
   }
   
 

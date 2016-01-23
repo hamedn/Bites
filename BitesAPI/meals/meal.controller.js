@@ -298,6 +298,7 @@ User.findOne({'accessToken': req.body.access}, function(err, user) {
 				meal.chefToken = req.body.chefToken;
 				meal.customers = [];
 				meal.raters = [];
+				meal.chefPhone = req.body.chefPhone;
 
 				meal.photo = cred.location[env] + "defaultmeal.jpg";
 				/*
