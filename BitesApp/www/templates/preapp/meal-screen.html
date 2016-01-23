@@ -14,6 +14,13 @@
     </ion-header-bar>
 
 <ion-content scroll="true" delegate-handle="scrollArea">
+   <div ng-show="noOrders">
+  <div class="row" style="text-align: center; color: grey;">
+    Can't eat if you haven't ordered anything! Head on over to the dash to check out what's cooking!
+  </div>
+</div>
+
+
     <div>
         <div class="item item-image">
             <img src="{{meal.photo}}">

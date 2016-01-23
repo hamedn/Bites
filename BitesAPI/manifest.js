@@ -238,7 +238,7 @@ var Meal = require('mongoose').model('Meal');
   var Parse = require('parse/node');
   var CronJob = require('cron').CronJob;
   Parse.initialize("YwSVlKUkmHItIfQAKgMTgNoHQSuvLUUHo8s9mBwH", "bMTLuK7K9HVYSz1U5h9i3GvJn3aVeNT3ELthFRTO", "NASRqPkVWZU7RnKy3mhNQF2QvpZT3ozZWnmnk3XH");
-  
+  /*
 
         data = {
                 "alert": "Now this should be received :)", 
@@ -254,7 +254,7 @@ var Meal = require('mongoose').model('Meal');
               error: function (error) {
                 console.log("Error: " + error.code + " " + error.message);
               }
-          });
+          });*/
 
 
 

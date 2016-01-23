@@ -40,8 +40,17 @@
 
 <ion-content scroll="true" class="bg3">
 
+
+
+
 <ion-refresher on-refresh="doRefresh()" ></ion-refresher>
-    
+
+<span style="width:100%; display:block;">
+  <div class="row" ng-show="meals.length == 0" style="text-align: center;color: grey; ">
+No meals currently for sale :( Pull down to refresh.
+  </div>
+  </span>
+
 	<div ng-repeat="meal in meals">
 	    <div class="list card" style="border-radius:5px; margin-bottom:-2%">
 
