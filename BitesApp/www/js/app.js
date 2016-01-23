@@ -51,31 +51,16 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
                  localStorage.set("push","1");
 
             }, function(e) {
-                 $scope.showPopup = function() {
-                  var alertPopup = $ionicPopup.alert({
-                    title: 'Server error',
-                  });
-                  alertPopup.then(function(res) {
-                  });
+                alert('error');
             });
 
         }, function(e) {
-             $scope.showPopup = function() {
-                  var alertPopup = $ionicPopup.alert({
-                    title: 'Server error',
-                  });
-                  alertPopup.then(function(res) {
-                  });
+            alert('error');
         });
         }
 
     }, function(e) {
-          $scope.showPopup = function() {
-                  var alertPopup = $ionicPopup.alert({
-                    title: 'Server error',
-                  });
-                  alertPopup.then(function(res) {
-                  });
+        alert('error');
     });
 
 
