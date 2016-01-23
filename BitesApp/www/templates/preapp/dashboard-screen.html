@@ -38,7 +38,7 @@
 
     </ion-header-bar>
 
-<ion-content scroll="true" class="bg3">
+<ion-content scroll="true" class="ng-class:{ 'bg2': meals.length  <= 1, 'bg3': meals.length > 1 };">
 
 
 
@@ -46,8 +46,8 @@
 <ion-refresher on-refresh="doRefresh()" ></ion-refresher>
 
 <span style="width:100%; display:block;">
-  <div class="row" ng-show="meals.length == 0" style="text-align: center;color: grey; ">
-No meals currently for sale :( Pull down to refresh.
+  <div class="row" ng-show="meals.length == 0" style="text-align: center; color: grey; ">
+	No meals currently for sale. Come back later for a delicious meal!
   </div>
   </span>
 
