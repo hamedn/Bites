@@ -104,6 +104,7 @@ angular.module('login.controllers', ['ionic-ratings'])
               }
             });
            
+           //welcome popup
            var myPopup = $ionicPopup.show({
               //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
               title: "Welcome to Bites",
@@ -117,8 +118,9 @@ angular.module('login.controllers', ['ionic-ratings'])
             localStorage.set("loggedIn",true);
             localStorage.set("userToken", response.data.accessToken);
 
-            console.log(response.data);
-            //$state.go("preapp.stripeScreen"); 
+            //send email
+            $scope.sendEmail($scope.data.email.toLowerCase(), $scope.data.realname);
+
             $state.go("preapp.dashboard");
           }
           else {
@@ -127,7 +129,6 @@ angular.module('login.controllers', ['ionic-ratings'])
 
       })
 
-    
   }
 
   else if ($scope.data.agreedToTerms == false || typeof $scope.data.agreedToTerms == "undefined") {
@@ -187,6 +188,37 @@ angular.module('login.controllers', ['ionic-ratings'])
       }
   }
 
+  $scope.sendEmail = function(email, name) {
+    console.log("sending email");
+    $http({
+        method: 'POST',
+        url: APIServer.url() + '/sendEmail',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+        transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+
+        data:  {
+          email: email,
+          name: name
+        }
+    }).then (function (response) {
+        console.log(response.data);
+
+         if (response.data.accessToken) {
+          $ionicAnalytics.track("User Login", {
+            user: {
+              id: response.data.oid,
+              email: $scope.data.email
+            }
+          });
+        }
+    });
+  }
 
   $scope.loginLocal = function () {
 
