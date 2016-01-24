@@ -22,16 +22,16 @@
     <div class="card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
       <div class="item item-text-wrap">
           <label class="item item-input">
-              <input type="text" placeholder="Credit Card Number" ng-model="data.cardNumber"/>
+              <input type="tel" placeholder="Credit Card Number" ng-model="data.cardNumber"/>
           </label>
           <label class="item item-input">
-              <input type="text" data-stripe="cvc" ng-model="data.cvc" placeholder="CVC"/>
+              <input type="tel" data-stripe="cvc" ng-model="data.cvc" placeholder="CVC"/>
           </label>
           <label class="item item-input">
-              <input type="text" placeholder="Expiration Month MM" ng-model="data.exp_month" data-stripe="exp-month"/>
+              <input type="tel" placeholder="Expiration Month MM" ng-model="data.exp_month" data-stripe="exp-month"/>
           </label> 
           <label class="item item-input">
-              <input type="text" placeholder="Expiration Year YY" ng-model="data.exp_year" data-stripe="exp-year"/>
+              <input type="tel" placeholder="Expiration Year YY" ng-model="data.exp_year" data-stripe="exp-year"/>
           </label> 
 
 
