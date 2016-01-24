@@ -1,8 +1,26 @@
-angular.module('splash.controllers', ['ionic-ratings'])
+angular.module('splash.controllers', ['ionic-ratings','ionic'])
 
-.controller("SplashCtrl", function($scope, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicLoading) {
+.controller("SplashCtrl", function($scope,$ionicPlatform, $rootScope, $state, $stateParams, localStorage, APIServer, $http, $ionicLoading,$ionicPopup) {
   $scope.$on('$ionicView.enter', function(e) {
     console.log("USER LOGGED IN STATUS: " + localStorage.get("loggedIn"));
+
+  $ionicPlatform.ready(function() {
+
+    if(window.Connection) {
+      if(navigator.connection.type == Connection.NONE) {
+        $ionicPopup.alert({
+          title: 'No Internet Connection',
+          content: 'Sorry, no Internet connectivity detected. Please reconnect and try again.'
+        })
+        .then(function(res) {
+            ionic.Platform.exitApp();
+          
+        });
+      }
+    }
+  });
+
+
 
     if (localStorage.get("loggedIn") == "true") {
 

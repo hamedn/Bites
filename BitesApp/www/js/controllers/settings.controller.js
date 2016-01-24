@@ -3,10 +3,6 @@ angular.module('settings.controllers', ['ionic-ratings'])
 
 .controller("SettingsCtrl", function($scope,$ionicScrollDelegate, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
-$scope.$on('$ionicView.enter', function(e) {
-      $ionicScrollDelegate.scrollTop();
-    });
-
 
 //global variables
 $scope.freezebuttons = false;
@@ -52,9 +48,11 @@ $scope.showRatings = function(meal) {
 
   $scope.ready = false;
 
+  $scope.update = function () {
+
+      $ionicScrollDelegate.scrollTop();
 
 
-  $scope.$on('$ionicView.enter', function(e) {
     $scope.editProfile = false;
     $scope.currentOrders = [];
     $scope.pastOrders = [];
@@ -109,8 +107,12 @@ $scope.showRatings = function(meal) {
     $scope.isChef = {checked:isChef};
     $scope.subscribe = {checked:(localStorage.get("push") == "1")};
 
+    $scope.$apply();
 
-  });
+  }
+
+
+  $scope.$on('$ionicView.enter', $scope.update);
 
   $scope.takePicture = function (source) {
 
@@ -175,7 +177,12 @@ if ($scope.freezebuttons == false) {
 
 
                 $ionicLoading.hide();
-                alert("Successfully changed profile picture");
+                var alertPopup = $ionicPopup.alert({
+     title: 'Success',
+     template: 'Updated profile picture.'
+   });
+
+
 
 
 
@@ -301,7 +308,14 @@ if ($scope.freezebuttons == false) {
           
 
           }, function() {
-              alert("Image height cannot exceed image width");
+
+ var alertPopup = $ionicPopup.alert({
+     title: 'Error',
+     template: 'Image height cannot exceed image width. Please crop photos or take them in landscape (horizontal) mode.',
+          cssClass:'custom-popup'
+
+   });
+
               // User canceled or couldn't load image.
           });
 
@@ -329,7 +343,14 @@ $scope.toggleSub = function () {
         localStorage.set("push","1");
     }, function(e) {
         console.log("failed to subscribe");
-        alert("Server error. Please try again.");
+ var alertPopup = $ionicPopup.alert({
+     title: 'Server Error',
+     template: 'Failed to subscribe.',
+          cssClass:'custom-popup'
+
+   });
+
+
     });
   }
 }
@@ -347,7 +368,9 @@ $scope.toggleSub = function () {
 
       var confirmPopup = $ionicPopup.confirm({
          title: 'Are you sure?',
-         template: 'Are you sure you want to remove your chef status'
+         template: 'Are you sure you want to remove your chef status',
+              cssClass:'custom-popup'
+
        });
        confirmPopup.then(function(res) {
          if(res) {
@@ -375,7 +398,16 @@ $scope.toggleSub = function () {
                     localStorage.set("isChef","false");
                 }
                 else {
-                  alert("Server error");
+
+
+                   var alertPopup = $ionicPopup.alert({
+     title: 'Server Error',
+     template: 'Invalid response from server.',
+          cssClass:'custom-popup'
+
+   });
+
+
                 }
 
 
@@ -395,7 +427,9 @@ $scope.toggleSub = function () {
 
       var confirmPopup = $ionicPopup.confirm({
          title: 'Agreement',
-         template: 'I have read and agree to the chef terms of service'
+         template: 'I have read and agree to the chef terms of service',
+              cssClass:'custom-popup'
+
        });
        confirmPopup.then(function(res) {
          if(res) {
@@ -423,7 +457,16 @@ $scope.toggleSub = function () {
                     localStorage.set("isChef","true");
                 }
                 else {
-                  alert("Server error");
+
+
+                   var alertPopup = $ionicPopup.alert({
+     title: 'Server Error',
+     template: 'Unsuccessful request.',
+          cssClass:'custom-popup'
+
+   });
+
+
                 }
 
 
@@ -448,7 +491,9 @@ $scope.toggleSub = function () {
 if ($scope.freezebuttons == false) {
     var confirmPopup = $ionicPopup.confirm({
        title: 'Confirm Logout',
-       template: 'Are you sure you want to log out?'
+       template: 'Are you sure you want to log out?',
+            cssClass:'custom-popup'
+
      });
      confirmPopup.then(function(res) {
        if(res) {
@@ -502,7 +547,15 @@ if ($scope.freezebuttons == false) {
                     $scope.cancelChangeCreditCardInfo();
                 } else {
                   console.log(response.data);
-                  alert("Error: " + response.data.reason.message);
+
+                   var alertPopup = $ionicPopup.alert({
+     title: 'Server Error',
+     template: response.data.reason.message,
+          cssClass:'custom-popup'
+
+   });
+
+
                 }
               });
 
@@ -599,7 +652,13 @@ if ($scope.freezebuttons == false) {
                 }
                   
                 }).then (function (response) {
-                  alert("Stripe successfully connected");
+                 var alertPopup = $ionicPopup.alert({
+     title: 'Success',
+     template: "Stripe successfully connected",
+          cssClass:'custom-popup'
+
+
+   });
                   $state.go("preapp.settings",{},{reload:true});
 
                 });
@@ -622,10 +681,13 @@ if ($scope.freezebuttons == false) {
   }
 
   $scope.cancelChangePhone = function() {
-    if ($state.params.source == "meal")
+    if ($state.params.source == "meal") {
       $state.go("preapp.meal");
-    else
+    }
+    else {
       $state.go("preapp.settings");
+      $scope.update();
+    }
     
   }
 
@@ -662,7 +724,14 @@ if ($scope.freezebuttons == false) {
                 $scope.cancelChangePhone();
             } else {
               console.log(response.data);
-              alert("Error: " + response.data.reason.message);
+
+var alertPopup = $ionicPopup.alert({
+     title: 'Server Error',
+     template: response.data.reason.message,
+     cssClass:'custom-popup'
+   });
+
+
             }
           });
   }
