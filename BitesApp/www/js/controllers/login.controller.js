@@ -124,7 +124,16 @@ angular.module('login.controllers', ['ionic-ratings'])
             $state.go("preapp.dashboard");
           }
           else {
-            alert(response.data.message);
+            var myPopup = $ionicPopup.show({
+              title: "Error",
+              template: response.data.message,
+              scope: $scope,
+              cssClass: 'custom-popup'
+            });
+                    
+            $timeout(function() {
+              myPopup.close(); 
+            }, 1250);
           }
 
       })
@@ -371,7 +380,16 @@ $http({
           $state.go("preapp.dashboard");
       }
       else {
-        alert("error connecting to server");
+        var myPopup = $ionicPopup.show({
+          title: "Error",
+          template: "Problem connecting to server",
+          scope: $scope,
+          cssClass: 'custom-popup'
+        });
+                
+        $timeout(function() {
+          myPopup.close(); 
+        }, 1250);
       }
 
 

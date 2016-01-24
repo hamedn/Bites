@@ -40,8 +40,17 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         console.log("processed image" + this.height/this.width);
         //i have currently disabled crop because of image upload problems!
         if (this.height/this.width > 1) {
-
-        alert("Could not use image. Image height cannot exceed image width. Please take photos in landscape mode (hold phone horizontally).");
+        var myPopup = $ionicPopup.show({
+          title: "Could not use Image",
+          template: "Image height cannot exceed image width. Please take photos in landscape mode (hold phone horizontally).",
+          scope: $scope,
+          cssClass: 'custom-popup'
+        });
+                
+        $timeout(function() {
+          myPopup.close(); 
+        }, 1250);
+        
 
 /*
           $jrCrop.crop({
@@ -225,7 +234,16 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                       });
 
                     $cordovaFileTransfer.upload(APIServer.url() + "/meals/uploadPicture/" + response.data.id, $scope.photo, {}).then(function(result) {
-                      alert("Meal successfully posted");
+                      var myPopup = $ionicPopup.show({
+                        title: "Meal Successfully Posted",
+                        scope: $scope,
+                        cssClass: 'custom-popup'
+                      });
+                              
+                      $timeout(function() {
+                        myPopup.close(); 
+                      }, 1250);                      
+                      
                       $ionicAnalytics.track("Meal w/ Picture Posted", {
                         meal: {
                           title: $scope.data.title,
@@ -245,7 +263,15 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
                     }, function(err) {
                       $ionicLoading.hide();
-                      alert("Server error");
+                      var myPopup = $ionicPopup.show({
+                        title: "Server Error",
+                        scope: $scope,
+                        cssClass: 'custom-popup'
+                      });
+                              
+                      $timeout(function() {
+                        myPopup.close(); 
+                      }, 1250);
                         console.log("ERROR: " + JSON.stringify(err));
                     }, function (progress) {
                         // constant progress updates
@@ -285,7 +311,16 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                     }
                   }
                   else {
-                    alert("Server error. Could not load meal id.");
+                    var myPopup = $ionicPopup.alert({
+                      title: "Server Error",
+                      template: "Could not load meal id",
+                      scope: $scope,
+                      cssClass: 'custom-popup'
+                    });
+                            
+                    $timeout(function() {
+                      myPopup.close(); 
+                    }, 1250);
                   }
 
                 })
@@ -348,7 +383,16 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               }, 2000);
             } else {
               console.log(response.data);
-              alert("Error: " + response.data.reason.message);
+              var myPopup = $ionicPopup.alert({
+                title: "Error",
+                template: response.data.reason.message,
+                scope: $scope,
+                cssClass: 'custom-popup'
+              });
+                      
+              $timeout(function() {
+                myPopup.close(); 
+              }, 1250);
             }
     });
 

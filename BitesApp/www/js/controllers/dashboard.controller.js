@@ -277,7 +277,15 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
     $state.go("preapp.newmeal");   
     }
     else {
-      alert("Chef account not connected with stripe. Please do so in settings");
+      var myPopup = $ionicPopup.show({
+        title: "Chef account not connected with stripe. Please do so in settings",
+        scope: $scope,
+        cssClass: 'custom-popup'
+      });
+  
+      $timeout(function() {
+        myPopup.close(); 
+      }, 1250); 
     } 
   }
 
@@ -443,7 +451,15 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
     for (meal in Object) {
       
       if (p.hasOwnProperty(key)) {
-        alert(key + " -> " + p[key]);
+        var myPopup = $ionicPopup.show({
+          title: key + " -> " + p[key],
+          scope: $scope,
+          cssClass: 'custom-popup'
+        });
+                
+        $timeout(function() {
+          myPopup.close(); 
+        }, 1250); 
       }
 
       if (meal._id == $stateParams.id) {
@@ -521,7 +537,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
       var myPopup = $ionicPopup.show({
         title: "Rating Submitted",
-        scope: $scope
+        scope: $scope,
+        cssClass: 'custom-popup'
       });
   
       $timeout(function() {
@@ -640,7 +657,16 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
                       } else {
                           console.log("did not add to orders " + response.data.message);
-                          alert("Error: " + response.data.message);
+                          var myPopup = $ionicPopup.show({
+                            title: "Error",
+                            template: response.data.message,
+                            scope: $scope,
+                            cssClass: 'custom-popup'
+                          });
+                
+                          $timeout(function() {
+                            myPopup.close(); 
+                          }, 1250); 
                       }
                     });
 
@@ -648,7 +674,17 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
                 } else {
                     $ionicLoading.hide();
                     console.log(response.data);
-                    alert("Error: " + response.data.message);
+                    var myPopup = $ionicPopup.show({
+                      title: "Error",
+                      template: response.data.message,
+                      scope: $scope,
+                      cssClass: 'custom-popup'
+                    });
+                
+                    $timeout(function() {
+                      myPopup.close(); 
+                    }, 1250); 
+                    
                 }
               });
 
