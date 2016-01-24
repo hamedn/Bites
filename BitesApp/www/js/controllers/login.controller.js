@@ -62,9 +62,10 @@ angular.module('login.controllers', ['ionic-ratings'])
       return false;
   }
 
-  $scope.registerLocal = function () {
+  $scope.registerLocal = function() {
+        
+      if (($scope.data.password == $scope.data.confirm) && $scope.data.agreedToTerms == true && $scope.checkEmail($scope.data.email) == true && $scope.checkPhone($scope.data.phone)) {
 
-    if ($scope.data.password == $scope.data.confirm && $scope.data.agreedToTerms == true && $scope.checkEmail($scope.data.email) == true && $scope.checkPhone($scope.data.phone)) {
       if (typeof $scope.data.chef == "undefined")
         $scope.data.chef = false;      
       $http({
