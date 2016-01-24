@@ -56,8 +56,7 @@ angular.module('login.controllers', ['ionic-ratings'])
   }
 
   $scope.checkPhone = function(phone) {
-    console.log("phone.length " + phone.length);
-    if (phone.length <= 15 && phone.length >= 7)
+    if (phone != undefined && phone.length <= 15 && phone.length >= 7 )
       return true;
     else 
       return false;
@@ -108,7 +107,8 @@ angular.module('login.controllers', ['ionic-ratings'])
            var myPopup = $ionicPopup.show({
               //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
               title: "Welcome to Bites",
-              scope: $scope
+              scope: $scope,
+              cssClass: 'custom-popup'
             });
 
             $timeout(function() {
@@ -143,7 +143,8 @@ angular.module('login.controllers', ['ionic-ratings'])
   else if ($scope.data.agreedToTerms == false || typeof $scope.data.agreedToTerms == "undefined") {
     var myPopup = $ionicPopup.show({
       title: "Must Agree to Terms of Service",
-      scope: $scope
+      scope: $scope,
+      cssClass: 'custom-popup'
     });
 
     $timeout(function() {
@@ -155,7 +156,8 @@ angular.module('login.controllers', ['ionic-ratings'])
   else if ($scope.checkEmail($scope.data.email) == false) {
     var myPopup = $ionicPopup.show({
       title: "Your email must be a valid Columbia or Barnard email address.",
-      scope: $scope
+      scope: $scope,
+      cssClass: 'custom-popup'
     });
 
     $timeout(function() {
@@ -163,10 +165,11 @@ angular.module('login.controllers', ['ionic-ratings'])
     }, 1250);  
   }
 
-  else if ($scope.checkPhone($scope.data.email) == false) {
+  else if ($scope.checkPhone($scope.data.phone) == false) {
      var myPopup = $ionicPopup.show({
       title: "Not a valid phone number.",
-      scope: $scope
+      scope: $scope,
+      cssClass: 'custom-popup'
     });
 
     $timeout(function() {
@@ -177,7 +180,8 @@ angular.module('login.controllers', ['ionic-ratings'])
   else {
     var myPopup = $ionicPopup.show({
       title: "Passwords don't match!",
-      scope: $scope
+      scope: $scope,
+      cssClass: 'custom-popup'
     });
 
     $timeout(function() {
@@ -276,7 +280,8 @@ angular.module('login.controllers', ['ionic-ratings'])
         else {
           var myPopup = $ionicPopup.show({
               title: "Sorry, no user found with that email.",
-              scope: $scope
+              scope: $scope,
+              cssClass: 'custom-popup'
           });
 
           $timeout(function() {
@@ -314,6 +319,10 @@ angular.module('login.controllers', ['ionic-ratings'])
           }
         })
 
+  }
+
+  $scope.openWindow = function(url) {
+    $window.open(url, '_blank', 'location=yes, toolbar=yes, hidden=no');
   }
 
   $scope.registerFacebook = function() {
@@ -355,8 +364,8 @@ angular.module('login.controllers', ['ionic-ratings'])
   }
 
   $scope.facebookFinish = function() {
-
-$http({
+    if ($scope.checkPhone($scope.data.phone) == true) {
+      $http({
         method: 'POST',
         url: APIServer.url() + '/users/changechef',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -395,7 +404,17 @@ $http({
 
 
     })
+  } else {
+    var myPopup = $ionicPopup.show({
+      title: "Not a Valid Phone Number",
+      scope: $scope,
+      cssClass: 'custom-popup'
+    });
 
+    $timeout(function() {
+      myPopup.close(); 
+    }, 1250);
+  }
 
 }
 
