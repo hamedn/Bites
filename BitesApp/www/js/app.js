@@ -35,8 +35,8 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
 
         if (localStorage.get("push") == null || localStorage.get("push").length == 0 || localStorage.get("push") == "undefined") {
         parsePlugin.subscribe('Bites', function() {
-
             parsePlugin.getInstallationId(function(id) {
+
 
                 /**
                  * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
@@ -51,16 +51,22 @@ angular.module('starter', ['ngCordova','ionic','ionic.service.core', 'ionic.serv
                  localStorage.set("push","1");
 
             }, function(e) {
-                alert('error');
+                $ionicPopup.alert({
+                    title: 'Server error',
+                  });
             });
 
         }, function(e) {
-            alert('error');
+            $ionicPopup.alert({
+                    title: 'Server error',
+                  });
         });
         }
 
     }, function(e) {
-        alert('error');
+       $ionicPopup.alert({
+                    title: 'Server error',
+                  });
     });
 
 
