@@ -11,6 +11,7 @@ var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
 var flash    = require('connect-flash');
+var nodemailer = require('nodemailer');
 
 passport.serializeUser(function(user, done) {
 	done(null,user.id);
@@ -449,6 +450,43 @@ module.exports = function(app, options) {
 
 		        }); 
 
+			});
+
+			app.post('/sendEmail', function(req, res) {
+				console.log("sending email");
+				var name = req.body.name;
+				var email = req.body.email;
+
+				var emailText = "Hello " + name + ",";
+
+
+				// create reusable transporter object using the default SMTP transport
+				/* var transporter = nodemailer.createTransport("SMTP",{
+				   service: "Gmail",
+				   auth: {
+				       user: "agarwal.eshan@columbia.edu",
+				       pass: "elana987"
+				   }
+				}); */
+
+				var transporter = nodemailer.createTransport('smtps://bitesappmail%40gmail.com:WallachH8@smtp.gmail.com');
+
+				// setup e-mail data with unicode symbols
+				var mailOptions = {
+				    from: 'Bites App <admin@bitesapp.com>', // sender address
+				    to: email, // list of receivers
+				    subject: 'Welcome to Bites!', // Subject line
+				    text: emailText, // plaintext body
+				    html: '<b>' + emailText + '</b>' // html body
+				};
+
+				// send mail with defined transport object
+				transporter.sendMail(mailOptions, function(error, info){
+				    if(error){
+				        return console.log(error);
+				    }
+				    console.log('Message sent: ' + info.response);
+				});
 			});
 
 			app.get('/auth/facebook',
