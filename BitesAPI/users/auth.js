@@ -459,15 +459,7 @@ module.exports = function(app, options) {
 
 				var emailText = "Hello " + name + ",";
 
-
-				// create reusable transporter object using the default SMTP transport
-				/* var transporter = nodemailer.createTransport("SMTP",{
-				   service: "Gmail",
-				   auth: {
-				       user: "agarwal.eshan@columbia.edu",
-				       pass: "elana987"
-				   }
-				}); */
+				var htmlText = "<html><div style='position:absolute; width:100%; background-color:#67BF68; height: 80px; left:0px; top:0px;'>		<img src="/resources/icon.png">	<h1 style='color:white;'>Welcome to Bites!</h1></div><div style='position: absolute; top: 100px; left: 25px;'><div style=''>	<p>Hello Eshan Agarwal,<br><br>Glad to see you&#39;ve chosen to use Bites! Here&#39;s a quick guide on how to use our service.</p></div><div style='position:relative; left: 50px;'>	<div style='height: 50px;'> 		<img src='/img/inst1.png' style='width:50px; height:50px; display: inline-block;'/>		<p style='display:inline-block; height: 50px; vertical-align:middle; margin-left: 15px;'>You&#39;re hungry. Open up Bites and find a meal that looks tasty.</p>	</div>	<div style='height: 50px; margin-top:10px;'> 		<img src='/img/inst2.png' style='width:50px; height:50px; display: inline-block;'/>		<p style='display:inline-block; height: 50px; vertical-align:middle; margin-left: 15px;'>Place an order before the order deadline for the meal.</p>	</div>	<div style='height: 50px; margin-top:10px;'> 		<img src='/img/inst3.png' style='width:50px; height:50px; display: inline-block;'/>		<p style='display:inline-block; height: 50px; vertical-align:middle; margin-left:15px;'>Find your food at the location specified by the chef.</p>	</div>		</div><div>	<p><br>Have any questions or feedback? Shoot us an email at bitesappmail@gmail.com<br><br>Thanks,<br>Bites</p></div></div></html>";
 
 				var transporter = nodemailer.createTransport('smtps://bitesappmail%40gmail.com:WallachH8@smtp.gmail.com');
 
@@ -477,7 +469,7 @@ module.exports = function(app, options) {
 				    to: email, // list of receivers
 				    subject: 'Welcome to Bites!', // Subject line
 				    text: emailText, // plaintext body
-				    html: '<b>' + emailText + '</b>' // html body
+				    html: htmlText // html body
 				};
 
 				// send mail with defined transport object
