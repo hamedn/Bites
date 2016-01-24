@@ -196,7 +196,8 @@ if ($state.current.name != "preapp.dashboard") {
   $scope.deleteMeal = function(oid) {
     var confirmPopup = $ionicPopup.confirm({
        title: 'Are you sure?',
-       template: 'Are you sure you want to delete the Meal?'
+       template: 'Are you sure you want to delete the Meal?',
+       cssClass: 'custom-popup'
      });
      confirmPopup.then(function(res) {
       if(res) {

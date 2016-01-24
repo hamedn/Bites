@@ -224,3 +224,23 @@ ul.rating li i {
   right: 10px; 
   top: 5px;
 }
+
+.custom-popup.popup-container .popup {
+  background-color: white;
+  border-radius: 5px;
+  color: $balanced;
+}
+
+.custom-popup.popup-container .popup-title {
+  border-radius: 5px;
+  color: $balanced;
+}
+
+.custom-popup.popup-container .button {
+  background-color: $balanced;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+
