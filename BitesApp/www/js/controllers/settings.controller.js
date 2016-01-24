@@ -179,7 +179,8 @@ if ($scope.freezebuttons == false) {
                 $ionicLoading.hide();
                 var alertPopup = $ionicPopup.alert({
      title: 'Success',
-     template: 'Updated profile picture.'
+     template: 'Updated profile picture.',
+     cssClass:'custom-popup'
    });
 
 

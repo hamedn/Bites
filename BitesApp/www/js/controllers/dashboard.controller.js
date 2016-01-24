@@ -332,7 +332,6 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   
   $scope.toMeal = function(mealCurrent, oid) {
     
-if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stripeCustomerToken") != "undefined") {
 
 
     currentMeal.meal = mealCurrent;
@@ -350,10 +349,7 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
       $state.go("preapp.meal");
 
     });
-  }
-  else {
-    alert("No credit card information. Please configure in settings.");
-  }
+ 
 }
 
 
@@ -558,8 +554,10 @@ if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stri
   };
 
   $scope.toOrder = function() {
-    
-    if(localStorage.get("stripeCustomerToken")) {
+
+
+    if (localStorage.get("stripeCustomerToken").length > 4 && localStorage.get("stripeCustomerToken") != "undefined") {
+
 
             $ionicLoading.show({
               template: 'Making transaction'
