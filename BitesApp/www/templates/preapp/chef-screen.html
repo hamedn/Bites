@@ -43,7 +43,7 @@
                     <h2>{{meal.title}}</h2>
                     <p>By {{meal.userName}}</p>
 
-                <h2 style="font-size: 1.5em; color: green; position: absolute; right: 5px; top: 0;" align="right">${{formatPrice(meal.price)}}</h2>
+                <h2 class="price" style="font-size: 2em;" align="right"><sup>$</sup>{{meal.price}}</h2>
                     
                 <div class="buttons" style="float: right;">
                     <button class="button button-icon  ion-location" style="font-size: .9em; margin-right: -10px;"> {{  formatMealLocation(meal.mealLocation)}}</button>
