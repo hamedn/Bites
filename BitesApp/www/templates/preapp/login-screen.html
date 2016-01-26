@@ -1,6 +1,6 @@
 <ion-view login-screen view-title="Log In Screen" hide-nav-bar="true" class="bg">
 
-  <ion-content scroll="false">
+  <ion-content scroll="true">
     
     <div class = "splashtext" align="center" style="margin-top:10%;">
 
@@ -8,7 +8,7 @@
 
     </div>
 
-    <div class="card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
+    <div class="card" style="margin-left:5%; margin-right:5%; border-radius:5px; padding-buttom: -5px;">
       <div class="item item-text-wrap">
       
          <label class="item item-input">
@@ -19,26 +19,33 @@
           </label>
 
 
-        <button class="button button-block button-balanced" ng-click="loginLocal()" style="border-radius:4px;">
+        <button class="button button-block button-balanced" ng-click="loginLocal()" >
           Sign In
         </button>
 
 
         <div class="button-bar">
-  <a class="button button-outline button-balanced" ui-sref="preapp.registerscreen">Register</a>
-
-</div>
-
+          <a class="button button-outline button-balanced" ui-sref="preapp.registerscreen">Register</a>
+        </div>
 
       </div>
-    </div>
 
+      <div class="item item-text-wrap">
+        <div class="row" style="margin-top: -17px; margin-bottom: 3px;">
+          <div class="col">
+            <h1 class="facebook">Facebook</h1>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: -10px;">
+        <button class="col button button-positive" style="margin-right: 6px; padding: 0;" ng-click="loginFacebook()">
+          Login
+        </button>
+        <button class="col button button-outline button-positive" style="padding: 0;" ng-click="registerFacebook()">
+          Sign Up
+        </button>
+        </div>
+      </div>
 
-
-    <div style="padding-left:5%; padding-right:5%;">
-    <button class="button button-block button-positive" ng-click="loginFacebook()">
-  Login with Facebook
-</button>
     </div>
 
 
