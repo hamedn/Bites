@@ -332,7 +332,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               var myPopup = $ionicPopup.show({
                 //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
                 title: "Sorry, you are not a registered chef and only chefs may post meals",
-                scope: $scope
+                scope: $scope,
+                cssClass: 'custom-popup'
               });
 
               $timeout(function() {
@@ -348,7 +349,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               var myPopup = $ionicPopup.show({
                 //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
                 title: "Please enter a Whole Number for the Price",
-                scope: $scope
+                scope: $scope,
+                cssClass: 'custom-popup'
               });
 
               $timeout(function() {
@@ -363,7 +365,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               var myPopup = $ionicPopup.show({
                 //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
                 title: "Please don't set the pickup time before the order time",
-                scope: $scope
+                scope: $scope,
+                cssClass: 'custom-popup'
               });
 
               $timeout(function() {
@@ -375,7 +378,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               var myPopup = $ionicPopup.show({
                 //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
                 title: "Please make the Order Number a whole number",
-                scope: $scope
+                scope: $scope,
+                cssClass: 'custom-popup'
               });
 
               $timeout(function() {

@@ -178,10 +178,10 @@ if ($scope.freezebuttons == false) {
 
                 $ionicLoading.hide();
                 var alertPopup = $ionicPopup.alert({
-     title: 'Success',
-     template: 'Updated profile picture.',
-     cssClass:'custom-popup'
-   });
+                 title: 'Success',
+                 template: 'Updated profile picture.',
+                 cssClass:'custom-popup'
+                });
 
 
 
@@ -226,8 +226,9 @@ if ($scope.freezebuttons == false) {
       });
 
       var myPopup = $ionicPopup.show({
-        title: "Rating Submitted",
-        scope: $scope
+        title: "Meal Rated!",
+        scope: $scope,
+        cssClass: 'custom-popup'
       });
   
       $timeout(function() {
@@ -564,7 +565,8 @@ if ($scope.freezebuttons == false) {
         console.log("credit info not valid. please check all your information");
         var myPopup = $ionicPopup.show({
           title: "Your credit card info not valid. Could you check that you've entered all data in correctly?",
-          scope: $scope
+          scope: $scope,
+          cssClass: 'custom-popup'
         });
     
         $timeout(function() {
@@ -578,7 +580,8 @@ if ($scope.freezebuttons == false) {
              
       var myPopup = $ionicPopup.show({
         title: "Oops, you didn't enter in all necessary information.",
-        scope: $scope
+        scope: $scope,
+        cssClass: 'custom-popup'
       });
   
       $timeout(function() {

@@ -23,7 +23,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     .then(function () {
        var myPopup = $ionicPopup.show({
               title: "Link successfully copied to clipboard",
-              scope: $scope
+              scope: $scope,
+              cssClass: 'custom-popup'
             });
 
             $timeout(function() {
@@ -34,7 +35,8 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
     }, function () {
       var myPopup = $ionicPopup.show({
               title: "Clipboard access error",
-              scope: $scope
+              scope: $scope,
+              cssClass: 'custom-popup'
             });
 
             $timeout(function() {
@@ -224,7 +226,8 @@ if ($state.current.name != "preapp.dashboard") {
 
               var myPopup = $ionicPopup.show({
                 title: "Meal Deleted",
-                scope: $scope
+                scope: $scope,
+                cssClass: 'custom-popup'
               });
           
               $timeout(function() {
@@ -646,8 +649,9 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
 
                         console.log("added order to my orders");
                         var myPopup = $ionicPopup.show({
-                            title: "Meal added to My Orders",
-                            scope: $scope
+                            title: "Meal Ordered!",
+                            scope: $scope,
+                            cssClass: 'custom-popup'
                         });
 
                         $timeout(function() {
@@ -692,7 +696,8 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
    } else {
       var noCardPopup = $ionicPopup.confirm({
        title: 'No Credit Card',
-       template: 'You do not have a credit card on file. Would you like to enter one now?'
+       template: 'You do not have a credit card on file. Would you like to enter one now?',
+       cssClass: 'custom-popup'
       });
 
       noCardPopup.then(function(res){
