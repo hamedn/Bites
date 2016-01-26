@@ -9,6 +9,10 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
+<preference name="FadeSplashScreen" value="true" />  
+<preference name="FadeSplashScreenDuration" value="1.0" />  
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

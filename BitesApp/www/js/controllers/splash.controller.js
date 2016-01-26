@@ -6,6 +6,11 @@ angular.module('splash.controllers', ['ionic-ratings','ionic'])
 
   $ionicPlatform.ready(function() {
 
+    setTimeout(function() {
+navigator.splashscreen.hide();
+    }, 250);
+
+
     if(window.Connection) {
       if(navigator.connection.type == Connection.NONE) {
         $ionicPopup.alert({

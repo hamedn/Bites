@@ -7,6 +7,8 @@ cordova plugin add cordova-plugin-file
 cordova plugin add https://github.com/VersoSolutions/CordovaClipboard.git
 cordova plugin add https://github.com/fastrde/phonegap-parse-plugin
 cordova plugin add cordova-plugin-network-information
+cordova plugin add org.apache.cordova.splashscreen
+
 
 
 Put this in the info.plist
