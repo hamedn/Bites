@@ -40,16 +40,14 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
         console.log("processed image" + this.height/this.width);
         //i have currently disabled crop because of image upload problems!
         if (this.height/this.width > 1) {
-        var myPopup = $ionicPopup.show({
+          // Currently not Catching Callback, not sure if Issue
+        var myPopup = $ionicPopup.alert({
           title: "Could not use Image",
           template: "Image height cannot exceed image width. Please take photos in landscape mode (hold phone horizontally).",
           scope: $scope,
           cssClass: 'custom-popup'
         });
                 
-        $timeout(function() {
-          myPopup.close(); 
-        }, 1250);
         
 
 /*
@@ -151,7 +149,18 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
-    
+    var isEmpty = $scope.checkEmpty();
+    if (isEmpty != true) {
+      var myPopup = $ionicPopup.alert({
+        title: "Something's Wrong",
+        template: isEmpty,
+        scope: $scope,
+        cssClass: 'custom-popup'
+      });
+
+      return;
+    }
+
     $ionicLoading.show({
       template: 'Posting meal data'
     });
@@ -183,7 +192,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
             
     }).then (function (response) {
 
-            console.log("response" + response);
+
 
             if (response.data.message == "SUCCESS" && $scope.checkPrice($scope.data.price) && $scope.checkDates(orderDeadlineFixed, pickupFixed) && $scope.checkPrice($scope.data.maxOrder)) {
                 console.log("response chefToken " + response.data.chefToken);
@@ -318,9 +327,6 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                       cssClass: 'custom-popup'
                     });
                             
-                    $timeout(function() {
-                      myPopup.close(); 
-                    }, 1250);
                   }
 
                 })
@@ -394,20 +400,37 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                 cssClass: 'custom-popup'
               });
                       
-              $timeout(function() {
-                myPopup.close(); 
-              }, 1250);
+
             }
     });
 
 
+  }
 
-
-
-
-
-     
-
+  $scope.checkEmpty = function() {
+    if ($scope.data.title == undefined) {
+      return "You should probably name your meal!";
+    } else if ($scope.data.mealDate == undefined) {
+      return "Please enter a Date";
+    } else if ($scope.data.pickup == undefined) {
+      return "Please enter a Pickup Time";
+    } else if ($scope.data.orderDeadline == undefined) {
+      return "Please enter an Order Deadline";
+    } else if ($scope.data.title == undefined) {
+      return "You should probably name your meal!";
+    } else if ($scope.data.description == undefined) {
+      return "Provide a description your meal for your customers!";
+    } else if ($scope.data.price == undefined) {
+      return "Provide a price for your meal";
+    } else if ($scope.data.maxOrder == undefined) {
+      return "How many people are you cooking for?";
+    } else if ($scope.data.mealLocation == undefined) {
+      return "Where are you cooking? Right now nowhere.";
+    } else if ($scope.data.ingredients == undefined) {
+      return "People are going to want to know what exactly you're cooking up in that lab of yours";
+    } else {
+      return true;
+    }
   }
 
 
