@@ -289,15 +289,15 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
                     else {
                       $ionicLoading.hide();
 
-                      var myPopup = $ionicPopup.show({
-                        //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
-                        title: "Meal successfully posted",
-                        scope: $scope
+                     var myPopup = $ionicPopup.show({
+                        title: "Meal Successfully Posted",
+                        scope: $scope,
+                        cssClass: 'custom-popup'
                       });
-
+                              
                       $timeout(function() {
-                        myPopup.close(); //close the popup after 3 seconds for some reason
-                      }, 2000);
+                        myPopup.close(); 
+                      }, 1250);
     
                       $ionicAnalytics.track("Meal w/o Picture Posted", {
                         meal: {
@@ -378,7 +378,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               $timeout(function() {
                 myPopup.close(); //close the popup after 3 seconds for some reason
               }, 2000);
-            } else if (!$scope.checkPrice($scope.data.maxOrder)) {
+            }
+             else if (!$scope.checkPrice($scope.data.maxOrder)) {
               $ionicLoading.hide();
 
               var myPopup = $ionicPopup.show({
