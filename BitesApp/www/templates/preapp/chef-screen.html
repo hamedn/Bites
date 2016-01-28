@@ -67,13 +67,15 @@
                     </div>
                  </div>
 
-                <div>
-                    <button class="button button-icon ion-pizza" ng-hide="yourAccount" style= "float: left; display: inline-block;"> {{meal.maxOrder - meal.numOrder}} Meals Available</button>
+            <div class="item item-divider" ng-hide="yourAccount">
+                <div class="buttons">
+                    <button class="button button-icon ion-pizza" style= "float: left; display: inline-block;"> {{meal.maxOrder - meal.numOrder}} Meals Available</button>
+                </div>
 
-                    <div ng-hide="yourAccount || (meal.maxOrder - meal.numOrder) <= 0" class="buttons" style="margin: 0 auto;">
-                        <button class="button button-balanced" ng-click="toMeal(meal,chef._id)" style="float:right;">Order</button>
-                    </div>
-                </div>  
+                <div class="buttons">
+                    <button class="button button-balanced" ion-nav-animation="slide-in-up" style= "float: right; display: inline-block;" ng-click="toMeal(meal, meal.userOID)">Order</button>
+                </div>
+            </div>
 
         </div>
         </script>
