@@ -56,7 +56,6 @@ sup {  font-size:50%; }
   background-color: #f2f2f2;
 }
 
-@media screen and (max-width: 320px) {
   .left {
       color: #000;
       display: inline-block; 
@@ -88,37 +87,8 @@ sup {  font-size:50%; }
       text-align: center;
       padding-bottom: 2px;
   }
-}
 
-@media screen and (min-width: 321px) and (max-width: 375px) {
-  .left {
-      color: #000;
-      display: inline-block; 
-      float: left;
-      text-align: center;
-  }
-  
-  .left-active {
-    border-bottom: thick solid #33cd5f;
-    display: inline-block; 
-    float: left;
-    text-align: center;
-  }
-  
-  .right-active {
-    border-bottom: thick solid #33cd5f;
-    display: inline-block; 
-    float: right;
-    text-align: center;
-  }
-  
-  .right {
-      color: #000;
-      display: inline-block; 
-      float: right;
-      text-align: center;
-  }
-}
+
 
 .rate {
   display: table;
@@ -231,6 +201,10 @@ ul.rating li i {
   position: absolute; 
   right: 10px; 
   top: 5px;
+}
+
+ul.rating li {
+  padding: 3px 3px;
 }
 
 .custom-popup.popup-container .popup {

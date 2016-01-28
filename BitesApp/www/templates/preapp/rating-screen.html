@@ -16,10 +16,11 @@
             <p align="center">The chef would love your feedback!</p>
         </div>
         <div class="rate">
-            <ionic-ratings ratingsobj='ratingsObject'></ionic-ratings>
+             <rating ng-model="rating.rate" max="rating.max"></rating>
+
         </div>
 
-        <button style="margin: 5px auto 5px;" class="rate-button button button-small button-balanced" ng-click="submitRating()">Rate the Meal</button>
+        <button style="margin: 5px auto 5px;" class="rate-button button button-balanced" ng-click="submitRating()">Rate the Meal</button>
 
     </div>
 

@@ -1,4 +1,4 @@
-angular.module('settings.controllers', ['ionic-ratings']) 
+angular.module('settings.controllers', ['ionic-ratings','ionic.rating']) 
 
 
 .controller("SettingsCtrl", function($scope,$ionicScrollDelegate, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
@@ -227,7 +227,7 @@ if ($scope.freezebuttons == false) {
       
 
       data: {
-        rating: $scope.ratingsObject.rating,
+        rating:  $scope.rating.rate,
         oid: localStorage.get("rateID"),
         userid: localStorage.get("oid")
       }
@@ -236,7 +236,7 @@ if ($scope.freezebuttons == false) {
 
       $ionicAnalytics.track("Rating Submitted", {
         meal: {
-          rating: $scope.ratingsObject.rating,
+          rating: $scope.rating.rate,
           id: localStorage.get("rateID")
         }
       });
@@ -254,6 +254,10 @@ if ($scope.freezebuttons == false) {
       $scope.goMyOrders();   
     })
   }
+
+  $scope.rating = {};
+  $scope.rating.rate = 3;
+  $scope.rating.max = 5;
 
   $scope.ratingsObject = {
     iconOn : 'ion-ios-star',
@@ -281,7 +285,7 @@ if ($scope.freezebuttons == false) {
   
   $scope.ratingsCallback = function(rating) {
     console.log('Selected rating is : ', rating);
-    $scope.ratingsObject.rating = rating;
+    $scope.ratingsObject.rating = $scope.rating.rate
   };
 
   $scope.processImage = function (imgURL) {
