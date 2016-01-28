@@ -251,6 +251,7 @@ if ($scope.freezebuttons == false) {
         myPopup.close(); 
       }, 1250);  
 
+
       $scope.goMyOrders();   
     })
   }
@@ -272,6 +273,7 @@ if ($scope.freezebuttons == false) {
   };
 
   $scope.goMyOrders = function() {
+    $scope.ready = false;
     $state.go("preapp.myorders");
   }
 
@@ -280,6 +282,7 @@ if ($scope.freezebuttons == false) {
 
 
     console.log("ID:" + order._id);
+    $scope.ready = false;
     $state.go('preapp.rating');
   }
   
@@ -607,6 +610,7 @@ if ($scope.freezebuttons == false) {
     
         $timeout(function() {
           myPopup.close(); 
+          $scope.ready = false;
           $state.go($state.current, {}, {reload: true});
 
         }, 2000);
@@ -621,7 +625,8 @@ if ($scope.freezebuttons == false) {
       });
   
       $timeout(function() {
-        myPopup.close(); 
+        myPopup.close();
+        $scope.ready = false;
         $state.go($state.current, {}, {reload: true});
 
       }, 2000);
@@ -845,6 +850,7 @@ var alertPopup = $ionicPopup.alert({
   $scope.mealClicked = function(id) {
     console.log("meal clicked id: " + id);
 
+    $scope.ready = false;
     $state.go("preapp.meal", {source: "myorders", sourceId: id});
   }
 
