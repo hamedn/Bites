@@ -150,6 +150,7 @@ module.exports = function(app, options) {
 					if (err) return done(err,null);
 					if (user) {
 						user.accessToken = accessToken
+						options.successRedirect = config.facebook[env].successURL + "?oauth_token=" + accessToken + "?exists=true";
 						user.save(function(err) {
 							if (err) return done(err,null);
 							return done(null,user);
@@ -157,6 +158,7 @@ module.exports = function(app, options) {
 					}
 					else {
 
+					options.successRedirect = config.facebook[env].successURL + "?oauth_token=" + accessToken + "?exists=false";
 					user = new User({
 						authId: authId,
 						name: profile.displayName,
@@ -181,7 +183,6 @@ module.exports = function(app, options) {
 				/*
 				POTENTIAL BUG WITH ASYNC.
 				*/
-				options.successRedirect = config.facebook[env].successURL + "?oauth_token=" + accessToken;
 				console.log(accessToken);
 
 			}));

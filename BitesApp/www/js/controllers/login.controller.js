@@ -304,7 +304,9 @@ angular.module('login.controllers', ['ionic-ratings'])
         loginWindow.addEventListener('loadstart', function (event) {
           hasToken = event.url.indexOf('?oauth_token=');
           if(hasToken > -1) {
-            token = event.url.match("oauth_token=(.*)")[1];
+            token = event.url.match("oauth_token=(.*)")[1].split("?")[0];
+            login = event.url.match("exists=(.*)")[1];
+            alert(login);
             loginWindow.close();
             $location.path('/');
             localStorage.set("userToken", token);
@@ -314,7 +316,13 @@ angular.module('login.controllers', ['ionic-ratings'])
                 name: "PLACEHOLDER"
               }
             });
-            $state.go("preapp.dashboard");
+
+            if (login == "true") {
+              $state.go("preapp.dashboard");
+            }
+            else {
+              $state.go("preapp.registerfacebook");
+            }
 
             //Logged in, change screen and pass token in
           }
@@ -324,40 +332,6 @@ angular.module('login.controllers', ['ionic-ratings'])
 
   $scope.openWindow = function(url) {
     $window.open(url, '_blank', 'location=yes, toolbar=yes, hidden=no');
-  }
-
-  $scope.registerFacebook = function() {
-
-
-
-    url = APIServer.url() + '/auth/facebook';
-    console.log(url);
-        loginWindow = $window.open(url, '_blank', 'location=yes,toolbar=yes,hidden=no');
-
-        loginWindow.addEventListener('loadstart', function (event) {
-
-          console.log("user finished with facebook login");
-
-          hasToken = event.url.indexOf('?oauth_token=');
-          if(hasToken > -1) {
-            token = event.url.match("oauth_token=(.*)")[1];
-            loginWindow.close();
-            $location.path('/');
-            localStorage.set("userToken", token);
-            localStorage.set("loggedIn",true);
-
-            $ionicAnalytics.track("Facebook Register", {
-              user: {
-                name: "PLACEHOLDER"
-              }
-            });
-
-            $state.go("preapp.registerfacebook");
-
-            //Logged in, change screen and pass token in
-          }
-        })
-
   }
 
   $scope.goDash = function() {

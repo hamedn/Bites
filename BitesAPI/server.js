@@ -13,6 +13,9 @@ if (err)
     console.log("made uploads directory");
 });
 
+test = "http://bitesapp.com?oauth=jhadjsakdhk?user=false"
+
+
 
 require('./manifest')(app);
 require('./website')(app);
