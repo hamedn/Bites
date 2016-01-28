@@ -55,12 +55,14 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
  $scope.$on('$ionicView.enter', function(e) {
 
 
-if ($state.current.name != "preapp.dashboard") {
-        //$ionicScrollDelegate.scrollTop();
+  if ($state.current.name.toString() == "preapp.meal") {
+       $timeout(function() {
+          $ionicScrollDelegate.$getByHandle("scrollArea").scrollTop();
+          //  $ionicScrollDelegate.$getByHandle("scrollArea2").scrollTop();
+      }, 300);  
 
-      console.log("SCROLLED TO OP" + $state.current.name)
-    
-}
+  }
+
 
 
     $scope.meal = currentMeal.meal;
@@ -358,6 +360,10 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
       $scope.getChefMeals();
 
       $state.go("preapp.meal");
+
+      
+
+
 
     });
  

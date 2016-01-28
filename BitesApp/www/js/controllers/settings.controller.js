@@ -54,8 +54,6 @@ $scope.showRatings = function(meal) {
 
 
     $scope.editProfile = false;
-    $scope.currentOrders = [];
-    $scope.pastOrders = [];
     var acc = localStorage.get("userToken");
 
     $http.get(APIServer.url() + '/users/byToken',{headers:{'accesstoken': acc }}).then(function(resp) {
@@ -69,11 +67,19 @@ $scope.showRatings = function(meal) {
         $scope.orders = resp.data.orders;
         $scope.findPastAndPresentOrders();
       }
-      else {
-        $scope.noOrders = true;
+
+      else {        
+
+         $ionicScrollDelegate.$getByHandle("scrollArea2").resize();
+
+        $scope.noOrde = true;
+        $scope.showOrd = false;
+        $scope.ready = true;
+        $scope.currentOrders = [];
+        $scope.pastOrders = []
+        console.log("AINT GOT NO ORDERS")
       }
 
-      $scope.ready = true;
 
       //check if user card is on file
       if (!resp.data.stripeCustomerToken) {
@@ -92,6 +98,16 @@ $scope.showRatings = function(meal) {
 
       };
       localStorage.set("stripeChef",resp.data.chefStripeAccessToken);
+
+
+
+
+      $timeout(function() {
+            $ionicScrollDelegate.$getByHandle("scrollArea4").resize();
+           $timeout(function() {
+                $ionicScrollDelegate.$getByHandle("scrollArea4").resize();
+          }, 400);  
+      }, 250);  
 
 
 
@@ -485,6 +501,7 @@ $scope.toggleSub = function () {
   }
 
   $scope.goDash = function() {
+    $scope.ready = false;
     $state.go("preapp.dashboard");
   }
 
@@ -507,6 +524,21 @@ if ($scope.freezebuttons == false) {
    }
 
    
+  }
+
+  $scope.showOrders = function () {
+    if ($scope.pastOrders.length + $scope.currentOrders.length == 0 && $scope.ready) {
+      console.log("---------------");
+      console.log($scope.pastOrders.length);
+      console.log($scope.currentOrders.length);
+      $scope.showOrd = false;
+    }
+    else {
+      $scope.showOrd = true;
+    }
+
+    if (!$scope.ready) return false;
+    return ($scope.pastOrders.length + $scope.currentOrders.length) > 0;
   }
 
 
@@ -751,6 +783,11 @@ var alertPopup = $ionicPopup.alert({
   $scope.findPastAndPresentOrders = function() {
   
       var now = new Date();
+
+      $scope.ready = false;
+
+      $scope.currentOrders = [];
+      $scope.pastOrders = [];
       
       for (var i = 0; i < $scope.orders.length; i++) {
         $http.get(APIServer.url() + '/meals/search/' + $scope.orders[i].mealId).then(function(resp) {
@@ -767,6 +804,9 @@ var alertPopup = $ionicPopup.alert({
           }
         })
       }
+
+      $scope.showOrders()
+      $scope.ready = true;
   }
 
   $scope.onClickChefTab = function(tab) {

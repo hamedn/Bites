@@ -13,13 +13,13 @@
 
 <ion-content scroll="true" delegate-handle="scrollArea3">
   
-<div ng-show="noOrders && ready && currentOrders.length == 0">
+<div ng-hide="showOrd" ng-cloack ng-hide>
   <div class="row" style="text-align: center; color: grey;">
-    Can't eat if you haven't ordered anything! Head on over to the dash to check out what's cooking!
+    Can't eat if you haven't ordered anything! Head on over to the dashboard to check out what's cooking!
   </div>
 </div>
 
-<div class="item" ng-show="!noOrders && ready || currentOrders.length > 0">
+<div class="item" ng-show="showOrd">
   <div id="chefTabs" class="row">
     <div ng-repeat="tab in chefTabs" class="col" ng-class="tab.style" ng-click="onClickChefTab(tab)">
         <h2 style="padding-bottom: 4px;">{{tab.title}}</h2>
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div ng-repeat="order in currentOrders" ng-show="showCurrentOrders">
+<div ng-repeat="order in currentOrders" ng-show="showCurrentOrders && showOrders()">
   <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px" ng-click="mealClicked(order._id)">
     <div class="item item-divider">
       <h2 style="text-align: center; padding-bottom: 2px;">{{order.title}} cooked by {{order.userName}}</h2>
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div ng-repeat="order in pastOrders" ng-show="!showCurrentOrders">
+<div ng-repeat="order in pastOrders" ng-show="!showCurrentOrders && showOrders()">
   <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px; margin-bottom:10px">
 
     <div class="item item-avatar">

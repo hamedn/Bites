@@ -7705,6 +7705,12 @@ a.button {
 sup {
   font-size: 50%; }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
+
+.nav > li > a {
+  display: block; }
+
 .bg {
   background: url(../img/Food.jpg);
   background-size: 100%;

@@ -280,7 +280,7 @@ angular.module('login.controllers', ['ionic-ratings'])
         }
         else {
           var myPopup = $ionicPopup.show({
-              title: "Sorry, no user found with that email.",
+              title: "Sorry, invalid email or password.",
               scope: $scope,
               cssClass: 'custom-popup'
           });
