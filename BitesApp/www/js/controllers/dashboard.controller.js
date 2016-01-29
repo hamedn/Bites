@@ -290,7 +290,7 @@ if (localStorage.get("stripeChef").length > 5 && localStorage.get("stripeChef") 
   
       $timeout(function() {
         myPopup.close(); 
-      }, 1250); 
+      }, 2500); 
     } 
   }
 
