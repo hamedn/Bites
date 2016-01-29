@@ -133,7 +133,9 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.checkPrice = function(price) {
     if (price % 1 != 0) {
-      return false;
+      return "wholeNumErr";
+    } else if (price > 999) {
+      return "exceedsMaxPrice";
     } else {
       return true;
     }
@@ -149,10 +151,16 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   $scope.newMeal = function() {
 
-    var isEmpty = $scope.checkEmpty();
+    var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
+               $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
+    
+    var orderDeadlineFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
+               $scope.data.orderDeadline.getHours(), $scope.data.orderDeadline.getMinutes(), $scope.data.orderDeadline.getSeconds());
+
+    var isEmpty = $scope.checkEmpty(orderDeadlineFixed, pickupFixed);
     if (isEmpty != true) {
       var myPopup = $ionicPopup.alert({
-        title: "Something's Wrong",
+        title: "Oops!",
         template: isEmpty,
         scope: $scope,
         cssClass: 'custom-popup'
@@ -164,14 +172,6 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
     $ionicLoading.show({
       template: 'Posting meal data'
     });
-    
-
-    var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
-               $scope.data.pickup.getHours(), $scope.data.pickup.getMinutes(), $scope.data.pickup.getSeconds());
-    
-    var orderDeadlineFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
-               $scope.data.orderDeadline.getHours(), $scope.data.orderDeadline.getMinutes(), $scope.data.orderDeadline.getSeconds());
-
 
 
     $http({
@@ -347,51 +347,6 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
               }, 2000);
               
               $state.go("preapp.dashboard");
-            } else if (!$scope.checkPrice($scope.data.price)) {
-              console.log(response.data.price);
-
-              $ionicLoading.hide();
-
-              var myPopup = $ionicPopup.show({
-                //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
-                title: "Please enter a Whole Number for the Price",
-                scope: $scope,
-                cssClass: 'custom-popup'
-              });
-
-              $timeout(function() {
-                myPopup.close(); //close the popup after 3 seconds for some reason
-              }, 2000);
-
-
-
-            } else if (!$scope.checkDates(orderDeadlineFixed, pickupFixed)) {
-              $ionicLoading.hide();
-
-              var myPopup = $ionicPopup.show({
-                //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
-                title: "Please don't set the pickup time before the order time",
-                scope: $scope,
-                cssClass: 'custom-popup'
-              });
-
-              $timeout(function() {
-                myPopup.close(); //close the popup after 3 seconds for some reason
-              }, 2000);
-            }
-             else if (!$scope.checkPrice($scope.data.maxOrder)) {
-              $ionicLoading.hide();
-
-              var myPopup = $ionicPopup.show({
-                //template: "<div style='text-align: center;'>Welcome to Bites!</div>",
-                title: "Please make the Order Number a whole number",
-                scope: $scope,
-                cssClass: 'custom-popup'
-              });
-
-              $timeout(function() {
-                myPopup.close(); //close the popup after 3 seconds for some reason
-              }, 2000);
             } else {
               console.log(response.data);
               var myPopup = $ionicPopup.alert({
@@ -408,7 +363,7 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
 
   }
 
-  $scope.checkEmpty = function() {
+  $scope.checkEmpty = function(orderTime, pickupTime) {
     if ($scope.data.title == undefined) {
       return "You should probably name your meal!";
     } else if ($scope.data.mealDate == undefined) {
@@ -429,6 +384,14 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
       return "Where are you cooking? Right now nowhere.";
     } else if ($scope.data.ingredients == undefined) {
       return "People are going to want to know what exactly you're cooking up in that lab of yours";
+    } else if ($scope.checkPrice($scope.data.price) == "wholeNumErr") {
+      return "Please enter a Whole Number for the Price";
+    } else if ($scope.checkPrice($scope.data.price) == "exceedsMaxPrice") {
+      return "Please enter a number less than 1000";
+    } else if (!$scope.checkDates(orderTime, pickupTime)) {
+      return "Please don't set the pickup time before the order time";
+    } else if (!$scope.checkOrder($scope.data.maxOrder)) {
+      return "Please make the Order Number a whole number";
     } else {
       return true;
     }
