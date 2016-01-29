@@ -149,6 +149,14 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
     }
   }
 
+  $scope.checkOrder = function(order) {
+    if (order % 1 == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   $scope.newMeal = function() {
 
     var pickupFixed = new Date($scope.data.mealDate.getFullYear(), $scope.data.mealDate.getMonth(), $scope.data.mealDate.getDate(), 
