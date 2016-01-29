@@ -21,6 +21,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
    $cordovaClipboard
     .copy(link)
     .then(function () {
+
+       $ionicAnalytics.track("Meal Shared", {
+         meal: {
+           charId: m.charId
+         }
+       });
+
        var myPopup = $ionicPopup.show({
               title: "Link successfully copied to clipboard",
               scope: $scope,
