@@ -577,7 +577,7 @@ if ($scope.freezebuttons == false) {
                 exp_month: $scope.data.exp_month,
                 exp_year: $scope.data.exp_year,
                 userToken: localStorage.get("userToken"),
-                id: localStorage.get("oid");
+                id: localStorage.get("oid")
               }
                 
               }).then (function (response) {
