@@ -6,7 +6,7 @@ var User = require('./user.model.js'),
 	StripeStrategy = require('passport-stripe').Strategy;
 
 var Meal = require("../meals/meal.model.js").Meal;
-var stripe = require("stripe")("sk_test_TGVJ5AB4dXa1eaYooQr0MTN8");
+var stripe = require("stripe")("sk_live_pDJdLN8F6bHfQhswLlJk7wpx"); //using live production key
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
@@ -194,7 +194,7 @@ module.exports = function(app, options) {
 			//stripe connect authentication
 			passport.use('stripe', new StripeStrategy({
         		clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
-        		clientSecret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
+        		clientSecret: "sk_live_pDJdLN8F6bHfQhswLlJk7wpx", //live key
         		callbackURL: credentials.stripecallback[env],
         		scope: "read_write"
       		},
