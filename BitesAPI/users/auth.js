@@ -455,9 +455,9 @@ module.exports = function(app, options) {
 				var name = req.body.name;
 				var email = req.body.email;
 
-				var emailText = "Hello " + name + ",";
+				var emailText = "Hello " + name + ",\n\n" + "Welcome to Bites! Here's a quick guide on how to use our service.\n\n1. You're hungry. Open up Bites and find a meal that looks tasty.\n\n2. Place an order before the order dealine for the meal.\n\n3. Find your meal at the location specified by the chef before the pickup deadline.\n\n\nHave any questions or feedback? Shoot us an email at bitesappmail@gmail.com.\n\nThanks,\nBites";
 
-				var htmlText = "<html><div style='position:absolute; width:100%; background-color:#67BF68; height: 60px; left:0px; top:0px;'>		<img src='http://www.bitesapp.com/img/portfolio/bg/bg-logo.png' style='display:inline-block; margin-left: 20px; margin-top:10px;' ></div><div style='border: 1px solid black;'>	<div style='margin-left: 20px;'>	<div style=''>		<p>Hello " + name + ",<br><br>Welcome to Bites! Here&#39;s a quick guide on how to use our service.</p>	</div>	<div style='margin-left:40px; margin-top:25px;'>		<div style='height: 0px;'> 			<img src='http://www.bitesapp.com/img/inst1.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left: 10px; margin-top:18px;'>You&#39;re hungry. Open up Bites and find a meal that looks tasty.</p>		</div>		<div style='height: 0px; margin-top:0px;'> 			<img src='http://www.bitesapp.com/img/inst2.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left: 10px; margin-top:18px;'>Place an order before the order deadline for the meal.</p>		</div>		<div style='height: 0px; margin-top:0px;'> 			<img src='http://www.bitesapp.com/img/inst3.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left:10px; margin-top:18px;'>Find your food at the location specified by the chef.</p>		</div>			</div>	<div>		<p><br>Have any questions or feedback? Shoot us an email at bitesappmail@gmail.com.<br><br>Thanks,<br>Bites</p>	</div>	</div></div></html>";
+				//var htmlText = "<html><div style='position:absolute; width:100%; background-color:#67BF68; height: 60px; left:0px; top:0px;'>		<img src='http://www.bitesapp.com/img/portfolio/bg/bg-logo.png' style='display:inline-block; margin-left: 20px; margin-top:10px;' ></div><div style='border: 1px solid black;'>	<div style='margin-left: 20px;'>	<div style=''>		<p>Hello " + name + ",<br><br>Welcome to Bites! Here&#39;s a quick guide on how to use our service.</p>	</div>	<div style='margin-left:40px; margin-top:25px;'>		<div style='height: 0px;'> 			<img src='http://www.bitesapp.com/img/inst1.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left: 10px; margin-top:18px;'>You&#39;re hungry. Open up Bites and find a meal that looks tasty.</p>		</div>		<div style='height: 0px; margin-top:0px;'> 			<img src='http://www.bitesapp.com/img/inst2.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left: 10px; margin-top:18px;'>Place an order before the order deadline for the meal.</p>		</div>		<div style='height: 0px; margin-top:0px;'> 			<img src='http://www.bitesapp.com/img/inst3.png' style='width:50px; height:50px; display: inline-block;'/>			<p style='display:inline-block; height: 0px; vertical-align:top; margin-left:10px; margin-top:18px;'>Find your food at the location specified by the chef.</p>		</div>			</div>	<div>		<p><br>Have any questions or feedback? Shoot us an email at bitesappmail@gmail.com.<br><br>Thanks,<br>Bites</p>	</div>	</div></div></html>";
 
 				var transporter = nodemailer.createTransport('smtps://bitesappmail%40gmail.com:WallachH8@smtp.gmail.com');
 
@@ -466,8 +466,8 @@ module.exports = function(app, options) {
 				    from: 'Bites App <admin@bitesapp.com>', // sender address
 				    to: email, // list of receivers
 				    subject: 'Welcome to Bites!', // Subject line
-				    text: emailText, // plaintext body
-				    html: htmlText // html body
+				    text: emailText // plaintext body
+				    //html: htmlText // html body
 				};
 
 				// send mail with defined transport object
