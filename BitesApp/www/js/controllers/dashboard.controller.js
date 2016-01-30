@@ -55,12 +55,24 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
   }
 
 
+
+  $scope.profilePicture = function(){
+
+    return $scope.chef.profilePicture + "?time" + $scope.random;
+  }
+
+  $scope.updatePicture = function () {
+    $scope.$apply();
+  }
+
   $scope.isChef = function() {
     return localStorage.get("isChef") == "true";
   }
 
  $scope.$on('$ionicView.enter', function(e) {
 
+
+$scope.random = Math.random();
 
   if ($state.current.name.toString() == "preapp.meal") {
        $timeout(function() {

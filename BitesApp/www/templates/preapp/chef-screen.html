@@ -13,7 +13,7 @@
 <ion-content scroll="true" delegate-handle="scrollArea2">
     <div class="list card" style="margin-left:5%; margin-right:5%; border-radius:5px;">
         <div class="item">
-            <img src="{{chef.profilePicture}}" class="profile-avatar">
+            <img src="{{profilePicture()}}" class="profile-avatar" ng-click="updatePicture()">
             <h2 style="text-align: center; margin: 5px 0; padding-bottom: 2px;">{{chef.name}}</h2>
             <div class="profile-rating-text" ng-show="chef.rating == -5"><h2 style="color: #67BF68;">Not Rated Yet!</h2></div>
             <div class="profile-rating" ng-show="chef.rating != -5">

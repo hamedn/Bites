@@ -306,7 +306,8 @@ angular.module('login.controllers', ['ionic-ratings'])
           if(hasToken > -1) {
             token = event.url.match("oauth_token=(.*)")[1].split("?")[0];
             login = event.url.match("exists=(.*)")[1];
-            alert(login);
+
+
             loginWindow.close();
             $location.path('/');
             localStorage.set("userToken", token);

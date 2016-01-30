@@ -324,7 +324,7 @@ if ($scope.freezebuttons == false) {
                         $scope.self.profilePicture = canvas.toDataURL();
                         $scope.$apply();
                        
-                       setTimeout(function(){  $scope.freezebuttons = false; console.log("FIXED")}, 2000);
+                       setTimeout(function(){  $scope.freezebuttons = false; console.log("FIXED")}, 500);
 
 
 
