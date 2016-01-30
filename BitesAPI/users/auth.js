@@ -253,7 +253,7 @@ module.exports = function(app, options) {
 				  	
 					  	//create the Customer object
 					  	stripe.customers.create({
-						  description: 'Customer for test@example.com',
+						  description: 'Customer for Bites user with oid: ' + req.body.id,
 						  source: token.id // obtained with Stripe.js
 						}, function(err, customer) {
 
