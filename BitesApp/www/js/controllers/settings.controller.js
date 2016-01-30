@@ -666,7 +666,7 @@ if ($scope.freezebuttons == false) {
             },
 
             data:  {
-              client_secret: "sk_test_TGVJ5AB4dXa1eaYooQr0MTN8",
+              client_secret: "sk_live_pDJdLN8F6bHfQhswLlJk7wpx",
               clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
               code: code,
               grant_type: "authorization_code",
