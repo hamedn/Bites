@@ -639,11 +639,11 @@ if ($scope.freezebuttons == false) {
 
       url = APIServer.url() + "/auth/stripe";
       
-      loginWindow = $window.open(url, '_blank', 'location=yes,toolbar=yes,hidden=no');
+      loginWindow = $window.open("https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_7VvNrmZeCBiSQkfMCQjWNfTovaYSZpGR&scope=read_write", '_blank', 'location=yes,toolbar=yes,hidden=no');
 
       loginWindow.addEventListener('loadstart', function (event) {
 
-        console.log(event.url);ß
+        console.log(event.url);
 
         hasToken = event.url.indexOf('&code=');
         console.log("hasToken index " + hasToken);
