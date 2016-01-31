@@ -643,7 +643,7 @@ if ($scope.freezebuttons == false) {
 
       loginWindow.addEventListener('loadstart', function (event) {
 
-        console.log(event.url);
+        console.log(event.url);ß
 
         hasToken = event.url.indexOf('&code=');
         console.log("hasToken index " + hasToken);
@@ -667,7 +667,7 @@ if ($scope.freezebuttons == false) {
 
             data:  {
               client_secret: "sk_live_pDJdLN8F6bHfQhswLlJk7wpx",
-              clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
+              clientID: "ca_7VvNrmZeCBiSQkfMCQjWNfTovaYSZpGR",
               code: code,
               grant_type: "authorization_code",
               response_type:"code",
@@ -699,9 +699,9 @@ if ($scope.freezebuttons == false) {
                   
                 }).then (function (response) {
                  var alertPopup = $ionicPopup.alert({
-     title: 'Success',
-     template: "Stripe successfully connected",
-          cssClass:'custom-popup'
+                  title: 'Success',
+                  template: "Stripe successfully connected",
+                  cssClass:'custom-popup'
 
 
    });

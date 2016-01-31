@@ -193,7 +193,7 @@ module.exports = function(app, options) {
 
 			//stripe connect authentication
 			passport.use('stripe', new StripeStrategy({
-        		clientID: "ca_7VvNpW0Em2iOnDuxSOHQyygV9PvtAfCs",
+        		clientID: "ca_7VvNrmZeCBiSQkfMCQjWNfTovaYSZpGR",
         		clientSecret: "sk_live_pDJdLN8F6bHfQhswLlJk7wpx", //live key
         		callbackURL: credentials.stripecallback[env],
         		scope: "read_write"

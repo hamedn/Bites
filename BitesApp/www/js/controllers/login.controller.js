@@ -425,8 +425,8 @@ angular.module('login.controllers', ['ionic-ratings'])
               },
 
               data:  {
-                client_secret: "sk_live_HOVy4PQ5CwF2LrET0jhSU8ZI",
-                clientID: "ca_7okqnWgdf5OVfV7HA5RN9GAPO9gizj75",
+                client_secret: "pk_live_AqS2fVNDFlxPSXPLuO5eMiTc",
+                clientID: "ca_7VvNrmZeCBiSQkfMCQjWNfTovaYSZpGR",
                 code: code,
                 grant_type: "authorization_code"
               }
