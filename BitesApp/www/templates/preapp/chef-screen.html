@@ -108,7 +108,7 @@
 
         <script type="text/ng-template" id="past.html">
             <div id="past" ng-repeat="meal in pastChefMeals">
-                <div class="list card" style="padding: 10px; margin: 0px 5% 5% 5%; border-radius:5px;">
+                <div class="list card" ng-hide="meal.rating == -5 && meal.numOrder == 0" style="padding: 10px; margin: 0px 5% 5% 5%; border-radius:5px;">
                     <div class="row" style="">
                         <div class="col" style="margin-bottom: 5px; margin-top: -5px; border-bottom: 1px green solid; text-align: center;"> {{meal.title}} </div>
                     </div>
