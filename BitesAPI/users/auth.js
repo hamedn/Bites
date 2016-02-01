@@ -336,7 +336,7 @@ module.exports = function(app, options) {
 
 				var fee = 0.15 * payment;
 
-				payment = payment - fee;
+				payment = payment;
 				
 				stripe.charges.create({
 				  amount: payment,
