@@ -556,7 +556,7 @@ if ($scope.freezebuttons == false) {
         console.log("send data, it is all checked and stuff");
 
         $ionicLoading.show({
-          template: 'Sending info to server'
+          template: 'Saving Credit Card Info'
         });
 
         $http({

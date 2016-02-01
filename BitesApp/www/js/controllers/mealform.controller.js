@@ -149,6 +149,21 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
     }
   }
 
+  $scope.checkMealDate = function(mealDate) {
+    var date = new Date();
+    console.log(date);
+    months = date.getMonth();
+    days = date.getDate();
+    console.log("Month of Now: " + months);
+    console.log("Days of Now: " + days);
+    console.log("Dates: " + months + " " + days + " " + mealDate.getDate() + " " + mealDate.getMonth())
+    if (mealDate.getMonth() < months)
+      return true;
+    if (mealDate.getDate() < days && mealDate.getMonth() <= months)
+      return true;
+
+  }
+
   $scope.checkOrder = function(order) {
     if (order % 1 == 0) {
       return true;
@@ -392,6 +407,8 @@ angular.module('mealform.controllers', ['ionic-ratings','jrCrop'])
       return "Where are you cooking? Right now nowhere.";
     } else if ($scope.data.ingredients == undefined) {
       return "People are going to want to know what exactly you're cooking up in that lab of yours";
+    } else if ($scope.checkMealDate($scope.data.mealDate)) {
+      return "Right now you're cooking in the past. Please change the date";
     } else if ($scope.checkPrice($scope.data.price) == "wholeNumErr") {
       return "Please enter a Whole Number for the Price";
     } else if ($scope.checkPrice($scope.data.price) == "exceedsMaxPrice") {
