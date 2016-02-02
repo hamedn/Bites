@@ -134,10 +134,17 @@ $scope.random = Math.random();
   $scope.showMeal = function(mealId) {
     console.log("showMeal with id " + mealId);
     $http.get(APIServer.url() + '/meals/search/' + mealId).then(function(resp) {
+          $http.get(APIServer.url() + '/users/individual/' + resp.data.userOID).then(function(resp2) {
+
         
         console.log("found meal");
+        console.log(resp2.data)
         currentMeal.meal = resp.data;
+        $scope.chef = resp2.data;
+        currentProfile = resp2;
         $scope.meal = currentMeal.meal;
+
+      });
       })
   }
 

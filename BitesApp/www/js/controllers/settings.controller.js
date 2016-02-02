@@ -1,7 +1,7 @@
 angular.module('settings.controllers', ['ionic-ratings','ionic.rating']) 
 
 
-.controller("SettingsCtrl", function($scope,$ionicScrollDelegate, $window,$ionicLoading,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
+.controller("SettingsCtrl", function($scope,$ionicScrollDelegate, $window,$ionicLoading,currentMeal,$ionicAnalytics,$timeout, $rootScope, $state,Camera, $stateParams, localStorage, APIServer, $http, $ionicPopup, $jrCrop) {
 
 
 //global variables
@@ -849,6 +849,22 @@ var alertPopup = $ionicPopup.alert({
   }
 
   $scope.mealClicked = function(id) {
+
+/*
+
+ $http.get(APIServer.url() + '/meals/search/' + id).then(function(resp) {
+      currentMeal.meal = resp.data;
+       $http.get(APIServer.url() + '/users/individual/' + resp.data.userOID).then(function(resp2) {
+          chef = resp2.data;
+            console.log(resp2);
+      })
+
+    });
+*/
+
+
+
+
     console.log("meal clicked id: " + id);
 
     $scope.ready = false;

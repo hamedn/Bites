@@ -8,6 +8,11 @@ angular.module('starter.services', [])
         return {};
 })
 
+.factory("mealProfile",function(){
+        return {};
+})
+
+
 .factory("hStars", function() {
   return {};
 
