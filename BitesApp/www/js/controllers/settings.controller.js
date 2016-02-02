@@ -168,36 +168,32 @@ if ($scope.freezebuttons == false) {
       template: 'Uploading photo'
     });
 
-
-
       var file = $scope.self.profilePicture;
 
-
-
       $http({
-                  method: 'POST',
-                  url: APIServer.url() + '/users/changepicture/' + $scope.self._id,
-                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          method: 'POST',
+          url: APIServer.url() + '/users/changepicture/' + $scope.self._id,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 
-                  transformRequest: function(obj) {
-                      var str = [];
-                      for(var p in obj)
-                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                      return str.join("&");
-                  },
+          transformRequest: function(obj) {
+              var str = [];
+              for(var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              return str.join("&");
+          },
 
-                  data:  {
-                    image:file
-                  }
-              }).then (function (response) {
+          data:  {
+            image:file
+          }
+      }).then (function (response) {
 
 
-                $ionicLoading.hide();
-                var alertPopup = $ionicPopup.alert({
-                 title: 'Success',
-                 template: 'Updated profile picture.',
-                 cssClass:'custom-popup'
-                });
+        $ionicLoading.hide();
+        var alertPopup = $ionicPopup.alert({
+         title: 'Success',
+         template: 'Updated profile picture.',
+         cssClass:'custom-popup'
+        });
 
 
 
@@ -514,7 +510,7 @@ $scope.toggleSub = function () {
 
   $scope.logOut = function () {
 
-if ($scope.freezebuttons == false) {
+  if ($scope.freezebuttons == false) {
     var confirmPopup = $ionicPopup.confirm({
        title: 'Confirm Logout',
        template: 'Are you sure you want to log out?',
@@ -525,6 +521,8 @@ if ($scope.freezebuttons == false) {
        if(res) {
           localStorage.set("loggedIn","false");
            $state.go("preapp.splashscreen");
+           chefStripeConnected = false;
+           savedCard = false;
        } 
      });
 
