@@ -99,28 +99,15 @@ $scope.showRatings = function(meal) {
       };
       localStorage.set("stripeChef",resp.data.chefStripeAccessToken);
 
-
-
-
       $timeout(function() {
             $ionicScrollDelegate.$getByHandle("scrollArea4").resize();
            $timeout(function() {
                 $ionicScrollDelegate.$getByHandle("scrollArea4").resize();
           }, 400);  
-      }, 250);  
-
-
+      }, 250); 
 
     });
 
-    
-    chef = localStorage.get("isChef");
-    console.log(chef);
-
-    isChef = (chef == "true")
-
-
-    $scope.isChef = {checked:isChef};
     $scope.subscribe = {checked:(localStorage.get("push") == "1")};
 
     $scope.$apply();
@@ -523,6 +510,7 @@ $scope.toggleSub = function () {
            $state.go("preapp.splashscreen");
            chefStripeConnected = false;
            savedCard = false;
+           isChef = {checked: false};
        } 
      });
 
