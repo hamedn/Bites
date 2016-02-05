@@ -8,6 +8,12 @@ var Meal = require('mongoose').model('Meal');
 var User = require('mongoose').model('User');
 var mongo = require('mongodb');
 
+
+router.get('/email', function(req, res, next) {
+	res.json({"restrict":false});
+});
+
+
 router.get('/individual/:oid', function(req, res, next) {
 
 
