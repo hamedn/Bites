@@ -46,6 +46,9 @@ angular.module('login.controllers', ['ionic-ratings'])
     // columbia.edu, barnard.edu
     var university = email.substring(email.length - 12, email.length).toLowerCase();
     console.log("Console Uni: " + university);
+    if (localStorage.get("restrictEmails") == "false") {
+      return true;
+    }
     if (university == "columbia.edu") {
       return true;
     } else if (university == "@barnard.edu") {

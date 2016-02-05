@@ -26,6 +26,12 @@ navigator.splashscreen.hide();
   });
 
 
+   $http.get(APIServer.url() + '/users/email/').then(function(resp) {
+        console.log("RESTRICT:" + resp.data["restrict"])
+        localStorage.set("restrictEmails", "" + resp.data["restrict"]);
+    })
+
+
 
     if (localStorage.get("loggedIn") == "true") {
 

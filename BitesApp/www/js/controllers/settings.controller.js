@@ -50,6 +50,8 @@ $scope.showRatings = function(meal) {
 
   $scope.update = function () {
 
+    $scope.chefStripeConnected = false;
+
       $ionicScrollDelegate.scrollTop();
 
 
@@ -91,12 +93,23 @@ $scope.showRatings = function(meal) {
           $scope.lastFour = resp.data.creditCardLastFourDigits;
       }
 
+      console.log("TOKEN");
+      if (resp.data.chefStripeAccessToken) {
+        console.log("1")
+      }
+       if (resp.data.chefStripeAccessToken.length > 5) {
+        console.log("2")
+      }
       //check if chef is connected to stripe, and also >5 to make sure its a reasonable token
       if (resp.data.chefStripeAccessToken && resp.data.chefStripeAccessToken.length > 5) {
         //alert(resp.data.chefStripeAccessToken)
         $scope.chefStripeConnected = true;
+        console.log("OH MY GOD IM CONNECGTAED_--------")
 
-      };
+      }
+      else {
+        $scope.chefStripeConnected = false;
+      }
       localStorage.set("stripeChef",resp.data.chefStripeAccessToken);
 
       $timeout(function() {
@@ -111,6 +124,8 @@ $scope.showRatings = function(meal) {
     $scope.subscribe = {checked:(localStorage.get("push") == "1")};
 
     $scope.$apply();
+
+
 
   }
 

@@ -57,8 +57,13 @@ angular.module('dashboard.controllers', ['ionic-ratings'])
 
 
   $scope.profilePicture = function(){
+    append = "&what="
 
-    return $scope.chef.profilePicture + "?time" + $scope.random;
+    if ($scope.chef.profilePicture.indexOf("bitesapp.com") != -1) {
+      append = "?time="
+    }
+
+    return $scope.chef.profilePicture + append + $scope.random;
   }
 
   $scope.updatePicture = function () {
