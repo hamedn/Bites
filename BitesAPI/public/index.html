@@ -31,6 +31,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link rel="stylesheet" href="css/mobile.css" type="text/css">
     <!--load font--> 
     <!--load jQuery-->
     <script src="../ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -72,7 +73,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#header">Today's Meal</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#services">Services</a>
@@ -91,25 +92,20 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <header data-stellar-background-ratio="0.5">
-        <div class="container" id="header-bg">
-            <div class="row">
-                <div class="col-md-4" style="width:700px; margin-top:260px">
-                    <img src="img/portfolio/bg/bg-logo.png" style="width:350px; margin-right:300px">
-                    <p style="color:#fff; text-align:left; font-family:opensans-light, sans-serif; font-size: 4.5em; margin-top:50px">Never Miss Home Cooked Meals Again</p>
-                </div>
-                <!--
-                <h1>Bites App</h1>
-                <p>The mission is simple: Allow college students to find peers to cook fresh food for them, even deliver food the their doors, in just ONE tap.</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>-->
-                <div class="col-md-4 wow fadeInUp" style="width:400px;position:relative;margin-top:200px" data-stellar-ratio="2">
-                    <img src="img/portfolio/bg/bg-iphone.gif" style="height:800px">
+    <section id="header">
+       <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading" style="font-family:opensans-light; font-size:3em">Today's Meal: Chicken Stir Fry</h2>
+                    <hr class="primary">
+                    <p style="margin-bottom:-5px">Some awesome stir fry with broccoli and deliciousness!</p>
+                    <p style="margin-bottom:-5px">7-9 pm Monday, April 24th</p>
+                    <p style="margin-bottom:-5px">Wallach 8 Lounge</p>
+                    <p style="margin-bottom:30px">$5.00</p>
+                    <img src="img/stirfry.jpg" style="border-radius: 10px; width: 74%; max-width:700px; margin-right:13%; margin-left: 13%;">
+                    <p style="margin-top: 30px">Payment: Cash, Venmo @Hamed-Nilforoshan, or Credit Card via <a href="https://itunes.apple.com/us/app/bites-college-food-marketplace/id1081254007?mt=8">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.bitesapp.bites&hl=en">Android</a> apps</p>
                 </div>
             </div>
-            
-        </div>
-        
-    </header>
+    </section>
 
     <section id="services">
         <div class="container">
@@ -213,7 +209,7 @@
                 </div>
                 
                 <div id="moving-image" alt="img" class="col-md-4">
-                    <img src="img/portfolio/ip_home.png" style="height:600px" >
+                    <img id="anImage" src="img/portfolio/ip_home.png" style="height:600px" >
                     <div id="slideshow" class="owl-carousel owl-wrapper" style="position:absolute;top:88px; left:300px; height:416px; width: 234px; z-index:10">
 
                                 <div class="item"><img src="img/portfolio/screenshot/1.png" alt="The Last of us"></div>
@@ -225,19 +221,19 @@
                 
                 <div  id="features-text" class="col-md-4 wow fadeInRight" style="margin-left:50px;width:500px;position:relative; z-index:20">
                             <br><br><br>
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                            <p id="descrip-f1" class="redundantinfo" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/info.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">DISH INFORMATION<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Give others a taste of your culture and create a <span style="margin-left:65px">tighter community.</span></span></span>    
+                                <span style="margin-left:20px"><span class="infoHeader" style="font-family:opensans-regular;">DISH INFORMATION<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Give others a taste of your culture and create a <span class="infoDesc" style="margin-left:65px">tighter community.</span></span></span>    
                             </p>
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                            <p id="descrip-f1" class="redundantinfo" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/price.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">PRICE<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Find low cost meals and pay securely through <span style="margin-left:65px">Paypal.</span></span></span></p>   
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                                <span style="margin-left:20px"><span class="infoHeader" style="font-family:opensans-regular;">PRICE<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Find low cost meals and pay securely through <span class="infoDesc" style="margin-left:65px">Paypal.</span></span></span></p>   
+                            <p id="descrip-f1" class="redundantinfo" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/time.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">TIME<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Know exactly when your meal is ready to <span style="margin-left:65px">pickup.<br></span></span></span></p>
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                                <span style="margin-left:20px"><span class="infoHeader" style="font-family:opensans-regular;">TIME<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Know exactly when your meal is ready to <span class="infoDesc" style="margin-left:65px">pickup.<br></span></span></span></p>
+                            <p id="descrip-f1" class="redundantinfo" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/photo.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">PHOTO<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">See your food before you eat it.<br><br></span></span>    </p>
+                                <span style="margin-left:20px"><span class="infoHeader" style="font-family:opensans-regular;">PHOTO<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">See your food before you eat it.<br><br></span></span>    </p>
  
                             
                 </div>
@@ -245,7 +241,7 @@
         </div>
     </section>
     
-    <section id="features 2">
+    <section id="features_2">
         
         <div class="container">
                 <div class="row;">
@@ -257,19 +253,19 @@
                             <h3 style="color:#00e0a6">
                                 <br>Connect with Bites
                             </h3>
-                            <p id="descrip-f1">
-                                Become part of our food community - be a chef and a buyer.<br>
+                            <p id="descrip-f1" >
+                                Become part of our food <br> community -  be a chef and a buyer.
                             </p>
                             <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/rating.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">RATE<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Read and write reviews on your <span style="margin-left:65px">favorite chefs.</span></span></span>    
+                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">RATE<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Read and write reviews on <span class="infoDesc" style="margin-left:65px">your favorite chefs.</span></span></span>    
                             </p>
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                            <!-- <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
                                 <img src="img/portfolio/ICON/follow.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">FOLLOW<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Never miss a meal from your favorite <span style="margin-left:65px">chef.</span></span></span></p>
-                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px">
+                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">FOLLOW<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Never miss a meal from <span class="infoDesc" style="margin-left:65px">your favorite chef.</span></span></span></p> -->
+                            <p id="descrip-f1" style="color:#00e0a6; font-size:22px"> 
                                 <img src="img/portfolio/ICON/history.png" style="height:40px">
-                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">REFLECT<br></span><span style="color:darkgrey;font-size:18px;margin-left:65px">Remember and relive your favorite <span style="margin-left:65px">meals.</span></span></span></span></p>
+                                <span style="margin-left:20px"><span style="font-family:opensans-regular;">REFLECT<br></span><span class="infoDesc" style="color:darkgrey;font-size:18px;margin-left:65px">Remember your favorite<span class="infoDesc" style="margin-left:65px"> meals.</span></span></span></span></p>
                         </div>
                         <div id="moving-image2" alt="img" class="col-md-3">
                         <!--<div id="moving-image" alt="img" class="col-sm-6 col-md-6 col-lg-6">-->

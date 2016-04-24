@@ -1,0 +1,40 @@
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+  	body {
+  		overflow-x: hidden;
+  	}
+
+  	.infoHeader {
+  		display: none;
+  	}
+
+  	.redundantinfo {
+  		display: none;
+  	}
+  	.infoDesc {
+  	}
+
+  	#moving-image2 {
+  		display: none;
+  	}
+
+  	#anImage {
+  		content: url(../img/portfolio/rsz_ip_home.png);
+  		margin-left: -175px; 
+  	}
+
+  	#slideshow {
+  		margin-left: -255px;
+  	}
+}
+
+#header {
+	margin-bottom: -100px;
+}
+
+#features_2 {
+	margin-bottom: -100px;
+}
+

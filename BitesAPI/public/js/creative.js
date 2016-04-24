@@ -39,7 +39,7 @@
     );
     
     $(window).scroll(function() {
-        if(window.pageYOffset >= 100) {
+        if(window.pageYOffset >= 0) {
             $(".logopic").attr("src", "img/portfolio/Logo.png");
         } else {
             $(".logopic").attr("src", "img/portfolio/Logo_white.png");
@@ -52,7 +52,7 @@
     
     $('#mainNav').affix({
         offset: {
-            top: 100
+            top: -1
         }
     })
 
